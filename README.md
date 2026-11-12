@@ -1,0 +1,2 @@
+# Hate-Speech-Detector
+
