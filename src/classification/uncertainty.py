@@ -14,7 +14,7 @@ class UncertaintyEngine:
     def __init__(
         self,
         confidence_threshold: float = 0.60,
-        entropy_threshold: float = 0.65,
+        entropy_threshold: float = 0.95,
         temperature: float = 1.0
     ):
         self.confidence_threshold = confidence_threshold
@@ -69,11 +69,11 @@ class UncertaintyEngine:
                 f"Severe cross-modal contradiction detected with substantial single-modality disagreement ({modality_disagreement:.2f}). Evidence is conflicting."
             )
 
-        # 4. Critical Missing Modality penalty
-        if len(missing_modalities) >= 2:
+        # 4. Critical Missing Modality penalty (only when no modalities or user forces abstention)
+        if len(missing_modalities) >= 3:
             is_uncertain = True
             uncertainty_factors.append(
-                f"Multiple modalities missing ({', '.join(missing_modalities)}); insufficient multi-source corroboration."
+                "All modalities missing; insufficient evidence to evaluate."
             )
 
         final_label = "UNCERTAIN" if is_uncertain else tentative_label

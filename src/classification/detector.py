@@ -274,14 +274,23 @@ class MultimodalVerificationSystem:
         # 4. Cross-Modal Consistency Analysis
         consistency_report = self.cross_modal_analyzer.analyze(t_emb, v_emb, a_emb)
 
-        # 5. Multimodal Fusion Inference
+        # 5. Multimodal Fusion Inference vs Single-Modality Direct Evaluation
         attention_weights_summary = None
-        if fusion_strategy == "cross_attention":
+        if len(available_modalities) == 1:
+            # When only a single modality is provided (e.g. text only), use that modality's baseline
+            # rather than passing dummy missing tokens through multimodal cross-attention
+            active_mod = available_modalities[0]
+            active_p = modality_predictions[active_mod]["probabilities"]
+            p_real = float(active_p["REAL"])
+            p_fake = float(active_p["FAKE"])
+        elif fusion_strategy == "cross_attention":
             self.cross_attention_model.eval()
             with torch.no_grad():
                 logits, attn_w = self.cross_attention_model(t_emb, v_emb, a_emb)
                 probs = torch.softmax(logits, dim=-1).squeeze(0)
                 attention_weights_summary = attn_w.squeeze(0).tolist()
+            p_real = float(probs[0].item())
+            p_fake = float(probs[1].item())
         elif fusion_strategy == "decision_level":
             # Late fusion
             df_res = self.decision_fusion.fuse(
@@ -289,16 +298,16 @@ class MultimodalVerificationSystem:
                 vision_prob=modality_predictions.get("vision", {}).get("probabilities"),
                 audio_prob=modality_predictions.get("audio", {}).get("probabilities")
             )
-            probs = torch.tensor([df_res["probabilities"]["REAL"], df_res["probabilities"]["FAKE"]])
+            p_real = float(df_res["probabilities"]["REAL"])
+            p_fake = float(df_res["probabilities"]["FAKE"])
         else:
             # Feature-level fusion
             self.feature_fusion_model.eval()
             with torch.no_grad():
                 logits = self.feature_fusion_model(t_emb, v_emb, a_emb)
                 probs = torch.softmax(logits, dim=-1).squeeze(0)
-
-        p_real = float(probs[0].item())
-        p_fake = float(probs[1].item())
+            p_real = float(probs[0].item())
+            p_fake = float(probs[1].item())
 
         # Disagreement across baselines
         baseline_fakes = [v["probabilities"]["FAKE"] for v in modality_predictions.values()]

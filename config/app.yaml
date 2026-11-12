@@ -24,9 +24,9 @@ paths:
 uncertainty:
   method: "entropy_and_margin" # 'entropy_and_margin', 'temperature_scaling', 'ensemble'
   confidence_threshold: 0.60 # Below this confidence, output UNCERTAIN
-  entropy_threshold: 0.65 # Above this normalized entropy, output UNCERTAIN
+  entropy_threshold: 0.95 # Above this normalized entropy, output UNCERTAIN (near 50/50 confusion)
   cross_modal_mismatch_penalty: 0.25 # Penalty when semantic text-image cosine < threshold
-  semantic_mismatch_threshold: 0.22 # Minimum acceptable semantic alignment
+  semantic_mismatch_threshold: 0.05 # Minimum acceptable semantic alignment
 
 preprocessing:
   text:
