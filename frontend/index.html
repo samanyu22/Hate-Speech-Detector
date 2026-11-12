@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOICEBOX // Multimodal Deepfake Verification System</title>
+  
+  <!-- VoiceBox Typography: Archivo Black, Work Sans, Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- VoiceBox Design System CSS -->
+  <link rel="stylesheet" href="css/voicebox.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- VoiceBox High-Contrast Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sub-rubric">CSET 346 // Multimodal NLP</div>
+      <h1>VERIFY.AI</h1>
+      <div style="font-size: 11px; font-family: var(--font-mono); color: #A3A3A3; margin-top: 6px;">
+        Instructor: Dr. Sakshi (N2-Cub-009)
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="#overview" class="nav-link active" onclick="showSection('overview')">
+          <span>01 // Overview</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#detection" class="nav-link" onclick="showSection('detection')">
+          <span>02 // Deepfake Detection</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#datasets" class="nav-link" onclick="showSection('datasets')">
+          <span>03 // Datasets</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#preprocessing" class="nav-link" onclick="showSection('preprocessing')">
+          <span>04 // Preprocessing Studio</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#models" class="nav-link" onclick="showSection('models')">
+          <span>05 // Model Laboratory</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#experiments" class="nav-link" onclick="showSection('experiments')">
+          <span>06 // Experiments (1-6)</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#explainability" class="nav-link" onclick="showSection('explainability')">
+          <span>07 // Explainability Studio</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#results" class="nav-link" onclick="showSection('results')">
+          <span>08 // Results & Papers</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#settings" class="nav-link" onclick="showSection('settings')">
+          <span>09 // Settings</span>
+          <span class="caption">&rarr;</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div>SYSTEM: <strong id="sys-device">CPU (8 Cores)</strong></div>
+      <div>STATUS: <span class="vb-chip success" style="padding: 1px 6px; font-size: 9px;">ACTIVE</span></div>
+    </div>
+  </aside>
+
+  <!-- Main Workspace -->
+  <main class="main-content">
+
+    <!-- 01. OVERVIEW DASHBOARD -->
+    <section id="sec-overview" class="view-section active">
+      <div class="section-header">
+        <div class="overline">System Overview & Live Telemetry</div>
+        <h2>Multimodal Content Verification</h2>
+      </div>
+
+      <div class="pull-quote">
+        "Investigating whether combining multimodal representations improves detection compared with strong single-modality baselines while producing explainable evidence."
+      </div>
+
+      <!-- Live Metric Tiles -->
+      <div class="grid-4" style="margin-bottom: 24px;">
+        <div class="metric-tile">
+          <div class="label">Benchmark Samples</div>
+          <div class="value" id="stat-total-samples">320</div>
+          <div class="caption">Balanced (160 REAL / 160 FAKE)</div>
+        </div>
+        <div class="metric-tile">
+          <div class="label">Available Modalities</div>
+          <div class="value">3</div>
+          <div class="caption">Text + Vision + Audio</div>
+        </div>
+        <div class="metric-tile">
+          <div class="label">Multimodal Accuracy</div>
+          <div class="value" id="stat-mm-acc">--</div>
+          <div class="caption">Held-out test split</div>
+        </div>
+        <div class="metric-tile">
+          <div class="label">F1 Gain vs Baseline</div>
+          <div class="value" id="stat-f1-gain" style="color: var(--color-secondary);">--</div>
+          <div class="caption">Cross-modal synergy</div>
+        </div>
+      </div>
+
+      <!-- Benchmark Summary & Architectural Status -->
+      <div class="grid-2">
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>ACTIVE RESEARCH DATASET</h3>
+            <span class="vb-chip success">VALIDATED</span>
+          </div>
+          <p><strong>Dataset:</strong> CSET 346 Multimodal Benchmark</p>
+          <p><strong>Splits:</strong> 224 Train (70%) | 48 Val (15%) | 48 Test (15%)</p>
+          <p><strong>Categories:</strong> Authentic Press, Semantic Mismatch, Face Swap, Synthetic Voice, AI Diffusion.</p>
+          <p style="margin-top: 12px;"><strong>Integrity:</strong> Zero missing files, anti-leakage source grouping.</p>
+          <div style="margin-top: 16px;">
+            <button class="vb-btn vb-btn-secondary vb-btn-sm" onclick="showSection('datasets')">Inspect Manifest &rarr;</button>
+          </div>
+        </div>
+
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>ACTIVE MODEL ENSEMBLE</h3>
+            <span class="vb-chip neutral">PYTORCH</span>
+          </div>
+          <p><strong>Text Baseline:</strong> 1D-CNN + LayerNorm (128-dim)</p>
+          <p><strong>Vision Baseline:</strong> Deep ConvNet + Adaptive Pooling (128-dim)</p>
+          <p><strong>Audio Baseline:</strong> Mel-Spectrogram 2D-CNN (128-dim)</p>
+          <p><strong>Fusion Strategy:</strong> Cross-Attention Multihead Transformer</p>
+          <div style="margin-top: 16px;">
+            <button class="vb-btn vb-btn-primary vb-btn-sm" onclick="showSection('models')">Open Model Lab &rarr;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research Quick Actions -->
+      <div class="vb-card">
+        <div class="vb-card-header">
+          <h3>EXECUTE VERIFICATION WORKFLOWS</h3>
+        </div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <button class="vb-btn vb-btn-primary" onclick="showSection('detection')">Analyze Live Media &rarr;</button>
+          <button class="vb-btn vb-btn-secondary" onclick="showSection('experiments')">Run All 6 Experiments &rarr;</button>
+          <button class="vb-btn vb-btn-secondary" onclick="showSection('explainability')">Inspect Heatmaps &rarr;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. DEEPFAKE DETECTION (INTERACTIVE INFERENCE) -->
+    <section id="sec-detection" class="view-section">
+      <div class="section-header">
+        <div class="overline">Multimodal Inference Engine</div>
+        <h2>Deepfake & Content Detection</h2>
+      </div>
+
+      <div class="grid-2">
+        <!-- Input Form -->
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>SUBMIT MULTIMODAL EVIDENCE</h3>
+            <span class="caption">AT LEAST ONE MODALITY REQUIRED</span>
+          </div>
+
+          <form id="detect-form" onsubmit="event.preventDefault(); runDetection();">
+            <!-- Text Modality -->
+            <div style="margin-bottom: 20px;">
+              <label class="vb-label">1. Textual Claim / Caption / Transcript</label>
+              <textarea id="detect-text" class="vb-textarea" placeholder="Paste article headline, social media caption, or spoken transcript here..."></textarea>
+              <div class="helper-text">Example: 'Official press briefing at the summit discussing bilateral trade agreements.'</div>
+            </div>
+
+            <!-- Image Modality -->
+            <div style="margin-bottom: 20px;">
+              <label class="vb-label">2. Visual Evidence (Image / Frame)</label>
+              <div class="upload-dropzone" onclick="document.getElementById('detect-img-file').click();">
+                <input type="file" id="detect-img-file" accept="image/*" style="display:none;" onchange="previewUploadImage(this);">
+                <div id="img-drop-text">CLICK TO SELECT JPEG / PNG IMAGE</div>
+                <div id="img-preview-box" class="preview-media-box" style="display: none;">
+                  <img id="img-preview-elem" src="" alt="Image preview">
+                </div>
+              </div>
+            </div>
+
+            <!-- Audio Modality -->
+            <div style="margin-bottom: 20px;">
+              <label class="vb-label">3. Acoustic Evidence (Audio / Speech WAV)</label>
+              <div class="upload-dropzone" onclick="document.getElementById('detect-aud-file').click();">
+                <input type="file" id="detect-aud-file" accept="audio/*" style="display:none;" onchange="previewUploadAudio(this);">
+                <div id="aud-drop-text">CLICK TO SELECT AUDIO FILE (WAV / MP3)</div>
+                <div id="aud-preview-info" style="display: none; margin-top: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--color-secondary);">
+                  Audio file attached.
+                </div>
+              </div>
+            </div>
+
+            <!-- Fusion Selection -->
+            <div style="margin-bottom: 24px;">
+              <label class="vb-label">Fusion Architecture</label>
+              <select id="detect-fusion" class="vb-select">
+                <option value="cross_attention">Cross-Attention Fusion (Bidirectional Multihead)</option>
+                <option value="feature_level">Feature-Level Fusion (Bilinear Interaction MLP)</option>
+                <option value="decision_level">Decision-Level Late Fusion (Evidential Weighting)</option>
+              </select>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+              <button type="submit" id="btn-run-detect" class="vb-btn vb-btn-primary" style="flex: 1;">
+                <span>VERIFY SAMPLE NOW</span>
+              </button>
+              <button type="button" class="vb-btn vb-btn-secondary" onclick="loadSampleCase(0);">Load Real</button>
+              <button type="button" class="vb-btn vb-btn-secondary" onclick="loadSampleCase(1);">Load Fake</button>
+              <button type="button" class="vb-btn vb-btn-secondary" onclick="loadSampleCase(2);">Load Mismatch</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Output Verdict Card -->
+        <div class="vb-card elevated" id="verdict-container">
+          <div class="vb-card-header">
+            <h3>VERIFICATION REPORT</h3>
+            <span id="verdict-status-chip" class="vb-chip neutral">AWAITING INPUT</span>
+          </div>
+
+          <div id="verdict-empty-state" style="text-align: center; padding: 60px 20px; color: var(--text-tertiary);">
+            <div style="font-family: var(--font-display); font-size: 24px;">NO PREDICTION GENERATED</div>
+            <p>Submit media evidence on the left to execute the full multimodal neural verification pipeline.</p>
+          </div>
+
+          <div id="verdict-result" style="display: none;">
+            <div style="margin-bottom: 20px; text-align: center;">
+              <div class="overline" style="margin-bottom: 6px;">Classification Outcome</div>
+              <div id="verdict-badge" class="verdict-badge real">REAL</div>
+              <div style="margin-top: 8px; font-family: var(--font-mono); font-size: 14px;">
+                Calibrated Confidence: <strong id="verdict-conf">98.5%</strong>
+              </div>
+            </div>
+
+            <!-- Modality Breakdown -->
+            <div class="vb-card" style="padding: 16px; background-color: var(--surface-card);">
+              <div class="overline">Modality-Specific Predictions</div>
+              <div class="grid-3" style="margin-top: 10px; font-size: 13px;" id="modality-breakdown-grid">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Detected Manipulation Type -->
+            <div style="margin: 16px 0;">
+              <label class="vb-label">Detected Manipulation</label>
+              <div id="verdict-manipulation" style="font-family: var(--font-mono); font-weight: 700; color: var(--color-secondary);">
+                AUTHENTIC
+              </div>
+            </div>
+
+            <!-- Explanation & Evidence Grounding -->
+            <div style="margin: 16px 0;">
+              <label class="vb-label">Grounded Evidence Explanation</label>
+              <p id="verdict-explanation" style="font-size: 14px; background: #FFF; padding: 12px; border: 1px solid var(--border-medium);">
+                --
+              </p>
+            </div>
+
+            <!-- Visual Heatmap Preview if available -->
+            <div id="verdict-heatmap-box" style="display:none; margin: 16px 0;">
+              <label class="vb-label">Visual Attribution Heatmap (Grad-CAM)</label>
+              <div style="border: 2px solid var(--border-strong); text-align: center; background: #000;">
+                <img id="verdict-heatmap-img" src="" alt="Grad-CAM Heatmap" style="max-height: 220px; max-width: 100%;">
+              </div>
+            </div>
+
+            <!-- Warnings / Abstention Details -->
+            <div id="verdict-warnings-box" style="margin-top: 16px; display: none;">
+              <div class="vb-chip warning" style="width: 100%; box-sizing: border-box;">
+                <span id="verdict-warning-text">Warnings present</span>
+              </div>
+            </div>
+
+            <!-- Download Report Button -->
+            <div style="margin-top: 24px; display: flex; gap: 12px;">
+              <button class="vb-btn vb-btn-secondary vb-btn-sm" onclick="exportVerificationReportJSON();">Download JSON Report</button>
+              <button class="vb-btn vb-btn-secondary vb-btn-sm" onclick="window.print();">Printable View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. DATASETS -->
+    <section id="sec-datasets" class="view-section">
+      <div class="section-header">
+        <div class="overline">Data Management & Validation</div>
+        <h2>Multimodal Datasets</h2>
+      </div>
+
+      <div class="vb-card elevated">
+        <div class="vb-card-header">
+          <h3>REGISTERED BENCHMARK REPOSITORIES</h3>
+          <button class="vb-btn vb-btn-secondary vb-btn-sm" onclick="refreshDatasetTable();">Refresh Registry</button>
+        </div>
+
+        <table class="vb-table" id="dataset-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Total Samples</th>
+              <th>Class Balance</th>
+              <th>License</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="dataset-table-body">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dataset Validation Details -->
+      <div class="vb-card">
+        <div class="vb-card-header">
+          <h3>DATASET INTEGRITY & SPLIT VALIDATION</h3>
+          <span id="validation-chip" class="vb-chip success">PASSED</span>
+        </div>
+        <div class="grid-3" id="validation-details-grid">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- External Manifest Registration -->
+      <div class="vb-card">
+        <div class="vb-card-header">
+          <h3>REGISTER EXTERNAL DATASET MANIFEST</h3>
+        </div>
+        <p class="caption" style="margin-bottom: 16px;">
+          Compatible with FaceForensics++, DFDC, FakeAVCeleb, and Fakeddit JSON/CSV manifests.
+        </p>
+        <form id="reg-ds-form" onsubmit="event.preventDefault(); registerNewDataset();" class="grid-3">
+          <div>
+            <label class="vb-label">Dataset ID</label>
+            <input type="text" id="reg-ds-id" class="vb-input" placeholder="e.g. faceforensics_c23">
+          </div>
+          <div>
+            <label class="vb-label">Dataset Name</label>
+            <input type="text" id="reg-ds-name" class="vb-input" placeholder="FaceForensics++ C23">
+          </div>
+          <div>
+            <label class="vb-label">Manifest Absolute Path</label>
+            <input type="text" id="reg-ds-path" class="vb-input" placeholder="C:/data/ff_manifest.json">
+          </div>
+          <div style="grid-column: span 3;">
+            <button type="submit" class="vb-btn vb-btn-primary">Register Manifest</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 04. PREPROCESSING STUDIO -->
+    <section id="sec-preprocessing" class="view-section">
+      <div class="section-header">
+        <div class="overline">Feature Pipelines Inspection</div>
+        <h2>Preprocessing Studio</h2>
+      </div>
+
+      <div class="pull-quote">
+        Inspect how multimodal inputs are converted into normalized representations across textual tokenization, visual tensor normalization, and acoustic Mel-spectrograms.
+      </div>
+
+      <div class="grid-3">
+        <!-- Text Preprocessing -->
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>TEXT PIPELINE</h3>
+            <span class="caption">UNICODE &rarr; TOKENS</span>
+          </div>
+          <p class="caption">Normalizes whitespace, decomposes accents, tokenizes with vocabulary mapping.</p>
+          <div style="margin: 16px 0;">
+            <label class="vb-label">Input Text</label>
+            <input type="text" id="prep-text-input" class="vb-input" value="Breaking: Whistleblower unveils altered video of official summit.">
+          </div>
+          <button class="vb-btn vb-btn-secondary vb-btn-sm" onclick="runPrepInspection();">Inspect Tokens</button>
+          <div style="margin-top: 16px;">
+            <label class="vb-label">Extracted Tokens & IDs</label>
+            <pre id="prep-text-output" style="max-height: 180px;">Click 'Inspect Tokens' to view output.</pre>
+          </div>
+        </div>
+
+        <!-- Vision Preprocessing -->
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>VISION PIPELINE</h3>
+            <span class="caption">RGB &rarr; 224x224 &rarr; TENSOR</span>
+          </div>
+          <p class="caption">Resizes aspect ratio, applies ImageNet normalization, computes Laplacian gradients.</p>
+          <div style="margin-top: 16px; text-align: center;">
+            <img src="/data/benchmark_300/images/real_0000.jpg" alt="Sample" style="max-height: 120px; border: 2px solid var(--border-medium);">
+          </div>
+          <div style="margin-top: 12px; font-family: var(--font-mono); font-size: 12px;">
+            Target Tensor: [3, 224, 224]<br>
+            Mean: [0.485, 0.456, 0.406]
+          </div>
+        </div>
+
+        <!-- Audio Preprocessing -->
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>AUDIO PIPELINE</h3>
+            <span class="caption">WAV &rarr; STFT &rarr; MEL-SPEC</span>
+          </div>
+          <p class="caption">Resamples to 16kHz, computes Short-Time Fourier Transform, yields (64, 96) log spectrogram.</p>
+          <div style="margin-top: 16px; text-align: center;">
+            <div style="padding: 16px; background: #000; color: #FFF; font-family: var(--font-mono); font-size: 11px;">
+              [STFT Mel-Spectrogram: 64 Freq Bins x 96 Time Frames]
+            </div>
+          </div>
+          <div style="margin-top: 12px; font-family: var(--font-mono); font-size: 12px;">
+            Sample Rate: 16,000 Hz<br>
+            Hop Length: 512 samples
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. MODEL LABORATORY -->
+    <section id="sec-models" class="view-section">
+      <div class="section-header">
+        <div class="overline">Neural Architecture Registry</div>
+        <h2>Model Laboratory</h2>
+      </div>
+
+      <div class="vb-card elevated">
+        <div class="vb-card-header">
+          <h3>MODEL REGISTRY & CHECKPOINT STATUS</h3>
+        </div>
+        <table class="vb-table">
+          <thead>
+            <tr>
+              <th>Model Name</th>
+              <th>Architecture</th>
+              <th>Modalities</th>
+              <th>Checkpoint File</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Text Baseline</strong></td>
+              <td>1D-CNN + LayerNorm</td>
+              <td>Text</td>
+              <td><code>models/checkpoints/text_baseline.pt</code></td>
+              <td><span class="vb-chip success">READY</span></td>
+            </tr>
+            <tr>
+              <td><strong>Vision Baseline</strong></td>
+              <td>4-Block ConvNet + AdaptiveAvgPool</td>
+              <td>Image / Video Frames</td>
+              <td><code>models/checkpoints/vision_baseline.pt</code></td>
+              <td><span class="vb-chip success">READY</span></td>
+            </tr>
+            <tr>
+              <td><strong>Audio Baseline</strong></td>
+              <td>Mel-Spectrogram 2D-CNN</td>
+              <td>Audio (WAV)</td>
+              <td><code>models/checkpoints/audio_baseline.pt</code></td>
+              <td><span class="vb-chip success">READY</span></td>
+            </tr>
+            <tr>
+              <td><strong>Feature-Level Fusion</strong></td>
+              <td>Bilinear Projection MLP</td>
+              <td>Text + Vision + Audio</td>
+              <td><code>models/checkpoints/multimodal_feature_fusion.pt</code></td>
+              <td><span class="vb-chip success">READY</span></td>
+            </tr>
+            <tr>
+              <td><strong>Cross-Attention Fusion</strong></td>
+              <td>Multihead Cross-Modal Attention</td>
+              <td>Text + Vision + Audio</td>
+              <td><code>models/checkpoints/multimodal_cross_attention.pt</code></td>
+              <td><span class="vb-chip success">READY</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 06. EXPERIMENTS HUB (ALL 6 EXPERIMENTS) -->
+    <section id="sec-experiments" class="view-section">
+      <div class="section-header">
+        <div class="overline">Academic Research Benchmark</div>
+        <h2>All Six Required Experiments</h2>
+      </div>
+
+      <div class="vb-card" style="background-color: #0A0A0A; color: #FAFAFA; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h3 style="color: #FAFAFA;">EXECUTE FULL EXPERIMENTAL SUITE</h3>
+          <p class="caption" style="color: #A3A3A3;">Runs Experiments 1 through 6 on held-out test records.</p>
+        </div>
+        <button class="vb-btn vb-btn-primary" onclick="runAllExperiments();" style="background-color: var(--color-secondary); border-color: var(--color-secondary);">
+          <span>RUN ALL 6 EXPERIMENTS</span>
+        </button>
+      </div>
+
+      <!-- Tab Buttons for Experiments 1 through 6 -->
+      <div style="display: flex; gap: 8px; margin: 24px 0; overflow-x: auto;">
+        <button class="vb-btn vb-btn-secondary vb-btn-sm active" id="tab-exp-1" onclick="selectExpTab(1);">Exp 1: Baselines</button>
+        <button class="vb-btn vb-btn-secondary vb-btn-sm" id="tab-exp-2" onclick="selectExpTab(2);">Exp 2: Fusion</button>
+        <button class="vb-btn vb-btn-secondary vb-btn-sm" id="tab-exp-3" onclick="selectExpTab(3);">Exp 3: Generalization</button>
+        <button class="vb-btn vb-btn-secondary vb-btn-sm" id="tab-exp-4" onclick="selectExpTab(4);">Exp 4: Ablation</button>
+        <button class="vb-btn vb-btn-secondary vb-btn-sm" id="tab-exp-5" onclick="selectExpTab(5);">Exp 5: Error Analysis</button>
+        <button class="vb-btn vb-btn-secondary vb-btn-sm" id="tab-exp-6" onclick="selectExpTab(6);">Exp 6: Faithfulness</button>
+      </div>
+
+      <!-- Experiment Dynamic Output Box -->
+      <div class="vb-card elevated" id="exp-display-card">
+        <div class="vb-card-header">
+          <h3 id="exp-title">EXPERIMENT 1: SINGLE-MODALITY VS MULTIMODAL</h3>
+          <span id="exp-status-chip" class="vb-chip success">COMPLETED</span>
+        </div>
+
+        <div id="exp-content-body">
+          <!-- Dynamic details injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 07. EXPLAINABILITY STUDIO -->
+    <section id="sec-explainability" class="view-section">
+      <div class="section-header">
+        <div class="overline">Evidence Grounding & Heatmaps</div>
+        <h2>Explainability Studio</h2>
+      </div>
+
+      <div class="grid-2">
+        <!-- Text Token Attribution -->
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>TEXT TOKEN ATTRIBUTION</h3>
+            <span class="caption">PERTURBATION SALIENCY</span>
+          </div>
+          <p class="caption">Identifies words contributing to fake (red) or authentic (green) predictions.</p>
+          <div style="margin: 16px 0; padding: 16px; background-color: var(--surface-card); border: 1px solid var(--border-medium);" id="token-attribution-box">
+            <span class="token-span suspicious">Shocking</span>
+            <span class="token-span suspicious">footage</span>
+            <span class="token-span">shows</span>
+            <span class="token-span">downtown</span>
+            <span class="token-span suspicious">skyscraper</span>
+            <span class="token-span suspicious">collapsing</span>
+            <span class="token-span">today</span>
+          </div>
+          <div class="caption">Green: Authenticity indicator | Red: Suspicion indicator</div>
+        </div>
+
+        <!-- Visual Heatmap -->
+        <div class="vb-card elevated">
+          <div class="vb-card-header">
+            <h3>VISUAL GRAD-CAM EVIDENCE</h3>
+            <span class="caption">SPATIAL ATTRIBUTION</span>
+          </div>
+          <div style="text-align: center; background: #000; border: 2px solid var(--border-strong); padding: 8px;">
+            <img id="studio-heatmap-img" src="" alt="Heatmap" style="max-height: 240px; max-width: 100%;">
+          </div>
+          <div style="margin-top: 12px; font-size: 13px;">
+            <strong>Primary Focus:</strong> <span id="studio-focus">CENTRAL_FACIAL</span><br>
+            <strong>Evidence:</strong> High-gradient spatial boundary discontinuity detected.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08. RESULTS & PAPERS -->
+    <section id="sec-results" class="view-section">
+      <div class="section-header">
+        <div class="overline">Research Reports & Publication Draft</div>
+        <h2>Results & Academic Paper</h2>
+      </div>
+
+      <div class="vb-card elevated">
+        <div class="vb-card-header">
+          <h3>IEEE RESEARCH PAPER DRAFT</h3>
+          <span class="vb-chip neutral">CSET 346 FINAL SUBMISSION</span>
+        </div>
+        <div class="pull-quote">
+          "Multimodal NLP for Deepfake Detection and Explainable Content Verification: Cross-Modal Attention and Evidential Abstention" — Prepared for Dr. Sakshi (N2-Cub-009).
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="/reports/research_paper.md" target="_blank" class="vb-btn vb-btn-primary vb-btn-sm">View Markdown Draft &rarr;</a>
+          <button class="vb-btn vb-btn-secondary vb-btn-sm" onclick="exportFullResearchReport();">Download Full Report (JSON)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09. SETTINGS -->
+    <section id="sec-settings" class="view-section">
+      <div class="section-header">
+        <div class="overline">Runtime Calibration & Thresholds</div>
+        <h2>System Settings</h2>
+      </div>
+
+      <div class="vb-card elevated" style="max-width: 800px;">
+        <div class="vb-card-header">
+          <h3>UNCERTAINTY & ABSTENTION CONFIGURATION</h3>
+        </div>
+        <form onsubmit="event.preventDefault(); saveSettings();">
+          <div style="margin-bottom: 20px;">
+            <label class="vb-label">Confidence Abstention Threshold (Below this &rarr; UNCERTAIN)</label>
+            <input type="number" id="set-conf-thresh" class="vb-input" step="0.05" min="0.5" max="0.95" value="0.60">
+            <div class="helper-text">Specifies minimum required probability before returning REAL or FAKE.</div>
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label class="vb-label">Normalized Entropy Threshold (Above this &rarr; UNCERTAIN)</label>
+            <input type="number" id="set-ent-thresh" class="vb-input" step="0.05" min="0.5" max="0.95" value="0.65">
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label class="vb-label">Semantic Mismatch Threshold (Cosine Similarity)</label>
+            <input type="number" id="set-mismatch-thresh" class="vb-input" step="0.05" min="0.0" max="0.5" value="0.05">
+          </div>
+          <button type="submit" class="vb-btn vb-btn-primary">Save Settings</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Frontend Application Controller -->
+<script src="js/app.js"></script>
+</body>
+</html>
+
