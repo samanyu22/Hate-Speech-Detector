@@ -44,6 +44,6 @@ class TextNormalizer:
         return text
 
     def tokenize_words(self, text: str):
-        # Basic multilingual word tokenizer
-        return re.findall(r"[\w']+|[^\s\w]", text, re.UNICODE)
+        # Multilingual word tokenizer with explicit Indic / Devanagari combining mark preservation
+        return re.findall(r"[\w\u0900-\u097f']+|[^\s\w\u0900-\u097f]", text, re.UNICODE)
 

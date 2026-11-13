@@ -66,22 +66,34 @@ class TextAttributionEngine:
                     "polarity": pol
                 })
 
-        # Calculate Faithfulness Validation (AOPC)
-        sorted_indices = np.argsort([a["abs_score"] for a in attributions])[::-1]
+        # Calculate Faithfulness Validation (AOPC / Comprehensiveness)
+        pred_label = base_res.get("label", 1 if base_prob >= 0.5 else 0)
+        target_base_prob = base_prob if pred_label == 1 else (1.0 - base_prob)
+
+        # Rationale tokens supporting the predicted class:
+        # If predicted HATEFUL (1), sort by highest positive score
+        # If predicted NON-HATEFUL (0), sort by highest negative score (pulls toward non-hate)
+        if pred_label == 1:
+            sorted_indices = np.argsort([a["score"] for a in attributions])[::-1]
+        else:
+            sorted_indices = np.argsort([a["score"] for a in attributions])
+
         k = max(1, int(len(words) * 0.25))
         top_k_indices = set(sorted_indices[:k])
         ablated_words = [words[i] for i in range(len(words)) if i not in top_k_indices]
         ablated_text = " ".join(ablated_words) if ablated_words else "[EMPTY]"
         ablated_res = predict_fn(ablated_text)
         ablated_prob = ablated_res.get("raw_hateful_probability", 0.5)
+        target_ablated_prob = ablated_prob if pred_label == 1 else (1.0 - ablated_prob)
 
         if use_logit_attribution and base_logits and ablated_res.get("logits"):
-            ablated_logits = ablated_res["logits"]
-            logit_shift = abs(base_logits[1] - ablated_logits[1])
-            faithfulness = min(1.0, max(0.2, logit_shift / (abs(base_logits[1]) + 1e-4)))
+            target_idx = pred_label
+            logit_shift = abs(base_logits[target_idx] - ablated_res["logits"][target_idx])
+            faithfulness = min(1.0, max(0.1, logit_shift / (abs(base_logits[target_idx]) + 1e-4)))
         else:
-            prob_drop = abs(base_prob - ablated_prob)
-            faithfulness = min(1.0, max(0.0, prob_drop / max(0.01, base_prob)))
+            prob_drop = max(0.0, target_base_prob - target_ablated_prob)
+            margin = max(0.05, target_base_prob - 0.50) if target_base_prob > 0.50 else max(0.05, target_base_prob)
+            faithfulness = min(1.0, max(0.0, prob_drop / margin))
 
         return {
             "token_attributions": attributions,

@@ -71,10 +71,11 @@ class CrossModalCrossAttentionFusion(nn.Module):
         return logits
 
 class MultimodalDetector(nn.Module):
-    def __init__(self, dim: int = 128, fusion_type: str = "cross_attention"):
+    def __init__(self, dim: int = 128, text_in_dim: int = 256, fusion_type: str = "cross_attention"):
         super().__init__()
         self.dim = dim
         self.fusion_type = fusion_type
+        self.text_proj = nn.Linear(text_in_dim, dim)
         self.visual_extractor = VisualFeatureExtractor(out_dim=dim)
         self.context_fc = nn.Linear(dim, dim)
         self.cross_attention = CrossModalCrossAttentionFusion(dim=dim)
@@ -87,20 +88,22 @@ class MultimodalDetector(nn.Module):
         image_tensor: Optional[torch.Tensor] = None,
         context_feat: Optional[torch.Tensor] = None
     ) -> torch.Tensor:
+        # Align text representation dimension if needed
+        t_feat = self.text_proj(text_feat) if text_feat.shape[-1] != self.dim else text_feat
+
         # If image is missing, gracefully fall back to text representation
         if image_tensor is None:
-            return self.fallback_classifier(text_feat)
+            return self.fallback_classifier(t_feat)
 
         v_feat = self.visual_extractor(image_tensor)
 
         if self.fusion_type == "cross_attention":
-            t_seq = text_feat.unsqueeze(1)
+            t_seq = t_feat.unsqueeze(1)
             v_seq = v_feat.unsqueeze(1)
             return self.cross_attention(t_seq, v_seq)
         elif self.fusion_type == "feature_concat":
-            c_feat = self.context_fc(context_feat) if context_feat is not None else torch.zeros_like(text_feat)
-            return self.concat_fusion(text_feat, v_feat, c_feat)
+            c_feat = self.context_fc(context_feat) if context_feat is not None else torch.zeros_like(t_feat)
+            return self.concat_fusion(t_feat, v_feat, c_feat)
         else:
-            # Fallback
-            return self.fallback_classifier(text_feat)
+            return self.fallback_classifier(t_feat)
 

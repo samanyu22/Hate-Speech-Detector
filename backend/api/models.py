@@ -45,5 +45,9 @@ def select_active_model(model_id: str):
     conn.commit()
     conn.close()
 
+    # Trigger hot-reload in detection engine
+    from backend.api.detection import get_models
+    get_models(force_reload=True)
+
     return {"status": "success", "active_model": model_id}
 

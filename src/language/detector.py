@@ -38,9 +38,18 @@ class MultilingualLanguageDetector:
         dev_ratio = devanagari_chars / total_alpha
         latin_ratio = latin_chars / total_alpha
 
-        # Analyze tokens for Romanized Hindi (Hinglish)
+        # Analyze tokens for Romanized Hindi (Hinglish) with phonetic elongation collapse
         tokens = [t.lower() for t in re.findall(r"[a-zA-Z]+", text)]
-        hinglish_hits = sum(1 for t in tokens if t in cls.HINGLISH_LEXICON)
+        hinglish_hits = 0
+        for t in tokens:
+            if t in cls.HINGLISH_LEXICON:
+                hinglish_hits += 1
+            else:
+                # Test elongation collapse e.g. "bhaaaai" -> "bhai", "nahiii" -> "nahi"
+                t_c2 = re.sub(r"(.)\1{2,}", r"\1\1", t)
+                t_c1 = re.sub(r"(.)\1+", r"\1", t)
+                if t_c2 in cls.HINGLISH_LEXICON or t_c1 in cls.HINGLISH_LEXICON:
+                    hinglish_hits += 1
         hinglish_ratio = (hinglish_hits / len(tokens)) if tokens else 0.0
 
         # Classification rules

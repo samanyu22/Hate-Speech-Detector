@@ -15,15 +15,15 @@
       },
       "confusion_matrix": [
         [
-          17,
+          74,
           0
         ],
         [
           0,
-          15
+          54
         ]
       ],
-      "sample_count": 32
+      "sample_count": 128
     },
     "transformer_backbone": {
       "accuracy": 1.0,
@@ -37,15 +37,15 @@
       },
       "confusion_matrix": [
         [
-          17,
+          74,
           0
         ],
         [
           0,
-          15
+          54
         ]
       ],
-      "sample_count": 32
+      "sample_count": 128
     },
     "macro_f1_delta": 0.0
   },
@@ -83,22 +83,22 @@
       "type": "confusion_matrices",
       "classical_cm": [
         [
-          17,
+          74,
           0
         ],
         [
           0,
-          15
+          54
         ]
       ],
       "transformer_cm": [
         [
-          17,
+          74,
           0
         ],
         [
           0,
-          15
+          54
         ]
       ]
     }

@@ -7,6 +7,8 @@ from backend.core.config import settings
 def get_connection() -> sqlite3.Connection:
     conn = sqlite3.connect(str(settings.database_path), timeout=30.0)
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA journal_mode=WAL;")
+    conn.execute("PRAGMA synchronous=NORMAL;")
     return conn
 
 def init_db():

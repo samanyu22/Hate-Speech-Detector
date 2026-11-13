@@ -1,3 +1,4 @@
+import os
 import io
 import base64
 from pathlib import Path
@@ -10,18 +11,30 @@ class ImagePreprocessor:
         self.target_size = target_size
 
     def load_image(self, source: str) -> Image.Image:
-        # Check if source is base64 string
-        if source.startswith("data:image") or len(source) > 500 and not os.path.exists(source):
+        # 1. Direct Data URI
+        if source.startswith("data:image"):
             if "base64," in source:
                 source = source.split("base64,")[1]
             img_bytes = base64.b64decode(source)
             return Image.open(io.BytesIO(img_bytes)).convert("RGB")
-        
-        # Source is file path
-        path = Path(source)
-        if not path.exists():
-            raise FileNotFoundError(f"Image not found at path: {source}")
-        return Image.open(path).convert("RGB")
+
+        # 2. Existing File Path
+        try:
+            path = Path(source)
+            if path.exists() and path.is_file():
+                return Image.open(path).convert("RGB")
+        except (OSError, ValueError):
+            pass
+
+        # 3. Raw Base64 string without data URI scheme
+        try:
+            clean_b64 = source.split("base64,")[1] if "base64," in source else source
+            img_bytes = base64.b64decode(clean_b64)
+            return Image.open(io.BytesIO(img_bytes)).convert("RGB")
+        except Exception:
+            pass
+
+        raise FileNotFoundError(f"Image not found at path or invalid base64 data: {source[:80]}")
 
     def inspect_and_preprocess(self, image_input: Any) -> Dict[str, Any]:
         if isinstance(image_input, Image.Image):

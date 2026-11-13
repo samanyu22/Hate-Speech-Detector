@@ -7,7 +7,7 @@ class ContextInput(BaseModel):
     post_type: Optional[str] = Field(default=None, description="Direct post, reply, or quote")
 
 class DetectionRequest(BaseModel):
-    text: str = Field(..., description="Post text in English, Hindi, or Hinglish")
+    text: Optional[str] = Field(default="", description="Post text in English, Hindi, or Hinglish")
     image_path: Optional[str] = Field(default=None, description="Optional path or filename of uploaded meme/image")
     image_base64: Optional[str] = Field(default=None, description="Optional base64 image data")
     context: Optional[ContextInput] = Field(default=None, description="Optional conversation context")

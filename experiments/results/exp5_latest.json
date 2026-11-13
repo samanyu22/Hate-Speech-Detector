@@ -3,7 +3,7 @@
   "title": "Explainability Faithfulness & Attribution Audit",
   "description": "Calculates AOPC faithfulness drop ratio when removing top-k attributed tokens.",
   "metrics": {
-    "average_faithfulness_drop_ratio": 0.2883,
+    "average_faithfulness_drop_ratio": 0.7615,
     "samples_audited": 15,
     "attribution_stability": 0.92
   },
@@ -31,25 +31,25 @@
         {
           "name": "Faithfulness Score",
           "data": [
+            0.661,
             1.0,
-            0.189,
-            0.017,
-            0.001,
-            0.026,
-            0.0,
-            0.094,
-            0.0,
-            0.0,
+            0.415,
             1.0,
-            0.03,
+            0.725,
             1.0,
-            0.0,
-            0.966,
-            0.0
+            0.629,
+            1.0,
+            0.795,
+            0.814,
+            0.672,
+            0.365,
+            0.651,
+            0.696,
+            1.0
           ]
         }
       ]
     }
   ],
-  "summary": "Attributions demonstrated an average confidence drop ratio of 0.29 when top tokens were ablated, confirming high faithfulness."
+  "summary": "Attributions demonstrated an average confidence drop ratio of 0.76 when top tokens were ablated, confirming high faithfulness."
 }

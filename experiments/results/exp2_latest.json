@@ -15,15 +15,15 @@
       },
       "confusion_matrix": [
         [
-          6,
+          48,
           0
         ],
         [
           0,
-          7
+          35
         ]
       ],
-      "sample_count": 13
+      "sample_count": 83
     },
     "hindi_native_subset": {
       "accuracy": 1.0,
@@ -37,15 +37,15 @@
       },
       "confusion_matrix": [
         [
-          7,
+          11,
           0
         ],
         [
           0,
-          3
+          5
         ]
       ],
-      "sample_count": 10
+      "sample_count": 16
     },
     "hinglish_code_mixed_subset": {
       "accuracy": 1.0,
@@ -59,15 +59,15 @@
       },
       "confusion_matrix": [
         [
-          4,
+          15,
           0
         ],
         [
           0,
-          5
+          14
         ]
       ],
-      "sample_count": 9
+      "sample_count": 29
     }
   },
   "visualizations": [

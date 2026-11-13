@@ -21,25 +21,26 @@ class MultilingualAttentionClassifier(nn.Module):
         self.dropout = nn.Dropout(0.3)
         self.fc_out = nn.Linear(64, num_classes)
 
-    def forward(self, input_ids: torch.Tensor) -> torch.Tensor:
-        # input_ids: [batch_size, seq_len]
-        pad_mask = (input_ids == 0) # [batch_size, seq_len]
-        embeds = self.embedding(input_ids) # [batch_size, seq_len, embed_dim]
-        lstm_out, _ = self.lstm(embeds) # [batch_size, seq_len, hidden_dim*2]
-        
-        # Self-attention with key_padding_mask
+    def get_features(self, input_ids: torch.Tensor) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
+        """Returns pooled representation [batch_size, hidden_dim*2] and attention weights."""
+        pad_mask = (input_ids == 0)
+        embeds = self.embedding(input_ids)
+        lstm_out, _ = self.lstm(embeds)
         if pad_mask.all():
             attn_out = lstm_out
+            attn_weights = None
         else:
-            attn_out, _ = self.attention(lstm_out, lstm_out, lstm_out, key_padding_mask=pad_mask)
+            attn_out, attn_weights = self.attention(lstm_out, lstm_out, lstm_out, key_padding_mask=pad_mask)
         
-        # Masked average pooling: average ONLY over valid non-PAD tokens
-        valid_mask = (~pad_mask).unsqueeze(-1).float() # [batch_size, seq_len, 1]
+        valid_mask = (~pad_mask).unsqueeze(-1).float()
         masked_attn = attn_out * valid_mask
-        sum_attn = torch.sum(masked_attn, dim=1) # [batch_size, hidden_dim*2]
+        sum_attn = torch.sum(masked_attn, dim=1)
         lengths = torch.clamp(valid_mask.sum(dim=1), min=1.0)
         pooled = sum_attn / lengths
-        
+        return pooled, attn_weights
+
+    def forward(self, input_ids: torch.Tensor) -> torch.Tensor:
+        pooled, _ = self.get_features(input_ids)
         feat = F.relu(self.fc1(self.dropout(pooled)))
         logits = self.fc_out(self.dropout(feat))
         return logits
@@ -89,6 +90,16 @@ class MultilingualTransformerEngine:
             if len(ids) < max_len:
                 ids += [self.vocab["<PAD>"]] * (max_len - len(ids))
         return torch.tensor([ids], dtype=torch.long, device=self.device)
+
+    def encode_text(self, text: str) -> torch.Tensor:
+        """Extracts 256-dim pooled representation from the bidirectional attention transformer."""
+        if not self.is_trained and self.checkpoint_path.exists():
+            self.load_checkpoint()
+        self.model.eval()
+        x = self.tokenize_to_tensor(text)
+        with torch.no_grad():
+            pooled, _ = self.model.get_features(x)
+        return pooled
 
     def has_grounded_markers(self, text: str) -> bool:
         """

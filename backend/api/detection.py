@@ -1,8 +1,12 @@
 import uuid
 import json
+from pathlib import Path
 from datetime import datetime, timezone
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Tuple
 from fastapi import APIRouter, HTTPException, Depends
+import torch
+import torch.nn.functional as F
+
 from backend.schemas.detection import DetectionRequest, DetectionResponse, ExplanationResponse, TokenAttribution, VisualAttribution
 from backend.core.config import settings
 from backend.database.db import get_connection
@@ -12,6 +16,7 @@ from src.preprocessing.text.normalizer import TextNormalizer
 from src.preprocessing.context.context_processor import ContextProcessor
 from src.preprocessing.image.image_preprocessor import ImagePreprocessor
 from src.multimodal.ocr import OCRService
+from src.multimodal.fusion import MultimodalDetector
 from src.classification.classical_baseline import ClassicalBaselineClassifier
 from src.models.transformer_classifier import MultilingualTransformerEngine
 from src.models.llm_reasoner import LLMReasoningEngine
@@ -21,26 +26,57 @@ from src.explainability.synthesizer import ExplanationSynthesizer
 
 router = APIRouter(prefix="/api/detection", tags=["Detection"])
 
-# Singleton model instances
+# Singleton model & processor instances
 _normalizer = TextNormalizer()
 _context_proc = ContextProcessor()
 _image_proc = ImagePreprocessor()
 _llm_reasoner = LLMReasoningEngine()
 _xai_engine = TextAttributionEngine(_normalizer)
+_multimodal_detector = MultimodalDetector(dim=128, text_in_dim=256)
 
 _classical_model: Optional[ClassicalBaselineClassifier] = None
 _transformer_model: Optional[MultilingualTransformerEngine] = None
+_current_loaded_checkpoint: Optional[str] = None
 
-def get_models(force_reload: bool = False):
-    global _classical_model, _transformer_model
+def get_active_model_registry_info() -> Dict[str, Any]:
+    """Retrieve active model info dynamically from SQLite registry."""
+    conn = get_connection()
+    row = conn.execute("SELECT * FROM model_registry WHERE is_active = 1 LIMIT 1").fetchone()
+    conn.close()
+    if row:
+        return dict(row)
+    return {
+        "id": settings.app_config.get("active_model", {}).get("id", "multilingual-transformer-v1"),
+        "checkpoint_path": str(settings.base_dir / "models" / "checkpoints" / "multilingual_transformer.pt"),
+        "version": "1.0"
+    }
+
+def get_models(force_reload: bool = False) -> Tuple[Optional[ClassicalBaselineClassifier], Optional[MultilingualTransformerEngine]]:
+    global _classical_model, _transformer_model, _current_loaded_checkpoint
+    
+    active_info = get_active_model_registry_info()
+    target_ckpt = active_info.get("checkpoint_path") or str(settings.base_dir / "models" / "checkpoints" / "multilingual_transformer.pt")
+
     if _classical_model is None or force_reload:
         _classical_model = ClassicalBaselineClassifier()
         if _classical_model.checkpoint_path.exists():
             _classical_model.load()
-    if _transformer_model is None or force_reload:
-        _transformer_model = MultilingualTransformerEngine()
-        if _transformer_model.checkpoint_path.exists():
+
+    need_reload = (
+        _transformer_model is None or
+        force_reload or
+        _current_loaded_checkpoint != target_ckpt
+    )
+
+    if need_reload:
+        _transformer_model = MultilingualTransformerEngine(checkpoint_path=target_ckpt)
+        if Path(target_ckpt).exists():
+            _transformer_model.load_checkpoint(Path(target_ckpt))
+            _current_loaded_checkpoint = target_ckpt
+        elif _transformer_model.checkpoint_path.exists():
             _transformer_model.load_checkpoint()
+            _current_loaded_checkpoint = str(_transformer_model.checkpoint_path)
+
     return _classical_model, _transformer_model
 
 @router.post("/detect", response_model=DetectionResponse)
@@ -54,7 +90,7 @@ def detect_content(req: DetectionRequest):
     modalities_used = []
 
     # 1. Modality: Text Preprocessing & Language Detection
-    clean_text = _normalizer.normalize(req.text)
+    clean_text = _normalizer.normalize(req.text or "")
     lang_info = MultilingualLanguageDetector.detect(clean_text)
     lang = lang_info["language"]
     if clean_text:
@@ -65,8 +101,11 @@ def detect_content(req: DetectionRequest):
     if ctx_info["has_context"]:
         modalities_used.append("context")
 
-    # 3. Modality: Visual & OCR
+    # 3. Modality: Visual, OCR & Image Feature Tensor
     ocr_result = {"extracted_text": "", "bounding_boxes": [], "confidence": 0.0}
+    img_tensor = None
+    saved_image_path = req.image_path
+
     if req.image_path or req.image_base64:
         try:
             img_source = req.image_path or req.image_base64
@@ -75,6 +114,18 @@ def detect_content(req: DetectionRequest):
             modalities_used.append("image")
             if ocr_result["extracted_text"]:
                 modalities_used.append("ocr")
+
+            # Convert processed array [224, 224, 3] to PyTorch tensor [1, 3, 224, 224]
+            arr = img_props["processed_array"]
+            img_tensor = torch.from_numpy(arr).permute(2, 0, 1).unsqueeze(0).float()
+
+            # Persist incoming base64 image to data/uploads for persistence & auditing
+            if req.image_base64 and not req.image_path:
+                uploads_dir = settings.base_dir / "data" / "uploads"
+                uploads_dir.mkdir(parents=True, exist_ok=True)
+                saved_file = uploads_dir / f"{pred_id}.png"
+                img_props["pil_image"].save(saved_file)
+                saved_image_path = str(saved_file)
         except Exception as e:
             print(f"Image processing note: {e}")
 
@@ -84,17 +135,16 @@ def detect_content(req: DetectionRequest):
         full_text = f"{clean_text} [OCR: {ocr_result['extracted_text']}]".strip()
 
     # 4. Model Selection & Inference
-    active_model_id = req.model_id or settings.app_config.get("active_model", {}).get("id", "multilingual-transformer-v1")
-    model_version = "1.0"
+    active_reg = get_active_model_registry_info()
+    active_model_id = req.model_id or active_reg.get("id", "multilingual-transformer-v1")
+    model_version = active_reg.get("version", "1.0")
 
     if active_model_id == "classical-tfidf-svm" and classical_clf and classical_clf.is_trained:
         pred_res = classical_clf.predict(full_text)
         pred_label = pred_res["label"]
         confidence = pred_res["confidence"]
-        active_model_name = "TF-IDF + Linear Classifier"
         predict_fn = classical_clf.predict
     elif active_model_id == "llm-structured-reasoner-v1":
-        # Structured LLM analysis
         trans_prob = transformer_clf.predict(full_text) if (transformer_clf and transformer_clf.is_trained) else None
         llm_out = _llm_reasoner.analyze(
             text=clean_text,
@@ -105,14 +155,32 @@ def detect_content(req: DetectionRequest):
         )
         pred_label = llm_out.predicted_label
         confidence = llm_out.calibrated_confidence
-        active_model_name = "LLM Structured Analysis Engine"
         predict_fn = transformer_clf.predict if (transformer_clf and transformer_clf.is_trained) else classical_clf.predict
     else:
-        # Default: Multilingual Transformer
+        # Default: Multilingual Attention Transformer with Multimodal Fusion if visual present
         if transformer_clf and transformer_clf.is_trained:
             pred_res = transformer_clf.predict(full_text)
-            pred_label = pred_res["label"]
-            confidence = pred_res["confidence"]
+            
+            # Incorporate Cross-Modal CNN Feature Fusion when image tensor is available
+            if img_tensor is not None:
+                try:
+                    text_feat = transformer_clf.encode_text(full_text)
+                    with torch.no_grad():
+                        mm_logits = _multimodal_detector(text_feat, img_tensor)
+                        mm_probs = F.softmax(mm_logits, dim=-1).cpu().numpy()[0]
+                    p_mm_hate = float(mm_probs[1])
+                    # Calibrate text probability with visual CNN representation (70% text / 30% visual cross-attention)
+                    fused_prob = round(0.70 * pred_res["raw_hateful_probability"] + 0.30 * p_mm_hate, 4)
+                    pred_label = 1 if fused_prob >= 0.50 else 0
+                    confidence = fused_prob if pred_label == 1 else round(1.0 - fused_prob, 4)
+                    modalities_used.append("visual_cnn_fusion")
+                except Exception as e:
+                    print(f"Multimodal cross-attention fallback: {e}")
+                    pred_label = pred_res["label"]
+                    confidence = pred_res["confidence"]
+            else:
+                pred_label = pred_res["label"]
+                confidence = pred_res["confidence"]
             predict_fn = transformer_clf.predict
         elif classical_clf and classical_clf.is_trained:
             pred_res = classical_clf.predict(full_text)
@@ -121,7 +189,6 @@ def detect_content(req: DetectionRequest):
             predict_fn = classical_clf.predict
         else:
             raise HTTPException(status_code=500, detail="No trained model available. Train models in Model Lab.")
-        active_model_name = "Multilingual Code-Mixed Transformer"
 
     # 5. Explainability Computation
     explanation_obj = None
@@ -164,7 +231,7 @@ def detect_content(req: DetectionRequest):
     """, (
         pred_id,
         clean_text,
-        req.image_path,
+        saved_image_path,
         json.dumps(ctx_info),
         pred_label,
         confidence,

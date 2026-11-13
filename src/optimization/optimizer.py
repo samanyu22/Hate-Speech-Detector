@@ -2,7 +2,7 @@ import os
 import uuid
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 import torch
 import torch.nn as nn
@@ -50,6 +50,21 @@ class RewardOptimizer:
 
         # Baseline evaluation before optimization
         before_metrics = self.engine.evaluate(test_records)
+        eval_sample = test_records[:50]
+        rewards_before = []
+        for r in eval_sample:
+            p_res = self.engine.predict(r.text)
+            is_c = (p_res["label"] == r.label)
+            rew_dict = self.reward_calculator.calculate_reward(
+                predicted_label=p_res["label"],
+                confidence=p_res["confidence"],
+                is_correct=is_c,
+                suggested_label=r.label if not is_c else None,
+                faithfulness_score=0.85 if is_c else 0.35,
+                context_used=bool(r.context)
+            )
+            rewards_before.append(rew_dict["total_reward"])
+        mean_reward_before = round(float(sum(rewards_before) / max(1, len(rewards_before))), 4)
 
         # 3. Perform Preference Optimization Loss update
         self.engine.model.train()
@@ -83,15 +98,27 @@ class RewardOptimizer:
         self.engine.model.eval()
         after_metrics = self.engine.evaluate(test_records)
 
+        rewards_after = []
+        for r in eval_sample:
+            p_res = self.engine.predict(r.text)
+            is_c = (p_res["label"] == r.label)
+            rew_dict = self.reward_calculator.calculate_reward(
+                predicted_label=p_res["label"],
+                confidence=p_res["confidence"],
+                is_correct=is_c,
+                suggested_label=r.label if not is_c else None,
+                faithfulness_score=0.85 if is_c else 0.35,
+                context_used=bool(r.context)
+            )
+            rewards_after.append(rew_dict["total_reward"])
+        mean_reward_after = round(float(sum(rewards_after) / max(1, len(rewards_after))), 4)
+        reward_delta = round(float(mean_reward_after - mean_reward_before), 4)
+
         # 5. Versioning
-        version_num = f"2.{int(datetime.utcnow().timestamp()) % 1000}"
+        version_num = f"2.{int(datetime.now(timezone.utc).timestamp()) % 1000}"
         new_version_id = f"multilingual-transformer-v{version_num}"
         new_checkpoint_path = settings.base_dir / "models" / "versions" / f"{new_version_id}.pt"
         self.engine.save_checkpoint(new_checkpoint_path)
-
-        # Determine reward score improvement
-        f1_gain = after_metrics["macro_f1"] - before_metrics["macro_f1"]
-        mean_reward_after = 0.82 if f1_gain >= 0 else 0.70
 
         # Anti-regression Guard: Check if performance improved or held steady
         promoted = (after_metrics["macro_f1"] >= before_metrics["macro_f1"] - 0.05)
@@ -106,7 +133,7 @@ class RewardOptimizer:
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             run_id,
-            f"Reward-Opt-{method}-{datetime.utcnow().strftime('%Y%m%d%H%M')}",
+            f"Reward-Opt-{method}-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M')}",
             "1.0",
             version_num,
             method,
@@ -170,7 +197,7 @@ class RewardOptimizer:
             "samples_trained": len(pairs),
             "before_metrics": before_metrics,
             "after_metrics": after_metrics,
-            "reward_gain": round(float(f1_gain), 4),
+            "reward_gain": reward_delta,
             "promoted_to_active": promoted,
             "message": msg
         }
