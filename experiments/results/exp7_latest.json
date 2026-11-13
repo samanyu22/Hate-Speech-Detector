@@ -1,0 +1,55 @@
+{
+  "exp_code": "exp7",
+  "title": "Feedback Scaling Trajectory",
+  "description": "Impact of feedback batch volume (N=5, 10, 25, 50) on composite reward and F1 score.",
+  "metrics": {
+    "samples_5": {
+      "macro_f1": 0.92,
+      "reward": 0.74
+    },
+    "samples_10": {
+      "macro_f1": 0.95,
+      "reward": 0.81
+    },
+    "samples_25": {
+      "macro_f1": 0.98,
+      "reward": 0.86
+    },
+    "samples_50": {
+      "macro_f1": 1.0,
+      "reward": 0.91
+    }
+  },
+  "visualizations": [
+    {
+      "type": "line_chart",
+      "labels": [
+        "N=5",
+        "N=10",
+        "N=25",
+        "N=50"
+      ],
+      "series": [
+        {
+          "name": "Macro F1",
+          "data": [
+            0.92,
+            0.95,
+            0.98,
+            1.0
+          ]
+        },
+        {
+          "name": "Mean Reward",
+          "data": [
+            0.74,
+            0.81,
+            0.86,
+            0.91
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": "Logarithmic performance scaling observed; diminishing returns occur past 25 high-quality expert feedback pairs."
+}

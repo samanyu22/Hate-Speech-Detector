@@ -1,0 +1,27 @@
+rewards:
+  function:
+    formula: "R = alpha * R_cls + beta * R_exp + gamma * R_ctx + delta * R_fb - lambda_err * R_err"
+    weights:
+      alpha: 0.35      # Weight for classification correctness against ground truth or consensus
+      beta: 0.25       # Weight for explanation quality, faithfulness, and evidence alignment
+      gamma: 0.15      # Weight for appropriate context utilization (without demographic leakage)
+      delta: 0.25      # Weight for human expert feedback alignment
+      lambda_err: 0.50 # Penalty for confident false positives or biased decisions
+
+  thresholds:
+    min_reward_for_promotion: 0.70
+    min_feedback_samples_batch: 5
+    dpo_beta: 0.10
+    learning_rate: 1.0e-5
+    epochs_per_cycle: 2
+
+  components:
+    r_classification:
+      metric: "binary_cross_entropy_alignment"
+    r_explanation:
+      faithfulness_metric: "perturbation_drop_ratio"
+    r_context:
+      neutrality_metric: "demographic_invariance"
+    r_feedback:
+      consensus_score: "expert_agreement_weight"
+

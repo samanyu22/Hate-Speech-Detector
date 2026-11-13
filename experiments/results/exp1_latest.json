@@ -1,0 +1,107 @@
+{
+  "exp_code": "exp1",
+  "title": "Classical NLP vs Transformer Backbone",
+  "description": "Comparative evaluation on identical held-out test split.",
+  "metrics": {
+    "classical_baseline": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class_f1": {
+        "non_hateful": 1.0,
+        "hateful": 1.0
+      },
+      "confusion_matrix": [
+        [
+          17,
+          0
+        ],
+        [
+          0,
+          15
+        ]
+      ],
+      "sample_count": 32
+    },
+    "transformer_backbone": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class_f1": {
+        "non_hateful": 1.0,
+        "hateful": 1.0
+      },
+      "confusion_matrix": [
+        [
+          17,
+          0
+        ],
+        [
+          0,
+          15
+        ]
+      ],
+      "sample_count": 32
+    },
+    "macro_f1_delta": 0.0
+  },
+  "visualizations": [
+    {
+      "type": "bar_comparison",
+      "labels": [
+        "Accuracy",
+        "Precision",
+        "Recall",
+        "Macro F1"
+      ],
+      "series": [
+        {
+          "name": "TF-IDF + Linear Classifier",
+          "data": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Multilingual Attention Transformer",
+          "data": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": "confusion_matrices",
+      "classical_cm": [
+        [
+          17,
+          0
+        ],
+        [
+          0,
+          15
+        ]
+      ],
+      "transformer_cm": [
+        [
+          17,
+          0
+        ],
+        [
+          0,
+          15
+        ]
+      ]
+    }
+  ],
+  "summary": "Transformer achieved 1.0000 Macro F1 compared to 1.0000 for the classical TF-IDF baseline."
+}

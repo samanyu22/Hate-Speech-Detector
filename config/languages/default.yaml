@@ -1,0 +1,23 @@
+languages:
+  supported:
+    - code: "en"
+      name: "English"
+      script: "Latin"
+    - code: "hi"
+      name: "Hindi"
+      script: "Devanagari"
+    - code: "hi-en"
+      name: "Hindi-English Code-Mixed (Hinglish)"
+      script: "Mixed Latin/Devanagari"
+    - code: "mr"
+      name: "Marathi"
+      script: "Devanagari"
+    - code: "bn"
+      name: "Bengali"
+      script: "Bengali"
+
+  detection:
+    min_confidence: 0.60
+    allow_multilingual_tokens: true
+    code_mixed_threshold: 0.25 # If >25% tokens from second script/language, classify as code-mixed
+

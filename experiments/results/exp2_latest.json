@@ -1,0 +1,94 @@
+{
+  "exp_code": "exp2",
+  "title": "Monolingual vs Multilingual & Code-Mixed Evaluation",
+  "description": "Breakdown of detection efficacy across English, Hindi Devanagari, and Hinglish code-mixing.",
+  "metrics": {
+    "english_subset": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class_f1": {
+        "non_hateful": 1.0,
+        "hateful": 1.0
+      },
+      "confusion_matrix": [
+        [
+          6,
+          0
+        ],
+        [
+          0,
+          7
+        ]
+      ],
+      "sample_count": 13
+    },
+    "hindi_native_subset": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class_f1": {
+        "non_hateful": 1.0,
+        "hateful": 1.0
+      },
+      "confusion_matrix": [
+        [
+          7,
+          0
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "sample_count": 10
+    },
+    "hinglish_code_mixed_subset": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class_f1": {
+        "non_hateful": 1.0,
+        "hateful": 1.0
+      },
+      "confusion_matrix": [
+        [
+          4,
+          0
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "sample_count": 9
+    }
+  },
+  "visualizations": [
+    {
+      "type": "bar_chart",
+      "labels": [
+        "English",
+        "Hindi Native",
+        "Hinglish Code-Mixed"
+      ],
+      "series": [
+        {
+          "name": "Macro F1",
+          "data": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": "Multilingual representations maintain balanced discrimination across scripts with no severe drop on code-mixed Hinglish."
+}

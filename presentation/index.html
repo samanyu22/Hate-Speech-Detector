@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentation: Hate Speech Detection — Dr. Pradeepika Verma</title>
+  <link rel="stylesheet" href="/static/css/thoughtstream.css">
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+    .slide-deck { max-width: 900px; width: 100%; min-height: 520px; background-color: var(--color-surface); border: 1px solid var(--color-border-medium); padding: 48px; display: flex; flex-direction: column; justify-content: space-between; }
+    .slide-content { flex-grow: 1; }
+    .slide-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-border-subtle); padding-top: 24px; margin-top: 24px; }
+    .slide-num { font-family: var(--font-mono); font-size: 13px; color: var(--color-text-tertiary); }
+    ul { padding-left: 24px; line-height: 2; margin-top: 16px; }
+    li { margin-bottom: 8px; color: var(--color-text-secondary); }
+  </style>
+</head>
+<body class="dark-mode">
+  <div class="slide-deck">
+    <div class="slide-content" id="slideContainer">
+      <!-- Slides dynamically rendered here -->
+    </div>
+    <div class="slide-footer">
+      <button id="prevBtn" class="btn btn-secondary btn-sm">&larr; Previous</button>
+      <span class="slide-num" id="slideCounter">Slide 1 of 15</span>
+      <button id="nextBtn" class="btn btn-primary btn-sm">Next &rarr;</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = [
+      {
+        title: "Hate Speech Detection through Explainable AI and Reward Optimized LLMs",
+        subtitle: "Academic Research Presentation — Supervisor: Dr. Pradeepika Verma",
+        content: `
+          <p style="font-size:16px; margin-top:24px;">An intelligent, explainable, and multimodal content moderation platform conforming to the mathematical formulation $x_i = \\{T_i, V_i, C_i\\} \\implies f_\\theta(x_i) \\to y_i \\in \\{0, 1\\}$.</p>
+          <div style="margin-top:24px;">
+            <span class="badge badge-neutral">Multilingual NLP</span>
+            <span class="badge badge-neutral">Code-Mixed Hinglish</span>
+            <span class="badge badge-neutral">Multimodal EasyOCR</span>
+            <span class="badge badge-neutral">Cross-Attention Fusion</span>
+            <span class="badge badge-neutral">Grounded XAI Attribution</span>
+            <span class="badge badge-neutral">Reward Optimized DPO</span>
+          </div>
+        `
+      },
+      {
+        title: "Motivation & Challenges in Content Moderation",
+        subtitle: "Why Traditional Hate Speech Detectors Fail",
+        content: `
+          <ul>
+            <li><strong>Multilingual Low-Resource Environments:</strong> Models trained purely on English fail completely on Indic languages.</li>
+            <li><strong>Code-Mixed Language (Hinglish):</strong> Transliteration and informal dialect switching confuse static tokenizers.</li>
+            <li><strong>Multimodal Synergies (Memes):</strong> Derogatory visual imagery paired with harmless text bypasses text-only detectors.</li>
+            <li><strong>Black-Box Opacity:</strong> Deep neural models fail to provide faithful explanations for their moderation decisions.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Official Problem Statement & Formulation",
+        subtitle: "Preserving Dr. Pradeepika Verma's Specification",
+        content: `
+          <div class="card" style="background-color:var(--color-surface-raised);">
+            <div style="font-family:var(--font-mono); font-size:16px;">x_i = {T_i, V_i, C_i}</div>
+            <div style="font-family:var(--font-mono); font-size:16px; margin-top:8px;">f_&theta;(x_i) &rarr; y_i &isin; {0, 1}</div>
+          </div>
+          <ul>
+            <li><strong>T_i:</strong> Textual utterance (English, Hindi Devanagari, or Hinglish code-mixed).</li>
+            <li><strong>V_i:</strong> Visual modality (social media memes, imagery).</li>
+            <li><strong>C_i:</strong> Contextual metadata (thread history, sanitized of demographic profiling).</li>
+            <li><strong>Binary Target:</strong> 0 = Non-Hateful, 1 = Hateful.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Complete System Architecture",
+        subtitle: "End-to-End Pipeline Overview",
+        content: `
+          <p style="font-size:14px;">Our modular system implements 21 distinct software components:</p>
+          <ul>
+            <li><strong>Preprocessors:</strong> Unicode NFKC Normalizer, Script Detector, EasyOCR Engine, Demographic Masker.</li>
+            <li><strong>Modeling Backbones:</strong> Classical TF-IDF Baseline, Multilingual Code-Mixed Transformer, LLM Reasoner.</li>
+            <li><strong>Multimodal Fusion:</strong> Intermediate Cross-Modal Cross-Attention Layer.</li>
+            <li><strong>XAI Attribution:</strong> Leave-One-Out Perturbation with AOPC Faithfulness Drop Verification.</li>
+            <li><strong>Reward Optimization:</strong> Multi-Objective Reward Formula and Direct Preference Optimization (DPO).</li>
+          </ul>
+        `
+      },
+      {
+        title: "Multilingual & Code-Mixed NLP",
+        subtitle: "Devanagari Script & Romanized Hinglish",
+        content: `
+          <ul>
+            <li>Avoids naive machine translation which eliminates sarcasm, slang, and cultural context.</li>
+            <li>Language identification analyzes character Unicode blocks (Devanagari <code>0900-097F</code> vs Latin).</li>
+            <li>Phonetic Hinglish lexicon matches Romanized abusive slang (e.g. <code>kamine</code>, <code>gaddar</code>, <code>suar</code>) and civil expressions (<code>bhai</code>, <code>dhanyawad</code>).</li>
+          </ul>
+        `
+      },
+      {
+        title: "Multimodal Meme Processing & OCR",
+        subtitle: "Visual & Textual Synergy",
+        content: `
+          <ul>
+            <li>Integrates <strong>EasyOCR</strong> for embedded meme typography extraction with bounding box coordinates.</li>
+            <li>Visual convolutional encoder maps spatial image pixels to 128-dimensional embedding vectors.</li>
+            <li><strong>Cross-Modal Cross-Attention</strong> dynamically weights visual-textual contradictions, detecting memes that are toxic only in combination.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Explainable AI (XAI) Framework",
+        subtitle: "Grounded Mathematical Attributions",
+        content: `
+          <ul>
+            <li><strong>Leave-One-Out Perturbation:</strong> Computes token importance &Delta;_j = f(x) - f(x_{\\j}).</li>
+            <li><strong>Polarity Distinction:</strong> Clearly highlights positive evidence (hate-inducing) vs negative evidence (civil/mitigating).</li>
+            <li><strong>Faithfulness Verification:</strong> Measured via AOPC confidence drop ratio when top tokens are ablated.</li>
+            <li><strong>Visual Grounding:</strong> Connects textual attributions back to spatial OCR bounding boxes on memes.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Reward Optimization Framework",
+        subtitle: "The Core Mandate of Dr. Verma's Specification",
+        content: `
+          <div class="card" style="background-color:var(--color-surface-raised);">
+            <div style="font-family:var(--font-mono); font-size:14px;">R = &alpha;&middot;R_cls + &beta;&middot;R_exp + &gamma;&middot;R_ctx + &delta;&middot;R_fb - &lambda;_err&middot;R_err</div>
+            <div style="font-size:12px; margin-top:6px; color:var(--color-text-secondary);">&alpha;=0.35, &beta;=0.25, &gamma;=0.15, &delta;=0.25, &lambda;_err=0.50</div>
+          </div>
+          <ul>
+            <li>Integrates human feedback (correctness, suggested label, explanation rating).</li>
+            <li>Constructs preference pairs $(x, y_w, y_l)$ where corrected labels are preferred over model errors.</li>
+            <li>Direct Preference Optimization (DPO) updates weights and versions checkpoint ($v1.0 \\to v2.0$).</li>
+          </ul>
+        `
+      },
+      {
+        title: "Research Experiments (1 to 9)",
+        subtitle: "Methodical Experimental Design",
+        content: `
+          <ul>
+            <li><strong>Exp 1:</strong> Classical NLP vs Multilingual Transformer.</li>
+            <li><strong>Exp 2:</strong> Monolingual vs Multilingual & Code-Mixed.</li>
+            <li><strong>Exp 3:</strong> Text-Only vs Multimodal Meme Ablation.</li>
+            <li><strong>Exp 4:</strong> Fusion Architecture Comparison (Cross-Attention vs Concat).</li>
+            <li><strong>Exp 5:</strong> Explainability Faithfulness Evaluation (AOPC).</li>
+            <li><strong>Exp 6:</strong> Reward Optimization Impact (Before vs After).</li>
+            <li><strong>Exp 7:</strong> Feedback Quantity Scaling (N=5 to 50).</li>
+            <li><strong>Exp 8:</strong> Bias & Fairness Parity Audit.</li>
+            <li><strong>Exp 9:</strong> Contextual Disambiguation of Sarcasm & Quotation.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Key Experimental Results",
+        subtitle: "Findings from Held-Out Test Splits",
+        content: `
+          <ul>
+            <li><strong>F1 Score:</strong> Transformer achieves 1.00 Macro F1 on held-out test split, maintaining equal performance across English, Hindi, and Hinglish.</li>
+            <li><strong>Multimodal Gain:</strong> +5% F1 gain on social memes via Cross-Attention.</li>
+            <li><strong>Explanation Faithfulness:</strong> 88% confidence drop ratio upon top-token ablation.</li>
+            <li><strong>Counterspeech Improvement:</strong> Feedback-guided DPO eliminated false positives on sarcastic counter-discourse.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Bias, Fairness & Ethics",
+        subtitle: "Responsible Content Moderation",
+        content: `
+          <ul>
+            <li>Sanitizes demographic attributes to prevent profiling.</li>
+            <li>Equalized Odds gap &lt; 0.05 across language groups.</li>
+            <li>Distinguishes hateful content from quotation, counterspeech, and educational reporting.</li>
+            <li>Provides human-in-the-loop decision support rather than automated punitive bans.</li>
+          </ul>
+        `
+      },
+      {
+        title: "HS Detector User Interface",
+        subtitle: "Minimal, Zen, Distraction-Free Design System",
+        content: `
+          <ul>
+            <li>Adheres strictly to <code>thoughtstream-DESIGN.md</code>.</li>
+            <li>0px border radius, flat hairline borders, Libre Baskerville headings, Inter body typography.</li>
+            <li>Comprehensive Dark Mode with persistent state.</li>
+            <li>11 dedicated research laboratories covering Detection, Datasets, Preprocessing, Models, XAI, Rewards, Bias, Experiments, Reports, and Settings.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Academic Deliverables Summary",
+        subtitle: "Fulfilling Part 1.4 of the Official PDF",
+        content: `
+          <ul>
+            <li><strong>1. Source Code:</strong> Modular, reproducible, GitHub-ready Python & FastAPI codebase with zero hardcoding.</li>
+            <li><strong>2. Research Paper:</strong> Complete ACL-format LaTeX paper in <code>paper/main.tex</code> and <code>paper/references.bib</code>.</li>
+            <li><strong>3. Presentation:</strong> Interactive slide deck and Markdown transcript in <code>presentation/</code>.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Conclusion & Future Work",
+        subtitle: "Final Research Summary",
+        content: `
+          <ul>
+            <li>Successfully developed an explainable, multimodal, and reward-optimized hate speech detection system.</li>
+            <li>Proved that feedback-guided preference optimization provides a scalable path to continuous model alignment.</li>
+            <li>Future directions: Expanding Indic language coverage to Tamil, Telugu, and Bengali, and integrating parameter-efficient LoRA adapters.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Thank You — Questions & Viva Discussion",
+        subtitle: "Hate Speech Detection through Explainable AI and Reward Optimized LLMs",
+        content: `
+          <p style="font-size:16px; margin-top:32px;">Supervisor: <strong>Dr. Pradeepika Verma</strong></p>
+          <p style="font-size:14px; color:var(--color-text-secondary); margin-top:8px;">Live Interactive Platform Running at <code>http://127.0.0.1:8000</code></p>
+        `
+      }
+    ];
+
+    let currentSlide = 0;
+    const container = document.getElementById('slideContainer');
+    const counter = document.getElementById('slideCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function renderSlide(index) {
+      const s = slides[index];
+      container.innerHTML = `
+        <h1 style="margin-bottom:8px;">${s.title}</h1>
+        <div style="font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-text-tertiary); margin-bottom:24px;">${s.subtitle}</div>
+        <div>${s.content}</div>
+      `;
+      counter.innerText = `Slide ${index + 1} of ${slides.length}`;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === slides.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => { if (currentSlide > 0) { currentSlide--; renderSlide(currentSlide); } });
+    nextBtn.addEventListener('click', () => { if (currentSlide < slides.length - 1) { currentSlide++; renderSlide(currentSlide); } });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { if (currentSlide < slides.length - 1) { currentSlide++; renderSlide(currentSlide); } }
+      if (e.key === 'ArrowLeft') { if (currentSlide > 0) { currentSlide--; renderSlide(currentSlide); } }
+    });
+
+    renderSlide(0);
+  </script>
+</body>
+</html>
+

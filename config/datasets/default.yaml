@@ -1,0 +1,49 @@
+datasets:
+  hasoc_hindi_english:
+    name: "HASOC Hindi-English Code-Mixed Corpus"
+    source: "FIRE 2019-2021 Track on Hate Speech and Offensive Content"
+    license: "Research Use Only"
+    modalities: ["text"]
+    languages: ["hi", "en", "hi-en"]
+    label_column: "label"
+    text_column: "text"
+    id_column: "id"
+    label_mapping:
+      "NOT": 0
+      "HOF": 1
+      "0": 0
+      "1": 1
+    splits:
+      train: 0.70
+      val: 0.15
+      test: 0.15
+
+  hatexplain_multilingual:
+    name: "HateXplain Benchmark (Benchmark Subset)"
+    source: "Mathew et al., AAAI 2021"
+    license: "MIT License"
+    modalities: ["text", "rationales"]
+    languages: ["en"]
+    label_column: "label"
+    text_column: "post_tokens"
+    label_mapping:
+      "normal": 0
+      "hate speech": 1
+      "offensive": 1
+      "0": 0
+      "1": 1
+
+  multimodal_memes:
+    name: "Multimodal Code-Mixed Social Meme Corpus"
+    source: "Academic Hate Speech & Meme Research Repository"
+    license: "Research Non-Commercial"
+    modalities: ["text", "image", "ocr", "context"]
+    languages: ["en", "hi", "hi-en"]
+    text_column: "caption"
+    image_column: "image_path"
+    context_column: "context"
+    label_column: "label"
+    label_mapping:
+      "0": 0
+      "1": 1
+

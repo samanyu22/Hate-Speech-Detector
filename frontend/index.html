@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>HS Detector — Explainable AI & Reward Optimized LLMs</title>
+  <link rel="stylesheet" href="/static/css/thoughtstream.css?v=2.3">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="brand-title">HS Detector</div>
+        <div class="brand-subtitle">Explainable AI &amp; Reward LLMs</div>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item active" data-target="page-overview">
+          <span class="nav-icon">01</span> Overview
+        </li>
+        <li class="nav-item" data-target="page-detection">
+          <span class="nav-icon">02</span> Detection Lab
+        </li>
+        <li class="nav-item" data-target="page-datasets">
+          <span class="nav-icon">03</span> Datasets Lab
+        </li>
+        <li class="nav-item" data-target="page-preprocessing">
+          <span class="nav-icon">04</span> Preprocessing Studio
+        </li>
+        <li class="nav-item" data-target="page-models">
+          <span class="nav-icon">05</span> Model Registry
+        </li>
+        <li class="nav-item" data-target="page-explainability">
+          <span class="nav-icon">06</span> Explainability (XAI)
+        </li>
+        <li class="nav-item" data-target="page-optimization">
+          <span class="nav-icon">07</span> Reward Optimization
+        </li>
+        <li class="nav-item" data-target="page-fairness">
+          <span class="nav-icon">08</span> Bias & Fairness
+        </li>
+        <li class="nav-item" data-target="page-experiments">
+          <span class="nav-icon">09</span> Experiments (1-9)
+        </li>
+        <li class="nav-item" data-target="page-reports">
+          <span class="nav-icon">10</span> Reports & Paper
+        </li>
+        <li class="nav-item" data-target="page-settings">
+          <span class="nav-icon">11</span> Settings
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <div class="theme-dock-placeholder" id="themeDock">
+          <button id="themeToggleBtn" class="v-btn v-theme-toggle theme-toggle-btn" role="switch" aria-checked="false" aria-label="Toggle theme appearance" title="Switch to dark theme" data-slot="theme-toggle" data-label="visible">
+            <svg data-slot="theme-toggle-icon" class="v-theme-toggle-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true" focusable="false">
+              <g class="v-theme-rays" style="transform-origin: 12px 12px;">
+                <path d="M12 1.5V3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 1.5V3" transform="rotate(45 12 12)" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 1.5V3" transform="rotate(90 12 12)" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 1.5V3" transform="rotate(135 12 12)" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 1.5V3" transform="rotate(180 12 12)" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 1.5V3" transform="rotate(225 12 12)" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 1.5V3" transform="rotate(270 12 12)" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 1.5V3" transform="rotate(315 12 12)" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </g>
+              <path class="v-theme-body" d="M12 5C15.866 5 19 8.134 19 12C19 15.866 15.866 19 12 19C8.134 19 5 15.866 5 12C5 8.134 8.134 5 12 5Z" fill="currentColor" style="transform-origin: 12px 12px;" />
+            </svg>
+            <span class="v-theme-toggle__label">Light</span>
+          </button>
+        </div>
+        <span class="version-tag">v1.0.0</span>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <header class="topbar">
+        <div class="topbar-status">
+          <span>Active: <strong id="statActiveModel">Multilingual Transformer</strong></span>
+          <span>•</span>
+          <span id="statActiveVersion" class="badge badge-neutral">v1.0</span>
+        </div>
+        <div>
+          <span style="font-size:12px; color:var(--color-text-tertiary);">Academic Formulation: x = {T, V, C} &rarr; y &isin; {0,1}</span>
+        </div>
+      </header>
+
+      <div class="content-viewport">
+        <!-- 1. OVERVIEW PAGE -->
+        <section id="page-overview" class="page-view active">
+          <h1>Hate Speech Detection Platform</h1>
+          <p>Explainable AI & Reward Optimized LLMs for Multilingual, Code-Mixed, and Multimodal Content Moderation.</p>
+          
+          <div class="grid-4" style="margin-bottom:var(--space-6);">
+            <div class="stat-box">
+              <div class="stat-label">Total Dataset Samples</div>
+              <div class="stat-value" id="statTotalSamples">325</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Reward Optimization Runs</div>
+              <div class="stat-value" id="statOptimizationRuns">1</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Human Feedback Audited</div>
+              <div class="stat-value" id="statTotalFeedback">6</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Experiments Completed</div>
+              <div class="stat-value" id="statCompletedExp">1/9</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">System Architecture Pipeline</div>
+            <p style="font-size:13px;">Social Media Input (T, V, C) &rarr; Language & Modality Detection &rarr; Modality Preprocessing (Text Normalization, EasyOCR, Context Sanitization) &rarr; Feature Extraction & Cross-Attention Fusion &rarr; Hate Speech Classification &rarr; Grounded XAI Attribution &rarr; Human Feedback & Multi-Objective Reward Calculation &rarr; DPO Optimization.</p>
+            <div style="margin-top:16px;">
+              <span class="badge badge-neutral">English</span>
+              <span class="badge badge-neutral">Hindi (Devanagari)</span>
+              <span class="badge badge-neutral">Hinglish Code-Mixed</span>
+              <span class="badge badge-neutral">Multimodal Memes</span>
+              <span class="badge badge-neutral">Direct Preference Optimization</span>
+              <span class="badge badge-neutral">Integrated Gradients / Perturbation</span>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">Core Research Mandates</div>
+              <ul style="padding-left:18px; font-size:13px; color:var(--color-text-secondary); line-height:1.8;">
+                <li><strong>Strict Binary Objective:</strong> 0 = Non-Hateful, 1 = Hateful.</li>
+                <li><strong>No Hardcoding Rule:</strong> All metrics, predictions, explanations, and rewards are dynamically computed.</li>
+                <li><strong>Multilingual Robustness:</strong> Devanagari script and Latin Romanized Hindi slang support without blind machine translation.</li>
+                <li><strong>Multimodal Meme Analysis:</strong> EasyOCR extraction and Cross-Modal Cross-Attention fusion.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Quick Action Links</div>
+              <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-detection\']').click()">Launch Detection Workspace &rarr;</button>
+                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-optimization\']').click()">Review Reward Optimization Lab &rarr;</button>
+                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-experiments\']').click()">Run Research Experiments &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. DETECTION PAGE -->
+        <section id="page-detection" class="page-view">
+          <h1>Hate Speech Detection Workspace</h1>
+          <p>Interactive multimodal inference with grounded Explainable AI attributions and instant feedback collection.</p>
+
+          <div class="card">
+            <div class="card-title">Input Modalities: x = {T, V, C}</div>
+            
+            <div style="margin-bottom:var(--space-3);">
+              <span style="font-size:12px; font-weight:600; text-transform:uppercase; color:var(--color-text-tertiary);">Load Academic Test Presets:</span>
+              <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;">
+                <button class="btn btn-secondary btn-sm preset-btn" data-preset="hate_en">Hate English</button>
+                <button class="btn btn-secondary btn-sm preset-btn" data-preset="sarcasm_counter">Sarcasm Counterspeech</button>
+                <button class="btn btn-secondary btn-sm preset-btn" data-preset="hinglish_abuse">Hinglish Abuse</button>
+                <button class="btn btn-secondary btn-sm preset-btn" data-preset="hinglish_civil">Hinglish Civil</button>
+                <button class="btn btn-secondary btn-sm preset-btn" data-preset="devanagari_hate">Devanagari Hate</button>
+                <button class="btn btn-secondary btn-sm preset-btn" data-preset="devanagari_civil">Devanagari Civil</button>
+                <button class="btn btn-secondary btn-sm preset-btn" data-preset="quotation_critique">Quotation Critique</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">1. Text Content (T) — English, Hindi, or Code-Mixed Hinglish</label>
+              <textarea id="detectTextInput" class="form-control" placeholder="Enter social media post text..."></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">2. Contextual Information (C) — Optional Thread History</label>
+                <input type="text" id="detectContextInput" class="form-control" placeholder="e.g. Previous turn in debate, topic tags...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Model Architecture</label>
+                <select id="detectModelSelect" class="form-control">
+                  <option value="multilingual-transformer-v1">Multilingual Code-Mixed Transformer (Default)</option>
+                  <option value="classical-tfidf-svm">Classical TF-IDF + Linear Classifier</option>
+                  <option value="llm-structured-reasoner-v1">LLM Structured Analysis Reasoner</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="btnRunDetection" class="btn btn-primary" style="margin-top:12px;">Execute Detection Pipeline</button>
+          </div>
+
+          <!-- Detection Result Card -->
+          <div id="detectionResultCard" class="card-elevated" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <span id="resLabelBadge" class="badge">HATEFUL</span>
+                <span style="margin-left:12px; font-size:14px; color:var(--color-text-secondary);">Confidence: <strong id="resConfidence">95.4%</strong></span>
+              </div>
+              <div style="font-size:12px; color:var(--color-text-tertiary);">
+                Language: <strong id="resLanguage">EN</strong> | Modalities: <strong id="resModalities">TEXT</strong>
+              </div>
+            </div>
+
+            <div style="font-size:12px; color:var(--color-text-tertiary); margin-bottom:16px;">
+              Executed by: <span id="resModelVersion">multilingual-transformer-v1</span> | Faithfulness: <strong id="resFaithfulness">88.5%</strong>
+            </div>
+
+            <div class="card" style="background-color:var(--color-surface); margin-bottom:16px;">
+              <div class="card-title" style="font-size:15px;">Token-Level Attribution Heatmap</div>
+              <p style="font-size:12px; margin-bottom:8px;">Tokens in <span style="color:var(--color-error); font-weight:600;">red</span> positively contribute toward the HATEFUL classification. Tokens in <span style="color:var(--color-success); font-weight:600;">green</span> contribute toward NON-HATEFUL.</p>
+              <div id="resTokenStream" class="token-stream"></div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom:16px;">
+              <div class="card" style="background-color:var(--color-surface);">
+                <div class="card-title" style="font-size:14px;">OCR Modality Evidence</div>
+                <div id="resOcrEvidence" style="font-size:13px; font-family:var(--font-mono); color:var(--color-text-secondary);">None</div>
+              </div>
+              <div class="card" style="background-color:var(--color-surface);">
+                <div class="card-title" style="font-size:14px;">Contextual Modality Evidence</div>
+                <div id="resContextEvidence" style="font-size:13px; font-family:var(--font-mono); color:var(--color-text-secondary);">None</div>
+              </div>
+            </div>
+
+            <div class="card" style="background-color:var(--color-surface);">
+              <div class="card-title" style="font-size:15px;">Synthesized Grounded Explanation</div>
+              <pre id="resNaturalExplanation" style="white-space:pre-wrap;"></pre>
+            </div>
+
+            <!-- Feedback Submission Form -->
+            <div class="card" style="background-color:var(--color-surface-raised); border-color:var(--color-border-medium); margin-top:16px;">
+              <div class="card-title" style="font-size:15px;">Human Feedback & Reward Collection</div>
+              <p style="font-size:12px;">Submit feedback to evaluate the model and supply data to the Reward Optimization engine.</p>
+              
+              <div class="grid-3">
+                <div class="form-group">
+                  <label class="form-label">Is Prediction Accurate?</label>
+                  <select id="feedbackCorrectSelect" class="form-control">
+                    <option value="true">Yes, Correct</option>
+                    <option value="false">No, Incorrect</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Corrected Label (if incorrect)</label>
+                  <select id="feedbackCorrectLabel" class="form-control">
+                    <option value="">No Correction</option>
+                    <option value="0">0 — Non-Hateful</option>
+                    <option value="1">1 — Hateful</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Explanation Quality (1-5)</label>
+                  <select id="feedbackRating" class="form-control">
+                    <option value="5">5 — Highly Clear & Grounded</option>
+                    <option value="4">4 — Good</option>
+                    <option value="3">3 — Moderate</option>
+                    <option value="2">2 — Ambiguous</option>
+                    <option value="1">1 — Unfaithful / Poor</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Reviewer Notes</label>
+                <input type="text" id="feedbackComment" class="form-control" placeholder="Optional comments on sarcasm, slang, or context...">
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <button id="btnSubmitFeedback" class="btn btn-secondary btn-sm">Submit Audited Feedback</button>
+                <span id="feedbackStatusMsg" style="font-size:12px; color:var(--color-success);"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. DATASETS PAGE -->
+        <section id="page-datasets" class="page-view">
+          <h1>Dataset Laboratory</h1>
+          <p>Universal dataset adapters, schema validation, class balance verification, and leakage-safe splits.</p>
+
+          <div class="card">
+            <div class="card-title">Registered Research Datasets</div>
+            <div class="table-container">
+              <table id="datasetTable">
+                <thead>
+                  <tr>
+                    <th>Dataset Name</th>
+                    <th>Identifier</th>
+                    <th>Samples</th>
+                    <th>Languages</th>
+                    <th>Modalities</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="datasetInspectModal" class="card-elevated" style="display:none; margin-top:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="card-title">Dataset Inspection</div>
+              <button class="btn btn-secondary btn-sm" onclick="document.getElementById('datasetInspectModal').style.display='none'">Close</button>
+            </div>
+            <div id="datasetInspectContent"></div>
+          </div>
+        </section>
+
+        <!-- 4. PREPROCESSING PAGE -->
+        <section id="page-preprocessing" class="page-view">
+          <h1>Preprocessing Studio</h1>
+          <p>Inspect the actual transformation stages for text, multilingual code-mixing, memes, and context.</p>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">Text & Script Normalization</div>
+              <p style="font-size:13px;">Applies Unicode NFKC normalization, URL neutralization ([URL]), mention anonymization ([MENTION]), camelCase hashtag decomposition, and Devanagari script integrity checking.</p>
+              <pre>Raw: "Inko maro! #DeshBhakti https://t.co/xyz"
+Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
+            </div>
+            <div class="card">
+              <div class="card-title">Code-Mixed Hinglish Detection</div>
+              <p style="font-size:13px;">Detects Latin vs Devanagari unicode characters and matches phonetic Romanized Hindi lexicon (e.g. <code>kamine</code>, <code>bhai</code>, <code>desh</code>, <code>aukaat</code>) to reliably identify Hinglish code-mixing without English translation loss.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">Visual & EasyOCR Extraction</div>
+              <p style="font-size:13px;">Loads meme graphics, resizes to [224, 224], extracts embedded text and spatial bounding boxes via EasyOCR, and normalizes pixel tensors for cross-modal cross-attention.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Context Sanitization</div>
+              <p style="font-size:13px;">Sanitizes thread history and masks protected demographic references ([DEMOGRAPHIC_NEUTRAL]) to prevent models from learning identity-term biases.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. MODEL REGISTRY PAGE -->
+        <section id="page-models" class="page-view">
+          <h1>Model Laboratory & Registry</h1>
+          <p>Architectures, trained checkpoints, live performance metrics, and active model management.</p>
+
+          <div class="card">
+            <div class="card-title">Available Model Architectures</div>
+            <div class="table-container">
+              <table id="modelsTable">
+                <thead>
+                  <tr>
+                    <th>Model Name</th>
+                    <th>Identifier</th>
+                    <th>Version</th>
+                    <th>Type</th>
+                    <th>Accuracy / Macro F1</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Model Version Audit Trail (Rollback Supported)</div>
+            <div class="table-container">
+              <table id="versionsTable">
+                <thead>
+                  <tr>
+                    <th>Version ID</th>
+                    <th>Optimization Method</th>
+                    <th>Reward Score</th>
+                    <th>Macro F1</th>
+                    <th>Created At</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. EXPLAINABILITY STUDIO PAGE -->
+        <section id="page-explainability" class="page-view">
+          <h1>Explainability (XAI) Studio</h1>
+          <p>Grounded token-level attribution, visual bounding saliency, and AOPC faithfulness validation.</p>
+
+          <div class="card">
+            <div class="card-title">Methodology: Grounded Perturbation & Integrated Gradients</div>
+            <p style="font-size:13px;">Traditional attention maps frequently fail faithfulness tests. Our engine implements Leave-One-Out (LIME-style) perturbation attribution and verifies explanation faithfulness by measuring confidence drop (&Delta;f(x)) when top-k attributed tokens are ablated.</p>
+            <pre>Faithfulness Score Formula: AOPC_Drop = |f(x) - f(x \ top_k)| / f(x)</pre>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">Positive Evidence Tokens</div>
+              <p style="font-size:13px;">Tokens that elevate hateful logit probability (slurs, dehumanization, violent imperatives).</p>
+              <div class="badge badge-hate" style="margin:4px;">vermin [+0.42]</div>
+              <div class="badge badge-hate" style="margin:4px;">exterminate [+0.38]</div>
+              <div class="badge badge-hate" style="margin:4px;">kutto [+0.35]</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Negative Evidence Tokens</div>
+              <p style="font-size:13px;">Tokens that reduce hateful logit probability (counterspeech, civil terms, quotation critiques).</p>
+              <div class="badge badge-nonhate" style="margin:4px;">virodh [-0.31]</div>
+              <div class="badge badge-nonhate" style="margin:4px;">equality [-0.29]</div>
+              <div class="badge badge-nonhate" style="margin:4px;">peace [-0.25]</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. REWARD OPTIMIZATION PAGE -->
+        <section id="page-optimization" class="page-view">
+          <h1>Reward Optimization Laboratory</h1>
+          <p>Execute actual feedback-driven Direct Preference Optimization (DPO) and monitor reward metrics.</p>
+
+          <div class="card">
+            <div class="card-title">Documented Multi-Objective Reward Function</div>
+            <pre style="font-size:14px; margin-bottom:12px;">R(x, y, e, f) = &alpha;&middot;R_cls + &beta;&middot;R_exp + &gamma;&middot;R_ctx + &delta;&middot;R_fb - &lambda;_err&middot;R_err
+Current Weights: &alpha;=0.35, &beta;=0.25, &gamma;=0.15, &delta;=0.25, &lambda;_err=0.50</pre>
+            <p style="font-size:13px;">Rewards model accuracy, faithful explanations, and context awareness while heavily penalizing confident false positives.</p>
+          </div>
+
+          <div class="card-elevated">
+            <div class="card-title">Trigger Optimization Cycle</div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Optimization Method</label>
+                <select id="optMethodSelect" class="form-control">
+                  <option value="DPO">Direct Preference Optimization (DPO)</option>
+                  <option value="Preference-SFT">Preference Supervised Fine-Tuning</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Training Epochs</label>
+                <input type="number" id="optEpochs" class="form-control" value="2" min="1" max="10">
+              </div>
+            </div>
+            <button id="btnTriggerOpt" class="btn btn-primary">Execute Optimization Cycle</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Optimization Run History</div>
+            <div class="table-container">
+              <table id="optRunsTable">
+                <thead>
+                  <tr>
+                    <th>Run Name</th>
+                    <th>Method</th>
+                    <th>Preference Pairs</th>
+                    <th>Macro F1 (Before &rarr; After)</th>
+                    <th>Status</th>
+                    <th>Executed At</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Recent Instance Rewards (Audit Log)</div>
+            <div class="table-container">
+              <table id="recentRewardsTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>R_cls</th>
+                    <th>R_exp</th>
+                    <th>R_ctx</th>
+                    <th>R_fb</th>
+                    <th>R_err (Penalty)</th>
+                    <th>Total Reward</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. BIAS & FAIRNESS PAGE -->
+        <section id="page-fairness" class="page-view">
+          <h1>Bias and Fairness Laboratory</h1>
+          <p>Disaggregated group metrics, False Positive Rate (FPR) parity, and Equalized Odds analysis.</p>
+
+          <div class="grid-2" style="margin-bottom:var(--space-4);">
+            <div class="stat-box">
+              <div class="stat-label">Equalized Odds Disparity Gap</div>
+              <div class="stat-value" id="fairnessOddsGap">0.0%</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Fairness Standard</div>
+              <div style="margin-top:8px;"><span id="fairnessStatusBadge" class="badge badge-nonhate">EQUITABLE PARITY MET</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Disaggregated Performance by Language Group</div>
+            <div class="table-container">
+              <table id="fairnessGroupTable">
+                <thead>
+                  <tr>
+                    <th>Language Subgroup</th>
+                    <th>Samples</th>
+                    <th>Accuracy</th>
+                    <th>Macro F1</th>
+                    <th>False Positive Rate (FPR)</th>
+                    <th>False Negative Rate (FNR)</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. EXPERIMENTS PAGE -->
+        <section id="page-experiments" class="page-view">
+          <h1>Research Experiment Laboratory</h1>
+          <p>Run and verify Experiments 1 through 9 directly with real backend executions and metric calculations.</p>
+          <div id="experimentsContainer"></div>
+        </section>
+
+        <!-- 10. REPORTS & PAPER PAGE -->
+        <section id="page-reports" class="page-view">
+          <h1>Research Reports & Academic Deliverables</h1>
+          <p>Official ACL Paper Draft and Presentation Deck.</p>
+
+          <div class="card">
+            <div class="card-title">ACL Research Paper Draft (LaTeX Format)</div>
+            <p style="font-size:13px;">Official ACL formatting following the core research problem statement.</p>
+            <pre id="paperTexContent" style="max-height:350px; overflow-y:auto; font-size:12px;"></pre>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Presentation Slide Deck</div>
+            <p style="font-size:13px;">A 15-slide comprehensive viva presentation covering Motivation, Problem Formulation, Multimodal Architecture, XAI Faithfulness, and Reward Optimization.</p>
+            <a href="/presentation/index.html" target="_blank" class="btn btn-secondary">Open Interactive Presentation Slides &rarr;</a>
+          </div>
+        </section>
+
+        <!-- 11. SETTINGS PAGE -->
+        <section id="page-settings" class="page-view">
+          <h1>System Settings & Hyperparameters</h1>
+          <p>Centralized configuration without requiring source-code modifications.</p>
+
+          <div class="card">
+            <div class="card-title">Compute & Execution Settings</div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Compute Device</label>
+                <input type="text" id="settingDevice" class="form-control" readonly>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Batch Size</label>
+                <input type="number" id="settingBatchSize" class="form-control" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Multi-Objective Reward Weights</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label class="form-label">&alpha; (Classification Correctness)</label>
+                <input type="number" step="0.05" id="weightAlpha" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">&beta; (Explanation Quality)</label>
+                <input type="number" step="0.05" id="weightBeta" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">&gamma; (Context Appropriateness)</label>
+                <input type="number" step="0.05" id="weightGamma" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">&delta; (Human Feedback Alignment)</label>
+                <input type="number" step="0.05" id="weightDelta" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">&lambda;_err (Error Penalty)</label>
+                <input type="number" step="0.05" id="weightLambda" class="form-control">
+              </div>
+            </div>
+            <button id="btnSaveSettings" class="btn btn-primary" style="margin-top:12px;">Save Reward Weights</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/api.js?v=2.3"></script>
+  <script src="/static/js/app.js?v=2.3"></script>
+</body>
+</html>
+

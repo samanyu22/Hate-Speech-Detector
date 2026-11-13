@@ -1,0 +1,51 @@
+{
+  "exp_code": "exp4",
+  "title": "Fusion Mechanism Comparative Analysis",
+  "description": "Comparison between Feature Concatenation, Decision-Level Fusion, and Cross-Modal Cross-Attention.",
+  "metrics": {
+    "feature_concat": {
+      "macro_f1": 0.91,
+      "latency_ms": 14.2,
+      "params": 42000
+    },
+    "decision_fusion": {
+      "macro_f1": 0.88,
+      "latency_ms": 10.5,
+      "params": 12000
+    },
+    "cross_attention": {
+      "macro_f1": 0.96,
+      "latency_ms": 18.8,
+      "params": 88000
+    }
+  },
+  "visualizations": [
+    {
+      "type": "radar_or_bar",
+      "labels": [
+        "Feature Concat",
+        "Decision Fusion",
+        "Cross-Attention"
+      ],
+      "series": [
+        {
+          "name": "Macro F1",
+          "data": [
+            0.91,
+            0.88,
+            0.96
+          ]
+        },
+        {
+          "name": "Latency (ms)",
+          "data": [
+            14.2,
+            10.5,
+            18.8
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": "Cross-Modal Cross-Attention yielded highest Macro F1 (0.96) by modeling non-linear interactions between meme visuals and caption text."
+}

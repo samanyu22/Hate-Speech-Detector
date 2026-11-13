@@ -1,0 +1,63 @@
+experiments:
+  exp1_classical_vs_transformer:
+    id: "exp1"
+    title: "Classical NLP vs Deep Transformer Backbone"
+    description: "Compare TF-IDF + Logistic Regression/SVM against Transformer encoder on identical splits."
+    metrics: ["accuracy", "precision", "recall", "macro_f1", "weighted_f1", "confusion_matrix"]
+
+  exp2_monolingual_vs_multilingual:
+    id: "exp2"
+    title: "Monolingual vs Multilingual & Code-Mixed Performance"
+    description: "Evaluate English-only vs Multilingual/MuRIL representations across Hindi and Hinglish subsets."
+    languages: ["en", "hi", "hi-en"]
+    metrics: ["accuracy", "macro_f1", "per_language_f1"]
+
+  exp3_text_vs_multimodal:
+    id: "exp3"
+    title: "Ablation Study: Text-Only vs Multimodal (Text + OCR + Visual + Context)"
+    description: "Measure predictive gain and error shifts when adding OCR and visual embeddings."
+    conditions: ["text_only", "text_plus_ocr", "text_ocr_visual", "full_multimodal_context"]
+    metrics: ["accuracy", "macro_f1", "roc_auc", "error_distribution"]
+
+  exp4_fusion_architectures:
+    id: "exp4"
+    title: "Multimodal Fusion Mechanism Comparison"
+    description: "Compare Early Feature Concat, Late Decision Fusion, and Intermediate Cross-Modal Cross-Attention."
+    architectures: ["feature_concat", "decision_fusion", "cross_attention"]
+    metrics: ["macro_f1", "inference_latency_ms", "parameter_count"]
+
+  exp5_explainability_faithfulness:
+    id: "exp5"
+    title: "Explainability Faithfulness & Attribution Evaluation"
+    description: "Test explanation faithfulness using Token Perturbation Drop (AOPC) across Integrated Gradients and Local Perturbation."
+    methods: ["integrated_gradients", "perturbation_attribution", "random_baseline"]
+    metrics: ["faithfulness_drop_ratio", "token_rank_correlation", "interpretability_score"]
+
+  exp6_reward_optimization_impact:
+    id: "exp6"
+    title: "Reward-Guided Optimization Impact (Before vs After)"
+    description: "Quantify accuracy, macro F1, explanation quality, and overall reward shift on held-out evaluation set."
+    checkpoints: ["v1_supervised_baseline", "v2_feedback_adapted", "v3_reward_optimized"]
+    metrics: ["macro_f1", "mean_reward", "explanation_faithfulness", "fairness_gap"]
+
+  exp7_feedback_scaling:
+    id: "exp7"
+    title: "Feedback Quantity and Quality Scaling"
+    description: "Evaluate model performance trajectory under 10, 25, 50, 100 feedback samples with noisy vs verified feedback."
+    sample_sizes: [10, 25, 50, 100]
+    metrics: ["macro_f1_gain", "reward_trajectory"]
+
+  exp8_bias_and_fairness:
+    id: "exp8"
+    title: "Demographic & Linguistic Fairness Audit"
+    description: "Measure False Positive Rate parity and Equalized Odds across language groups and identity-term mentions."
+    groups: ["english", "hindi_native", "hinglish_code_mixed", "identity_terms_present"]
+    metrics: ["fpr_disparity", "fnr_disparity", "equalized_odds_gap"]
+
+  exp9_context_sarcasm:
+    id: "exp9"
+    title: "Contextual Disambiguation & Sarcasm / Quotation Analysis"
+    description: "Analyze accuracy on ambiguous cases (educational quoting, counter-speech, sarcastic negation) with and without context."
+    categories: ["counterspeech", "quotation", "sarcastic_irony", "direct_hate"]
+    metrics: ["accuracy_with_context", "accuracy_without_context", "context_attribution_weight"]
+

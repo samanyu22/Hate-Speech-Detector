@@ -1,0 +1,43 @@
+models:
+  classical_baseline:
+    id: "classical-tfidf-svm"
+    name: "TF-IDF + Linear SVM Baseline"
+    type: "classical"
+    ngram_range: [1, 3]
+    char_ngram_range: [2, 5]
+    max_features: 10000
+    sublinear_tf: true
+    loss: "hinge"
+    class_weight: "balanced"
+
+  transformer_multilingual:
+    id: "multilingual-transformer-v1"
+    name: "Multilingual Code-Mixed Transformer"
+    type: "transformer"
+    backbone: "google/muril-base-cased" # Fallback: xlm-roberta-base or multilingual-distilbert
+    hidden_size: 768
+    num_labels: 2
+    dropout: 0.2
+    max_length: 128
+    learning_rate: 2.0e-5
+    weight_decay: 0.01
+
+  multimodal_cross_attention:
+    id: "multimodal-cross-attention-v1"
+    name: "Multimodal Cross-Attention & OCR Fusion Network"
+    type: "multimodal"
+    text_dim: 768
+    visual_dim: 512
+    context_dim: 128
+    fusion_type: "cross_attention" # 'cross_attention', 'feature_concat', 'decision_fusion'
+    num_heads: 4
+    num_classes: 2
+
+  llm_reasoner:
+    id: "llm-structured-reasoner-v1"
+    name: "LLM Structured Analysis & Reasoning Engine"
+    type: "llm"
+    temperature: 0.1
+    max_new_tokens: 256
+    enable_chain_of_thought: true
+

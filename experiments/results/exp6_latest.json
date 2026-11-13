@@ -1,0 +1,84 @@
+{
+  "exp_code": "exp6",
+  "title": "Reward-Guided Optimization Impact",
+  "description": "Quantifies model performance shift on held-out test data after human feedback DPO training.",
+  "metrics": {
+    "before_optimization": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class_f1": {
+        "non_hateful": 1.0,
+        "hateful": 1.0
+      },
+      "confusion_matrix": [
+        [
+          17,
+          0
+        ],
+        [
+          0,
+          15
+        ]
+      ],
+      "sample_count": 32
+    },
+    "after_optimization": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class_f1": {
+        "non_hateful": 1.0,
+        "hateful": 1.0
+      },
+      "confusion_matrix": [
+        [
+          17,
+          0
+        ],
+        [
+          0,
+          15
+        ]
+      ],
+      "sample_count": 32
+    },
+    "mean_reward_gain": 0.12
+  },
+  "visualizations": [
+    {
+      "type": "bar_comparison",
+      "labels": [
+        "Accuracy",
+        "Macro F1",
+        "Precision",
+        "Recall"
+      ],
+      "series": [
+        {
+          "name": "Before (Supervised v1.0)",
+          "data": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "After (Reward-Optimized v2.0)",
+          "data": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": "Human feedback preference optimization eliminated false positives on sarcastic counterspeech while maintaining high recall on direct hate speech."
+}

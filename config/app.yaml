@@ -1,0 +1,36 @@
+app:
+  title: "Hate Speech Detection through Explainable AI and Reward Optimized LLMs"
+  subtitle: "Academic Research Platform - Supervisor: Dr. Pradeepika Verma"
+  version: "1.0.0"
+  env: "development"
+  host: "127.0.0.1"
+  port: 8000
+  debug: true
+
+storage:
+  database_path: "data/hate_speech_detector.db"
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  models_dir: "models/checkpoints"
+  versions_dir: "models/versions"
+  feedback_dir: "data/feedback"
+  reports_dir: "reports/generated"
+  experiments_dir: "experiments/results"
+
+compute:
+  device: "cpu" # 'cpu' or 'cuda'
+  num_threads: 4
+  batch_size: 16
+  seed: 42
+
+active_model:
+  id: "multilingual-transformer-v1"
+  name: "Multilingual Code-Mixed Transformer Classifier"
+  architecture: "transformer"
+  version: "1.0"
+  threshold: 0.50
+
+ui:
+  theme: "thoughtstream"
+  default_mode: "light" # 'light' or 'dark'
+
