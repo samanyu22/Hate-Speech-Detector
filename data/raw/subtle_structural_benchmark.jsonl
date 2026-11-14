@@ -1,0 +1,210 @@
+{"id": "id1", "text": "People from that religion are inferior and should not be treated as equals.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id2", "text": "People from many religions live peacefully in our city.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id3", "text": "Members of that faith do not deserve the same rights as everyone else.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id4", "text": "Everyone should have equal rights regardless of their faith.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id5", "text": "That religious community should be excluded from our neighbourhood.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id6", "text": "I disagree with that religious institution's policy, not with its followers.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id7", "text": "People of that religion are all dishonest and cannot be trusted.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id8", "text": "Religious leaders should be accountable for their public statements.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id9", "text": "Nobody from that faith should be allowed to work in public service.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id10", "text": "People should be free to follow a religion or no religion.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id11", "text": "That caste is naturally less intelligent than other castes.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id12", "text": "Our school welcomes students from every religious background.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id13", "text": "People born into that caste should stay away from our community.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id14", "text": "That caste system is unfair and should be challenged.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id15", "text": "That caste should never be allowed to lead our organisation.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id16", "text": "No one should face discrimination because of their caste.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id17", "text": "Members of that caste are dirty and should be kept separate.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id18", "text": "People from every caste deserve equal access to education.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id19", "text": "People from that caste do not deserve equal opportunities.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id20", "text": "We should discuss caste discrimination respectfully and honestly.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id21", "text": "Women are too weak-minded to make important decisions.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id22", "text": "I disagree with the decision made by the local council.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id23", "text": "Women should not be allowed to study or work outside the home.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id24", "text": "The government's immigration policy needs improvement.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id25", "text": "Girls from that community are not fit to become leaders.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id26", "text": "Some immigration procedures are too slow and confusing.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id27", "text": "Men are the only people capable of doing serious work.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id28", "text": "People should be judged by their actions, not their nationality.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id29", "text": "People should be rejected from jobs simply because they are women.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id30", "text": "Students from different countries bring useful perspectives to class.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id31", "text": "People with disabilities are a burden and should be excluded from society.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id32", "text": "That politician's speech was misleading and poorly researched.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id33", "text": "Disabled people should not be allowed to participate in public life.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id34", "text": "I strongly oppose the party's economic policy.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id35", "text": "People with that disability are useless to the community.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id36", "text": "The company should improve its hiring process.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id37", "text": "Nobody should hire a person just because they use a wheelchair.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id38", "text": "That manager treated the staff unfairly.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id39", "text": "People with intellectual disabilities should not have a voice in society.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id40", "text": "The film's writing was weak and the pacing was poor.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id41", "text": "Immigrants from that country are parasites who ruin every place they enter.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id42", "text": "That comment was rude, but it does not represent an entire community.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id43", "text": "People of that nationality should be forced out of our town.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id44", "text": "I dislike the behaviour of that individual.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id45", "text": "Nobody from that country deserves a fair chance here.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id46", "text": "That person made an irresponsible decision.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id47", "text": "That nationality is made up of criminals and dishonest people.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id48", "text": "The referee made a terrible call during the match.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id49", "text": "People from that country should be banned from our schools.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id50", "text": "This software is frustrating and badly designed.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id51", "text": "People of that ethnicity are naturally violent and dangerous.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id52", "text": "That team's strategy was ineffective today.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id53", "text": "That ethnic group should be kept out of our city.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id54", "text": "I disagree with the argument in this article.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id55", "text": "People from that ethnic background are inferior to everyone else.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id56", "text": "The speaker's evidence does not support the conclusion.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id57", "text": "That ethnic community should not be allowed to own businesses here.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id58", "text": "People should be evaluated based on relevant qualifications.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id59", "text": "Children from that ethnic group should be kept out of our schools.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id60", "text": "Everyone deserves a fair chance to apply for the job.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id61", "text": "People should be denied housing because of their religion.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id62", "text": "Accessibility improvements help make public spaces usable for everyone.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id63", "text": "Do not rent apartments to anyone from that caste.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id64", "text": "Wheelchair users should have access to every public building.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id65", "text": "Keep people of that ethnicity out of this public event.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id66", "text": "People with disabilities deserve respect and equal opportunities.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id67", "text": "Reject applicants who belong to that religious community.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id68", "text": "Neurodivergent students should receive appropriate learning support.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id69", "text": "People from that nationality should not be allowed to vote.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id70", "text": "People should not be judged by their gender.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id71", "text": "That community is disgusting because of who they are.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id72", "text": "Women and men should receive equal pay for equal work.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id73", "text": "People like them are not real citizens and never will be.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id74", "text": "Girls should have the same opportunities in science and technology.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id75", "text": "Our town would be better if that ethnic group disappeared from public life.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id76", "text": "Men can be caring parents and excellent teachers.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id77", "text": "That religious minority does not belong in this country.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id78", "text": "Gender should not determine someone's career options.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id79", "text": "People from that caste should know their place and stay beneath us.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id80", "text": "People should be free to express their gender identity safely.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id81", "text": "All people of that nationality are stupid and incapable.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id82", "text": "Everyone deserves dignity regardless of sexual orientation.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id83", "text": "That ethnic group is naturally dishonest, so avoid every one of them.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id84", "text": "Schools should prevent bullying based on identity.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id85", "text": "People of that religion are a threat just by existing here.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id86", "text": "People from different ethnic backgrounds can work well together.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id87", "text": "That community should have fewer rights than the rest of us.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id88", "text": "Our neighbourhood benefits from welcoming newcomers.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id89", "text": "Do not let anyone from that ethnic group join our club.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id90", "text": "Citizens should debate national policies without attacking people by origin.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id91", "text": "People from that country should be treated as second-class residents.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id92", "text": "I disagree with that country's government, not its citizens.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id93", "text": "That caste makes people unclean, so keep them away.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id94", "text": "The government should explain how it handles asylum applications.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id95", "text": "Women from that background should never be trusted with authority.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id96", "text": "Some tourists ignored local rules, and the authorities should address it.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id97", "text": "Men from that ethnic group are all born criminals.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id98", "text": "Criticising a government is not the same as attacking a nationality.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id99", "text": "People of that religion should be removed from our school.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id100", "text": "That religious practice is unfamiliar to me, so I want to learn about it.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id101", "text": "That minority group is ruining society simply by being here.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id102", "text": "I do not share that belief, but others have a right to hold it.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id103", "text": "People from that community should not be allowed to live in this area.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id104", "text": "People should be allowed to peacefully criticise religious ideas.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id105", "text": "That nationality is inferior and should remain subordinate.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id106", "text": "Historical caste discrimination should be studied in schools.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id107", "text": "People with hearing impairments cannot contribute anything useful.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id108", "text": "The article describes discrimination against a minority community.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id109", "text": "People with visual impairments should not be included in our team.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id110", "text": "We should support people who experience racism.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id111", "text": "Autistic people are defective and should be avoided.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id112", "text": "That post is an example of hateful rhetoric and should be reviewed.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id113", "text": "People with mental health conditions are unfit to be part of society.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id114", "text": "I am quoting the harmful statement to explain why it is discriminatory.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id115", "text": "Older people are worthless and should be pushed out of public life.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id116", "text": "Do not generalise one person's behaviour to an entire group.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id117", "text": "Young people from that ethnic group should not be given opportunities.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id118", "text": "People from every background should be treated fairly.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id119", "text": "People should be excluded from sports because of their gender identity.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id120", "text": "Our club welcomes members regardless of disability.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id121", "text": "Nobody from that sexual orientation should be welcome in our club.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id122", "text": "The event venue needs ramps and accessible restrooms.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id123", "text": "People of that identity do not deserve respect or equal treatment.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id124", "text": "Older adults have valuable experience and should be included.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id125", "text": "That group should be denied access to public facilities.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id126", "text": "Young people deserve to be heard in community decisions.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id127", "text": "People should not be served at this shop because of their religion.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id128", "text": "People should not lose opportunities because of their age.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id129", "text": "Do not invite anyone from that caste to the celebration.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id130", "text": "That employee missed the deadline and needs to improve.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id131", "text": "People from that ethnic group should not be allowed in this apartment complex.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id132", "text": "The customer was disrespectful to the cashier.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id133", "text": "That nationality should be treated as unwelcome wherever they go.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id134", "text": "I think the actor gave a poor performance.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id135", "text": "Members of that faith are less human than the rest of us.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id136", "text": "The restaurant's service was slow and the food was cold.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id137", "text": "That community should be removed from our society.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id138", "text": "The app keeps crashing after the latest update.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id139", "text": "People of that race should never hold positions of power.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id140", "text": "The policy is confusing and should be rewritten.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id141", "text": "That race is naturally less capable and should accept fewer opportunities.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id142", "text": "The city should invest more in public transport.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id143", "text": "People from that background should not be allowed to represent our school.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id144", "text": "The school should review its attendance rules.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id145", "text": "People of that caste are born to serve others and should not expect equality.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id146", "text": "The debate focused on ideas rather than personal identities.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id147", "text": "That religion makes every person who follows it inferior.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id148", "text": "That joke was offensive, and I asked the speaker to stop.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id149", "text": "People from that country should be kept out because they are all worthless.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id150", "text": "Please criticise the proposal without insulting its supporters.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id151", "text": "Women are naturally unfit for technical careers.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id152", "text": "We should challenge stereotypes when we hear them.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id153", "text": "Men from that community should never be allowed to teach children.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id154", "text": "People should not be excluded from housing because of identity.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id155", "text": "People with mobility disabilities should be kept out of public buildings.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id156", "text": "Equal treatment should apply to everyone in the workplace.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id157", "text": "People with speech disabilities have nothing worth hearing.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id158", "text": "The university should investigate the reported discrimination.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id159", "text": "People of that ethnicity should not be allowed to become neighbours.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id160", "text": "Support services should be available to students who need them.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id161", "text": "That minority should be denied the right to participate in elections.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id162", "text": "People who use sign language should have access to interpreters.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id163", "text": "People from that caste should not be allowed to enter this temple.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id164", "text": "Blind and low-vision visitors should be able to navigate the museum.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id165", "text": "People from that religion should not be allowed to enter this place of worship.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id166", "text": "Autistic people have different strengths and support needs.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id167", "text": "Do not employ anyone who belongs to that ethnic group.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id168", "text": "Mental health challenges do not make someone less worthy of respect.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id169", "text": "People of that nationality should be denied access to healthcare.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id170", "text": "People should be assessed individually rather than by stereotypes.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id171", "text": "That gender is too irrational to make decisions.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id172", "text": "That candidate's plan lacks detail on education funding.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id173", "text": "People who are transgender should be excluded from ordinary public life.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id174", "text": "The mayor's decision has had negative effects on local businesses.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id175", "text": "People of that sexual orientation are not fit to be part of our community.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id176", "text": "I oppose the law because it restricts freedom of expression.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id177", "text": "People from that ethnic group are inherently inferior.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id178", "text": "The news report needs stronger evidence and more context.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id179", "text": "That religious group should be made to feel unwelcome everywhere.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id180", "text": "That historical leader made decisions that deserve criticism.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id181", "text": "People of that caste should be barred from leadership positions.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id182", "text": "The organisation should publish its spending records.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id183", "text": "People from that country should never be accepted as our equals.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id184", "text": "The company should be criticised for unsafe working conditions.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id185", "text": "People with disabilities should be hidden away from public view.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id186", "text": "People can disagree strongly without targeting someone's identity.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id187", "text": "That community deserves fewer rights because of its identity.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id188", "text": "Let's keep the discussion focused on the issue.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id189", "text": "People of that race should not be allowed to attend this university.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id190", "text": "That statement stereotypes an entire group and should be corrected.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id191", "text": "People from that religion are all dangerous and should be avoided.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id192", "text": "People of all faiths should be safe at school.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id193", "text": "People from that nationality should not be allowed to become citizens.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id194", "text": "Everyone should be able to access healthcare without discrimination.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id195", "text": "That ethnic group should be segregated from everyone else.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id196", "text": "Public services should be available to residents fairly.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id197", "text": "People of that caste should not be allowed to share public spaces.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id198", "text": "People should be hired based on skills and experience.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id199", "text": "Women from that religion should not be allowed to make their own choices.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id200", "text": "An individual's criminal behaviour does not define their whole nationality.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id201", "text": "People with learning disabilities should not be allowed to study with others.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id202", "text": "One person's actions should not be blamed on an entire religion.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id203", "text": "People from that community are inherently untrustworthy.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id204", "text": "The post criticises a political movement, not an ethnic group.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id205", "text": "That group should be denied equal protection under the law.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id206", "text": "The speaker is discussing a policy and not insulting its supporters.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id207", "text": "People should be ashamed of belonging to that ethnicity.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id208", "text": "The complaint is about poor service, not the employee's identity.", "label": 0, "language": "en", "category": "civil_counter_speech"}
+{"id": "id209", "text": "People from that community should not be allowed to run for public office.", "label": 1, "language": "en", "category": "structural_discrimination"}
+{"id": "id210", "text": "That comment attacks an idea rather than a protected group.", "label": 0, "language": "en", "category": "civil_counter_speech"}

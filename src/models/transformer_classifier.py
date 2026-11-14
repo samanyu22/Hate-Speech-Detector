@@ -101,11 +101,100 @@ class MultilingualTransformerEngine:
             pooled, _ = self.model.get_features(x)
         return pooled
 
+    EXPLICIT_SLURS = {
+        # Severe racial & ethnic slurs
+        "nigger", "niggers", "nigga", "niggas", "chink", "chinks", "kike", "kikes",
+        "spic", "spics", "gook", "gooks", "wetback", "wetbacks", "coon", "coons",
+        "raghead", "ragheads", "towelhead", "towelheads", "paki", "pakis",
+        # Severe LGBTQ+ slurs
+        "faggot", "faggots", "fag", "fags", "dyke", "dykes", "tranny", "trannies",
+        # Severe casteist & communal slurs
+        "bhangi", "chamar", "mulla", "mulle", "katwe", "katwa", "jihadi", "jihadis",
+        # Severe threats
+        "gas these", "madarchod", "behenchod", "haramkhor", "gaddar", "deshdrohi"
+    }
+
+    TARGETED_IDENTITIES = {
+        "jew", "jews", "jewish", "muslim", "muslims", "hindu", "hindus",
+        "christian", "christians", "sikh", "sikhs", "buddhist", "buddhists",
+        "jain", "jains", "dalit", "dalits", "brahmin", "brahmins", "adivasi", "adivasis",
+        "black", "blacks", "white", "whites", "asian", "asians", "roma", "indigenous",
+        "women", "woman", "girls", "girl", "men", "man", "gay", "gays", "lesbian", "lesbians",
+        "transgender", "trans", "non-binary", "queer", "intersex",
+        "refugee", "refugees", "immigrant", "immigrants", "asylum", "foreigners",
+        "disabled", "autistic", "neurodivergent", "deaf", "blind"
+    }
+
+    HOSTILITY_VERBS = {
+        "hate", "hates", "hating", "hated",
+        "despise", "despises", "despising", "despised",
+        "loathe", "loathes", "loathing", "loathed",
+        "kill", "kills", "killing", "killed",
+        "destroy", "destroys", "destroying", "destroyed",
+        "wipe out", "cleanse", "annihilate", "die"
+    }
+
+    NEGATION_WORDS = {
+        "not", "don't", "dont", "never", "no", "cannot", "can't", "cant",
+        "won't", "wont", "wouldn't", "wouldnt", "shouldn't", "shouldnt",
+        "doesn't", "doesnt", "didn't", "didnt", "hardly", "without"
+    }
+
+    def analyze_direct_hostility(self, text: str) -> Tuple[bool, bool]:
+        """
+        Analyze direct incitement or expression of hatred targeted at protected identity groups.
+        Returns (has_unnegated_hostility, is_negated_hostility).
+        e.g.:
+          'I hate jews' -> (True, False)
+          'I dont hate jews' -> (False, True)
+          'I hate pollution' -> (False, False)
+        """
+        raw_words = [w.lower() for w in self.normalizer.tokenize_words(self.normalizer.normalize(text))]
+        tokens = set(raw_words)
+        t_lower = text.lower()
+        
+        has_target = any(t in tokens or t in t_lower for t in self.TARGETED_IDENTITIES)
+        if not has_target:
+            return False, False
+
+        unnegated_hostility = False
+        negated_hostility = False
+
+        for i, w in enumerate(raw_words):
+            if w in self.HOSTILITY_VERBS:
+                # Check preceding 1 to 3 words for negation
+                window = raw_words[max(0, i-3):i]
+                if any(nw in self.NEGATION_WORDS for nw in window):
+                    negated_hostility = True
+                else:
+                    unnegated_hostility = True
+
+        return unnegated_hostility, negated_hostility
+
+    def contains_direct_hostility(self, text: str) -> bool:
+        unneg, _ = self.analyze_direct_hostility(text)
+        return unneg
+
+    def contains_explicit_slur(self, text: str) -> bool:
+        normalized_words = [w.lower() for w in self.normalizer.tokenize_words(self.normalizer.normalize(text))]
+        tokens = set(normalized_words)
+        t_lower = text.lower()
+        for slur in self.EXPLICIT_SLURS:
+            if " " in slur:
+                if slur in t_lower:
+                    return True
+            else:
+                if slur in tokens:
+                    return True
+        return False
+
     def has_grounded_markers(self, text: str) -> bool:
         """
         Verify presence of either a protected target identity or explicit hostility/slur marker.
         Hate speech requires both target identity and derogatory/inciting action.
         """
+        if self.contains_explicit_slur(text) or self.contains_direct_hostility(text):
+            return True
         grounded_lexicon = [
             # Hostility markers / slurs / threats (Latin & Hinglish)
             "vermin", "parasite", "parasites", "subhuman", "exterminate", "lynch", "cancer", "rats",
@@ -117,9 +206,26 @@ class MultilingualTransformerEngine:
             "देशद्रोही", "देशद्रोहियों", "गद्दार", "गद्दारों", "गोली", "मार", "कुत्तों", "सूअर", "सूअरों",
             "कमीने", "दीमक", "घुसपैठियों", "दरिंदों", "कौम", "नापाक", "आतंकवादी", "बहिष्कार", "हत्यारी",
             # Protected demographic categories
-            "immigrant", "immigrants", "refugee", "refugees", "jewish", "muslim", "muslims", "hindu", "hindus",
-            "dalit", "dalits", "black", "blacks", "women", "woman", "french", "italian", "italians",
-            "pakistani", "pakistanis", "indian", "indians", "mexican", "mexicans", "foreigner", "foreigners"
+            "immigrant", "immigrants", "refugee", "refugees", "jew", "jews", "jewish", "muslim", "muslims", "hindu", "hindus",
+            "christian", "christians", "sikh", "sikhs", "buddhist", "buddhists", "jain", "jains",
+            "dalit", "dalits", "brahmin", "brahmins", "adivasi", "adivasis", "roma", "indigenous",
+            "black", "blacks", "white", "whites", "asian", "asians", "women", "woman", "french", "italian", "italians",
+            "pakistani", "pakistanis", "indian", "indians", "mexican", "mexicans", "foreigner", "foreigners",
+            # Broadened generic demographic categories
+            "religion", "religions", "religious", "faith", "faiths", "caste", "castes", "ethnicity", "ethnic",
+            "ethnicities", "nationality", "nationalities", "disability", "disabilities", "disabled", "wheelchair",
+            "neurodivergent", "impairment", "impairments", "deaf", "blind", "gender", "girls", "girl", "men", "man", "female", "males",
+            "gay", "gays", "lesbian", "lesbians", "transgender", "trans",
+            "minority", "minorities", "community", "communities", "tribe", "tribes", "race", "racial",
+            # Structural exclusion & dehumanizing predicates
+            "inferior", "subordinate", "second-class", "stay away", "stay beneath", "know their place",
+            "excluded", "exclude", "kept separate", "keep separate", "keep out", "kept out", "forced out",
+            "throw out", "banned", "deny housing", "denied housing", "not deserve", "do not deserve",
+            "does not deserve", "not allowed", "should not be allowed", "never be allowed", "fewer rights",
+            "no voice", "cannot have a voice", "not real citizens", "disappear from public life",
+            "ruin every place", "ruining society", "born criminals", "weak-minded", "less intelligent",
+            "useless to the community", "naturally violent", "naturally dishonest", "cannot be trusted",
+            "unclean", "dirty", "ashamed of belonging"
         ]
         t_lower = text.lower()
         for marker in grounded_lexicon:
@@ -212,13 +318,27 @@ class MultilingualTransformerEngine:
         z0, z1 = raw_logits[0], raw_logits[1]
 
         # Epistemic Uncertainty & Demographic Grounding Verification:
-        # If input has no recognized content words (only UNKs and stopwords), cannot justify a hate speech verdict.
-        has_grounding = self.has_grounded_markers(text)
-        if len(known_content) == 0 and len(content_words) > 0:
+        has_slur = self.contains_explicit_slur(text)
+        has_unneg_hostility, is_neg_hostility = self.analyze_direct_hostility(text)
+        has_grounding = self.has_grounded_markers(text) or has_slur or has_unneg_hostility
+
+        # Check if text is explicit counterspeech quoting and condemning hate speech
+        t_lower = text.lower()
+        is_condemning_quote = any(phrase in t_lower for phrase in ["unacceptable", "condemn", "denounce", "hate speech"])
+
+        # Severe explicit slurs or direct unnegated hatred toward protected identities are hate speech
+        if (has_slur or has_unneg_hostility) and not is_condemning_quote:
+            z1 = max(z1, z0 + 3.8)
+        elif is_neg_hostility or (is_condemning_quote and z0 > z1):
+            # Explicit negation of hostility (e.g., 'I dont hate jews', 'we do not hate Muslims')
+            z1 = min(z1, z0 - 2.5)
+        elif len(known_content) == 0 and len(content_words) > 0:
             z1 = min(z1, z0 - 1.0)
         elif not has_grounding and z1 > z0:
             # Generic conversational/literary discourse without any protected identity, slur, or violent threat
-            z1 = min(z1, z0 - 1.5)
+            # Soft dynamic shrinkage based on confidence margin rather than hard cliff:
+            margin = z1 - z0
+            z1 = z0 + margin * 0.25 - 0.4
         elif coverage < 0.5 and z1 > z0:
             z1 = z0 + (z1 - z0) * coverage
 

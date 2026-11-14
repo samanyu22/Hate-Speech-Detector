@@ -31,7 +31,18 @@ def train_and_register_baselines():
         )
         records_hx = adapter_hx.load()
 
-    all_records = records_hasoc + records_hx
+    subtle_path = settings.base_dir / "data" / "raw" / "subtle_structural_benchmark.jsonl"
+    records_subtle = []
+    if subtle_path.exists():
+        adapter_subtle = UniversalDatasetAdapter(
+            file_path=str(subtle_path),
+            text_column="text",
+            label_column="label",
+            language_column="language"
+        )
+        records_subtle = adapter_subtle.load()
+
+    all_records = records_hasoc + records_hx + records_subtle
     train_records, val_records, test_records = DatasetSplitter.split(all_records, train_ratio=0.70, val_ratio=0.15, test_ratio=0.15, seed=42)
     print(f"Combined Dataset split: {len(train_records)} train, {len(val_records)} val, {len(test_records)} test")
 
