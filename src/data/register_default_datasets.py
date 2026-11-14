@@ -36,6 +36,18 @@ def register_default_datasets():
             "label_mapping": {"0": 0, "1": 1}
         },
         {
+            "id": "subtle_structural_benchmark",
+            "name": "Subtle & Structural Hate Speech Benchmark",
+            "source": "Institutional Discrimination Policy Corpus",
+            "license": "Research Non-Commercial",
+            "languages": ["en"],
+            "modalities": ["text", "context"],
+            "file_path": str(base_dir / "data" / "raw" / "subtle_structural_benchmark.jsonl"),
+            "text_column": "text",
+            "label_column": "label",
+            "label_mapping": {"0": 0, "1": 1}
+        },
+        {
             "id": "multimodal_memes",
             "name": "Multimodal Code-Mixed Social Meme Corpus",
             "source": "Multimodal Hate Research Project",

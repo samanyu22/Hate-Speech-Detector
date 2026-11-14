@@ -403,6 +403,34 @@ textarea.form-control {
   margin-top: 4px;
 }
 
+.stat-sub {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ratio-bar-container {
+  display: flex;
+  height: 6px;
+  width: 100%;
+  background-color: var(--color-border-subtle);
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.ratio-bar-hate {
+  background-color: var(--color-error);
+  height: 100%;
+}
+
+.ratio-bar-nonhate {
+  background-color: var(--color-success);
+  height: 100%;
+}
+
 /* Badges & Chips */
 .badge {
   display: inline-block;

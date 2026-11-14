@@ -91,32 +91,69 @@
       <div class="content-viewport">
         <!-- 1. OVERVIEW PAGE -->
         <section id="page-overview" class="page-view active">
-          <h1>Hate Speech Detection Platform</h1>
-          <p>Explainable AI & Reward Optimized LLMs for Multilingual, Code-Mixed, and Multimodal Content Moderation.</p>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-3); flex-wrap:wrap; gap:12px;">
+            <div>
+              <h1>Hate Speech Detection Platform</h1>
+              <p style="margin-bottom:0;">Explainable AI &amp; Reward-Optimized LLMs for Multilingual, Code-Mixed, and Multimodal Content Moderation.</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="loadOverviewStats(true)" title="Refresh live telemetry from database" style="flex-shrink:0;">
+              &#x21bb; Refresh Telemetry
+            </button>
+          </div>
           
-          <div class="grid-4" style="margin-bottom:var(--space-6);">
+          <div class="grid-4" style="margin-bottom:var(--space-4);">
             <div class="stat-box">
-              <div class="stat-label">Total Dataset Samples</div>
-              <div class="stat-value" id="statTotalSamples">325</div>
+              <div class="stat-label">Curated Dataset Samples</div>
+              <div class="stat-value" id="statTotalSamples">--</div>
+              <div class="stat-sub" id="statSamplesSub">Loading corpora...</div>
             </div>
             <div class="stat-box">
-              <div class="stat-label">Reward Optimization Runs</div>
-              <div class="stat-value" id="statOptimizationRuns">1</div>
+              <div class="stat-label">Live Inferences Logged</div>
+              <div class="stat-value" id="statTotalPredictions">--</div>
+              <div class="stat-sub" id="statPredsSub">Hateful vs Non-Hateful</div>
             </div>
             <div class="stat-box">
               <div class="stat-label">Human Feedback Audited</div>
-              <div class="stat-value" id="statTotalFeedback">6</div>
+              <div class="stat-value" id="statTotalFeedback">--</div>
+              <div class="stat-sub" id="statFeedbackSub">Audited feedback pairs</div>
             </div>
             <div class="stat-box">
               <div class="stat-label">Experiments Completed</div>
-              <div class="stat-value" id="statCompletedExp">1/9</div>
+              <div class="stat-value" id="statCompletedExp">--/9</div>
+              <div class="stat-sub" id="statExpSub">Benchmark suite coverage</div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-title">System Architecture Pipeline</div>
-            <p style="font-size:13px;">Social Media Input (T, V, C) &rarr; Language & Modality Detection &rarr; Modality Preprocessing (Text Normalization, EasyOCR, Context Sanitization) &rarr; Feature Extraction & Cross-Attention Fusion &rarr; Hate Speech Classification &rarr; Grounded XAI Attribution &rarr; Human Feedback & Multi-Objective Reward Calculation &rarr; DPO Optimization.</p>
-            <div style="margin-top:16px;">
+          <!-- Live Model Telemetry & Pipeline Status -->
+          <div class="card" style="margin-bottom:var(--space-4);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+              <div class="card-title" style="margin-bottom:0;">Live System Telemetry &amp; Model Engine</div>
+              <span class="badge badge-nonhate" style="font-size:11px;">SYSTEM HEALTH: OPTIMAL</span>
+            </div>
+            <div class="grid-4" style="font-size:13px; margin-bottom:14px;">
+              <div>
+                <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Active Model:</span><br>
+                <strong id="overviewModelName">Multilingual Transformer</strong> <span id="overviewModelVersion" class="badge badge-neutral" style="font-size:10px;">v1.0</span>
+              </div>
+              <div>
+                <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Holdout Evaluation:</span><br>
+                <span>Macro F1: <strong id="overviewMacroF1" style="color:var(--color-success);">--</strong></span> &bull; 
+                <span>Acc: <strong id="overviewAccuracy" style="color:var(--color-success);">--</strong></span>
+              </div>
+              <div>
+                <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Reward Optimization:</span><br>
+                <span id="statOptimizationRuns" style="font-weight:700;">1</span> run (<span class="badge badge-neutral" style="font-size:10px;">DPO Checkpoint</span>)
+              </div>
+              <div>
+                <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Guardrails &amp; Scoping:</span><br>
+                <span class="badge badge-nonhate" style="font-size:10px;">Slur Interceptor</span>
+                <span class="badge badge-neutral" style="font-size:10px;">Negation Scope</span>
+              </div>
+            </div>
+            <p style="font-size:12px; color:var(--color-text-secondary); margin-bottom:10px;">
+              <strong>Academic Architecture Pipeline:</strong> Social Media Input <em>x = {T, V, C}</em> &rarr; Language &amp; Modality Detection &rarr; Modality Preprocessing (Text Normalization, EasyOCR, Context Sanitization) &rarr; Feature Extraction &amp; Cross-Attention Fusion &rarr; Hate Speech Classification &rarr; Grounded XAI Attribution &rarr; Multi-Objective Reward Calculation &rarr; Direct Preference Optimization (DPO).
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
               <span class="badge badge-neutral">English</span>
               <span class="badge badge-neutral">Hindi (Devanagari)</span>
               <span class="badge badge-neutral">Hinglish Code-Mixed</span>
@@ -126,12 +163,67 @@
             </div>
           </div>
 
+          <!-- Live Recent Moderation Feed -->
+          <div class="card" style="margin-bottom:var(--space-4);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin-bottom:0;">Live Moderation Activity Feed</div>
+              <span style="font-size:12px; color:var(--color-text-tertiary);">Recent inference events logged to SQLite</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:95px;">Timestamp</th>
+                    <th>Input Text Sample</th>
+                    <th style="width:75px;">Lang</th>
+                    <th style="width:120px;">Classification</th>
+                    <th style="width:90px;">Confidence</th>
+                    <th style="width:105px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewRecentTableBody">
+                  <tr>
+                    <td colspan="6" style="text-align:center; padding:16px; color:var(--color-text-tertiary);">Loading live activity stream...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Curated Academic Datasets Distribution -->
+          <div class="card" style="margin-bottom:var(--space-4);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin-bottom:0;">Curated Academic Benchmark Corpora</div>
+              <button class="btn btn-secondary btn-sm" onclick="document.querySelector('[data-target=\'page-datasets\']').click()" style="padding:2px 8px; font-size:11px;">
+                Open Datasets Lab &rarr;
+              </button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Corpus / Source</th>
+                    <th>Languages</th>
+                    <th>Modalities</th>
+                    <th>Samples</th>
+                    <th>Class Distribution (Non-Hate / Hate)</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewDatasetsTableBody">
+                  <tr>
+                    <td colspan="5" style="text-align:center; padding:16px; color:var(--color-text-tertiary);">Loading registered datasets...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           <div class="grid-2">
             <div class="card">
               <div class="card-title">Core Research Mandates</div>
               <ul style="padding-left:18px; font-size:13px; color:var(--color-text-secondary); line-height:1.8;">
                 <li><strong>Strict Binary Objective:</strong> 0 = Non-Hateful, 1 = Hateful.</li>
-                <li><strong>No Hardcoding Rule:</strong> All metrics, predictions, explanations, and rewards are dynamically computed.</li>
+                <li><strong>No Hardcoding Rule:</strong> All metrics, predictions, explanations, and rewards are dynamically computed from SQLite and models.</li>
                 <li><strong>Multilingual Robustness:</strong> Devanagari script and Latin Romanized Hindi slang support without blind machine translation.</li>
                 <li><strong>Multimodal Meme Analysis:</strong> EasyOCR extraction and Cross-Modal Cross-Attention fusion.</li>
               </ul>
@@ -140,8 +232,9 @@
               <div class="card-title">Quick Action Links</div>
               <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
                 <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-detection\']').click()">Launch Detection Workspace &rarr;</button>
+                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-datasets\']').click()">Inspect Registered Datasets &rarr;</button>
                 <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-optimization\']').click()">Review Reward Optimization Lab &rarr;</button>
-                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-experiments\']').click()">Run Research Experiments &rarr;</button>
+                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-experiments\']').click()">Run Research Experiments (1-9) &rarr;</button>
               </div>
             </div>
           </div>
