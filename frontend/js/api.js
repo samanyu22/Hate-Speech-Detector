@@ -56,8 +56,18 @@ const API = {
     return res.json();
   },
 
-  async inspectDataset(datasetId) {
-    const res = await fetch(`${this.baseUrl}/api/datasets/${datasetId}/inspect`);
+  async inspectDataset(datasetId, params = {}) {
+    const q = new URLSearchParams();
+    if (params.limit != null) q.append('limit', params.limit);
+    if (params.offset != null) q.append('offset', params.offset);
+    if (params.label_filter != null) q.append('label_filter', params.label_filter);
+    if (params.search != null) q.append('search', params.search);
+    const qs = q.toString() ? `?${q.toString()}` : '';
+    const res = await fetch(`${this.baseUrl}/api/datasets/${datasetId}/inspect${qs}`);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || 'Inspection failed');
+    }
     return res.json();
   },
 

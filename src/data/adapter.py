@@ -24,15 +24,23 @@ class DatasetRecord:
         self.metadata = metadata or {}
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
+        d = {
             "id": self.id,
             "text": self.text,
             "label": self.label,
+            "label_name": "HATEFUL" if self.label == 1 else "NON-HATEFUL",
             "image_path": self.image_path,
             "context": self.context,
-            "language": self.language,
+            "language": self.language or "en",
             "metadata": self.metadata
         }
+        if "ocr_text" in self.metadata:
+            d["ocr_text"] = self.metadata["ocr_text"]
+        if "category" in self.metadata:
+            d["category"] = self.metadata["category"]
+        if "target" in self.metadata:
+            d["target"] = self.metadata["target"]
+        return d
 
 class UniversalDatasetAdapter:
     def __init__(
@@ -95,8 +103,23 @@ class UniversalDatasetAdapter:
         return records
 
     def _parse_item(self, item: Dict[str, Any], default_id: str) -> Optional[DatasetRecord]:
-        text = item.get(self.text_column, "")
+        text = item.get(self.text_column)
+        if text is None or text == "":
+            for alt in ["post_tokens", "caption", "sentence", "content", "tweet", "ocr_text"]:
+                if alt in item and item[alt]:
+                    text = item[alt]
+                    break
+        if isinstance(text, list):
+            text = " ".join(str(t) for t in text)
+        if text is None:
+            text = ""
+
         raw_label = item.get(self.label_column)
+        if raw_label is None:
+            for alt in ["label", "gold_label", "target_label", "annotation"]:
+                if alt in item and item[alt] is not None:
+                    raw_label = item[alt]
+                    break
         if raw_label is None:
             return None
 
@@ -126,8 +149,25 @@ class UniversalDatasetAdapter:
 
         rec_id = item.get(self.id_column, default_id)
         image_path = item.get(self.image_column) if self.image_column else None
+        if not image_path:
+            for alt in ["image_path", "image", "img_path", "img"]:
+                if alt in item and item[alt]:
+                    image_path = item[alt]
+                    break
+
         context = item.get(self.context_column) if self.context_column else None
+        if not context:
+            for alt in ["context", "thread", "history", "thread_history"]:
+                if alt in item and item[alt]:
+                    context = item[alt]
+                    break
+
         language = item.get(self.language_column) if self.language_column else None
+        if not language:
+            for alt in ["language", "lang", "lang_code"]:
+                if alt in item and item[alt]:
+                    language = item[alt]
+                    break
 
         # Remaining fields go into metadata
         excluded = {self.text_column, self.label_column, self.image_column, self.context_column, self.language_column, self.id_column}

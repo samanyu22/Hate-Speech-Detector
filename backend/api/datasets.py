@@ -68,7 +68,13 @@ def register_dataset(req: DatasetRegisterRequest):
         raise HTTPException(status_code=400, detail=str(e))
 
 @router.get("/{dataset_id}/inspect")
-def inspect_dataset(dataset_id: str, limit: int = 15):
+def inspect_dataset(
+    dataset_id: str,
+    limit: int = 50,
+    offset: int = 0,
+    label_filter: str = "all",
+    search: str = ""
+):
     conn = get_connection()
     row = conn.execute("SELECT * FROM datasets WHERE id = ?", (dataset_id,)).fetchone()
     conn.close()
@@ -79,11 +85,56 @@ def inspect_dataset(dataset_id: str, limit: int = 15):
     try:
         adapter = UniversalDatasetAdapter(file_path=file_path)
         records = adapter.load()
-        samples = [r.to_dict() for r in records[:limit]]
+
+        languages = json.loads(row["languages"]) if row["languages"] else []
+        modalities = json.loads(row["modalities"]) if row["modalities"] else []
+        class_dist = json.loads(row["class_distribution"]) if row["class_distribution"] else {}
+
+        all_samples = [r.to_dict() for r in records]
+
+        # Filter by label if requested
+        if label_filter and label_filter.strip().lower() not in ["", "all", "none"]:
+            try:
+                target_label = int(label_filter.strip())
+                all_samples = [s for s in all_samples if s.get("label") == target_label]
+            except ValueError:
+                pass
+
+        # Filter by search term if requested
+        if search and search.strip():
+            query = search.strip().lower()
+            all_samples = [
+                s for s in all_samples
+                if query in s.get("text", "").lower()
+                or query in s.get("id", "").lower()
+                or query in str(s.get("ocr_text", "")).lower()
+                or query in str(s.get("category", "")).lower()
+                or query in str(s.get("context", "")).lower()
+            ]
+
+        total_filtered = len(all_samples)
+        paged_samples = all_samples[offset : offset + limit]
+
+        # Attach image_url if image_path exists
+        for s in paged_samples:
+            if s.get("image_path"):
+                p = Path(s["image_path"])
+                s["image_url"] = f"/data/raw/images/{p.name}"
+
         return {
             "dataset_id": dataset_id,
+            "name": row["name"],
+            "source": row["source"],
+            "license": row["license"],
+            "languages": languages,
+            "modalities": modalities,
+            "file_path": file_path,
             "total_samples": len(records),
-            "sample_slice": samples
+            "filtered_count": total_filtered,
+            "class_distribution": class_dist,
+            "offset": offset,
+            "limit": limit,
+            "sample_slice": paged_samples
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to read dataset samples: {str(e)}")

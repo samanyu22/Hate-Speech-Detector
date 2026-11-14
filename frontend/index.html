@@ -103,14 +103,14 @@
           
           <div class="grid-4" style="margin-bottom:var(--space-4);">
             <div class="stat-box">
-              <div class="stat-label">Curated Dataset Samples</div>
+              <div class="stat-label">Total Dataset Samples</div>
               <div class="stat-value" id="statTotalSamples">--</div>
               <div class="stat-sub" id="statSamplesSub">Loading corpora...</div>
             </div>
             <div class="stat-box">
-              <div class="stat-label">Live Inferences Logged</div>
-              <div class="stat-value" id="statTotalPredictions">--</div>
-              <div class="stat-sub" id="statPredsSub">Hateful vs Non-Hateful</div>
+              <div class="stat-label">Reward Optimization Runs</div>
+              <div class="stat-value" id="statOptimizationRuns">1</div>
+              <div class="stat-sub" id="statOptSub">DPO Checkpoint Active</div>
             </div>
             <div class="stat-box">
               <div class="stat-label">Human Feedback Audited</div>
@@ -130,7 +130,7 @@
               <div class="card-title" style="margin-bottom:0;">Live System Telemetry &amp; Model Engine</div>
               <span class="badge badge-nonhate" style="font-size:11px;">SYSTEM HEALTH: OPTIMAL</span>
             </div>
-            <div class="grid-4" style="font-size:13px; margin-bottom:14px;">
+            <div class="grid-3" style="font-size:13px; margin-bottom:14px;">
               <div>
                 <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Active Model:</span><br>
                 <strong id="overviewModelName">Multilingual Transformer</strong> <span id="overviewModelVersion" class="badge badge-neutral" style="font-size:10px;">v1.0</span>
@@ -139,10 +139,6 @@
                 <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Holdout Evaluation:</span><br>
                 <span>Macro F1: <strong id="overviewMacroF1" style="color:var(--color-success);">--</strong></span> &bull; 
                 <span>Acc: <strong id="overviewAccuracy" style="color:var(--color-success);">--</strong></span>
-              </div>
-              <div>
-                <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Reward Optimization:</span><br>
-                <span id="statOptimizationRuns" style="font-weight:700;">1</span> run (<span class="badge badge-neutral" style="font-size:10px;">DPO Checkpoint</span>)
               </div>
               <div>
                 <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Guardrails &amp; Scoping:</span><br>
@@ -160,33 +156,6 @@
               <span class="badge badge-neutral">Multimodal Memes</span>
               <span class="badge badge-neutral">Direct Preference Optimization</span>
               <span class="badge badge-neutral">Integrated Gradients / Perturbation</span>
-            </div>
-          </div>
-
-          <!-- Live Recent Moderation Feed -->
-          <div class="card" style="margin-bottom:var(--space-4);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <div class="card-title" style="margin-bottom:0;">Live Moderation Activity Feed</div>
-              <span style="font-size:12px; color:var(--color-text-tertiary);">Recent inference events logged to SQLite</span>
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width:95px;">Timestamp</th>
-                    <th>Input Text Sample</th>
-                    <th style="width:75px;">Lang</th>
-                    <th style="width:120px;">Classification</th>
-                    <th style="width:90px;">Confidence</th>
-                    <th style="width:105px;">Action</th>
-                  </tr>
-                </thead>
-                <tbody id="overviewRecentTableBody">
-                  <tr>
-                    <td colspan="6" style="text-align:center; padding:16px; color:var(--color-text-tertiary);">Loading live activity stream...</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
 
@@ -370,22 +339,55 @@
 
         <!-- 3. DATASETS PAGE -->
         <section id="page-datasets" class="page-view">
-          <h1>Dataset Laboratory</h1>
-          <p>Universal dataset adapters, schema validation, class balance verification, and leakage-safe splits.</p>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-3); flex-wrap:wrap; gap:12px;">
+            <div>
+              <h1>Dataset Laboratory</h1>
+              <p style="margin-bottom:0;">Universal dataset adapters, schema validation, class balance verification, and leakage-safe splits.</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="loadDatasets()" title="Refresh datasets list" style="flex-shrink:0;">
+              &#x21bb; Refresh Corpora
+            </button>
+          </div>
 
-          <div class="card">
-            <div class="card-title">Registered Research Datasets</div>
+          <div class="grid-4" style="margin-bottom:var(--space-4);">
+            <div class="stat-box">
+              <div class="stat-label">Registered Corpora</div>
+              <div class="stat-value" id="dsStatTotalCount">4</div>
+              <div class="stat-sub">HASOC · HateXplain · Subtle · Memes</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Total Curated Samples</div>
+              <div class="stat-value" id="dsStatTotalSamples">1,310</div>
+              <div class="stat-sub">Strict Binary Ground Truth</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Modalities Covered</div>
+              <div class="stat-value" style="font-size:22px;">Text + OCR</div>
+              <div class="stat-sub">Images, Saliency &amp; Context</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Validation Engine</div>
+              <div class="stat-value" style="color:var(--color-success);">100%</div>
+              <div class="stat-sub">Universal Schema Validated</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:var(--space-4);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+              <div class="card-title" style="margin-bottom:0;">Registered Research Datasets</div>
+              <span class="badge badge-neutral" style="font-size:11px;">LEAKAGE-SAFE STRATIFIED SPLITS</span>
+            </div>
             <div class="table-container">
               <table id="datasetTable">
                 <thead>
                   <tr>
-                    <th>Dataset Name</th>
+                    <th>Corpus / Source</th>
                     <th>Identifier</th>
                     <th>Samples</th>
                     <th>Languages</th>
                     <th>Modalities</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>Class Balance (Non-Hate / Hate)</th>
+                    <th style="width:140px; white-space:nowrap;">Actions</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -393,12 +395,113 @@
             </div>
           </div>
 
-          <div id="datasetInspectModal" class="card-elevated" style="display:none; margin-top:24px;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <div class="card-title">Dataset Inspection</div>
-              <button class="btn btn-secondary btn-sm" onclick="document.getElementById('datasetInspectModal').style.display='none'">Close</button>
+          <!-- Enhanced Dataset Inspector -->
+          <div id="datasetInspectModal" class="card-elevated" style="display:none; margin-bottom:var(--space-4);">
+            <div class="dataset-inspect-container">
+              <div class="inspect-header">
+                <div>
+                  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <h3 id="inspectDatasetTitle" style="margin-bottom:0;">Dataset Inspection</h3>
+                    <code id="inspectDatasetId" style="font-size:12px; font-weight:600;"></code>
+                  </div>
+                  <div id="inspectDatasetMeta" style="font-size:12px; color:var(--color-text-secondary); margin-top:4px;"></div>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="closeDatasetInspector()">✕ Close Inspector</button>
+              </div>
+
+              <!-- Inspector Metric Strip -->
+              <div class="grid-4" id="inspectMetricStrip">
+                <div class="stat-box" style="padding:10px;">
+                  <div class="stat-label">Total Corpus Records</div>
+                  <div class="stat-value" id="inspectTotalSamples" style="font-size:20px;">--</div>
+                </div>
+                <div class="stat-box" style="padding:10px;">
+                  <div class="stat-label">Non-Hateful (0)</div>
+                  <div class="stat-value" id="inspectNonHateCount" style="font-size:20px; color:var(--color-success);">--</div>
+                </div>
+                <div class="stat-box" style="padding:10px;">
+                  <div class="stat-label">Hateful (1)</div>
+                  <div class="stat-value" id="inspectHateCount" style="font-size:20px; color:var(--color-error);">--</div>
+                </div>
+                <div class="stat-box" style="padding:10px;">
+                  <div class="stat-label">Filtered Results</div>
+                  <div class="stat-value" id="inspectFilteredCount" style="font-size:20px;">--</div>
+                </div>
+              </div>
+
+              <!-- Interactive Controls Toolbar -->
+              <div class="inspect-toolbar">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <label class="form-label" style="margin-bottom:0;">Class Filter:</label>
+                  <select id="inspectFilterSelect" class="inspect-select" onchange="onInspectFilterChange()">
+                    <option value="all">All Classes (0 &amp; 1)</option>
+                    <option value="0">Non-Hateful (0) Only</option>
+                    <option value="1">Hateful (1) Only</option>
+                  </select>
+                </div>
+
+                <input type="text" id="inspectSearchInput" class="inspect-search-input" placeholder="Search keywords, OCR text, ID, or category..." oninput="onInspectSearchInput()">
+
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <label class="form-label" style="margin-bottom:0;">Per Page:</label>
+                  <select id="inspectLimitSelect" class="inspect-select" onchange="onInspectLimitChange()">
+                    <option value="15">15 samples</option>
+                    <option value="30" selected>30 samples</option>
+                    <option value="50">50 samples</option>
+                    <option value="100">100 samples</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-secondary btn-sm" onclick="resetInspectFilters()" style="padding:6px 12px; font-size:12px;">Reset</button>
+              </div>
+
+              <!-- Samples Table -->
+              <div class="table-container" style="max-height: 480px; overflow-y:auto;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width:45px;">#</th>
+                      <th style="width:110px;">ID</th>
+                      <th>Content &amp; Modalities</th>
+                      <th style="width:75px;">Lang</th>
+                      <th style="min-width:145px; white-space:nowrap;">Ground Truth</th>
+                      <th style="width:120px;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inspectSamplesTableBody">
+                    <tr>
+                      <td colspan="6" style="text-align:center; padding:20px; color:var(--color-text-tertiary);">Loading samples...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div id="datasetInspectContent"></div>
+          </div>
+
+          <!-- Lightbox Preview Modal for Memes -->
+          <div id="memeLightboxModal" class="modal-lightbox" style="display:none;" onclick="if(event.target === this) closeMemeLightbox()">
+            <div class="modal-lightbox-content">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <div class="card-title" style="margin-bottom:0;">Meme Inspection</div>
+                <button class="btn btn-secondary btn-sm" onclick="closeMemeLightbox()">✕</button>
+              </div>
+              <div style="text-align:center; margin-bottom:12px; background:var(--color-surface-raised); padding:8px; border:1px solid var(--color-border-subtle);">
+                <img id="lightboxImg" src="" alt="Meme Preview" style="max-width:100%; max-height:280px; object-fit:contain;">
+              </div>
+              <div style="font-size:13px; margin-bottom:8px;">
+                <strong>Post Caption:</strong> <span id="lightboxCaption"></span>
+              </div>
+              <div style="font-size:13px; margin-bottom:8px;">
+                <strong>EasyOCR Extracted:</strong> <code id="lightboxOcr" style="font-family:var(--font-mono); background:var(--color-surface-raised); padding:2px 6px;"></code>
+              </div>
+              <div style="font-size:13px; margin-bottom:14px;">
+                <strong>Ground Truth:</strong> <span id="lightboxLabelBadge" class="badge"></span>
+              </div>
+              <div style="display:flex; justify-content:flex-end; gap:8px;">
+                <button id="lightboxTestBtn" class="btn btn-primary btn-sm">Test in Detection Lab &rarr;</button>
+                <button class="btn btn-secondary btn-sm" onclick="closeMemeLightbox()">Close</button>
+              </div>
+            </div>
           </div>
         </section>
 

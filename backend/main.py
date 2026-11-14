@@ -75,6 +75,10 @@ presentation_dir = settings.base_dir / "presentation"
 if presentation_dir.exists():
     app.mount("/presentation", StaticFiles(directory=str(presentation_dir)), name="presentation")
 
+images_dir = settings.base_dir / "data" / "raw" / "images"
+if images_dir.exists():
+    app.mount("/data/raw/images", StaticFiles(directory=str(images_dir)), name="dataset_images")
+
 @app.get("/")
 def serve_index():
     index_file = settings.base_dir / "frontend" / "index.html"

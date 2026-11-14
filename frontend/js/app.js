@@ -317,15 +317,13 @@ async function loadOverviewStats(isManualRefresh = false) {
       elSamplesSub.innerText = `${summary.total_datasets || 4} Benchmark Corpora Registered`;
     }
 
-    const elPreds = document.getElementById('statTotalPredictions');
-    if (elPreds) {
-      elPreds.innerText = summary.total_predictions != null ? Number(summary.total_predictions).toLocaleString() : '0';
+    const elOptRuns = document.getElementById('statOptimizationRuns');
+    if (elOptRuns) {
+      elOptRuns.innerText = summary.optimization_cycles != null ? summary.optimization_cycles : 1;
     }
-    const elPredsSub = document.getElementById('statPredsSub');
-    if (elPredsSub && summary.predictions_summary) {
-      const hCount = summary.predictions_summary.hateful != null ? summary.predictions_summary.hateful : 0;
-      const nhCount = summary.predictions_summary.non_hateful != null ? summary.predictions_summary.non_hateful : 0;
-      elPredsSub.innerText = `${hCount} Hateful · ${nhCount} Non-Hateful`;
+    const elOptSub = document.getElementById('statOptSub');
+    if (elOptSub) {
+      elOptSub.innerText = 'DPO Checkpoint Active';
     }
 
     const elFeedback = document.getElementById('statTotalFeedback');
@@ -350,11 +348,6 @@ async function loadOverviewStats(isManualRefresh = false) {
       elExpSub.innerText = `${runs} Execution Runs Completed`;
     }
 
-    const elOptRuns = document.getElementById('statOptimizationRuns');
-    if (elOptRuns) {
-      elOptRuns.innerText = summary.optimization_cycles != null ? summary.optimization_cycles : 1;
-    }
-
     // 3. Model Telemetry Card
     const elOverviewModel = document.getElementById('overviewModelName');
     if (elOverviewModel) elOverviewModel.innerText = summary.active_model_name || 'Multilingual Code-Mixed Transformer Classifier';
@@ -372,51 +365,7 @@ async function loadOverviewStats(isManualRefresh = false) {
       if (elAcc) elAcc.innerText = '94.1%';
     }
 
-    // 4. Recent Moderation Activity Feed
-    const tbodyRecent = document.getElementById('overviewRecentTableBody');
-    if (tbodyRecent) {
-      if (summary.recent_predictions && summary.recent_predictions.length > 0) {
-        tbodyRecent.innerHTML = summary.recent_predictions.map(p => {
-          const isHate = p.predicted_label === 1;
-          const badgeClass = isHate ? 'badge-hate' : 'badge-nonhate';
-          const labelText = isHate ? 'HATEFUL' : 'NON-HATEFUL';
-          const rawText = (p.input_text || '').trim();
-          const safeDisplay = rawText.length > 50 ? rawText.substring(0, 50) + '...' : rawText;
-          const escapedFullText = encodeURIComponent(rawText);
-          const confPercent = p.confidence != null ? (p.confidence * 100).toFixed(1) + '%' : '--';
-          const lang = p.language_detected ? p.language_detected.toUpperCase() : 'EN';
-
-          let timeStr = '--';
-          if (p.created_at) {
-            try {
-              const dt = new Date(p.created_at);
-              timeStr = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            } catch (_) {
-              timeStr = p.created_at.slice(11, 19);
-            }
-          }
-
-          return `
-            <tr>
-              <td style="font-family:var(--font-mono); font-size:11px; color:var(--color-text-tertiary);">${timeStr}</td>
-              <td style="font-weight:500;" title="${rawText.replace(/"/g, '&quot;')}">${safeDisplay}</td>
-              <td><span class="badge badge-neutral">${lang}</span></td>
-              <td><span class="badge ${badgeClass}">${labelText}</span></td>
-              <td style="font-family:var(--font-mono); font-weight:600;">${confPercent}</td>
-              <td>
-                <button class="btn btn-secondary btn-sm" onclick="testSnippetInDetectionLab('${escapedFullText}')" style="padding:2px 8px; font-size:11px;">
-                  Test in Lab &rarr;
-                </button>
-              </td>
-            </tr>
-          `;
-        }).join('');
-      } else {
-        tbodyRecent.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:16px; color:var(--color-text-tertiary);">No moderation activity logged yet. Test text in Detection Lab!</td></tr>`;
-      }
-    }
-
-    // 5. Curated Datasets Distribution
+    // 4. Curated Datasets Distribution
     const tbodyDatasets = document.getElementById('overviewDatasetsTableBody');
     if (tbodyDatasets && summary.datasets) {
       tbodyDatasets.innerHTML = summary.datasets.map(ds => {
@@ -601,7 +550,13 @@ function displayDetectionResult(res) {
   card.scrollIntoView({ behavior: 'smooth' });
 }
 
-// 5. Datasets Laboratory
+// 5. Datasets Laboratory & Inspector State
+let currentInspectDatasetId = null;
+let currentInspectFilter = 'all';
+let currentInspectSearch = '';
+let currentInspectLimit = 30;
+let searchDebounceTimer = null;
+
 async function loadDatasets() {
   try {
     const datasets = await API.getDatasets();
@@ -609,40 +564,299 @@ async function loadDatasets() {
     if (!tbody) return;
     tbody.innerHTML = '';
 
+    let totalCorpora = datasets.length;
+    let totalSamples = 0;
+
     datasets.forEach(ds => {
+      const count = ds.sample_count || 0;
+      totalSamples += count;
+      const dist = ds.class_distribution || {};
+      const hateCount = dist['1'] || dist[1] || 0;
+      const nonHateCount = dist['0'] || dist[0] || 0;
+      const hatePct = count > 0 ? Math.round((hateCount / count) * 100) : 0;
+      const nonHatePct = count > 0 ? Math.round((nonHateCount / count) * 100) : 0;
+
+      const langs = (Array.isArray(ds.languages) ? ds.languages : [ds.languages || 'en'])
+        .map(l => `<span class="badge badge-neutral" style="font-size:10px;">${l}</span>`).join(' ');
+      const mods = (Array.isArray(ds.modalities) ? ds.modalities : [ds.modalities || 'text'])
+        .map(m => `<span class="badge badge-neutral" style="font-size:10px;">${m}</span>`).join(' ');
+
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><strong>${ds.name}</strong></td>
+        <td>
+          <strong>${ds.name}</strong>
+          <div style="font-size:11px; color:var(--color-text-tertiary);">${ds.source || 'Curated Research Benchmark'}</div>
+        </td>
         <td><code>${ds.id}</code></td>
-        <td>${ds.sample_count}</td>
-        <td>${Array.isArray(ds.languages) ? ds.languages.join(', ') : ds.languages}</td>
-        <td>${Array.isArray(ds.modalities) ? ds.modalities.join(', ') : ds.modalities}</td>
-        <td><span class="badge ${ds.sample_count > 0 ? 'badge-nonhate' : 'badge-hate'}">${ds.sample_count > 0 ? 'VALID' : 'EMPTY'}</span></td>
-        <td><button class="btn btn-secondary btn-sm" onclick="inspectDataset('${ds.id}')">Inspect</button></td>
+        <td style="font-family:var(--font-mono); font-weight:700;">${count.toLocaleString()}</td>
+        <td>${langs}</td>
+        <td>${mods}</td>
+        <td style="min-width:140px;">
+          <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:2px;">
+            <span style="color:var(--color-success); font-weight:600;">${nonHateCount} Non-Hate (${nonHatePct}%)</span>
+            <span style="color:var(--color-error); font-weight:600;">${hateCount} Hate (${hatePct}%)</span>
+          </div>
+          <div class="ratio-bar-container">
+            <div class="ratio-bar-nonhate" style="width:${nonHatePct}%;"></div>
+            <div class="ratio-bar-hate" style="width:${hatePct}%;"></div>
+          </div>
+        </td>
+        <td style="white-space:nowrap;">
+          <button class="btn btn-secondary btn-sm" onclick="inspectDataset('${ds.id}')" style="white-space:nowrap; font-weight:600;">
+            Inspect Samples
+          </button>
+        </td>
       `;
       tbody.appendChild(tr);
     });
+
+    const statCount = document.getElementById('dsStatTotalCount');
+    if (statCount) statCount.innerText = totalCorpora;
+    const statSamples = document.getElementById('dsStatTotalSamples');
+    if (statSamples) statSamples.innerText = totalSamples.toLocaleString();
+
   } catch (e) {
     console.error('Error loading datasets:', e);
   }
 }
 
 window.inspectDataset = async function(datasetId) {
-  try {
-    const data = await API.inspectDataset(datasetId);
-    const modal = document.getElementById('datasetInspectModal');
-    const container = document.getElementById('datasetInspectContent');
-    modal.style.display = 'block';
+  currentInspectDatasetId = datasetId;
+  currentInspectFilter = 'all';
+  currentInspectSearch = '';
+  currentInspectLimit = 30;
 
-    let html = `<h4>Dataset: ${datasetId} (${data.total_samples} samples)</h4><div class="table-container" style="max-height: 400px; overflow-y:auto; margin-top:12px;"><table><thead><tr><th>ID</th><th>Text</th><th>Label</th><th>Lang</th></tr></thead><tbody>`;
-    data.sample_slice.forEach(s => {
-      html += `<tr><td><code>${s.id}</code></td><td>${s.text}</td><td><span class="badge ${s.label === 1 ? 'badge-hate' : 'badge-nonhate'}">${s.label}</span></td><td>${s.language || 'auto'}</td></tr>`;
-    });
-    html += `</tbody></table></div>`;
-    container.innerHTML = html;
-  } catch (e) {
-    alert(`Failed to inspect dataset: ${e.message}`);
+  const filterSelect = document.getElementById('inspectFilterSelect');
+  if (filterSelect) filterSelect.value = 'all';
+  const searchInput = document.getElementById('inspectSearchInput');
+  if (searchInput) searchInput.value = '';
+  const limitSelect = document.getElementById('inspectLimitSelect');
+  if (limitSelect) limitSelect.value = '30';
+
+  const modal = document.getElementById('datasetInspectModal');
+  if (modal) {
+    modal.style.display = 'block';
+    modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  await renderDatasetInspector();
+};
+
+window.closeDatasetInspector = function() {
+  const modal = document.getElementById('datasetInspectModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+};
+
+window.onInspectFilterChange = function() {
+  const filterSelect = document.getElementById('inspectFilterSelect');
+  if (filterSelect) {
+    currentInspectFilter = filterSelect.value;
+    renderDatasetInspector();
+  }
+};
+
+window.onInspectSearchInput = function() {
+  clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = setTimeout(() => {
+    const searchInput = document.getElementById('inspectSearchInput');
+    if (searchInput) {
+      currentInspectSearch = searchInput.value.trim();
+      renderDatasetInspector();
+    }
+  }, 250);
+};
+
+window.onInspectLimitChange = function() {
+  const limitSelect = document.getElementById('inspectLimitSelect');
+  if (limitSelect) {
+    currentInspectLimit = parseInt(limitSelect.value) || 30;
+    renderDatasetInspector();
+  }
+};
+
+window.resetInspectFilters = function() {
+  currentInspectFilter = 'all';
+  currentInspectSearch = '';
+  currentInspectLimit = 30;
+
+  const filterSelect = document.getElementById('inspectFilterSelect');
+  if (filterSelect) filterSelect.value = 'all';
+  const searchInput = document.getElementById('inspectSearchInput');
+  if (searchInput) searchInput.value = '';
+  const limitSelect = document.getElementById('inspectLimitSelect');
+  if (limitSelect) limitSelect.value = '30';
+
+  renderDatasetInspector();
+};
+
+async function renderDatasetInspector() {
+  if (!currentInspectDatasetId) return;
+
+  const tbody = document.getElementById('inspectSamplesTableBody');
+  if (tbody) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--color-text-tertiary);">Loading dataset samples...</td></tr>`;
+  }
+
+  try {
+    const data = await API.inspectDataset(currentInspectDatasetId, {
+      limit: currentInspectLimit,
+      label_filter: currentInspectFilter,
+      search: currentInspectSearch
+    });
+
+    const titleEl = document.getElementById('inspectDatasetTitle');
+    if (titleEl) titleEl.innerText = data.name || currentInspectDatasetId;
+
+    const idEl = document.getElementById('inspectDatasetId');
+    if (idEl) idEl.innerText = data.dataset_id || currentInspectDatasetId;
+
+    const metaEl = document.getElementById('inspectDatasetMeta');
+    if (metaEl) {
+      const langs = (data.languages || []).join(', ');
+      const mods = (data.modalities || []).join(', ');
+      metaEl.innerText = `Source: ${data.source || 'Curated Corpus'} • License: ${data.license || 'Academic Research'} • Modalities: ${mods} • Languages: ${langs}`;
+    }
+
+    const dist = data.class_distribution || {};
+    const hateCount = dist['1'] || dist[1] || 0;
+    const nonHateCount = dist['0'] || dist[0] || 0;
+    const totalCount = data.total_samples || 0;
+    const hatePct = totalCount > 0 ? Math.round((hateCount / totalCount) * 100) : 0;
+    const nonHatePct = totalCount > 0 ? Math.round((nonHateCount / totalCount) * 100) : 0;
+
+    const elTotal = document.getElementById('inspectTotalSamples');
+    if (elTotal) elTotal.innerText = totalCount.toLocaleString();
+
+    const elNonHate = document.getElementById('inspectNonHateCount');
+    if (elNonHate) elNonHate.innerText = `${nonHateCount} (${nonHatePct}%)`;
+
+    const elHate = document.getElementById('inspectHateCount');
+    if (elHate) elHate.innerText = `${hateCount} (${hatePct}%)`;
+
+    const elFiltered = document.getElementById('inspectFilteredCount');
+    if (elFiltered) elFiltered.innerText = `${data.filtered_count} matches`;
+
+    if (!tbody) return;
+
+    if (!data.sample_slice || data.sample_slice.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--color-text-tertiary);">No samples match the selected filter/search.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = data.sample_slice.map((s, idx) => {
+      const isHate = s.label === 1;
+      const badgeClass = isHate ? 'badge-hate' : 'badge-nonhate';
+      const labelText = isHate ? 'HATEFUL (1)' : 'NON-HATEFUL (0)';
+      const lang = s.language ? s.language.toUpperCase() : 'EN';
+      const cleanText = (s.text || '').replace(/"/g, '&quot;');
+
+      let mediaHtml = '';
+      if (s.image_url) {
+        mediaHtml += `
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <img src="${s.image_url}" alt="Meme thumbnail" class="meme-thumb" onclick="openMemeLightbox('${s.image_url}', '${encodeURIComponent(s.text || '')}', '${encodeURIComponent(s.ocr_text || '')}', ${s.label})">
+            <span style="font-size:11px; color:var(--color-text-tertiary);">Click thumbnail to view full meme</span>
+          </div>
+        `;
+      }
+
+      let extraPills = '';
+      if (s.ocr_text) {
+        extraPills += `<div class="sample-meta-pill" style="color:var(--color-text-primary);"><strong>OCR:</strong> ${s.ocr_text}</div> `;
+      }
+      if (s.context) {
+        extraPills += `<div class="sample-meta-pill" style="color:var(--color-text-secondary);"><strong>Context:</strong> ${s.context}</div> `;
+      }
+      if (s.category) {
+        extraPills += `<div class="sample-meta-pill"><strong>Category:</strong> ${s.category}</div> `;
+      }
+
+      const escapedText = encodeURIComponent(s.text || '');
+      const escapedCtx = encodeURIComponent(s.context || '');
+      const escapedImg = encodeURIComponent(s.image_path || '');
+
+      return `
+        <tr>
+          <td style="font-family:var(--font-mono); font-size:11px; color:var(--color-text-tertiary);">${idx + 1}</td>
+          <td><code style="font-size:11px;">${s.id}</code></td>
+          <td style="max-width:480px;">
+            ${mediaHtml}
+            <div style="font-size:13px; line-height:1.5;">${cleanText || '<em style="color:var(--color-text-tertiary)">[Multimodal OCR Content]</em>'}</div>
+            ${extraPills ? `<div style="margin-top:4px;">${extraPills}</div>` : ''}
+          </td>
+          <td><span class="badge badge-neutral" style="font-size:10px;">${lang}</span></td>
+          <td style="white-space:nowrap;"><span class="badge ${badgeClass}" style="white-space:nowrap;">${labelText}</span></td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="sendSampleToDetectionLab('${escapedText}', '${escapedCtx}', '${escapedImg}')" style="padding:3px 8px; font-size:11px; white-space:nowrap;">
+              Test in Lab &rarr;
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+  } catch (err) {
+    if (tbody) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--color-error);">Error loading samples: ${err.message}</td></tr>`;
+    }
+  }
+}
+
+window.sendSampleToDetectionLab = function(encodedText, encodedCtx, encodedImg) {
+  try {
+    const text = decodeURIComponent(encodedText || '');
+    const ctx = decodeURIComponent(encodedCtx || '');
+    const img = decodeURIComponent(encodedImg || '');
+
+    const textInput = document.getElementById('detectTextInput');
+    if (textInput) textInput.value = text;
+
+    const ctxInput = document.getElementById('detectContextInput');
+    if (ctxInput) ctxInput.value = ctx;
+
+    const navBtn = document.querySelector('[data-target="page-detection"]');
+    if (navBtn) {
+      navBtn.click();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  } catch (e) {
+    console.error('Error navigating sample to detection lab:', e);
+  }
+};
+
+window.openMemeLightbox = function(imgUrl, encodedCaption, encodedOcr, label) {
+  const modal = document.getElementById('memeLightboxModal');
+  if (!modal) return;
+
+  const caption = decodeURIComponent(encodedCaption || '');
+  const ocr = decodeURIComponent(encodedOcr || '');
+
+  document.getElementById('lightboxImg').src = imgUrl;
+  document.getElementById('lightboxCaption').innerText = caption;
+  document.getElementById('lightboxOcr').innerText = ocr;
+
+  const badge = document.getElementById('lightboxLabelBadge');
+  if (badge) {
+    badge.className = `badge ${label === 1 ? 'badge-hate' : 'badge-nonhate'}`;
+    badge.innerText = label === 1 ? 'HATEFUL (1)' : 'NON-HATEFUL (0)';
+  }
+
+  const testBtn = document.getElementById('lightboxTestBtn');
+  if (testBtn) {
+    testBtn.onclick = () => {
+      closeMemeLightbox();
+      sendSampleToDetectionLab(encodedCaption, encodeURIComponent('Meme contextual dialogue'), '');
+    };
+  }
+
+  modal.style.display = 'flex';
+};
+
+window.closeMemeLightbox = function() {
+  const modal = document.getElementById('memeLightboxModal');
+  if (modal) modal.style.display = 'none';
 };
 
 // 6. Model Laboratory
