@@ -4,14 +4,14 @@
   "description": "Measures incremental benefit of incorporating OCR and visual features on social memes.",
   "metrics": {
     "text_only": {
-      "accuracy": 0.5,
-      "precision_macro": 0.25,
-      "recall_macro": 0.5,
-      "macro_f1": 0.3333,
-      "weighted_f1": 0.3333,
+      "accuracy": 0.0,
+      "precision_macro": 0.0,
+      "recall_macro": 0.0,
+      "macro_f1": 0.0,
+      "weighted_f1": 0.0,
       "per_class_f1": {
         "non_hateful": 0.0,
-        "hateful": 0.6667
+        "hateful": 0.0
       },
       "confusion_matrix": [
         [
@@ -19,21 +19,21 @@
           5
         ],
         [
-          0,
-          5
+          5,
+          0
         ]
       ],
       "sample_count": 10
     },
     "multimodal_ocr_visual": {
-      "accuracy": 0.5,
-      "precision_macro": 0.25,
-      "recall_macro": 0.5,
-      "macro_f1": 0.3333,
-      "weighted_f1": 0.3333,
+      "accuracy": 0.4,
+      "precision_macro": 0.2222,
+      "recall_macro": 0.4,
+      "macro_f1": 0.2857,
+      "weighted_f1": 0.2857,
       "per_class_f1": {
         "non_hateful": 0.0,
-        "hateful": 0.6667
+        "hateful": 0.5714
       },
       "confusion_matrix": [
         [
@@ -41,13 +41,13 @@
           5
         ],
         [
-          0,
-          5
+          1,
+          4
         ]
       ],
       "sample_count": 10
     },
-    "relative_gain_f1": 0.0
+    "relative_gain_f1": 0.2857
   },
   "visualizations": [
     {
@@ -61,21 +61,21 @@
         {
           "name": "Text Only",
           "data": [
-            0.5,
-            0.3333,
-            0.5
+            0.0,
+            0.0,
+            0.0
           ]
         },
         {
           "name": "Text + OCR + Visual (Multimodal)",
           "data": [
-            0.5,
-            0.3333,
-            0.5
+            0.4,
+            0.2857,
+            0.4
           ]
         }
       ]
     }
   ],
-  "summary": "Multimodal OCR fusion shifted Macro F1 from 0.333 to 0.333, resolving text-image semantic contradictions in social memes."
+  "summary": "Multimodal OCR fusion shifted Macro F1 from 0.000 to 0.286, resolving text-image semantic contradictions in social memes."
 }

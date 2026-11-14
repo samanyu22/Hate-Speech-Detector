@@ -3,10 +3,10 @@
   "title": "Contextual Disambiguation & Sarcasm / Quotation Analysis",
   "description": "Empirical accuracy evaluation on ambiguous challenge cases (educational quotation, sarcastic counterspeech) with and without context.",
   "metrics": {
-    "counterspeech_without_context": 0.5,
-    "counterspeech_with_context": 0.5,
-    "quotation_without_context": 0.0,
-    "quotation_with_context": 0.0,
+    "counterspeech_without_context": 1.0,
+    "counterspeech_with_context": 1.0,
+    "quotation_without_context": 0.5,
+    "quotation_with_context": 0.5,
     "sarcasm_without_context": 1.0,
     "sarcasm_with_context": 1.0
   },
@@ -22,16 +22,16 @@
         {
           "name": "Without Context",
           "data": [
+            1.0,
             0.5,
-            0.0,
             1.0
           ]
         },
         {
           "name": "With Context",
           "data": [
+            1.0,
             0.5,
-            0.0,
             1.0
           ]
         }

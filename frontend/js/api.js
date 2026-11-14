@@ -99,8 +99,34 @@ const API = {
     return res.json();
   },
 
+  async simulateReward(payload) {
+    const res = await fetch(`${this.baseUrl}/api/optimization/simulate-reward`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || 'Reward simulation failed');
+    }
+    return res.json();
+  },
+
   async getFairnessAudit() {
     const res = await fetch(`${this.baseUrl}/api/fairness/audit`);
+    return res.json();
+  },
+
+  async runFairnessProbe(payload) {
+    const res = await fetch(`${this.baseUrl}/api/fairness/counterfactual-probe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || 'Fairness probe failed');
+    }
     return res.json();
   },
 
@@ -112,8 +138,26 @@ const API = {
   async runExperiment(expCode) {
     const res = await fetch(`${this.baseUrl}/api/experiments/run/${expCode}`, { method: 'POST' });
     if (!res.ok) {
-      const err = await res.json();
+      const err = await res.json().catch(() => ({}));
       throw new Error(err.detail || 'Experiment execution failed');
+    }
+    return res.json();
+  },
+
+  async runAllExperiments() {
+    const res = await fetch(`${this.baseUrl}/api/experiments/run-all`, { method: 'POST' });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || 'Batch experiment execution failed');
+    }
+    return res.json();
+  },
+
+  async resetExperiments() {
+    const res = await fetch(`${this.baseUrl}/api/experiments/reset`, { method: 'POST' });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || 'Reset failed');
     }
     return res.json();
   },

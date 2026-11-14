@@ -6,20 +6,20 @@
     "group_metrics": {
       "english": {
         "sample_count": 83,
-        "accuracy": 0.9398,
-        "macro_f1": 0.9368,
-        "precision": 0.9528,
-        "recall": 0.9286,
+        "accuracy": 0.9157,
+        "macro_f1": 0.9105,
+        "precision": 0.9364,
+        "recall": 0.9,
         "fpr": 0.0,
-        "fnr": 0.1429,
+        "fnr": 0.2,
         "confusion_matrix": [
           [
             48,
             0
           ],
           [
-            5,
-            30
+            7,
+            28
           ]
         ]
       },
@@ -68,13 +68,13 @@
       "hinglish_code_mixed": 0.0
     },
     "fnr_by_group": {
-      "english": 0.1429,
+      "english": 0.2,
       "hindi_native": 0.2,
       "hinglish_code_mixed": 0.2143
     },
     "max_fpr_disparity": 0.0,
-    "max_fnr_disparity": 0.0714,
-    "equalized_odds_gap": 0.0714,
+    "max_fnr_disparity": 0.0143,
+    "equalized_odds_gap": 0.0143,
     "is_fair_under_threshold": true
   },
   "visualizations": [
@@ -97,7 +97,7 @@
         {
           "name": "False Negative Rate (FNR)",
           "data": [
-            0.1429,
+            0.2,
             0.2,
             0.2143
           ]
@@ -105,5 +105,5 @@
       ]
     }
   ],
-  "summary": "Equalized Odds Gap measured at 0.0714, demonstrating equitable error distribution across English, Hindi, and Hinglish."
+  "summary": "Equalized Odds Gap measured at 0.0143, demonstrating equitable error distribution across English, Hindi, and Hinglish."
 }

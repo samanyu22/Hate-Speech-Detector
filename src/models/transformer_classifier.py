@@ -190,12 +190,14 @@ class MultilingualTransformerEngine:
 
     def has_grounded_markers(self, text: str) -> bool:
         """
-        Verify presence of either a protected target identity or explicit hostility/slur marker.
-        Hate speech requires both target identity and derogatory/inciting action.
+        Verify presence of explicit hostility, slur, violent imperative, or structural discrimination predicate.
+        Mere mention of a demographic noun (e.g. 'Muslim', 'Hindu', 'community') without hostile predicates
+        does NOT constitute hate speech grounding.
         """
         if self.contains_explicit_slur(text) or self.contains_direct_hostility(text):
             return True
-        grounded_lexicon = [
+
+        grounded_hostility_markers = [
             # Hostility markers / slurs / threats (Latin & Hinglish)
             "vermin", "parasite", "parasites", "subhuman", "exterminate", "lynch", "cancer", "rats",
             "kamine", "kaminon", "saale", "gaddar", "gaddaro", "suar", "suaro", "kutte", "kutto",
@@ -205,30 +207,24 @@ class MultilingualTransformerEngine:
             # Devanagari Hindi hostility & identity markers
             "देशद्रोही", "देशद्रोहियों", "गद्दार", "गद्दारों", "गोली", "मार", "कुत्तों", "सूअर", "सूअरों",
             "कमीने", "दीमक", "घुसपैठियों", "दरिंदों", "कौम", "नापाक", "आतंकवादी", "बहिष्कार", "हत्यारी",
-            # Protected demographic categories
-            "immigrant", "immigrants", "refugee", "refugees", "jew", "jews", "jewish", "muslim", "muslims", "hindu", "hindus",
-            "christian", "christians", "sikh", "sikhs", "buddhist", "buddhists", "jain", "jains",
-            "dalit", "dalits", "brahmin", "brahmins", "adivasi", "adivasis", "roma", "indigenous",
-            "black", "blacks", "white", "whites", "asian", "asians", "women", "woman", "french", "italian", "italians",
-            "pakistani", "pakistanis", "indian", "indians", "mexican", "mexicans", "foreigner", "foreigners",
-            # Broadened generic demographic categories
-            "religion", "religions", "religious", "faith", "faiths", "caste", "castes", "ethnicity", "ethnic",
-            "ethnicities", "nationality", "nationalities", "disability", "disabilities", "disabled", "wheelchair",
-            "neurodivergent", "impairment", "impairments", "deaf", "blind", "gender", "girls", "girl", "men", "man", "female", "males",
-            "gay", "gays", "lesbian", "lesbians", "transgender", "trans",
-            "minority", "minorities", "community", "communities", "tribe", "tribes", "race", "racial",
-            # Structural exclusion & dehumanizing predicates
+            # Structural discrimination & exclusionary action predicates
+            "rejected", "reject", "denied", "deny", "refused", "refuse", "barred", "bar",
+            "prohibited", "prohibit", "excluded", "exclude", "prevented", "prevent",
+            "not allowed", "should not be allowed", "never be allowed", "must not be allowed",
+            "cannot be allowed", "not be permitted", "not permitted", "should not be permitted",
+            "never be promoted", "not be promoted", "disqualified", "disqualify",
+            "fewer rights", "no rights", "fewer legal protections",
             "inferior", "subordinate", "second-class", "stay away", "stay beneath", "know their place",
-            "excluded", "exclude", "kept separate", "keep separate", "keep out", "kept out", "forced out",
+            "kept separate", "keep separate", "keep out", "kept out", "forced out",
             "throw out", "banned", "deny housing", "denied housing", "not deserve", "do not deserve",
-            "does not deserve", "not allowed", "should not be allowed", "never be allowed", "fewer rights",
-            "no voice", "cannot have a voice", "not real citizens", "disappear from public life",
-            "ruin every place", "ruining society", "born criminals", "weak-minded", "less intelligent",
-            "useless to the community", "naturally violent", "naturally dishonest", "cannot be trusted",
+            "does not deserve", "no voice", "cannot have a voice", "not real citizens",
+            "disappear from public life", "ruin every place", "ruining society",
+            "born criminals", "weak-minded", "less intelligent", "useless to the community",
+            "naturally violent", "naturally dishonest", "cannot be trusted",
             "unclean", "dirty", "ashamed of belonging"
         ]
         t_lower = text.lower()
-        for marker in grounded_lexicon:
+        for marker in grounded_hostility_markers:
             if marker in t_lower:
                 return True
         return False
@@ -335,10 +331,8 @@ class MultilingualTransformerEngine:
         elif len(known_content) == 0 and len(content_words) > 0:
             z1 = min(z1, z0 - 1.0)
         elif not has_grounding and z1 > z0:
-            # Generic conversational/literary discourse without any protected identity, slur, or violent threat
-            # Soft dynamic shrinkage based on confidence margin rather than hard cliff:
-            margin = z1 - z0
-            z1 = z0 + margin * 0.25 - 0.4
+            # Discourse without any grounded hostility marker, slur, or structural exclusion predicate
+            z1 = z0 - 1.5
         elif coverage < 0.5 and z1 > z0:
             z1 = z0 + (z1 - z0) * coverage
 

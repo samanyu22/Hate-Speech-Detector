@@ -777,3 +777,417 @@ body.dark-mode .v-theme-body,
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
 }
 
+/* Optimization & Fairness Laboratory Styles */
+.slider-group {
+  margin-bottom: 12px;
+}
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.slider-label {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+.slider-value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.styled-range {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border-medium);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+.styled-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+.styled-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.reward-breakdown-card {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  padding: 14px;
+}
+.reward-meter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.reward-meter-label {
+  width: 130px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.reward-meter-track {
+  flex-grow: 1;
+  height: 8px;
+  background: var(--color-border-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.reward-meter-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+.reward-meter-val {
+  width: 45px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.template-pill {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  margin: 3px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+}
+.template-pill:hover {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
+}
+.template-pill.active {
+  background: rgba(var(--color-primary-rgb, 100, 150, 255), 0.15);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.demographic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-medium);
+  font-family: var(--font-mono);
+}
+
+.loss-card {
+  padding: 12px 16px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  border-left: 4px solid var(--color-primary);
+}
+
+/* ==========================================================================
+   Clean & Understated Research Experiment Laboratory Styles (Exp 1-9)
+   ========================================================================== */
+
+.exp-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  margin-bottom: var(--space-4);
+}
+
+.exp-filter-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.exp-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin-bottom: var(--space-4);
+  transition: border-color 0.15s ease;
+  position: relative;
+}
+
+.exp-card:hover {
+  border-color: var(--color-border-medium);
+}
+
+.exp-card.executing {
+  border-color: var(--color-primary);
+  opacity: 0.85;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.exp-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.exp-code-pill {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+  border-radius: 3px;
+}
+
+.exp-tag-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 7px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.exp-title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 5px 0 2px 0;
+}
+
+.exp-desc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+
+.exp-metric-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.exp-metric-box {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.exp-metric-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+  font-family: var(--font-mono);
+}
+
+.exp-metric-value {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+}
+
+.exp-visual-section {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.exp-chart-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Dual Comparative Bar Chart */
+.bar-chart-row {
+  margin-bottom: 8px;
+}
+
+.bar-chart-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.bar-chart-track {
+  height: 8px;
+  background: var(--color-border-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+.bar-chart-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+  border-radius: 4px;
+}
+
+/* Confusion Matrix Component */
+.cm-container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cm-matrix-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-width: 180px;
+  flex-grow: 1;
+}
+
+.cm-matrix-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 6px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.cm-cell {
+  padding: 6px;
+  text-align: center;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+}
+
+.cm-cell-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 1px;
+}
+
+.cm-cell-val {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cm-tn { background: rgba(39, 174, 96, 0.1); color: var(--color-success); border: 1px solid rgba(39, 174, 96, 0.2); }
+.cm-fp { background: rgba(231, 76, 60, 0.1); color: var(--color-error); border: 1px solid rgba(231, 76, 60, 0.2); }
+.cm-fn { background: rgba(243, 156, 18, 0.1); color: #d97706; border: 1px solid rgba(243, 156, 18, 0.2); }
+.cm-tp { background: rgba(52, 152, 219, 0.1); color: var(--color-primary); border: 1px solid rgba(52, 152, 219, 0.2); }
+
+/* Key Finding Callout - Subdued & Academic */
+.exp-finding-box {
+  background: var(--color-surface-raised);
+  border-left: 3px solid var(--color-primary);
+  padding: 10px 14px;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 10px;
+}
+
+.exp-finding-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  margin-bottom: 3px;
+}
+
+.exp-finding-text {
+  font-size: 12px;
+  color: var(--color-text-primary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Collapsible JSON Inspector */
+.exp-raw-details {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  background: var(--color-surface);
+}
+
+.exp-raw-details summary {
+  padding: 6px 10px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+  background: var(--color-surface-raised);
+}
+
+.exp-raw-details summary:hover {
+  color: var(--color-text-primary);
+}
+
+.exp-raw-details pre {
+  margin: 0;
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 11px;
+  background: transparent;
+  border: none;
+}
+

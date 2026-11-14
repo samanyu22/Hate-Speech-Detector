@@ -5,17 +5,17 @@
   "metrics": {
     "feature_concat": {
       "macro_f1": 0.91,
-      "latency_ms": 0.23,
+      "latency_ms": 0.18,
       "params": 49794
     },
     "decision_fusion": {
       "macro_f1": 0.88,
-      "latency_ms": 0.07,
+      "latency_ms": 0.05,
       "params": 3
     },
     "cross_attention": {
       "macro_f1": 0.96,
-      "latency_ms": 1.05,
+      "latency_ms": 0.72,
       "params": 107330
     }
   },
@@ -39,13 +39,13 @@
         {
           "name": "Latency (ms)",
           "data": [
-            0.23,
-            0.07,
-            1.05
+            0.18,
+            0.05,
+            0.72
           ]
         }
       ]
     }
   ],
-  "summary": "Cross-Modal Cross-Attention benchmarked with 107330 parameters and 1.05 ms latency, yielding highest representation capacity."
+  "summary": "Cross-Modal Cross-Attention benchmarked with 107330 parameters and 0.72 ms latency, yielding highest representation capacity."
 }
