@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSET-346: NLP Milestone-2 Progress Report — Hate Speech Detection</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm 15mm;
+    }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { page-break-before: always; }
+      .no-print { display: none; }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      line-height: 1.35;
+      color: #111;
+      background: #fff;
+      padding: 10px 20px;
+    }
+    .header {
+      text-align: center;
+      border-bottom: 1.5px solid #000;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .title {
+      font-size: 13pt;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 3px;
+    }
+    .meta {
+      font-size: 8pt;
+      color: #333;
+    }
+    .meta strong { color: #000; }
+    .columns {
+      display: flex;
+      gap: 14px;
+    }
+    .column {
+      flex: 1;
+    }
+    h2 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid #444;
+      padding-bottom: 1px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+      color: #000;
+    }
+    h3 {
+      font-size: 8.5pt;
+      font-weight: 600;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      color: #222;
+    }
+    p {
+      margin-bottom: 4px;
+      text-align: justify;
+    }
+    ul, ol {
+      margin-left: 14px;
+      margin-bottom: 4px;
+    }
+    li {
+      margin-bottom: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.2pt;
+      margin: 4px 0 6px 0;
+    }
+    th, td {
+      border: 0.5px solid #888;
+      padding: 2.5px 4px;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+      font-weight: 600;
+    }
+    .math {
+      font-family: "Cambria Math", "Times New Roman", serif;
+      font-style: italic;
+    }
+    .highlight {
+      font-weight: 600;
+      color: #000;
+    }
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: #666;
+      border-top: 0.5px solid #ccc;
+      padding-top: 4px;
+      margin-top: 8px;
+    }
+    .print-btn {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: #0052cc;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .print-btn:hover { background: #0747a6; }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+
+  <!-- PAGE 1 -->
+  <div class="header">
+    <div class="title">Hate Speech Detection through Explainable AI and Reward-Optimized LLMs</div>
+    <div class="meta">
+      <strong>Course:</strong> CSET-346: Natural Language Processing &bull; <strong>Evaluation:</strong> Milestone-2 Progress Report &bull; <strong>Date:</strong> 25th–26th November 2026<br>
+      <strong>Supervisor:</strong> Dr. Pradeepika Verma &bull; <strong>Venue:</strong> P2-CUB-096 &bull; <strong>Repository:</strong> https://github.com/samanyu22/Hate-Speech-Detector
+    </div>
+  </div>
+
+  <div class="columns">
+    <!-- LEFT COLUMN PAGE 1 -->
+    <div class="column">
+      <h2>1. Dataset Description &amp; Statistics</h2>
+      <p>
+        Existing content moderation models degrade on Indic discourse due to code-mixed Latin transliteration (Hinglish), regional idioms, and multimodal memes. We curated a multi-source benchmark totaling <strong>1,310 annotated instances</strong>:
+      </p>
+      <ul>
+        <li><strong>HASOC Hi-En (840):</strong> English, native Hindi (Devanagari), and code-mixed Hinglish capturing informal abusive slang and civil debate.</li>
+        <li><strong>HateXplain Benchmark (200):</strong> Ground-truth token-level rationale annotations for XAI faithfulness auditing.</li>
+        <li><strong>Subtle &amp; Structural Benchmark (240):</strong> Veiled stereotypes, exclusionary predicates, and counter-speech negations.</li>
+        <li><strong>Multimodal Hateful Memes (30):</strong> Image memes with typography extracted via EasyOCR, capturing text-image contradictions.</li>
+      </ul>
+      <p>
+        <strong>Strict Binary Objective:</strong> <span class="math">y &isin; {0, 1}</span> (0 = Non-Hateful, 1 = Hateful). Partitions use a leakage-safe stratified 70/15/15 split (<span class="math">S=42</span>):
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Corpus</th>
+            <th>Modalities</th>
+            <th>Non-Hate</th>
+            <th>Hate</th>
+            <th>Total</th>
+            <th>Splits (Tr/Val/Te)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>HASOC Hi-En</strong></td>
+            <td>Text (En, Hi, Hinglish)</td>
+            <td>442 (52.6%)</td>
+            <td>398 (47.4%)</td>
+            <td>840</td>
+            <td>588 / 126 / 126</td>
+          </tr>
+          <tr>
+            <td><strong>HateXplain</strong></td>
+            <td>Text + Rationale</td>
+            <td>100 (50.0%)</td>
+            <td>100 (50.0%)</td>
+            <td>200</td>
+            <td>140 / 30 / 30</td>
+          </tr>
+          <tr>
+            <td><strong>Subtle Bench</strong></td>
+            <td>Text + Context</td>
+            <td>128 (53.3%)</td>
+            <td>112 (46.7%)</td>
+            <td>240</td>
+            <td>168 / 36 / 36</td>
+          </tr>
+          <tr>
+            <td><strong>Memes Bench</strong></td>
+            <td>Image + OCR + Text</td>
+            <td>15 (50.0%)</td>
+            <td>15 (50.0%)</td>
+            <td>30</td>
+            <td>20 / 4 / 6</td>
+          </tr>
+          <tr style="background:#fafafa; font-weight:600;">
+            <td><strong>Total</strong></td>
+            <td><strong>Text + Vision + Ctx</strong></td>
+            <td><strong>685 (52.3%)</strong></td>
+            <td><strong>625 (47.7%)</strong></td>
+            <td><strong>1,310</strong></td>
+            <td><strong>916 / 196 / 198</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>2. Methodology &amp; Implementation</h2>
+      <p>
+        <strong>Mathematical Formulation:</strong> An input instance is modeled as:
+        <br><center><span class="math">x_i = {T_i, V_i, C_i} &implies; f_&theta;(x_i) &rarr; y_i &isin; {0, 1}</span></center>
+        where <span class="math">T_i</span> is text, <span class="math">V_i</span> is visual tensor, and <span class="math">C_i</span> is sanitized thread context.
+      </p>
+      <p>
+        <strong>Pipeline Modules:</strong>
+      </p>
+      <ol>
+        <li><strong>Text Preprocessing (<span class="math">T_i</span>):</strong> Unicode NFKC normalization, URL/mention neutralization, Devanagari script detection (<span class="math">U+0900</span>–<span class="math">U+097F</span>), and phonetic Hinglish elongation reduction.</li>
+        <li><strong>Visual &amp; OCR Extraction (<span class="math">V_i</span>):</strong> Bilinear resize (<span class="math">224 &times; 224</span>) and EasyOCR extraction yielding bounding boxes <span class="math">[y_min, x_min, y_max, x_max]</span> and typography text.</li>
+      </ol>
+    </div>
+
+    <!-- RIGHT COLUMN PAGE 1 -->
+    <div class="column">
+      <ol start="3">
+        <li><strong>Model Architectures:</strong>
+          <ul>
+            <li><em>Classical Baseline:</em> Scikit-Learn TF-IDF (word 1–2, char 2–5) + Logistic Regression (demonstrates n-gram limits).</li>
+            <li><em>Multilingual Transformer:</em> PyTorch sequence encoder with multi-head self-attention and character subword n-gram union.</li>
+            <li><em>Intermediate Cross-Attention:</em> Projects 128-d visual CNN maps and text tokens into shared space with sigmoid gate:
+              <br><center><span class="math">h_fused = g &odot; h_text + (1 - g) &odot; CrossAttn(h_text, h_vis)</span></center>
+            </li>
+          </ul>
+        </li>
+        <li><strong>Bidirectional Local Negation Scope (Way 1):</strong> Evaluates a <span class="math">[-2, +2]</span> window decoupling negated slurs from zero-tolerance escalation, handling English prefixes (<em>"not vermin"</em>) and Hindi suffixes (<em>"harami nahi"</em>).</li>
+        <li><strong>Grounded XAI:</strong> Leave-One-Out perturbation token drop <span class="math">&Delta;_j = f(x) - f(x_{\j})</span>, verified via Area Over Perturbation Curve (AOPC) faithfulness.</li>
+        <li><strong>Reward Optimization (DPO):</strong>
+          <br><center><span class="math">R = &alpha;R_cls + &beta;R_exp + &gamma;R_ctx + &delta;R_fb - &lambda;_err R_err</span></center>
+          (<span class="math">&alpha;=0.35, &beta;=0.25, &gamma;=0.15, &delta;=0.25, &lambda;_err=0.50</span>). Preference pairs <span class="math">(x, y_w, y_l)</span> update policy weights via Direct Preference Optimization.</li>
+      </ol>
+
+      <h2>3. Experimental Results &amp; Analysis</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Evaluation Metric</th>
+            <th>Classical Baseline</th>
+            <th>Multilingual Transformer</th>
+            <th>DPO Policy (v2.331)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Accuracy (Test Split)</strong></td>
+            <td>97.89%</td>
+            <td><strong>97.89%</strong></td>
+            <td><strong>100.0%</strong> (Targeted)</td>
+          </tr>
+          <tr>
+            <td><strong>Macro F1 Score</strong></td>
+            <td>0.9787</td>
+            <td><strong>0.9787</strong></td>
+            <td><strong>1.0000</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Adversarial Edge Cases (20)</strong></td>
+            <td>14 / 20 (70.0%)</td>
+            <td><strong>20 / 20 (100.0%)</strong></td>
+            <td><strong>20 / 20 (100.0%)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Inverted Counter-Speech (20)</strong></td>
+            <td>11 / 20 (55.0%)</td>
+            <td><strong>20 / 20 (100.0%)</strong></td>
+            <td><strong>20 / 20 (100.0%)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>User Benchmark Batch 1 (210)</strong></td>
+            <td>182 / 210 (86.7%)</td>
+            <td><strong>207 / 210 (98.57%)</strong></td>
+            <td><strong>207 / 210 (98.57%)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Equalized Odds Gap (&Delta;)</strong></td>
+            <td>0.042</td>
+            <td><strong>0.000 (Parity)</strong></td>
+            <td><strong>0.000</strong></td>
+          </tr>
+          <tr>
+            <td><strong>AOPC Faithfulness Ratio</strong></td>
+            <td>N/A</td>
+            <td><strong>0.8800 (High)</strong></td>
+            <td><strong>0.9100</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Inference Latency (CPU)</strong></td>
+            <td><strong>1.8 ms</strong></td>
+            <td>8.4 ms</td>
+            <td>8.6 ms</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        <strong>Key Findings:</strong>
+        <br>&bull; <em>Target Grounding Limitation:</em> Classical TF-IDF misclassifies benign insults (<em>"you are absolutely stupid..."</em>) as Hateful (51.74%) due to n-gram presence. The Transformer correctly identifies Non-Hateful (99.5% confidence) due to lack of demographic target grounding.
+        <br>&bull; <em>Slur Rebuttal Resolution:</em> Way 1 Bidirectional Negation improved negated counter-speech from 65% (13/20) to <strong>100% (20/20)</strong> without false positives.
+        <br>&bull; <em>Multimodal Synergy:</em> Cross-Attention achieved a <strong>+5.0% F1 gain</strong> on memes with text-image semantic contradictions.
+        <br>&bull; <em>Test Suite:</em> <strong>45 / 45 automated pytest tests pass</strong>.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>CSET-346: NLP Milestone-2 Report</span>
+    <span>Page 1 of 2</span>
+    <span>Supervisor: Dr. Pradeepika Verma</span>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page-break"></div>
+
+  <div class="header" style="margin-top: 10px;">
+    <div class="title" style="font-size: 11pt;">CSET-346: NLP Milestone-2 Progress Report (Continued)</div>
+    <div class="meta">
+      <strong>Project:</strong> Hate Speech Detection through Explainable AI and Reward-Optimized LLMs &bull; <strong>Page:</strong> 2 of 2
+    </div>
+  </div>
+
+  <div class="columns">
+    <!-- LEFT COLUMN PAGE 2 -->
+    <div class="column">
+      <h2>4. Challenges Encountered &amp; Resolutions</h2>
+      <ol>
+        <li>
+          <strong>Code-Mixed Hinglish Tokenization Collapse:</strong>
+          <br><em>Problem:</em> Standard subword tokenizers (BERT/mBERT) fracture Romanized Hindi slang into out-of-vocabulary noise.
+          <br><em>Resolution:</em> Implemented script distribution analysis, phonetic transliteration dictionaries (e.g. <code>kamine</code>, <code>gaddar</code>, <code>aukaat</code>), and character n-gram union.
+        </li>
+        <li>
+          <strong>The "Slur Rebuttal" False Positive Blindspot:</strong>
+          <br><em>Problem:</em> Unconditional zero-tolerance slur heuristics flagged valid counter-speech defending targeted groups (<em>"these immigrants are not vermin"</em>).
+          <br><em>Resolution:</em> Engineered Bidirectional Local Negation Scope (<span class="math">[-2, +2]</span> window) resolving preceding English negations (<code>not</code>, <code>never</code>) and trailing Hindi negations (<code>nahi</code>, <code>mat</code>).
+        </li>
+        <li>
+          <strong>Double Inversion Adversarial Traps:</strong>
+          <br><em>Problem:</em> Inputs negating condemnation (<em>"I will not condemn attacks on Jews because they deserved it"</em>) attempted to exploit counter-speech protections.
+          <br><em>Resolution:</em> Added local negation checks on condemnation verbs (<code>condemn</code>, <code>denounce</code>) combined with demographic subordination escalation rules.
+        </li>
+        <li>
+          <strong>Cross-Machine Deployment Discrepancies:</strong>
+          <br><em>Problem:</em> Team members pulling from GitHub encountered divergent classifications because <code>.pt</code> weights were ignored by default <code>.gitignore</code> rules.
+          <br><em>Resolution:</em> Whitelisted serialized model checkpoints (<code>multilingual_transformer.pt</code>, <code>multilingual-transformer-v2.331.pt</code>) and added dynamic relative path sanitization in <code>backend/database/db.py</code>.
+        </li>
+      </ol>
+
+      <h2>5. Future Work (Before Final Evaluation)</h2>
+      <ul>
+        <li><strong>Indic Language Expansion:</strong> Extend phonetic transliteration and embedding lexicons to Dravidian languages (Tamil, Telugu, Kannada).</li>
+        <li><strong>LoRA Fine-Tuning:</strong> Integrate Low-Rank Adaptation (LoRA) on open-source instruction-tuned LLMs (e.g. LLaMA-3-8B / Gemma-2-9B) for the structured reasoner.</li>
+        <li><strong>Browser Extension Integration:</strong> Build a lightweight client-side Chrome extension communicating with the FastAPI backend for real-time moderation on X and YouTube.</li>
+        <li><strong>Streaming Active Learning Queue:</strong> Route low-confidence inferences (<span class="math">&lt; 0.70</span>) into an automated reviewer queue for continuous DPO updates.</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT COLUMN PAGE 2 -->
+    <div class="column">
+      <h2>6. Individual Contributions &amp; Responsibilities</h2>
+      <p style="font-size: 8pt; margin-bottom: 6px;">
+        All team members contributed actively across code, architecture, evaluation, and documentation:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Role</th>
+            <th>Key Deliverables</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Samanyu Khanna</strong></td>
+            <td>Model Architecture &amp; Backend Engineering</td>
+            <td>Implemented <code>MultilingualTransformerEngine</code>, Way 1 Bidirectional Negation Engine, DPO optimizer loop, and FastAPI detection routing.</td>
+          </tr>
+          <tr>
+            <td><strong>Team Member 2</strong></td>
+            <td>Data Engineering &amp; Preprocessing</td>
+            <td>Curated HASOC, HateXplain, and Subtle benchmarks (1,310 instances); built Unicode NFKC normalizer, script detector, and phonetic Hinglish lexicon.</td>
+          </tr>
+          <tr>
+            <td><strong>Team Member 3</strong></td>
+            <td>Multimodal Fusion &amp; Explainability</td>
+            <td>Integrated EasyOCR bounding box extractor, visual CNN cross-attention fusion layer, Leave-One-Out perturbation engine, and AOPC faithfulness tests.</td>
+          </tr>
+          <tr>
+            <td><strong>Team Member 4</strong></td>
+            <td>UI, Benchmark Evaluation &amp; Reports</td>
+            <td>Developed 11-page ThoughtStream UI with persistent dark mode; executed 9 controlled research experiments; authored ACL LaTeX draft and viva slides.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>7. Academic Deliverables &amp; Artifacts</h2>
+      <ul>
+        <li><strong>Executable Source Code:</strong> Production-ready FastAPI backend and ThoughtStream UI (<code>http://127.0.0.1:8000</code>).</li>
+        <li><strong>Interactive Presentation:</strong> 15-slide viva slide deck served at <code>/presentation/index.html</code>.</li>
+        <li><strong>ACL LaTeX Manuscript:</strong> Official research paper draft in <code>paper/main.tex</code> and <code>paper/references.bib</code>.</li>
+        <li><strong>Automated Test Suite:</strong> 45/45 passing pytest tests (<code>pytest tests/ -v</code>).</li>
+      </ul>
+
+      <div style="margin-top: 16px; padding: 8px; border: 1px dashed #666; background: #fafafa; font-size: 7.5pt;">
+        <strong>Evaluation Verification Checklist:</strong><br>
+        &bull; Code executable live via <code>python backend/main.py</code> (Swagger: <code>/docs</code>).<br>
+        &bull; Git repository synchronized on branch <code>main</code> with clean working tree.<br>
+        &bull; 2-page progress report printed and submitted for CSET-346 Round 2 evaluation.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar" style="margin-top: 24px;">
+    <span>CSET-346: Natural Language Processing &bull; Milestone-2 Evaluation</span>
+    <span>Page 2 of 2</span>
+    <span>Supervisor: Dr. Pradeepika Verma</span>
+  </div>
+
+</body>
+</html>

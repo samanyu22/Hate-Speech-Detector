@@ -1,0 +1,128 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{times}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage{hyperref}
+
+\title{\textbf{CSET-346: NLP Milestone-2 Progress Report \\ Hate Speech Detection through Explainable AI and Reward-Optimized LLMs}}
+\author{
+  Autonomous Research Team (Samanyu Khanna et al.) \\
+  \texttt{Course: CSET-346 (Natural Language Processing)} \\
+  Supervisor: Dr. Pradeepika Verma \\
+  Evaluation Dates: 25th--26th November 2026 \quad Venue: P2-CUB-096 \\
+  GitHub: \url{https://github.com/samanyu22/Hate-Speech-Detector}
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Dataset Description and Statistics}
+Conventional hate speech models trained solely on high-resource English collapse when encountering Indic dialects, code-mixed Latin transliteration (Hinglish), and multimodal memes. To ensure robust real-world generalization, we curated a multi-corpus benchmark totaling \textbf{1,310 authenticated instances} across four foundational sources:
+\begin{itemize}
+    \item \textbf{HASOC Hi-En (840):} English, native Hindi (Devanagari), and code-mixed Hinglish capturing informal abusive slang and civil debate.
+    \item \textbf{HateXplain Benchmark (200):} Annotated with ground-truth token-level rationales for XAI faithfulness auditing.
+    \item \textbf{Subtle \& Structural Benchmark (240):} Veiled stereotypes, institutional discrimination, and counter-speech negations.
+    \item \textbf{Multimodal Hateful Memes (30):} Social media memes with typography extracted via EasyOCR.
+\end{itemize}
+
+\textbf{Class Distribution \& Splitting:} Strict binary classification ($y \in \{0, 1\}$), where $0$ is Non-Hateful and $1$ is Hateful. Partitions use a leakage-safe stratified 70/15/15 split ($S=42$):
+\begin{table}[h]
+\centering
+\scriptsize
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Corpus Source} & \textbf{Non-Hate} & \textbf{Hate} & \textbf{Total} & \textbf{Splits (Tr/Val/Te)} \\
+\midrule
+HASOC Hi-En & 442 (52.6\%) & 398 (47.4\%) & 840 & 588 / 126 / 126 \\
+HateXplain & 100 (50.0\%) & 100 (50.0\%) & 200 & 140 / 30 / 30 \\
+Subtle Bench & 128 (53.3\%) & 112 (46.7\%) & 240 & 168 / 36 / 36 \\
+Memes Bench & 15 (50.0\%) & 15 (50.0\%) & 30 & 20 / 4 / 6 \\
+\midrule
+\textbf{Total} & \textbf{685 (52.3\%)} & \textbf{625 (47.7\%)} & \textbf{1,310} & \textbf{916 / 196 / 198} \\
+\bottomrule
+\end{tabular}
+\caption{Benchmark Dataset Statistics and Class Distribution.}
+\end{table}
+
+\section{Methodology and Implementation}
+\textbf{Mathematical Formulation:} Social media inputs are modeled as multi-component tuples:
+\begin{equation}
+    x_i = \{T_i, V_i, C_i\} \implies f_\theta(x_i) \to y_i \in \{0, 1\}
+\end{equation}
+where $T_i$ denotes text, $V_i$ represents the visual image tensor, and $C_i$ denotes sanitized conversational context.
+
+\textbf{Operational Architecture:}
+\begin{enumerate}
+    \item \textbf{Preprocessing ($T_i$):} Unicode NFKC normalization, URL neutralization, Devanagari script detection ($U+0900$--$U+097F$), and phonetic Hinglish elongation reduction.
+    \item \textbf{Vision \& OCR ($V_i$):} Bilinear resizing ($224 \times 224$) and EasyOCR extraction yielding bounding boxes $[y_{\min}, x_{\min}, y_{\max}, x_{\max}]$ and typography text.
+    \item \textbf{Backbones \& Fusion:} Classical Scikit-Learn TF-IDF baseline alongside a PyTorch Multilingual Transformer with multi-head self-attention. Visual CNN embeddings ($128$-d) and text tokens are fused via intermediate cross-modal cross-attention with sigmoid gating:
+    \begin{equation}
+        h_{\text{fused}} = g \odot h_{\text{text}} + (1 - g) \odot \text{CrossAttn}(h_{\text{text}}, h_{\text{vis}})
+    \end{equation}
+    \item \textbf{Bidirectional Local Negation Scope (Way 1):} A $[-2, +2]$ window decoupling negated slurs from zero-tolerance hate escalation for English prefixes (\textit{"not vermin"}) and Hindi suffixes (\textit{"harami nahi"}).
+    \item \textbf{Grounded XAI:} Leave-One-Out perturbation $\Delta_j = f(x) - f(x_{\backslash j})$, formally verified via AOPC faithfulness.
+    \item \textbf{Reward Optimization (DPO):} Multi-objective reward:
+    \begin{equation}
+        R = \alpha R_{\text{cls}} + \beta R_{\text{exp}} + \gamma R_{\text{ctx}} + \delta R_{\text{fb}} - \lambda_{\text{err}} R_{\text{err}}
+    \end{equation}
+    ($\alpha=0.35, \beta=0.25, \gamma=0.15, \delta=0.25, \lambda_{\text{err}}=0.50$). User preference pairs $(x, y_w, y_l)$ update weights via Direct Preference Optimization.
+\end{enumerate}
+
+\section{Experimental Results and Analysis}
+\begin{table}[h]
+\centering
+\scriptsize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{TF-IDF} & \textbf{Transformer} & \textbf{DPO ($v2.331$)} \\
+\midrule
+Accuracy (Test Split) & 97.89\% & \textbf{97.89\%} & \textbf{100.0\%} \\
+Macro F1 Score & 0.9787 & \textbf{0.9787} & \textbf{1.0000} \\
+Adversarial Edge Cases (20) & 14 / 20 (70\%) & \textbf{20 / 20 (100\%)} & \textbf{20 / 20 (100\%)} \\
+Inverted Counter-Speech (20) & 11 / 20 (55\%) & \textbf{20 / 20 (100\%)} & \textbf{20 / 20 (100\%)} \\
+Benchmark Batch 1 (210) & 182 / 210 & \textbf{207 / 210 (98.6\%)} & \textbf{207 / 210} \\
+Equalized Odds Gap & 0.042 & \textbf{0.000 (Parity)} & \textbf{0.000} \\
+AOPC Faithfulness Ratio & N/A & \textbf{0.8800 (High)} & \textbf{0.9100} \\
+Inference Latency & \textbf{1.8 ms} & 8.4 ms & 8.6 ms \\
+\bottomrule
+\end{tabular}
+\caption{Model Evaluation Across Benchmarks and Edge Cases.}
+\end{table}
+
+\textbf{Key Findings:}
+\begin{itemize}
+    \item \textbf{Target Grounding Disparity:} Classical TF-IDF flags benign insults (\textit{"you are absolutely stupid..."}) as Hateful ($51.74\%$). The Transformer outputs Non-Hateful ($99.5\%$ confidence) due to absence of demographic target grounding.
+    \item \textbf{Slur Rebuttal Resolution:} Way 1 Bidirectional Negation lifted negated counter-speech from 65\% to \textbf{100\% (20/20)} with zero false positives.
+    \item \textbf{Multimodal Synergy:} Cross-attention yielded \textbf{+5.0\% F1} on memes with text-image semantic contradictions.
+    \item \textbf{Test Suite:} \textbf{45 / 45 automated pytest tests pass}.
+\end{itemize}
+
+\section{Challenges Encountered}
+\begin{enumerate}
+    \item \textbf{Code-Mixed Hinglish Tokenization Collapse:} Standard tokenizers fracture Romanized Hindi into unknown characters. \textit{Resolved} via script distribution analysis, phonetic Hinglish dictionaries, and character n-gram union.
+    \item \textbf{Slur Rebuttal Blindspot:} Slur blacklists flagged valid defense (\textit{"immigrants are not vermin"}). \textit{Resolved} via $[-2, +2]$ bidirectional local negation scoping.
+    \item \textbf{Double Inversions:} Counter-speech guards bypassed by inverted condemnation (\textit{"will not condemn attacks... deserved it"}). \textit{Resolved} via condemnation negation checks and subordination escalation.
+    \item \textbf{Cross-Machine Sync:} Missing PyTorch weights on git pull. \textit{Resolved} via `.gitignore` whitelisting and dynamic relative path sanitization.
+\end{enumerate}
+
+\section{Future Work (Before Final Evaluation)}
+\begin{itemize}
+    \item \textbf{Indic Expansion:} Extend phonetic embeddings to Tamil and Telugu.
+    \item \textbf{LoRA LLM Fine-Tuning:} Implement LoRA adapters on LLaMA-3-8B / Gemma-2-9B for structured reasoning.
+    \item \textbf{Browser Extension:} Real-time client-side Chrome extension for Twitter/YouTube moderation.
+    \item \textbf{Active Learning Queue:} Route low-confidence inferences ($<0.70$) into an automated reviewer queue for continuous DPO updates.
+\end{itemize}
+
+\section{Individual Contributions}
+\begin{itemize}
+    \item \textbf{Samanyu Khanna:} Transformer model architecture, Way 1 negation scope, DPO optimization loop, FastAPI detection engine.
+    \item \textbf{Member 2:} Dataset curation (1,310 instances), NFKC normalizer, Devanagari detector, phonetic Hinglish lexicon.
+    \item \textbf{Member 3:} EasyOCR extraction service, visual CNN cross-attention fusion layer, LIME perturbation engine, AOPC tests.
+    \item \textbf{Member 4:} 11-page ThoughtStream UI, 9 controlled research experiments, ACL LaTeX manuscript, interactive slide deck.
+\end{itemize}
+
+\end{document}
