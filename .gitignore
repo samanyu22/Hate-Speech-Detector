@@ -30,6 +30,7 @@ wheels/
 *.pt
 *.bin
 *.onnx
+!models/checkpoints/multilingual_transformer.pt
 
 # SQLite databases
 *.sqlite3
