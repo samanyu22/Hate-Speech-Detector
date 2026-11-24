@@ -31,6 +31,7 @@ wheels/
 *.bin
 *.onnx
 !models/checkpoints/multilingual_transformer.pt
+!models/versions/multilingual-transformer-v2.331.pt
 
 # SQLite databases
 *.sqlite3
@@ -57,3 +58,5 @@ desktop.ini
 *.swp
 *.swo
 
+/scratch
+/scratch
