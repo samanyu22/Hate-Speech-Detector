@@ -231,7 +231,7 @@ Hate-Speech-Detector/
 Clone the repository and install the verified dependencies in a Python 3.10+ virtual environment:
 
 ```bash
-git clone https://github.com/your-username/Hate-Speech-Detector.git
+git clone https://github.com/samanyu22/Hate-Speech-Detector.git
 cd Hate-Speech-Detector
 
 # Create and activate virtual environment
@@ -359,7 +359,7 @@ If you utilize this codebase, models, or research methodology, please cite the m
   booktitle = {Proceedings of the Association for Computational Linguistics (ACL)},
   year      = {2026},
   pages     = {1--15},
-  url       = {https://github.com/your-username/Hate-Speech-Detector}
+  url       = {https://github.com/samanyu22/Hate-Speech-Detector}
 }
 ```
 

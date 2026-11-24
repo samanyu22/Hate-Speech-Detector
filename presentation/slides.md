@@ -8,6 +8,7 @@
 
 ## Slide 1: Title & Overview
 - **Project Title:** Hate Speech Detection through Explainable AI and Reward Optimized LLMs
+- **Repository:** https://github.com/samanyu22/Hate-Speech-Detector
 - **Research Scope:** Multilingual, Code-Mixed (Hinglish), Multimodal (Social Memes), and Context-Aware AI.
 - **Core Novelty:** Grounded XAI Attribution paired with human feedback-driven Direct Preference Optimization (DPO).
 
