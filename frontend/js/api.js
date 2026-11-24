@@ -20,6 +20,19 @@ const API = {
     return res.json();
   },
 
+  async extractOCR(payload) {
+    const res = await fetch(`${this.baseUrl}/api/detection/extract-ocr`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.detail || 'OCR extraction failed');
+    }
+    return res.json();
+  },
+
   async submitFeedback(payload) {
     const res = await fetch(`${this.baseUrl}/api/feedback/`, {
       method: 'POST',

@@ -4,6 +4,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, Any, Optional, Tuple
 from fastapi import APIRouter, HTTPException, Depends
+from pydantic import BaseModel
 import torch
 import torch.nn.functional as F
 
@@ -132,8 +133,15 @@ def detect_content(req: DetectionRequest):
             print(f"Image processing note: {e}")
 
     # Combine text, OCR text, and Context if present
+    if not clean_text and ocr_result["extracted_text"]:
+        clean_text = _normalizer.normalize(ocr_result["extracted_text"])
+        lang_info = MultilingualLanguageDetector.detect(clean_text)
+        lang = lang_info["language"]
+        if "text" not in modalities_used:
+            modalities_used.append("text")
+
     full_text = clean_text
-    if ocr_result["extracted_text"]:
+    if ocr_result["extracted_text"] and ocr_result["extracted_text"] != clean_text:
         full_text = f"{full_text} [OCR: {ocr_result['extracted_text']}]".strip()
     if ctx_info["has_context"]:
         full_text = f"{full_text} [CONTEXT: {ctx_info['formatted_context']}]".strip()
@@ -261,3 +269,25 @@ def detect_content(req: DetectionRequest):
         explanation=explanation_obj,
         created_at=now
     )
+
+class OCRRequest(BaseModel):
+    image_path: Optional[str] = None
+    image_base64: Optional[str] = None
+
+@router.post("/extract-ocr")
+def extract_ocr_only(req: OCRRequest):
+    if not req.image_path and not req.image_base64:
+        raise HTTPException(status_code=400, detail="Must provide image_path or image_base64")
+    try:
+        img_source = req.image_path or req.image_base64
+        img_props = _image_proc.inspect_and_preprocess(img_source)
+        res = OCRService.extract_text(img_props["pil_image"])
+        return {
+            "extracted_text": res.get("extracted_text", ""),
+            "confidence": res.get("confidence", 0.0),
+            "bounding_boxes": res.get("bounding_boxes", []),
+            "engine": res.get("engine", "easyocr")
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+

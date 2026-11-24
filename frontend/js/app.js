@@ -424,6 +424,103 @@ function initDetectionWorkspace() {
   const contextInput = document.getElementById('detectContextInput');
   const resultCard = document.getElementById('detectionResultCard');
 
+  let currentUploadedImageBase64 = null;
+  const imageInput = document.getElementById('detectImageInput');
+  const clearImgBtn = document.getElementById('btnClearImage');
+  const imgPreviewContainer = document.getElementById('imagePreviewContainer');
+  const imgPreview = document.getElementById('imagePreview');
+  const imgBadge = document.getElementById('imageStatusBadge');
+
+  if (imageInput) {
+    imageInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async function(evt) {
+        currentUploadedImageBase64 = evt.target.result;
+        if (imgPreview) imgPreview.src = currentUploadedImageBase64;
+        if (imgPreviewContainer) imgPreviewContainer.style.display = 'flex';
+        if (clearImgBtn) clearImgBtn.style.display = 'inline-block';
+        if (imgBadge) {
+          imgBadge.innerText = `Extracting OCR text & running model inference...`;
+          imgBadge.style.background = 'var(--color-primary)';
+          imgBadge.style.color = '#fff';
+        }
+        if (detectBtn) {
+          detectBtn.disabled = true;
+          detectBtn.innerText = 'Extracting OCR & Analyzing Image...';
+        }
+
+        try {
+          const modelId = document.getElementById('detectModelSelect') ? document.getElementById('detectModelSelect').value : 'multilingual-transformer-v1';
+          const ctxText = contextInput ? contextInput.value.trim() : '';
+          const existingText = textInput ? textInput.value.trim() : '';
+
+          const payload = {
+            text: existingText,
+            image_base64: currentUploadedImageBase64,
+            context: ctxText ? { thread_history: [ctxText] } : null,
+            model_id: modelId,
+            explain: true
+          };
+
+          const res = await API.detect(payload);
+          lastPredictionId = res.prediction_id;
+
+          // Auto-populate extracted OCR text into the detection input box
+          if (res.explanation && res.explanation.ocr_evidence) {
+            if (textInput) {
+              textInput.value = res.explanation.ocr_evidence;
+            }
+            if (imgBadge) {
+              imgBadge.innerText = `OCR Extracted (${res.explanation.ocr_evidence.length} chars) & Analyzed`;
+              imgBadge.style.background = 'var(--color-success)';
+              imgBadge.style.color = '#fff';
+            }
+          } else {
+            if (imgBadge) {
+              imgBadge.innerText = `Image Loaded (${file.name}) - Detection Complete`;
+              imgBadge.style.background = 'var(--color-success)';
+              imgBadge.style.color = '#fff';
+            }
+          }
+
+          displayDetectionResult(res);
+          loadOverviewStats();
+        } catch (err) {
+          if (imgBadge) {
+            imgBadge.innerText = `OCR Error: ${err.message}`;
+            imgBadge.style.background = 'var(--color-error)';
+            imgBadge.style.color = '#fff';
+          }
+          alert(`Multimodal Detection Error: ${err.message}`);
+        } finally {
+          if (detectBtn) {
+            detectBtn.disabled = false;
+            detectBtn.innerText = 'Execute Detection Pipeline';
+          }
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (clearImgBtn) {
+    clearImgBtn.addEventListener('click', () => {
+      currentUploadedImageBase64 = null;
+      if (imageInput) imageInput.value = '';
+      if (imgPreview) imgPreview.src = '';
+      if (imgPreviewContainer) imgPreviewContainer.style.display = 'none';
+      clearImgBtn.style.display = 'none';
+      if (imgBadge) {
+        imgBadge.innerText = 'Image Selected';
+        imgBadge.style.background = '#1e293b';
+        imgBadge.style.color = '#94a3b8';
+      }
+    });
+  }
+
   // Preset buttons
   const presets = {
     hate_en: { text: "These vermin immigrants are destroying our country and must be thrown out by force.", ctx: "" },
@@ -451,17 +548,18 @@ function initDetectionWorkspace() {
       const ctxText = contextInput.value.trim();
       const modelId = document.getElementById('detectModelSelect').value;
 
-      if (!text) {
-        alert('Please enter social media post text.');
+      if (!text && !currentUploadedImageBase64) {
+        alert('Please enter social media post text or upload an image.');
         return;
       }
 
       detectBtn.disabled = true;
-      detectBtn.innerText = 'Analyzing Multimodal Features...';
+      detectBtn.innerText = currentUploadedImageBase64 ? 'Extracting OCR & Analyzing...' : 'Analyzing Multimodal Features...';
 
       try {
         const payload = {
           text: text,
+          image_base64: currentUploadedImageBase64 || null,
           context: ctxText ? { thread_history: [ctxText] } : null,
           model_id: modelId,
           explain: true
@@ -469,6 +567,9 @@ function initDetectionWorkspace() {
 
         const res = await API.detect(payload);
         lastPredictionId = res.prediction_id;
+        if (!text && res.explanation && res.explanation.ocr_evidence && textInput) {
+          textInput.value = res.explanation.ocr_evidence;
+        }
         displayDetectionResult(res);
         loadOverviewStats(); // update counters
       } catch (err) {
