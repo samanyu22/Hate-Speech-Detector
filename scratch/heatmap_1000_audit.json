@@ -1,7 +1,7 @@
-{
-  "total_evaluated": 1000,
-  "success_count": 1000,
-  "error_count": 0,
+  {
+    "total_evaluated": 1000,
+    "success_count": 1000,
+    "error_count": 0,
   "all_zero_count": 0,
   "faithful_count": 1000,
   "faithfulness_scores": [

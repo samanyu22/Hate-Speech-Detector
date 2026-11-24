@@ -1,39 +1,39 @@
 {
   "total_samples": 200,
-  "accuracy": 0.97,
-  "macro_f1": 0.97,
-  "macro_precision": 0.9708,
-  "macro_recall": 0.97,
+  "accuracy": 0.98,
+  "macro_f1": 0.98,
+  "macro_precision": 0.9808,
+  "macro_recall": 0.98,
   "confusion_matrix": {
-    "TN": 99,
-    "FP": 1,
-    "FN": 5,
-    "TP": 95
+    "TN": 100,
+    "FP": 0,
+    "FN": 4,
+    "TP": 96
   },
   "per_class": {
     "unhateful": {
-      "precision": 0.9519,
-      "recall": 0.99,
-      "f1": 0.9706,
+      "precision": 0.9615,
+      "recall": 1.0,
+      "f1": 0.9804,
       "support": 100
     },
     "hateful": {
-      "precision": 0.9896,
-      "recall": 0.95,
-      "f1": 0.9694,
+      "precision": 1.0,
+      "recall": 0.96,
+      "f1": 0.9796,
       "support": 100
     }
   },
   "mismatches": [
     {
-      "id": "id575",
-      "text": "People with neurological disabilities should not be allowed to apply for research fellowships.",
+      "id": "id535",
+      "text": "People of that caste should not be permitted to participate in village decision-making.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7249,
-      "prob_hateful": 0.2751,
+      "confidence": 0.6005,
+      "prob_hateful": 0.3995,
       "match": false
     },
     {
@@ -43,52 +43,30 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9993,
+      "prob_hateful": 0.0007,
       "match": false
     },
     {
-      "id": "id587",
-      "text": "Transgender people should be denied access to professional licensing examinations.",
+      "id": "id647",
+      "text": "Men should not be allowed to receive parental leave benefits.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9565,
-      "prob_hateful": 0.0435,
+      "confidence": 0.802,
+      "prob_hateful": 0.198,
       "match": false
     },
     {
-      "id": "id590",
-      "text": "The research team is inviting applications from qualified candidates.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.5274,
-      "prob_hateful": 0.5274,
-      "match": false
-    },
-    {
-      "id": "id615",
-      "text": "Older people should be excluded from public computer training programmes.",
+      "id": "id675",
+      "text": "People from a particular nationality should not be permitted to work in public research laboratories.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9767,
-      "prob_hateful": 0.0233,
-      "match": false
-    },
-    {
-      "id": "id619",
-      "text": "People from rural communities should be prohibited from applying for city government positions.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7643,
-      "prob_hateful": 0.2357,
+      "confidence": 0.8884,
+      "prob_hateful": 0.1116,
       "match": false
     }
   ],
@@ -111,8 +89,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9944,
+      "prob_hateful": 0.0056,
       "match": true
     },
     {
@@ -133,8 +111,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.997,
+      "prob_hateful": 0.003,
       "match": true
     },
     {
@@ -142,11 +120,11 @@
       "text": "People of that caste should not be permitted to participate in village decision-making.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.6005,
+      "prob_hateful": 0.3995,
+      "match": false
     },
     {
       "id": "id536",
@@ -155,8 +133,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9714,
+      "prob_hateful": 0.0286,
       "match": true
     },
     {
@@ -166,8 +144,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9978,
-      "prob_hateful": 0.9978,
+      "confidence": 0.9174,
+      "prob_hateful": 0.9174,
       "match": true
     },
     {
@@ -199,8 +177,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9943,
+      "prob_hateful": 0.0057,
       "match": true
     },
     {
@@ -221,8 +199,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8265,
+      "prob_hateful": 0.1735,
       "match": true
     },
     {
@@ -243,8 +221,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9849,
+      "prob_hateful": 0.0151,
       "match": true
     },
     {
@@ -265,8 +243,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.6664,
+      "prob_hateful": 0.3336,
       "match": true
     },
     {
@@ -276,8 +254,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9989,
+      "prob_hateful": 0.9989,
       "match": true
     },
     {
@@ -287,8 +265,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9997,
-      "prob_hateful": 0.0003,
+      "confidence": 0.7765,
+      "prob_hateful": 0.2235,
       "match": true
     },
     {
@@ -298,8 +276,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.9994,
+      "prob_hateful": 0.9994,
       "match": true
     },
     {
@@ -309,8 +287,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9281,
+      "prob_hateful": 0.0719,
       "match": true
     },
     {
@@ -331,8 +309,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9991,
+      "prob_hateful": 0.0009,
       "match": true
     },
     {
@@ -353,8 +331,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9954,
+      "prob_hateful": 0.0046,
       "match": true
     },
     {
@@ -364,8 +342,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.5366,
-      "prob_hateful": 0.5366,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -375,8 +353,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -397,8 +375,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9936,
+      "prob_hateful": 0.0064,
       "match": true
     },
     {
@@ -419,8 +397,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9972,
+      "prob_hateful": 0.0028,
       "match": true
     },
     {
@@ -441,8 +419,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9995,
+      "prob_hateful": 0.0005,
       "match": true
     },
     {
@@ -463,8 +441,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9761,
+      "prob_hateful": 0.0239,
       "match": true
     },
     {
@@ -485,8 +463,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9973,
+      "prob_hateful": 0.0027,
       "match": true
     },
     {
@@ -507,8 +485,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9523,
+      "prob_hateful": 0.0477,
       "match": true
     },
     {
@@ -529,8 +507,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8058,
+      "prob_hateful": 0.1942,
       "match": true
     },
     {
@@ -540,8 +518,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9968,
-      "prob_hateful": 0.9968,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -551,8 +529,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9923,
+      "prob_hateful": 0.0077,
       "match": true
     },
     {
@@ -573,8 +551,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9831,
+      "prob_hateful": 0.0169,
       "match": true
     },
     {
@@ -582,11 +560,11 @@
       "text": "People with neurological disabilities should not be allowed to apply for research fellowships.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7249,
-      "prob_hateful": 0.2751,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9984,
+      "prob_hateful": 0.9984,
+      "match": true
     },
     {
       "id": "id576",
@@ -617,8 +595,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9694,
+      "prob_hateful": 0.0306,
       "match": true
     },
     {
@@ -639,8 +617,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9952,
+      "prob_hateful": 0.0048,
       "match": true
     },
     {
@@ -650,8 +628,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9966,
+      "prob_hateful": 0.9966,
       "match": true
     },
     {
@@ -661,8 +639,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9886,
+      "prob_hateful": 0.0114,
       "match": true
     },
     {
@@ -672,8 +650,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9993,
+      "prob_hateful": 0.0007,
       "match": false
     },
     {
@@ -683,8 +661,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9624,
+      "prob_hateful": 0.0376,
       "match": true
     },
     {
@@ -714,11 +692,11 @@
       "text": "Transgender people should be denied access to professional licensing examinations.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9565,
-      "prob_hateful": 0.0435,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
+      "match": true
     },
     {
       "id": "id588",
@@ -727,8 +705,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8296,
+      "prob_hateful": 0.1704,
       "match": true
     },
     {
@@ -738,8 +716,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9906,
+      "prob_hateful": 0.9906,
       "match": true
     },
     {
@@ -747,11 +725,11 @@
       "text": "The research team is inviting applications from qualified candidates.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.5274,
-      "prob_hateful": 0.5274,
-      "match": false
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8617,
+      "prob_hateful": 0.1383,
+      "match": true
     },
     {
       "id": "id591",
@@ -760,8 +738,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.868,
-      "prob_hateful": 0.868,
+      "confidence": 0.9992,
+      "prob_hateful": 0.9992,
       "match": true
     },
     {
@@ -771,8 +749,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.998,
+      "prob_hateful": 0.002,
       "match": true
     },
     {
@@ -782,8 +760,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -793,8 +771,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.9653,
+      "prob_hateful": 0.0347,
       "match": true
     },
     {
@@ -804,8 +782,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9942,
-      "prob_hateful": 0.9942,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -815,8 +793,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.7152,
+      "prob_hateful": 0.2848,
       "match": true
     },
     {
@@ -826,8 +804,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -837,8 +815,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9984,
-      "prob_hateful": 0.0016,
+      "confidence": 0.9087,
+      "prob_hateful": 0.0913,
       "match": true
     },
     {
@@ -859,8 +837,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7778,
-      "prob_hateful": 0.2222,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -881,8 +859,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9959,
+      "prob_hateful": 0.0041,
       "match": true
     },
     {
@@ -903,8 +881,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.974,
+      "prob_hateful": 0.026,
       "match": true
     },
     {
@@ -925,8 +903,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9955,
+      "prob_hateful": 0.0045,
       "match": true
     },
     {
@@ -947,8 +925,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9987,
+      "prob_hateful": 0.0013,
       "match": true
     },
     {
@@ -969,8 +947,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.999,
+      "prob_hateful": 0.001,
       "match": true
     },
     {
@@ -991,8 +969,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9976,
+      "prob_hateful": 0.0024,
       "match": true
     },
     {
@@ -1013,8 +991,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.6908,
+      "prob_hateful": 0.3092,
       "match": true
     },
     {
@@ -1022,11 +1000,11 @@
       "text": "Older people should be excluded from public computer training programmes.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9767,
-      "prob_hateful": 0.0233,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.7276,
+      "prob_hateful": 0.7276,
+      "match": true
     },
     {
       "id": "id616",
@@ -1035,8 +1013,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9904,
+      "prob_hateful": 0.0096,
       "match": true
     },
     {
@@ -1046,8 +1024,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9986,
-      "prob_hateful": 0.9986,
+      "confidence": 0.9996,
+      "prob_hateful": 0.9996,
       "match": true
     },
     {
@@ -1057,8 +1035,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": true
     },
     {
@@ -1066,11 +1044,11 @@
       "text": "People from rural communities should be prohibited from applying for city government positions.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7643,
-      "prob_hateful": 0.2357,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8372,
+      "prob_hateful": 0.8372,
+      "match": true
     },
     {
       "id": "id620",
@@ -1079,8 +1057,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": true
     },
     {
@@ -1090,8 +1068,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1101,8 +1079,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8221,
+      "prob_hateful": 0.1779,
       "match": true
     },
     {
@@ -1123,8 +1101,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.5752,
+      "prob_hateful": 0.4248,
       "match": true
     },
     {
@@ -1145,8 +1123,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8265,
+      "prob_hateful": 0.1735,
       "match": true
     },
     {
@@ -1167,8 +1145,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9936,
+      "prob_hateful": 0.0064,
       "match": true
     },
     {
@@ -1178,8 +1156,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.9998,
       "match": true
     },
     {
@@ -1189,8 +1167,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9809,
+      "prob_hateful": 0.0191,
       "match": true
     },
     {
@@ -1222,8 +1200,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.8962,
-      "prob_hateful": 0.8962,
+      "confidence": 0.9413,
+      "prob_hateful": 0.9413,
       "match": true
     },
     {
@@ -1233,8 +1211,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9983,
+      "prob_hateful": 0.0017,
       "match": true
     },
     {
@@ -1244,8 +1222,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1255,8 +1233,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9784,
+      "prob_hateful": 0.0216,
       "match": true
     },
     {
@@ -1277,8 +1255,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1299,8 +1277,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9498,
+      "prob_hateful": 0.0502,
       "match": true
     },
     {
@@ -1321,8 +1299,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9882,
+      "prob_hateful": 0.0118,
       "match": true
     },
     {
@@ -1332,8 +1310,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -1343,8 +1321,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9969,
+      "prob_hateful": 0.0031,
       "match": true
     },
     {
@@ -1354,8 +1332,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 0.6315,
+      "prob_hateful": 0.6315,
       "match": true
     },
     {
@@ -1365,8 +1343,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9935,
+      "prob_hateful": 0.0065,
       "match": true
     },
     {
@@ -1374,11 +1352,11 @@
       "text": "Men should not be allowed to receive parental leave benefits.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.7533,
-      "prob_hateful": 0.7533,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.802,
+      "prob_hateful": 0.198,
+      "match": false
     },
     {
       "id": "id648",
@@ -1387,8 +1365,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -1409,8 +1387,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9984,
+      "prob_hateful": 0.0016,
       "match": true
     },
     {
@@ -1420,8 +1398,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.9998,
       "match": true
     },
     {
@@ -1431,8 +1409,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.7604,
+      "prob_hateful": 0.2396,
       "match": true
     },
     {
@@ -1453,8 +1431,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9979,
+      "prob_hateful": 0.0021,
       "match": true
     },
     {
@@ -1475,8 +1453,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9993,
+      "prob_hateful": 0.0007,
       "match": true
     },
     {
@@ -1486,8 +1464,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.8424,
-      "prob_hateful": 0.8424,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1497,8 +1475,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8755,
+      "prob_hateful": 0.1245,
       "match": true
     },
     {
@@ -1508,8 +1486,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9959,
-      "prob_hateful": 0.9959,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1519,8 +1497,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -1552,8 +1530,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.8924,
+      "prob_hateful": 0.8924,
       "match": true
     },
     {
@@ -1563,8 +1541,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9601,
+      "prob_hateful": 0.0399,
       "match": true
     },
     {
@@ -1574,8 +1552,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9996,
+      "prob_hateful": 0.9996,
       "match": true
     },
     {
@@ -1585,8 +1563,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1607,8 +1585,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9948,
+      "prob_hateful": 0.0052,
       "match": true
     },
     {
@@ -1618,8 +1596,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1629,8 +1607,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.974,
+      "prob_hateful": 0.026,
       "match": true
     },
     {
@@ -1640,8 +1618,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9536,
-      "prob_hateful": 0.9536,
+      "confidence": 0.9762,
+      "prob_hateful": 0.9762,
       "match": true
     },
     {
@@ -1651,8 +1629,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9905,
+      "prob_hateful": 0.0095,
       "match": true
     },
     {
@@ -1662,8 +1640,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -1673,8 +1651,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1682,11 +1660,11 @@
       "text": "People from a particular nationality should not be permitted to work in public research laboratories.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.6941,
-      "prob_hateful": 0.6941,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8884,
+      "prob_hateful": 0.1116,
+      "match": false
     },
     {
       "id": "id676",
@@ -1717,8 +1695,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9547,
+      "prob_hateful": 0.0453,
       "match": true
     },
     {
@@ -1739,8 +1717,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9866,
+      "prob_hateful": 0.0134,
       "match": true
     },
     {
@@ -1750,8 +1728,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -1761,8 +1739,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9782,
+      "prob_hateful": 0.0218,
       "match": true
     },
     {
@@ -1783,8 +1761,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9988,
+      "prob_hateful": 0.0012,
       "match": true
     },
     {
@@ -1805,8 +1783,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": true
     },
     {
@@ -1827,8 +1805,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9962,
+      "prob_hateful": 0.0038,
       "match": true
     },
     {
@@ -1849,8 +1827,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9899,
+      "prob_hateful": 0.0101,
       "match": true
     },
     {
@@ -1860,8 +1838,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.996,
+      "prob_hateful": 0.996,
       "match": true
     },
     {
@@ -1871,8 +1849,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9987,
+      "prob_hateful": 0.0013,
       "match": true
     },
     {
@@ -1893,8 +1871,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9963,
+      "prob_hateful": 0.0037,
       "match": true
     },
     {
@@ -1915,8 +1893,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9961,
+      "prob_hateful": 0.0039,
       "match": true
     },
     {
@@ -1937,8 +1915,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": true
     },
     {
@@ -1948,8 +1926,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -1959,8 +1937,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9982,
+      "prob_hateful": 0.0018,
       "match": true
     },
     {
@@ -1981,8 +1959,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9722,
+      "prob_hateful": 0.0278,
       "match": true
     },
     {
@@ -2003,8 +1981,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.7086,
+      "prob_hateful": 0.2914,
       "match": true
     },
     {
@@ -2025,8 +2003,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9823,
+      "prob_hateful": 0.0177,
       "match": true
     },
     {
@@ -2047,8 +2025,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9867,
+      "prob_hateful": 0.0133,
       "match": true
     },
     {
@@ -2069,8 +2047,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9974,
+      "prob_hateful": 0.0026,
       "match": true
     },
     {
@@ -2080,8 +2058,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9989,
+      "prob_hateful": 0.9989,
       "match": true
     },
     {
@@ -2091,8 +2069,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -2113,8 +2091,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9918,
+      "prob_hateful": 0.0082,
       "match": true
     },
     {
@@ -2124,8 +2102,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9893,
-      "prob_hateful": 0.9893,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -2135,8 +2113,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9875,
+      "prob_hateful": 0.0125,
       "match": true
     },
     {
@@ -2157,8 +2135,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": true
     },
     {
@@ -2168,8 +2146,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -2179,8 +2157,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9303,
+      "prob_hateful": 0.0697,
       "match": true
     },
     {
@@ -2201,8 +2179,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9539,
+      "prob_hateful": 0.0461,
       "match": true
     },
     {
@@ -2223,8 +2201,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8862,
+      "prob_hateful": 0.1138,
       "match": true
     },
     {
@@ -2245,8 +2223,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9632,
+      "prob_hateful": 0.0368,
       "match": true
     },
     {
@@ -2267,8 +2245,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9832,
-      "prob_hateful": 0.0168,
+      "confidence": 0.6729,
+      "prob_hateful": 0.3271,
       "match": true
     },
     {
@@ -2289,8 +2267,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9952,
+      "prob_hateful": 0.0048,
       "match": true
     }
   ]

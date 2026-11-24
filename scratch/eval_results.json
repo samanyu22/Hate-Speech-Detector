@@ -1,30 +1,86 @@
 {
   "total_samples": 210,
-  "accuracy": 1.0,
-  "macro_f1": 1.0,
-  "macro_precision": 1.0,
-  "macro_recall": 1.0,
+  "accuracy": 0.9762,
+  "macro_f1": 0.9762,
+  "macro_precision": 0.9773,
+  "macro_recall": 0.9762,
   "confusion_matrix": {
     "TN": 105,
     "FP": 0,
-    "FN": 0,
-    "TP": 105
+    "FN": 5,
+    "TP": 100
   },
   "per_class": {
     "unhateful": {
-      "precision": 1.0,
+      "precision": 0.9545,
       "recall": 1.0,
-      "f1": 1.0,
+      "f1": 0.9767,
       "support": 105
     },
     "hateful": {
       "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
+      "recall": 0.9524,
+      "f1": 0.9756,
       "support": 105
     }
   },
-  "mismatches": [],
+  "mismatches": [
+    {
+      "id": "id17",
+      "text": "Members of that caste are dirty and should be kept separate.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id37",
+      "text": "Nobody should hire a person just because they use a wheelchair.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.7685,
+      "prob_hateful": 0.2315,
+      "match": false
+    },
+    {
+      "id": "id39",
+      "text": "People with intellectual disabilities should not have a voice in society.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id93",
+      "text": "That caste makes people unclean, so keep them away.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id113",
+      "text": "People with mental health conditions are unfit to be part of society.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8942,
+      "prob_hateful": 0.1058,
+      "match": false
+    }
+  ],
   "all_results": [
     {
       "id": "id1",
@@ -44,8 +100,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8491,
+      "prob_hateful": 0.1509,
       "match": true
     },
     {
@@ -66,8 +122,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9705,
+      "prob_hateful": 0.0295,
       "match": true
     },
     {
@@ -88,8 +144,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -110,8 +166,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -132,8 +188,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8207,
+      "prob_hateful": 0.1793,
       "match": true
     },
     {
@@ -143,8 +199,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -154,8 +210,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9959,
+      "prob_hateful": 0.0041,
       "match": true
     },
     {
@@ -176,8 +232,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9985,
+      "prob_hateful": 0.0015,
       "match": true
     },
     {
@@ -198,8 +254,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9994,
+      "prob_hateful": 0.0006,
       "match": true
     },
     {
@@ -207,11 +263,11 @@
       "text": "Members of that caste are dirty and should be kept separate.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id18",
@@ -220,8 +276,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9996,
+      "prob_hateful": 0.0004,
       "match": true
     },
     {
@@ -286,8 +342,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -330,8 +386,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8738,
+      "prob_hateful": 0.1262,
       "match": true
     },
     {
@@ -341,8 +397,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -352,8 +408,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9923,
+      "prob_hateful": 0.0077,
       "match": true
     },
     {
@@ -385,8 +441,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.9996,
+      "prob_hateful": 0.9996,
       "match": true
     },
     {
@@ -418,8 +474,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9975,
+      "prob_hateful": 0.0025,
       "match": true
     },
     {
@@ -427,11 +483,11 @@
       "text": "Nobody should hire a person just because they use a wheelchair.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.7685,
+      "prob_hateful": 0.2315,
+      "match": false
     },
     {
       "id": "id38",
@@ -440,8 +496,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9397,
+      "prob_hateful": 0.0603,
       "match": true
     },
     {
@@ -449,11 +505,11 @@
       "text": "People with intellectual disabilities should not have a voice in society.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id40",
@@ -506,8 +562,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9978,
+      "prob_hateful": 0.0022,
       "match": true
     },
     {
@@ -517,8 +573,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9995,
-      "prob_hateful": 0.9995,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -528,8 +584,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -550,8 +606,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9989,
+      "prob_hateful": 0.0011,
       "match": true
     },
     {
@@ -594,8 +650,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8814,
+      "prob_hateful": 0.1186,
       "match": true
     },
     {
@@ -616,8 +672,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.7998,
+      "prob_hateful": 0.2002,
       "match": true
     },
     {
@@ -660,8 +716,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -682,8 +738,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9994,
+      "prob_hateful": 0.0006,
       "match": true
     },
     {
@@ -704,8 +760,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9847,
+      "prob_hateful": 0.0153,
       "match": true
     },
     {
@@ -726,8 +782,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -748,8 +804,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -770,8 +826,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -792,8 +848,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.5864,
+      "prob_hateful": 0.4136,
       "match": true
     },
     {
@@ -880,8 +936,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.997,
+      "prob_hateful": 0.003,
       "match": true
     },
     {
@@ -902,8 +958,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.6072,
+      "prob_hateful": 0.3928,
       "match": true
     },
     {
@@ -924,8 +980,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -968,8 +1024,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -990,8 +1046,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9948,
+      "prob_hateful": 0.0052,
       "match": true
     },
     {
@@ -1012,8 +1068,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.805,
+      "prob_hateful": 0.195,
       "match": true
     },
     {
@@ -1034,8 +1090,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9715,
+      "prob_hateful": 0.0285,
       "match": true
     },
     {
@@ -1043,11 +1099,11 @@
       "text": "That caste makes people unclean, so keep them away.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id94",
@@ -1100,8 +1156,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9995,
+      "prob_hateful": 0.0005,
       "match": true
     },
     {
@@ -1122,8 +1178,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9502,
+      "prob_hateful": 0.0498,
       "match": true
     },
     {
@@ -1166,8 +1222,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": true
     },
     {
@@ -1188,8 +1244,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.999,
+      "prob_hateful": 0.001,
       "match": true
     },
     {
@@ -1210,8 +1266,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9989,
+      "prob_hateful": 0.0011,
       "match": true
     },
     {
@@ -1232,8 +1288,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.997,
+      "prob_hateful": 0.003,
       "match": true
     },
     {
@@ -1243,8 +1299,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.969,
-      "prob_hateful": 0.969,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1263,11 +1319,11 @@
       "text": "People with mental health conditions are unfit to be part of society.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8942,
+      "prob_hateful": 0.1058,
+      "match": false
     },
     {
       "id": "id114",
@@ -1276,8 +1332,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.964,
+      "prob_hateful": 0.036,
       "match": true
     },
     {
@@ -1287,8 +1343,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9414,
-      "prob_hateful": 0.9414,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1320,8 +1376,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1331,8 +1387,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.985,
+      "prob_hateful": 0.985,
       "match": true
     },
     {
@@ -1342,8 +1398,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9985,
+      "prob_hateful": 0.0015,
       "match": true
     },
     {
@@ -1353,8 +1409,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9993,
-      "prob_hateful": 0.9993,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1375,8 +1431,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.988,
-      "prob_hateful": 0.988,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1397,8 +1453,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.997,
-      "prob_hateful": 0.997,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1430,8 +1486,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.993,
+      "prob_hateful": 0.007,
       "match": true
     },
     {
@@ -1452,8 +1508,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8033,
+      "prob_hateful": 0.1967,
       "match": true
     },
     {
@@ -1474,8 +1530,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9513,
+      "prob_hateful": 0.0487,
       "match": true
     },
     {
@@ -1496,8 +1552,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9864,
+      "prob_hateful": 0.0136,
       "match": true
     },
     {
@@ -1518,8 +1574,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9996,
+      "prob_hateful": 0.0004,
       "match": true
     },
     {
@@ -1540,8 +1596,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9988,
+      "prob_hateful": 0.0012,
       "match": true
     },
     {
@@ -1551,8 +1607,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -1573,8 +1629,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9984,
+      "prob_hateful": 0.9984,
       "match": true
     },
     {
@@ -1716,8 +1772,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9849,
+      "prob_hateful": 0.0151,
       "match": true
     },
     {
@@ -1738,8 +1794,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9812,
+      "prob_hateful": 0.0188,
       "match": true
     },
     {
@@ -1760,8 +1816,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9891,
+      "prob_hateful": 0.0109,
       "match": true
     },
     {
@@ -1782,8 +1838,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9872,
+      "prob_hateful": 0.0128,
       "match": true
     },
     {
@@ -1804,8 +1860,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1826,8 +1882,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1848,8 +1904,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9967,
+      "prob_hateful": 0.0033,
       "match": true
     },
     {
@@ -1870,8 +1926,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9941,
+      "prob_hateful": 0.0059,
       "match": true
     },
     {
@@ -1892,8 +1948,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.6911,
+      "prob_hateful": 0.3089,
       "match": true
     },
     {
@@ -1914,8 +1970,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9372,
+      "prob_hateful": 0.0628,
       "match": true
     },
     {
@@ -2024,8 +2080,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9809,
+      "prob_hateful": 0.0191,
       "match": true
     },
     {
@@ -2035,8 +2091,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9997,
-      "prob_hateful": 0.9997,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -2046,8 +2102,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9905,
+      "prob_hateful": 0.0095,
       "match": true
     },
     {
@@ -2090,8 +2146,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9791,
+      "prob_hateful": 0.0209,
       "match": true
     },
     {
@@ -2112,8 +2168,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9907,
+      "prob_hateful": 0.0093,
       "match": true
     },
     {
@@ -2134,8 +2190,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9849,
+      "prob_hateful": 0.0151,
       "match": true
     },
     {
@@ -2156,8 +2212,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.0001,
       "match": true
     },
     {
@@ -2233,8 +2289,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -2266,8 +2322,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9851,
+      "prob_hateful": 0.0149,
       "match": true
     },
     {
@@ -2277,8 +2333,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.998,
-      "prob_hateful": 0.998,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -2310,8 +2366,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9885,
+      "prob_hateful": 0.0115,
       "match": true
     },
     {
@@ -2332,8 +2388,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.9987,
+      "prob_hateful": 0.0013,
       "match": true
     }
   ]
