@@ -104,24 +104,6 @@ class ClassicalBaselineClassifier:
 
         clean_text = self.normalizer.normalize(text)
         prob_hateful = float(self.pipeline.predict_proba([clean_text])[0][1])
-
-        # Target Grounding Guardrail:
-        # Borderline hateful predictions (0.50 <= P < 0.75) without demographic identity markers
-        # or explicit hate slurs represent interpersonal toxicity/arguments, not systemic hate speech.
-        try:
-            from src.models.transformer_classifier import MultilingualTransformerEngine
-            engine = MultilingualTransformerEngine()
-            has_grounding = engine.has_grounded_markers(clean_text)
-            has_slur = engine.contains_explicit_slur(clean_text)
-            has_hostility, is_negated = engine.analyze_direct_hostility(clean_text)
-
-            if not has_grounding and not has_slur and 0.50 <= prob_hateful < 0.75:
-                prob_hateful = max(0.15, prob_hateful - 0.25)
-            elif (has_grounding and (has_hostility and not is_negated)) or has_slur:
-                prob_hateful = max(prob_hateful, 0.85)
-        except Exception:
-            pass
-
         pred_label = 1 if prob_hateful >= 0.50 else 0
         confidence = prob_hateful if pred_label == 1 else (1.0 - prob_hateful)
 

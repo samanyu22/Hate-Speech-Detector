@@ -295,6 +295,7 @@ flowchart TD
 - **Source Files:** [src/models/transformer_classifier.py](src/models/transformer_classifier.py), [src/classification/classical_baseline.py](src/classification/classical_baseline.py)
 - **Implementation Highlights:**
   - `ClassicalBaselineClassifier`: FeatureUnion of sublinear TF-IDF word n-grams (1-2) and character boundary n-grams (2-5) with balanced Logistic Regression. Exposes `decision_function` log-odds `[-decision, decision]` for XAI logit sensitivity fallback.
+    - **Documented Baseline Limitation (Interpersonal Insults vs. Systemic Hate Speech):** Linear n-gram representations lack semantic target grounding. In sentences expressing direct personal anger or insults without demographic targets (e.g., *"you are absolutely stupid and have no idea what you're talking about"*), positive weights on second-person pronouns (`"you"`, `"are"`) and the insult token push the logit over threshold ($P = 51.74\% \implies \text{HATEFUL}$). In contrast, our `MultilingualAttentionClassifier` with Target Grounding correctly discerns the lack of protected demographic identity markers, classifying it as `NON-HATEFUL (81.8%)`.
   - `MultilingualAttentionClassifier`: PyTorch neural network featuring 15,000 vocabulary embeddings, BiLSTM context encoding, 4-head self-attention with padding masks, masked average pooling, and dropout (0.3).
   - **Word Dropout Regularization:** During training, 15% of tokens are randomly replaced with `<UNK>`, explicitly training the model that out-of-vocabulary words are neutral and preventing OOV collapse.
   - Exposes `encode_text(text) -> torch.Tensor` returning a 256-dimensional pooled representation.
@@ -503,19 +504,17 @@ The empirical experimentation harness (`backend/api/experiments.py` and `src/exp
 
 ---
 
-### Breakthrough 9: Model Synchronization & Classical Baseline Target Grounding Guardrail
-- **The Issue:** A collaborator cloned/pulled the repository and tested the sentence:
+### Breakthrough 9: Model Synchronization & Preserving Classical Baseline as an Architectural Limitation
+- **The Observation:** When evaluating the sentence:
   > *"you are absolutely stupid and have no idea what you're talking about."*
-  On the author's machine, the sentence classified as `NON-HATEFUL (81.8% / 99.5%)`. On the collaborator's machine, it classified as `HATEFUL (51.74%)`.
-- **Root Cause Analysis:**
-  1. **Gitignore Silent Model Fallback:** `.gitignore` contained `*.pt`, preventing `models/checkpoints/multilingual_transformer.pt` (9.89 MB) from being committed. On the collaborator's machine, the Transformer checkpoint was absent, causing the inference pipeline in `backend/api/detection.py` to silently fall back to `ClassicalBaselineClassifier` (`classical_baseline.joblib`).
-  2. **TF-IDF Bag-of-Words Lack of Grounding:** The Classical Baseline uses word and character n-grams. The intercept was $b = -0.7380$, but high positive coefficients on second-person pronouns (`"you"` $+0.3499$, `"are"` $+0.1821$, and character n-grams) produced a net logit of $z = +0.0697$, crossing the 50% threshold by 1.74% ($P = 51.74\%$). A personal interpersonal argument was thus mislabeled as systemic hate speech.
-- **The Dual-Fix:**
-  1. **Checkpoint Whitelisting & Push:** Added `!models/checkpoints/multilingual_transformer.pt` to `.gitignore`, committed the 9.89 MB checkpoint, and pushed to GitHub. Running `git pull origin main` gives the collaborator the identical Transformer model weights.
-  2. **Target Grounding Guardrail on Classical Baseline:** Enhanced `ClassicalBaselineClassifier.predict()` in [src/classification/classical_baseline.py](src/classification/classical_baseline.py) with dual-sided demographic grounding:
-     - *Dampening ungrounded insults:* If $0.50 \le P < 0.75$ and the text contains no protected identity targets and no explicit slurs, $P$ is dampened by $0.25$ ($P \to 26.74\% \implies$ `NON-HATEFUL (73.26%)`).
-     - *Escalating targeted threats:* If protected identity targets co-occur with direct hostility or explicit slurs, $P$ is escalated ($\ge 0.85 \implies$ `HATEFUL`).
-- **Verification:** Both Multilingual Transformer and Classical TF-IDF models now classify the sentence identically as **NON-HATEFUL**, while preserving 100% detection on true hate speech (*"these immigrants are vermin"*, *"kill all muslims"*). All 45/45 automated tests pass.
+  On the author's machine running the **Multilingual Code-Mixed Transformer**, the prediction is **NON-HATEFUL (81.8%)**. On a collaborator's machine that initially lacked the `.pt` checkpoint (due to `.gitignore` filtering `*.pt`), the backend silently fell back to the **Classical TF-IDF Baseline**, classifying it as **HATEFUL (51.74%)**.
+- **Root Cause & Architectural Insight:**
+  1. **Gitignore Checkpoint Synchronization:** `.gitignore` was updated with `!models/checkpoints/multilingual_transformer.pt` and pushed to GitHub. Running `git pull origin main` gives collaborators the identical PyTorch Transformer checkpoint (9.89 MB), restoring model parity across systems.
+  2. **Deliberate Preservation as a Benchmark Limitation:** Rather than artificially modifying the Classical TF-IDF baseline with ad-hoc heuristics, its pure Scikit-Learn implementation is deliberately preserved in its authentic state. In academic defense and viva presentations, this serves as an empirical demonstration of why linear n-gram models fail in practice:
+     - The intercept is $b = -0.7380$.
+     - Bag-of-words and character n-grams accumulate positive weights on second-person attack pronouns (`"you"` $+0.3499$, `"are"` $+0.1821$, `"stupid"` $+0.12$), resulting in a logit of $z = +0.0697$ ($P = 51.74\%$).
+     - The linear model lacks the contextual awareness to differentiate interpersonal toxicity between individuals from systemic hate speech targeting protected demographic classes.
+     - In direct contrast, our **Multilingual Attention Transformer with Target Grounding** correctly identifies the lack of protected demographic identity markers and slurs, categorizing it as **NON-HATEFUL (81.8%)**. This provides empirical justification for developing the Deep Transformer architecture.
 
 ---
 
