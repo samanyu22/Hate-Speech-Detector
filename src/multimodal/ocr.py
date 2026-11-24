@@ -19,7 +19,7 @@ class OCRService:
         return cls._reader
 
     @classmethod
-    def extract_text(cls, image_input: Any) -> Dict[str, Any]:
+    def extract_text(cls, image_input: Any, min_confidence: float = 0.25) -> Dict[str, Any]:
         reader = cls.get_reader()
         if reader is None:
             return {
@@ -46,7 +46,12 @@ class OCRService:
             confidences = []
 
             for bbox, text, conf in results:
-                extracted_chunks.append(text.strip())
+                clean = text.strip()
+                # Filter out empty text or low-confidence noise artifacts
+                if not clean or float(conf) < min_confidence:
+                    continue
+
+                extracted_chunks.append(clean)
                 confidences.append(float(conf))
                 # bbox is list of 4 points [[x1, y1], [x2, y2], [x3, y3], [x4, y4]]
                 ymin = int(min(pt[1] for pt in bbox))
@@ -55,7 +60,7 @@ class OCRService:
                 xmax = int(max(pt[0] for pt in bbox))
                 boxes.append({
                     "box": [ymin, xmin, ymax, xmax],
-                    "text": text.strip(),
+                    "text": clean,
                     "confidence": round(float(conf), 3)
                 })
 

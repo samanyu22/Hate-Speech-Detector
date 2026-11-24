@@ -480,8 +480,8 @@ function initDetectionWorkspace() {
             }
           } else {
             if (imgBadge) {
-              imgBadge.innerText = `Image Loaded (${file.name}) - Detection Complete`;
-              imgBadge.style.background = 'var(--color-success)';
+              imgBadge.innerText = `Image Loaded (${file.name}) - No visual text detected`;
+              imgBadge.style.background = 'var(--color-primary)';
               imgBadge.style.color = '#fff';
             }
           }

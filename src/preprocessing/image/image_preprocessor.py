@@ -46,13 +46,23 @@ class ImagePreprocessor:
             raise ValueError(f"Unsupported image input type: {type(image_input)}")
 
         orig_width, orig_height = img.size
-        # Resize to target
-        resized = img.resize(self.target_size, Image.Resampling.BILINEAR)
-        img_np = np.array(resized).astype(np.float32) / 255.0
+        # Resize to target (224, 224) for CNN feature extraction tensor
+        resized_cnn = img.resize(self.target_size, Image.Resampling.BILINEAR)
+        img_np = np.array(resized_cnn).astype(np.float32) / 255.0
 
         # Calculate visual properties
         mean_brightness = float(np.mean(img_np))
         contrast = float(np.std(img_np))
+
+        # For OCR text extraction: maintain high resolution so text glyphs remain sharp.
+        # If image is unusually massive (> 1800px on either side), downscale preserving aspect ratio.
+        max_ocr_dim = 1800
+        if max(orig_width, orig_height) > max_ocr_dim:
+            scale = max_ocr_dim / max(orig_width, orig_height)
+            ocr_size = (int(orig_width * scale), int(orig_height * scale))
+            ocr_image = img.resize(ocr_size, Image.Resampling.LANCZOS)
+        else:
+            ocr_image = img
 
         return {
             "original_resolution": [orig_width, orig_height],
@@ -61,6 +71,6 @@ class ImagePreprocessor:
             "mean_brightness": round(mean_brightness, 4),
             "contrast": round(contrast, 4),
             "processed_array": img_np,
-            "pil_image": resized
+            "pil_image": ocr_image
         }
 
