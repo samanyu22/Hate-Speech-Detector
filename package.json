@@ -1,0 +1,18 @@
+{
+  "name": "hate-speech-detector",
+  "version": "1.0.0",
+  "description": "Hate Speech Detection through Explainable AI and Reward-Optimized LLMs",
+  "scripts": {
+    "dev": "python backend/main.py",
+    "start": "python backend/main.py",
+    "test": "pytest tests/ -v"
+  },
+  "keywords": [
+    "hate-speech-detection",
+    "explainable-ai",
+    "fastapi",
+    "nlp"
+  ],
+  "author": "",
+  "license": "MIT"
+}
