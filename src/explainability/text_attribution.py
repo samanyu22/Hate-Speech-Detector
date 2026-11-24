@@ -24,11 +24,10 @@ class TextAttributionEngine:
         base_logits = base_res.get("logits")
 
         raw_pert = []
-        # Cap evaluation to max 35 tokens for responsiveness on long documents / OCR extracts
-        eval_words = words[:35]
-        for i in range(len(eval_words)):
-            # Leave word i out
-            perturbed_words = eval_words[:i] + eval_words[i+1:]
+        max_eval = min(len(words), 120)
+        for i in range(max_eval):
+            # Leave word i out from the full text context
+            perturbed_words = words[:i] + words[i+1:]
             perturbed_text = " ".join(perturbed_words) if perturbed_words else "[EMPTY]"
             
             p_res = predict_fn(perturbed_text)
@@ -37,10 +36,9 @@ class TextAttributionEngine:
 
             dp = float(base_prob - p_prob)
             dl = float(base_logits[1] - p_logits[1]) if (base_logits and p_logits) else 0.0
-            raw_pert.append((eval_words[i], dp, dl))
+            raw_pert.append((words[i], dp, dl))
 
-        # Append remaining tokens as neutral attributions if text was truncated for perturbation
-        for w in words[35:]:
+        for w in words[max_eval:]:
             raw_pert.append((w, 0.0, 0.0))
 
         # Handle Softmax Saturation: when probabilities are at extreme certainty (0.0 or 1.0),
