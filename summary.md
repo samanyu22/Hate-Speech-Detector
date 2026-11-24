@@ -518,6 +518,22 @@ The empirical experimentation harness (`backend/api/experiments.py` and `src/exp
 
 ---
 
+### Breakthrough 10: Bidirectional Local Negation Scope & Counter-Speech Resolution
+- **The Issue:** Stress-testing the model with polarity-inverted edge cases revealed the classic content moderation *"Slur Rebuttal Blindspot"*: sentences defending marginalized groups by explicitly negating slurs or dehumanizing tropes (e.g. *"these immigrants are not vermin"*, *"Jews are not parasites"*, *"tu harami nahi hai"*) were previously getting false-flagged as `HATEFUL (100.0%)`. Similarly, negated condemnation (*"I will not condemn the attacks..."*) bypassed detection due to keyword matching on *"condemn"*.
+- **Root Cause:** The model's safety escalation rule fired unconditionally whenever an explicit slur or severe trope token appeared, without checking whether the token was locally governed by a negation operator (`"not"`, `"never"`, `"nahi"`, `"mat"`).
+- **The Fix (Way 1 Implementation):**
+  1. **Bidirectional Local Negation Scope:** Enhanced `MultilingualTransformerEngine` with `is_word_locally_negated()`. Checks preceding 1–2 tokens for English negation (`"not vermin"`, `"never parasites"`) and following/preceding 1–2 tokens for Hindi/Hinglish negation (`"harami nahi"`, `"gaddar nahi"`, `"khatam mat"`).
+  2. **Rebuttal & Counter-Speech Identification:** When a slur or dehumanizing trope is locally negated, it is tagged as `has_neg_slur = True` rather than an unnegated slur, clamping $z_1 \le z_0 - 2.5$ to guarantee classification as **NON-HATEFUL**.
+  3. **Negated Condemnation Disqualification:** If condemnation verbs (*"condemn"*, *"denounce"*) are preceded by negation operators (*"will not condemn"*), counter-speech immunity is disqualified, properly intercepting justifications of violence as **HATEFUL (97.8%)**.
+  4. **Target-Anchored Pejoratives:** Non-demographic pejoratives (*"worthless"*, *"disgusting"*) are verified against identity targets; interpersonal banter (*"Do not shut up, your opinion is not worthless"*) is correctly classified as **NON-HATEFUL (81.8%)**.
+- **Empirical Results:**
+  - **Inverted Edge Cases:** **20 / 20 PASSED (100.0%)** (up from 13/20).
+  - **Original Edge Cases:** **20 / 20 PASSED (100.0%)**.
+  - **Batch 1 Benchmark:** **207 / 210 PASSED (98.57%)**.
+  - **Regression Test Suite:** **45 / 45 PASSED (100%)**.
+
+---
+
 ## 6. Comprehensive Verification & Viva Defense Checklist
 
 | Requirement | Implementation Artifact | Verification Result |

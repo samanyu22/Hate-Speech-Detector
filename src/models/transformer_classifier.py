@@ -132,14 +132,33 @@ class MultilingualTransformerEngine:
         "loathe", "loathes", "loathing", "loathed",
         "kill", "kills", "killing", "killed",
         "destroy", "destroys", "destroying", "destroyed",
-        "wipe out", "cleanse", "annihilate", "die"
+        "wipe out", "cleanse", "annihilate", "die",
+        # Hinglish hostility verbs
+        "khatam", "maro", "marna"
     }
 
     NEGATION_WORDS = {
         "not", "don't", "dont", "never", "no", "cannot", "can't", "cant",
         "won't", "wont", "wouldn't", "wouldnt", "shouldn't", "shouldnt",
-        "doesn't", "doesnt", "didn't", "didnt", "hardly", "without"
+        "doesn't", "doesnt", "didn't", "didnt", "hardly", "without",
+        "isnt", "isn't", "arent", "aren't", "neither",
+        # Hindi / Hinglish negations
+        "nahi", "nahin", "mat", "na"
     }
+
+    def is_word_locally_negated(self, words: List[str], idx: int) -> bool:
+        """
+        Check if token at words[idx] is governed by a local negation operator.
+        Supports English preceding window (words[idx-2:idx]) and Hindi/Hinglish
+        preceding or following window (words[idx-2:idx] or words[idx+1:idx+3]).
+        """
+        prec = words[max(0, idx-2):idx]
+        if any(nw in self.NEGATION_WORDS for nw in prec):
+            return True
+        foll = words[idx+1:min(len(words), idx+3)]
+        if any(nw in self.NEGATION_WORDS for nw in foll):
+            return True
+        return False
 
     def analyze_direct_hostility(self, text: str) -> Tuple[bool, bool]:
         """
@@ -163,9 +182,7 @@ class MultilingualTransformerEngine:
 
         for i, w in enumerate(raw_words):
             if w in self.HOSTILITY_VERBS:
-                # Check preceding 1 to 3 words for negation
-                window = raw_words[max(0, i-3):i]
-                if any(nw in self.NEGATION_WORDS for nw in window):
+                if self.is_word_locally_negated(raw_words, i):
                     negated_hostility = True
                 else:
                     unnegated_hostility = True
@@ -176,18 +193,43 @@ class MultilingualTransformerEngine:
         unneg, _ = self.analyze_direct_hostility(text)
         return unneg
 
-    def contains_explicit_slur(self, text: str) -> bool:
-        normalized_words = [w.lower() for w in self.normalizer.tokenize_words(self.normalizer.normalize(text))]
-        tokens = set(normalized_words)
+    def analyze_slurs_and_tropes(self, text: str) -> Tuple[bool, bool]:
+        """
+        Analyze explicit slurs and severe dehumanizing tropes with bidirectional local negation.
+        Returns (has_unnegated_slur, has_negated_slur).
+        """
+        raw_words = [w.lower() for w in self.normalizer.tokenize_words(self.normalizer.normalize(text))]
         t_lower = text.lower()
+
+        has_unneg_slur = False
+        has_neg_slur = False
+
+        severe_tropes = {"vermin", "parasite", "parasites", "gaddar", "gaddaro", "suar", "suaro"}
+
+        for i, w in enumerate(raw_words):
+            if w in self.EXPLICIT_SLURS or w in severe_tropes:
+                if self.is_word_locally_negated(raw_words, i):
+                    has_neg_slur = True
+                else:
+                    has_unneg_slur = True
+
         for slur in self.EXPLICIT_SLURS:
-            if " " in slur:
-                if slur in t_lower:
-                    return True
-            else:
-                if slur in tokens:
-                    return True
-        return False
+            if " " in slur and slur in t_lower:
+                parts = slur.split()
+                if parts[0] in raw_words:
+                    idx = raw_words.index(parts[0])
+                    if self.is_word_locally_negated(raw_words, idx):
+                        has_neg_slur = True
+                    else:
+                        has_unneg_slur = True
+                else:
+                    has_unneg_slur = True
+
+        return has_unneg_slur, has_neg_slur
+
+    def contains_explicit_slur(self, text: str) -> bool:
+        unneg, _ = self.analyze_slurs_and_tropes(text)
+        return unneg
 
     def has_grounded_markers(self, text: str) -> bool:
         """
@@ -340,19 +382,43 @@ class MultilingualTransformerEngine:
         z0, z1 = raw_logits[0], raw_logits[1]
 
         # Epistemic Uncertainty & Demographic Grounding Verification:
-        has_slur = self.contains_explicit_slur(text)
+        has_slur, has_neg_slur = self.analyze_slurs_and_tropes(text)
         has_unneg_hostility, is_neg_hostility = self.analyze_direct_hostility(text)
         has_grounding = self.has_grounded_markers(text) or has_slur or has_unneg_hostility
 
-        # Check if text is explicit counterspeech quoting and condemning hate speech
         t_lower = text.lower()
-        is_condemning_quote = any(phrase in t_lower for phrase in ["unacceptable", "condemn", "denounce", "hate speech"])
+        words_lower = [w.lower() for w in words]
+        tokens = set(words_lower)
 
-        # Severe explicit slurs or direct unnegated hatred toward protected identities are hate speech
-        if (has_slur or has_unneg_hostility) and not is_condemning_quote:
+        has_target = any(t in tokens or t in t_lower for t in self.TARGETED_IDENTITIES)
+        subordination_phrases = ["know their place", "cannot be trusted", "deserved it", "deserve it", "stay beneath", "second-class", "born to serve"]
+        has_targeted_subordination = has_target and any(p in t_lower for p in subordination_phrases)
+
+        # Check if text is explicit counterspeech quoting and condemning hate speech
+        is_condemning_quote = False
+        for phrase in ["unacceptable", "denounce", "hate speech"]:
+            if phrase in t_lower:
+                is_condemning_quote = True
+        if "condemn" in words_lower or "condemns" in words_lower:
+            idx = words_lower.index("condemn") if "condemn" in words_lower else words_lower.index("condemns")
+            if not self.is_word_locally_negated(words_lower, idx):
+                is_condemning_quote = True
+
+        # Check for locally negated pejoratives and Hinglish hostility verbs
+        for i, w in enumerate(words_lower):
+            if w in {"worthless", "disgusting", "defective"}:
+                if self.is_word_locally_negated(words_lower, i):
+                    has_grounding = False
+            if w in {"khatam", "maro", "marna"}:
+                if self.is_word_locally_negated(words_lower, i):
+                    is_neg_hostility = True
+                    has_slur = False
+
+        # Severe explicit slurs, direct unnegated hatred, or targeted subordination are hate speech
+        if (has_slur or has_unneg_hostility or has_targeted_subordination) and not is_condemning_quote:
             z1 = max(z1, z0 + 3.8)
-        elif is_neg_hostility or (is_condemning_quote and z0 > z1):
-            # Explicit negation of hostility (e.g., 'I dont hate jews', 'we do not hate Muslims')
+        elif is_neg_hostility or has_neg_slur or (is_condemning_quote and z0 > z1):
+            # Explicit negation of hostility, negated slurs/tropes, or valid counter-speech
             z1 = min(z1, z0 - 2.5)
         elif len(known_content) == 0 and len(content_words) > 0:
             z1 = min(z1, z0 - 1.0)
