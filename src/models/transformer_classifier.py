@@ -239,11 +239,18 @@ class MultilingualTransformerEngine:
         Verify presence of explicit hostility, slur, violent imperative, or structural discrimination predicate.
         Mere mention of a demographic noun (e.g. 'Muslim', 'Hindu', 'community') without hostile predicates
         does NOT constitute hate speech grounding.
+        Similarly, generic operational words ('refused', 'rejected', 'deny') without a protected demographic target
+        do NOT constitute hate speech grounding.
         """
         if self.contains_explicit_slur(text) or self.contains_direct_hostility(text):
             return True
 
-        grounded_hostility_markers = [
+        t_lower = text.lower()
+        words_lower = [w.lower() for w in self.normalizer.tokenize_words(self.normalizer.normalize(text))]
+        tokens = set(words_lower)
+        has_target = any((t in tokens) if " " not in t else (t in t_lower) for t in self.TARGETED_IDENTITIES)
+
+        severe_hostility_markers = [
             # Hostility markers / slurs / threats (Latin & Hinglish)
             "vermin", "parasite", "parasites", "subhuman", "exterminate", "lynch", "cancer", "rats",
             "kamine", "kaminon", "saale", "gaddar", "gaddaro", "suar", "suaro", "kutte", "kutto",
@@ -253,50 +260,57 @@ class MultilingualTransformerEngine:
             # Devanagari Hindi hostility & identity markers
             "देशद्रोही", "देशद्रोहियों", "गद्दार", "गद्दारों", "गोली", "मार", "कुत्तों", "सूअर", "सूअरों",
             "कमीने", "दीमक", "घुसपैठियों", "दरिंदों", "कौम", "नापाक", "आतंकवादी", "बहिष्कार", "हत्यारी",
-            # Structural discrimination & exclusionary action predicates
-            "rejected", "reject", "denied", "deny", "refused", "refuse", "barred", "bar",
-            "prohibited", "prohibit", "excluded", "exclude", "prevented", "prevent",
-            "not allowed", "should not be allowed", "never be allowed", "must not be allowed",
-            "cannot be allowed", "not be permitted", "not permitted", "should not be permitted",
-            "never be promoted", "not be promoted", "disqualified", "disqualify",
-            "fewer rights", "no rights", "fewer legal protections",
-            "inferior", "subordinate", "second-class", "stay away", "stay beneath", "know their place",
-            "kept separate", "keep separate", "keep out", "kept out", "forced out",
-            "throw out", "banned", "deny housing", "denied housing", "not deserve", "do not deserve",
-            "does not deserve", "no voice", "cannot have a voice", "not real citizens",
-            "disappear from public life", "ruin every place", "ruining society",
-            "born criminals", "weak-minded", "less intelligent", "useless to the community",
-            "naturally violent", "naturally dishonest", "cannot be trusted",
-            "unclean", "dirty", "ashamed of belonging",
-            # Additional structural discrimination, exclusion & hostility markers
-            "not fit", "unfit", "disgusting", "defective", "worthless", "segregated", "unwelcome",
-            "less human", "hidden away", "should be avoided", "should be removed", "pushed out",
-            "disappeared from public", "does not belong", "do not belong", "threat just by existing",
-            "never be trusted", "cannot contribute", "should not be included", "never hold positions",
-            "less capable", "born to serve", "nothing worth hearing", "too irrational",
-            "never be accepted", "all dangerous", "inherently untrustworthy", "criminals and dishonest",
-            "bhag ja", "niklo", "nikalo"
+            "chutiya", "chutiye", "chutiyon"
         ]
-        t_lower = text.lower()
-        for marker in grounded_hostility_markers:
+        for marker in severe_hostility_markers:
             if marker in t_lower:
                 return True
 
-        # Regex patterns for structural exclusion where subjects/predicates are distributed
-        import re
-        structural_exclusion_patterns = [
-            r"\bnobody\b.*\b(allowed|permitted|hire|hired|deserve|deserves|rights|voice|place|welcome)\b",
-            r"\bno one\b.*\b(allowed|permitted|hire|hired|deserve|deserves|rights|voice|place|welcome)\b",
-            r"\bdo not\b.*\b(rent|let|invite|employ|hire|serve|allow)\b",
-            r"\bnot\b.*\b(rent|employ|hire|served|invited|accepted)\b",
-            r"\bonly\b.*\bcapable\b",
-            r"\bincapable\b",
-            r"\bshould not be given\b",
-            r"\bkeep\b.*\bout\b",
-        ]
-        for pat in structural_exclusion_patterns:
-            if re.search(pat, t_lower):
-                return True
+        # Structural discrimination & exclusionary predicates ONLY constitute hate speech grounding
+        # when directed at a protected demographic group (e.g. 'Muslims denied housing', 'refused entry to immigrants')
+        if has_target:
+            structural_exclusion_predicates = [
+                "rejected", "reject", "denied", "deny", "refused", "refuse", "barred", "bar",
+                "prohibited", "prohibit", "excluded", "exclude", "prevented", "prevent",
+                "not allowed", "should not be allowed", "never be allowed", "must not be allowed",
+                "cannot be allowed", "not be permitted", "not permitted", "should not be permitted",
+                "never be promoted", "not be promoted", "disqualified", "disqualify",
+                "fewer rights", "no rights", "fewer legal protections",
+                "inferior", "subordinate", "second-class", "stay away", "stay beneath", "know their place",
+                "kept separate", "keep separate", "keep out", "kept out", "forced out",
+                "throw out", "banned", "deny housing", "denied housing", "not deserve", "do not deserve",
+                "does not deserve", "no voice", "cannot have a voice", "not real citizens",
+                "disappear from public life", "ruin every place", "ruining society",
+                "born criminals", "weak-minded", "less intelligent", "useless to the community",
+                "naturally violent", "naturally dishonest", "cannot be trusted",
+                "unclean", "dirty", "ashamed of belonging",
+                # Additional structural discrimination, exclusion & hostility markers
+                "not fit", "unfit", "disgusting", "defective", "worthless", "segregated", "unwelcome",
+                "less human", "hidden away", "should be avoided", "should be removed", "pushed out",
+                "disappeared from public", "does not belong", "do not belong", "threat just by existing",
+                "never be trusted", "cannot contribute", "should not be included", "never hold positions",
+                "less capable", "born to serve", "nothing worth hearing", "too irrational",
+                "never be accepted", "all dangerous", "inherently untrustworthy", "criminals and dishonest",
+                "bhag ja", "niklo", "nikalo"
+            ]
+            for marker in structural_exclusion_predicates:
+                if marker in t_lower:
+                    return True
+
+            import re
+            structural_exclusion_patterns = [
+                r"\bnobody\b.*\b(allowed|permitted|hire|hired|deserve|deserves|rights|voice|place|welcome)\b",
+                r"\bno one\b.*\b(allowed|permitted|hire|hired|deserve|deserves|rights|voice|place|welcome)\b",
+                r"\bdo not\b.*\b(rent|let|invite|employ|hire|serve|allow)\b",
+                r"\bnot\b.*\b(rent|employ|hire|served|invited|accepted)\b",
+                r"\bonly\b.*\bcapable\b",
+                r"\bincapable\b",
+                r"\bshould not be given\b",
+                r"\bkeep\b.*\bout\b",
+            ]
+            for pat in structural_exclusion_patterns:
+                if re.search(pat, t_lower):
+                    return True
 
         return False
 

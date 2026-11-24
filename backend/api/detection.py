@@ -173,21 +173,26 @@ def detect_content(req: DetectionRequest):
         if transformer_clf and transformer_clf.is_trained:
             pred_res = transformer_clf.predict(full_text)
             
-            # Incorporate Cross-Modal CNN Feature Fusion when image tensor is available
+            # Incorporate Cross-Modal CNN Feature Fusion when image tensor and trained checkpoint are available
             if img_tensor is not None:
-                try:
-                    text_feat = transformer_clf.encode_text(full_text)
-                    with torch.no_grad():
-                        mm_logits = _multimodal_detector(text_feat, img_tensor)
-                        mm_probs = F.softmax(mm_logits, dim=-1).cpu().numpy()[0]
-                    p_mm_hate = float(mm_probs[1])
-                    # Calibrate text probability with visual CNN representation (70% text / 30% visual cross-attention)
-                    fused_prob = round(0.70 * pred_res["raw_hateful_probability"] + 0.30 * p_mm_hate, 4)
-                    pred_label = 1 if fused_prob >= 0.50 else 0
-                    confidence = fused_prob if pred_label == 1 else round(1.0 - fused_prob, 4)
-                    modalities_used.append("visual_cnn_fusion")
-                except Exception as e:
-                    print(f"Multimodal cross-attention fallback: {e}")
+                mm_ckpt = settings.resolve_path("models/checkpoints/multimodal_detector.pt")
+                if mm_ckpt.exists():
+                    try:
+                        text_feat = transformer_clf.encode_text(full_text)
+                        with torch.no_grad():
+                            mm_logits = _multimodal_detector(text_feat, img_tensor)
+                            mm_probs = F.softmax(mm_logits, dim=-1).cpu().numpy()[0]
+                        p_mm_hate = float(mm_probs[1])
+                        # Calibrate text probability with visual CNN representation (70% text / 30% visual cross-attention)
+                        fused_prob = round(0.70 * pred_res["raw_hateful_probability"] + 0.30 * p_mm_hate, 4)
+                        pred_label = 1 if fused_prob >= 0.50 else 0
+                        confidence = fused_prob if pred_label == 1 else round(1.0 - fused_prob, 4)
+                        modalities_used.append("visual_cnn_fusion")
+                    except Exception as e:
+                        print(f"Multimodal cross-attention fallback: {e}")
+                        pred_label = pred_res["label"]
+                        confidence = pred_res["confidence"]
+                else:
                     pred_label = pred_res["label"]
                     confidence = pred_res["confidence"]
             else:
