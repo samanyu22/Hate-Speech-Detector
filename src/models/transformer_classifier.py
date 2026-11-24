@@ -112,7 +112,7 @@ class MultilingualTransformerEngine:
         # Severe casteist & communal slurs
         "bhangi", "chamar", "mulla", "mulle", "katwe", "katwa", "jihadi", "jihadis",
         # Severe threats
-        "gas these", "madarchod", "behenchod", "haramkhor", "gaddar", "deshdrohi"
+        "gas these", "madarchod", "behenchod", "haramkhor", "harami", "haramzada", "haramzade", "gaddar", "deshdrohi"
     }
 
     TARGETED_IDENTITIES = {
@@ -222,12 +222,37 @@ class MultilingualTransformerEngine:
             "disappear from public life", "ruin every place", "ruining society",
             "born criminals", "weak-minded", "less intelligent", "useless to the community",
             "naturally violent", "naturally dishonest", "cannot be trusted",
-            "unclean", "dirty", "ashamed of belonging"
+            "unclean", "dirty", "ashamed of belonging",
+            # Additional structural discrimination, exclusion & hostility markers
+            "not fit", "unfit", "disgusting", "defective", "worthless", "segregated", "unwelcome",
+            "less human", "hidden away", "should be avoided", "should be removed", "pushed out",
+            "disappeared from public", "does not belong", "do not belong", "threat just by existing",
+            "never be trusted", "cannot contribute", "should not be included", "never hold positions",
+            "less capable", "born to serve", "nothing worth hearing", "too irrational",
+            "never be accepted", "all dangerous", "inherently untrustworthy", "criminals and dishonest",
+            "bhag ja", "niklo", "nikalo"
         ]
         t_lower = text.lower()
         for marker in grounded_hostility_markers:
             if marker in t_lower:
                 return True
+
+        # Regex patterns for structural exclusion where subjects/predicates are distributed
+        import re
+        structural_exclusion_patterns = [
+            r"\bnobody\b.*\b(allowed|permitted|hire|hired|deserve|deserves|rights|voice|place|welcome)\b",
+            r"\bno one\b.*\b(allowed|permitted|hire|hired|deserve|deserves|rights|voice|place|welcome)\b",
+            r"\bdo not\b.*\b(rent|let|invite|employ|hire|serve|allow)\b",
+            r"\bnot\b.*\b(rent|employ|hire|served|invited|accepted)\b",
+            r"\bonly\b.*\bcapable\b",
+            r"\bincapable\b",
+            r"\bshould not be given\b",
+            r"\bkeep\b.*\bout\b",
+        ]
+        for pat in structural_exclusion_patterns:
+            if re.search(pat, t_lower):
+                return True
+
         return False
 
     def train(self, records: List[DatasetRecord], epochs: int = 15, lr: float = 1.5e-3) -> Dict[str, Any]:
