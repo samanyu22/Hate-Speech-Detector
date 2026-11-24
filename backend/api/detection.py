@@ -131,10 +131,12 @@ def detect_content(req: DetectionRequest):
         except Exception as e:
             print(f"Image processing note: {e}")
 
-    # Combine text and OCR text if present
+    # Combine text, OCR text, and Context if present
     full_text = clean_text
     if ocr_result["extracted_text"]:
-        full_text = f"{clean_text} [OCR: {ocr_result['extracted_text']}]".strip()
+        full_text = f"{full_text} [OCR: {ocr_result['extracted_text']}]".strip()
+    if ctx_info["has_context"]:
+        full_text = f"{full_text} [CONTEXT: {ctx_info['formatted_context']}]".strip()
 
     # 4. Model Selection & Inference
     active_reg = get_active_model_registry_info()
