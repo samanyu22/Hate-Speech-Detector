@@ -432,9 +432,18 @@ function initDetectionWorkspace() {
   const imgBadge = document.getElementById('imageStatusBadge');
 
   if (imageInput) {
+    // Reset file value on click so selecting the same or next image always fires 'change'
+    imageInput.addEventListener('click', () => {
+      imageInput.value = '';
+    });
+
     imageInput.addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (!file) return;
+
+      // When a new image is chosen, clear stale text and hide previous results
+      if (textInput) textInput.value = '';
+      if (resultCard) resultCard.style.display = 'none';
 
       const reader = new FileReader();
       reader.onload = async function(evt) {
@@ -455,10 +464,10 @@ function initDetectionWorkspace() {
         try {
           const modelId = document.getElementById('detectModelSelect') ? document.getElementById('detectModelSelect').value : 'multilingual-transformer-v1';
           const ctxText = contextInput ? contextInput.value.trim() : '';
-          const existingText = textInput ? textInput.value.trim() : '';
 
+          // Send empty text so the newly extracted OCR text becomes the clean_text for the model
           const payload = {
-            text: existingText,
+            text: '',
             image_base64: currentUploadedImageBase64,
             context: ctxText ? { thread_history: [ctxText] } : null,
             model_id: modelId,
@@ -513,6 +522,10 @@ function initDetectionWorkspace() {
       if (imgPreview) imgPreview.src = '';
       if (imgPreviewContainer) imgPreviewContainer.style.display = 'none';
       clearImgBtn.style.display = 'none';
+      if (textInput) textInput.value = '';
+      if (resultCard) resultCard.style.display = 'none';
+      const tokenStream = document.getElementById('resTokenStream');
+      if (tokenStream) tokenStream.innerHTML = '';
       if (imgBadge) {
         imgBadge.innerText = 'Image Selected';
         imgBadge.style.background = '#1e293b';
