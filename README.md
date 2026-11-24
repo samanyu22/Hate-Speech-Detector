@@ -5,7 +5,7 @@
   <img src="https://img.shields.io/badge/PyTorch-2.x-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch" />
   <img src="https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
   <img src="https://img.shields.io/badge/EasyOCR-Supported-4285F4?style=flat-square" alt="EasyOCR" />
-  <img src="https://img.shields.io/badge/Tests-45%2F45%20Passing-success?style=flat-square" alt="Test Status" />
+  <img src="https://img.shields.io/badge/Tests-40%2F40%20Passing-success?style=flat-square" alt="Test Status" />
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License" />
 </p>
 
@@ -216,7 +216,7 @@ Hate-Speech-Detector/
 │   ├── preprocessing/             # Text normalizer, context processor, image processor
 │   ├── rewards/                   # Multi-objective reward vector computation
 │   └── optimization/              # DPO preference dataset builder and optimizer
-└── tests/                         # Comprehensive Pytest Verification Suite (45 Tests)
+└── tests/                         # Comprehensive Pytest Verification Suite (40 Tests)
     ├── unit/                      # Unit tests for models, preprocessing, rewards, XAI
     ├── integration/               # Pipeline and optimization lifecycle tests
     └── end_to_end/                # Live FastAPI endpoint and schema tests
@@ -257,7 +257,7 @@ The server initializes at `http://127.0.0.1:8000`:
 
 ### 3. Run the Automated Test Suite
 
-Execute the full suite of 45 automated tests:
+Execute the full suite of 40 automated tests:
 
 ```bash
 pytest tests/ -v

@@ -85,7 +85,7 @@ where $\alpha=0.35, \beta=0.25, \gamma=0.15, \delta=0.25, \lambda_{\text{err}}=0
 \section{Experimental Evaluation}
 We executed 9 controlled research experiments using stratified splits on HASOC and HateXplain benchmark subsets:
 \begin{itemize}
-    \item \textbf{Exp 1 (Classical vs Transformer):} Multilingual Attention Transformer achieves high discrimination (97.9\% to 1.00 Macro F1) with robust subword generalization, outperforming classical TF-IDF baselines on syntactic inversions and ungrounded insults.
+    \item \textbf{Exp 1 (Classical vs Transformer):} Multilingual Attention Transformer achieved 1.00 Macro F1 vs 1.00 for TF-IDF + Logistic Regression on the balanced test split.
     \item \textbf{Exp 2 (Monolingual vs Multilingual):} Balanced performance across English, Hindi, and Hinglish with zero script drop.
     \item \textbf{Exp 3 (Multimodal Ablation):} Multimodal fusion resolved visual-semantic contradictions, yielding a +5\% gain over text-only inference on memes.
     \item \textbf{Exp 4 (Fusion Comparison):} Cross-Attention achieved superior discrimination (0.96 F1) over Decision Fusion (0.88 F1).

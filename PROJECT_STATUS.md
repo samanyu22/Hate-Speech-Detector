@@ -22,7 +22,7 @@
 | **Core Architecture & Specs** | Formalization of $x_i = \{T_i, V_i, C_i\}$, ADR, Traceability | COMPLETED | Documented in `ARCHITECTURE_DECISIONS.md`, `REQUIREMENTS_TRACEABILITY.md` |
 | **Central Configuration** | Dynamic YAML configs for models, datasets, rewards, devices | COMPLETED | `config/` central YAML files loaded without source code modifications |
 | **Backend API & Database** | FastAPI REST endpoints, SQLite ORM, async task manager | COMPLETED | Verified with `backend/main.py`, tested with 16 automated tests |
-| **Dataset Management** | Adapters for CSV/JSON/JSONL, validation, label mapping, splits | COMPLETED | Verified on 1,310 curated samples across HASOC (840), HateXplain (200), Subtle Benchmark (240), and Memes (30) |
+| **Dataset Management** | Adapters for CSV/JSON/JSONL, validation, label mapping, splits | COMPLETED | Verified on HASOC (195 samples), HateXplain (80 samples), Memes (50 samples) |
 | **Multilingual & Code-Mixed NLP** | Tokenization, Devanagari/Hinglish detection, normalization | COMPLETED | Script analysis + phonetic Hinglish dictionary in `src/language/` |
 | **Multimodal Vision & OCR** | EasyOCR meme extraction, visual embedding, fusion layer | COMPLETED | `src/multimodal/ocr.py` extracting bounding boxes and typography |
 | **Detection Engines** | Classical TF-IDF baseline, Transformer classifier, LLM reasoner | COMPLETED | Both models trained and serialized in `models/checkpoints/` |
@@ -32,7 +32,7 @@
 | **Research Experiments (1-9)** | Reproducible pipelines comparing baselines, modalities, rewards | COMPLETED | All 9 experiments executed and persisted in `experiments/results/` |
 | **ThoughtStream UI (+ Dark Mode)** | 11 dedicated research pages with Zen aesthetic and Dark Mode | COMPLETED | Implemented in `frontend/` adhering strictly to `thoughtstream-DESIGN.md` |
 | **ACL Paper & Presentation** | ACL LaTeX paper draft, slides deck, full documentation | COMPLETED | `paper/main.tex`, `paper/references.bib`, `presentation/` |
-| **Automated Test Suite** | Unit, integration, and end-to-end tests for all modules | COMPLETED | 45/45 automated tests passing in 15.01s with pytest |
+| **Automated Test Suite** | Unit, integration, and end-to-end tests for all modules | COMPLETED | 16/16 tests passing in 7.45s with pytest |
 
 ---
 
