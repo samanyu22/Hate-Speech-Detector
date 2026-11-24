@@ -46,13 +46,17 @@ class TextAttributionEngine:
         max_prob_delta = max((abs(r[1]) for r in raw_pert), default=0.0)
         use_logit_attribution = (max_prob_delta < 0.0005 and base_logits is not None)
 
+        # Statistical significance deadzone: probability shifts < 2.0% (0.02) are baseline
+        # softmax re-normalization noise and should remain neutral, preventing benign words from glowing red/green.
+        significance_threshold = 0.02
+
         if use_logit_attribution:
             max_dl = max((abs(r[2]) for r in raw_pert), default=1.0)
             norm_factor = max(1.0, max_dl)
             attributions = []
             for w, dp, dl in raw_pert:
                 score = round(dl / norm_factor * 0.5, 4)
-                pol = "positive_evidence" if score > 0.01 else ("negative_evidence" if score < -0.01 else "neutral")
+                pol = "positive_evidence" if score >= significance_threshold else ("negative_evidence" if score <= -significance_threshold else "neutral")
                 attributions.append({
                     "token": w,
                     "score": score,
@@ -62,7 +66,7 @@ class TextAttributionEngine:
         else:
             attributions = []
             for w, dp, dl in raw_pert:
-                pol = "positive_evidence" if dp > 0.001 else ("negative_evidence" if dp < -0.001 else "neutral")
+                pol = "positive_evidence" if dp >= significance_threshold else ("negative_evidence" if dp <= -significance_threshold else "neutral")
                 attributions.append({
                     "token": w,
                     "score": round(dp, 4),
