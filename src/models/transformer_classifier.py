@@ -119,6 +119,8 @@ class MultilingualTransformerEngine:
         "jew", "jews", "jewish", "muslim", "muslims", "hindu", "hindus",
         "christian", "christians", "sikh", "sikhs", "buddhist", "buddhists",
         "jain", "jains", "dalit", "dalits", "brahmin", "brahmins", "adivasi", "adivasis",
+        "indian", "indians", "pakistani", "pakistanis", "bangladeshi", "bangladeshis",
+        "italian", "italians", "mexican", "mexicans", "african", "africans", "chinese",
         "black", "blacks", "white", "whites", "asian", "asians", "roma", "indigenous",
         "women", "woman", "girls", "girl", "men", "man", "gay", "gays", "lesbian", "lesbians",
         "transgender", "trans", "non-binary", "queer", "intersex",
@@ -391,8 +393,23 @@ class MultilingualTransformerEngine:
         tokens = set(words_lower)
 
         has_target = any(t in tokens or t in t_lower for t in self.TARGETED_IDENTITIES)
-        subordination_phrases = ["know their place", "cannot be trusted", "deserved it", "deserve it", "stay beneath", "second-class", "born to serve"]
+        subordination_phrases = [
+            "know their place", "cannot be trusted", "deserved it", "deserve it", "stay beneath", "second-class", "born to serve",
+            "should be jailed", "be jailed", "jailed", "locked up", "should be locked up", "should be deported", "be deported", "deported", "kick them out"
+        ]
         has_targeted_subordination = has_target and any(p in t_lower for p in subordination_phrases)
+
+        # Check targeted sensory tropes (e.g. "stinky indian", "filthy immigrants")
+        sensory_tropes = {"stinky", "stink", "stinks", "filthy", "dirty", "unclean"}
+        has_unneg_sensory = False
+        has_neg_sensory = False
+        if has_target:
+            for i, w in enumerate(words_lower):
+                if w in sensory_tropes:
+                    if self.is_word_locally_negated(words_lower, i):
+                        has_neg_sensory = True
+                    else:
+                        has_unneg_sensory = True
 
         # Check if text is explicit counterspeech quoting and condemning hate speech
         is_condemning_quote = False
@@ -406,7 +423,7 @@ class MultilingualTransformerEngine:
 
         # Check for locally negated pejoratives and Hinglish hostility verbs
         for i, w in enumerate(words_lower):
-            if w in {"worthless", "disgusting", "defective"}:
+            if w in {"worthless", "disgusting", "defective", "stinky", "stink", "stinks", "filthy"}:
                 if self.is_word_locally_negated(words_lower, i):
                     has_grounding = False
             if w in {"khatam", "maro", "marna"}:
@@ -414,10 +431,14 @@ class MultilingualTransformerEngine:
                     is_neg_hostility = True
                     has_slur = False
 
-        # Severe explicit slurs, direct unnegated hatred, or targeted subordination are hate speech
-        if (has_slur or has_unneg_hostility or has_targeted_subordination) and not is_condemning_quote:
+        # If sensory words appear in non-demographic contexts (e.g. "this garbage is stinky"), clear grounding
+        if not has_target and any(w in sensory_tropes for w in words_lower):
+            has_grounding = False
+
+        # Severe explicit slurs, direct unnegated hatred, targeted subordination, or targeted derogatory tropes are hate speech
+        if (has_slur or has_unneg_hostility or has_targeted_subordination or has_unneg_sensory) and not is_condemning_quote:
             z1 = max(z1, z0 + 3.8)
-        elif is_neg_hostility or has_neg_slur or (is_condemning_quote and z0 > z1):
+        elif is_neg_hostility or has_neg_slur or has_neg_sensory or (is_condemning_quote and z0 > z1):
             # Explicit negation of hostility, negated slurs/tropes, or valid counter-speech
             z1 = min(z1, z0 - 2.5)
         elif len(known_content) == 0 and len(content_words) > 0:
