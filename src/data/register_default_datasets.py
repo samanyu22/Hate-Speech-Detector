@@ -8,7 +8,6 @@ from src.data.validator import DatasetValidator
 def register_default_datasets():
     conn = get_connection()
     cursor = conn.cursor()
-    base_dir = settings.base_dir
 
     configs = [
         {
@@ -18,7 +17,7 @@ def register_default_datasets():
             "license": "Research Use Only",
             "languages": ["hi", "en", "hi-en"],
             "modalities": ["text"],
-            "file_path": str(base_dir / "data" / "raw" / "hasoc_hi_en.jsonl"),
+            "file_path": "data/raw/hasoc_hi_en.jsonl",
             "text_column": "text",
             "label_column": "label",
             "label_mapping": {"0": 0, "1": 1}
@@ -30,7 +29,7 @@ def register_default_datasets():
             "license": "MIT License",
             "languages": ["en"],
             "modalities": ["text", "rationales"],
-            "file_path": str(base_dir / "data" / "raw" / "hatexplain_benchmark.jsonl"),
+            "file_path": "data/raw/hatexplain_benchmark.jsonl",
             "text_column": "post_tokens",
             "label_column": "label",
             "label_mapping": {"0": 0, "1": 1}
@@ -42,7 +41,7 @@ def register_default_datasets():
             "license": "Research Non-Commercial",
             "languages": ["en"],
             "modalities": ["text", "context"],
-            "file_path": str(base_dir / "data" / "raw" / "subtle_structural_benchmark.jsonl"),
+            "file_path": "data/raw/subtle_structural_benchmark.jsonl",
             "text_column": "text",
             "label_column": "label",
             "label_mapping": {"0": 0, "1": 1}
@@ -54,7 +53,7 @@ def register_default_datasets():
             "license": "Research Non-Commercial",
             "languages": ["en", "hi", "hi-en"],
             "modalities": ["text", "image", "ocr", "context"],
-            "file_path": str(base_dir / "data" / "raw" / "multimodal_memes.jsonl"),
+            "file_path": "data/raw/multimodal_memes.jsonl",
             "text_column": "caption",
             "label_column": "label",
             "image_column": "image_path",

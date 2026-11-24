@@ -62,7 +62,7 @@ def train_and_register_baselines():
         "TF-IDF + Linear Classifier Baseline",
         "classical",
         "1.0",
-        str(classical_clf.checkpoint_path),
+        settings.to_relative_path(classical_clf.checkpoint_path),
         "ready",
         0,
         json.dumps(eval_res)
@@ -84,7 +84,7 @@ def train_and_register_baselines():
         "Multilingual Code-Mixed Transformer Classifier",
         "transformer",
         "1.0",
-        str(transformer_engine.checkpoint_path),
+        settings.to_relative_path(transformer_engine.checkpoint_path),
         "ready",
         1, # Active model by default
         json.dumps(t_eval_res)
@@ -103,7 +103,7 @@ def train_and_register_baselines():
         0.75,
         t_eval_res["macro_f1"],
         t_eval_res["accuracy"],
-        str(transformer_engine.checkpoint_path),
+        settings.to_relative_path(transformer_engine.checkpoint_path),
         json.dumps(t_eval_res)
     ))
 

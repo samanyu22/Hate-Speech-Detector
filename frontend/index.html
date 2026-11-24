@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>HS Detector — Explainable AI & Reward Optimized LLMs</title>
-  <link rel="stylesheet" href="/static/css/thoughtstream.css?v=2.3">
+  <link rel="stylesheet" href="/static/css/thoughtstream.css?v=2.4">
 </head>
 <body>
   <div class="app-container">
@@ -257,7 +257,7 @@
           <div id="detectionResultCard" class="card-elevated" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
               <div>
-                <span id="resLabelBadge" class="badge">HATEFUL</span>
+                <span id="resLabelBadge" class="badge" style="white-space:nowrap;">HATEFUL</span>
                 <span style="margin-left:12px; font-size:14px; color:var(--color-text-secondary);">Confidence: <strong id="resConfidence">95.4%</strong></span>
               </div>
               <div style="font-size:12px; color:var(--color-text-tertiary);">
@@ -495,7 +495,7 @@
                 <strong>EasyOCR Extracted:</strong> <code id="lightboxOcr" style="font-family:var(--font-mono); background:var(--color-surface-raised); padding:2px 6px;"></code>
               </div>
               <div style="font-size:13px; margin-bottom:14px;">
-                <strong>Ground Truth:</strong> <span id="lightboxLabelBadge" class="badge"></span>
+                <strong>Ground Truth:</strong> <span id="lightboxLabelBadge" class="badge" style="white-space:nowrap;"></span>
               </div>
               <div style="display:flex; justify-content:flex-end; gap:8px;">
                 <button id="lightboxTestBtn" class="btn btn-primary btn-sm">Test in Detection Lab &rarr;</button>
@@ -1148,8 +1148,8 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
     </main>
   </div>
 
-  <script src="/static/js/api.js?v=2.3"></script>
-  <script src="/static/js/app.js?v=2.3"></script>
+  <script src="/static/js/api.js?v=2.4"></script>
+  <script src="/static/js/app.js?v=2.4"></script>
 </body>
 </html>
 

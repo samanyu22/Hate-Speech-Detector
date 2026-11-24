@@ -258,7 +258,7 @@ def generate_academic_datasets():
         rec = {
             "id": f"mm_meme_{idx+1:02d}",
             "caption": "Check out this trending meme shared in community group" if meme["label"] == 0 else "Look at what these parasites deserve, share widely",
-            "image_path": str(img_path),
+            "image_path": f"data/raw/images/{meme['name']}",
             "ocr_text": meme["text"].replace("\n", " "),
             "context": "Discussion thread on local policy and neighborhood values",
             "label": meme["label"],

@@ -517,7 +517,9 @@ function displayDetectionResult(res) {
   // Label badge
   const badge = document.getElementById('resLabelBadge');
   badge.className = `badge ${res.predicted_label === 1 ? 'badge-hate' : 'badge-nonhate'}`;
-  badge.innerText = res.label_name;
+  badge.innerHTML = res.predicted_label === 1 ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
+  badge.style.whiteSpace = 'nowrap';
+  badge.style.display = 'inline-block';
 
   document.getElementById('resConfidence').innerText = `${(res.confidence * 100).toFixed(1)}%`;
   document.getElementById('resLanguage').innerText = res.language_detected.toUpperCase();
@@ -748,7 +750,7 @@ async function renderDatasetInspector() {
     tbody.innerHTML = data.sample_slice.map((s, idx) => {
       const isHate = s.label === 1;
       const badgeClass = isHate ? 'badge-hate' : 'badge-nonhate';
-      const labelText = isHate ? 'HATEFUL (1)' : 'NON-HATEFUL (0)';
+      const labelText = isHate ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
       const lang = s.language ? s.language.toUpperCase() : 'EN';
       const cleanText = (s.text || '').replace(/"/g, '&quot;');
 
@@ -787,7 +789,7 @@ async function renderDatasetInspector() {
             ${extraPills ? `<div style="margin-top:4px;">${extraPills}</div>` : ''}
           </td>
           <td><span class="badge badge-neutral" style="font-size:10px;">${lang}</span></td>
-          <td style="white-space:nowrap;"><span class="badge ${badgeClass}" style="white-space:nowrap;">${labelText}</span></td>
+          <td style="white-space:nowrap; min-width:145px;"><span class="badge ${badgeClass}" style="white-space:nowrap !important; display:inline-block;">${labelText}</span></td>
           <td>
             <button class="btn btn-secondary btn-sm" onclick="sendSampleToDetectionLab('${escapedText}', '${escapedCtx}', '${escapedImg}')" style="padding:3px 8px; font-size:11px; white-space:nowrap;">
               Test in Lab &rarr;
@@ -840,7 +842,9 @@ window.openMemeLightbox = function(imgUrl, encodedCaption, encodedOcr, label) {
   const badge = document.getElementById('lightboxLabelBadge');
   if (badge) {
     badge.className = `badge ${label === 1 ? 'badge-hate' : 'badge-nonhate'}`;
-    badge.innerText = label === 1 ? 'HATEFUL (1)' : 'NON-HATEFUL (0)';
+    badge.innerHTML = label === 1 ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
+    badge.style.whiteSpace = 'nowrap';
+    badge.style.display = 'inline-block';
   }
 
   const testBtn = document.getElementById('lightboxTestBtn');
@@ -1363,7 +1367,7 @@ window.runCounterfactualStressTest = async function() {
         tr.innerHTML = `
           <td><strong>${r.demographic}</strong></td>
           <td><code style="font-size:12px;">${r.text}</code></td>
-          <td><span class="badge ${badgeClass}" style="white-space:nowrap;">${r.label_str} (${r.label})</span></td>
+          <td style="white-space:nowrap; min-width:145px;"><span class="badge ${badgeClass}" style="white-space:nowrap !important; display:inline-block;">${r.label_str}&nbsp;(${r.label})</span></td>
           <td>${(r.confidence * 100).toFixed(1)}%</td>
           <td><span class="badge badge-nonhate" style="white-space:nowrap;">Parity Met</span></td>
         `;

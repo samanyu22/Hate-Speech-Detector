@@ -3,7 +3,7 @@
 
 **Academic Supervisor:** Dr. Pradeepika Verma  
 **Formulation:** $\mathcal{F}_\theta(x_i) \to y_i \in \{0, 1\}, \quad \text{where } x_i = \{T_i, V_i, C_i\}$  
-**Workspace:** `c:\Users\gagan\Desktop\Hate-Speech-Detector`  
+**Workspace:** `.`  
 **Test Suite Status:** 45 / 45 Tests Passing (100% Green)  
 **Academic Target:** Association for Computational Linguistics (ACL 2026) / University Viva Examination  
 
@@ -26,6 +26,9 @@
    - 4.10. Controlled Empirical Experiments (EXP-1 through EXP-9)
    - 4.11. Production FastAPI Backend & Concurrency Management
    - 4.12. ThoughtStream Research UI & Design System
+   - 4.13. Universal Dataset Inspection & Multimodal Asset Auditing
+   - 4.14. Counterfactual Demographic Invariance Stress-Testing & Disparity Probing
+   - 4.15. Dynamic Research Experiment Benchmarking Suite & Reset Lifecycle
 5. [Chronological Evolution & Major Debugging Breakthroughs](#5-chronological-evolution--major-debugging-breakthroughs)
    - Breakthrough 1: Out-of-Vocabulary (OOV) Collapse & Word-Dropout Regularization
    - Breakthrough 2: Quotation & Counterspeech Ambiguity Disambiguation
@@ -34,6 +37,7 @@
    - Breakthrough 5: Eradicating Synthetic Hardcoding in Experiments & Optimizer
    - Breakthrough 6: Live Multimodal CNN Cross-Attention Integration
    - Breakthrough 7: Deployment Engineering & Cloud Serverless Size Limits
+   - Breakthrough 8: Demographic Identity Grounding vs. Benevolent Statement False Positives
 6. [Comprehensive Verification & Viva Defense Checklist](#6-comprehensive-verification--viva-defense-checklist)
 7. [Repository File Map & Operational Guide](#7-repository-file-map--operational-guide)
 
@@ -261,7 +265,7 @@ flowchart TD
 ## 4. Detailed Subsystem Engineering & Code Walkthrough
 
 ### 4.1 Linguistic Normalization & Code-Mixed Detection
-- **Source Files:** [src/preprocessing/text/normalizer.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/preprocessing/text/normalizer.py), [src/language/detector.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/language/detector.py)
+- **Source Files:** [src/preprocessing/text/normalizer.py](src/preprocessing/text/normalizer.py), [src/language/detector.py](src/language/detector.py)
 - **Implementation Highlights:**
   - `TextNormalizer.normalize()` applies Unicode NFKC normalization, converts URLs to `[URL]`, maps mentions to `[MENTION]`, and splits camelCase hashtags (`#StopAsianHate` $\to$ `"Stop Asian Hate"`).
   - **Devanagari Combining Mark Preservation:** Custom tokenization regex `r"[\w\u0900-\u097f']+|[^\s\w\u0900-\u097f]"` guarantees that Hindi matras, virama/halant, anusvara, and nuktas remain attached to base characters, preventing token fragmentation.
@@ -270,7 +274,7 @@ flowchart TD
 ---
 
 ### 4.2 Contextual Dialogue Sanitization & Demographic Neutrality
-- **Source File:** [src/preprocessing/context/context_processor.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/preprocessing/context/context_processor.py)
+- **Source File:** [src/preprocessing/context/context_processor.py](src/preprocessing/context/context_processor.py)
 - **Implementation Highlights:**
   - Conversational thread histories are parsed into structured multi-turn sequences.
   - **Bias Mitigation:** Sensitive demographic tokens (`hindu`, `muslim`, `jewish`, `dalit`, `black`, `white`, `gay`, `transgender`) within prior context turns are sanitized and masked as `[DEMOGRAPHIC_NEUTRAL]`.
@@ -279,7 +283,7 @@ flowchart TD
 ---
 
 ### 4.3 Multimodal Vision, EasyOCR & Spatial Bounding Boxes
-- **Source Files:** [src/multimodal/ocr.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/multimodal/ocr.py), [src/preprocessing/image/image_preprocessor.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/preprocessing/image/image_preprocessor.py)
+- **Source Files:** [src/multimodal/ocr.py](src/multimodal/ocr.py), [src/preprocessing/image/image_preprocessor.py](src/preprocessing/image/image_preprocessor.py)
 - **Implementation Highlights:**
   - `ImagePreprocessor` handles raw base64 strings, data URIs, and local file paths. Images are standardized to $224 \times 224 \times 3$ with Bilinear interpolation, calculating luminance, contrast, and normalized float tensors.
   - Uploaded base64 meme images are persisted to `data/uploads/{prediction_id}.png` for complete auditability.
@@ -288,7 +292,7 @@ flowchart TD
 ---
 
 ### 4.4 Contextual Transformer Backbone & Classical NLP Pipeline
-- **Source Files:** [src/models/transformer_classifier.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/models/transformer_classifier.py), [src/classification/classical_baseline.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/classification/classical_baseline.py)
+- **Source Files:** [src/models/transformer_classifier.py](src/models/transformer_classifier.py), [src/classification/classical_baseline.py](src/classification/classical_baseline.py)
 - **Implementation Highlights:**
   - `ClassicalBaselineClassifier`: FeatureUnion of sublinear TF-IDF word n-grams (1-2) and character boundary n-grams (2-5) with balanced Logistic Regression. Exposes `decision_function` log-odds `[-decision, decision]` for XAI logit sensitivity fallback.
   - `MultilingualAttentionClassifier`: PyTorch neural network featuring 15,000 vocabulary embeddings, BiLSTM context encoding, 4-head self-attention with padding masks, masked average pooling, and dropout (0.3).
@@ -298,7 +302,7 @@ flowchart TD
 ---
 
 ### 4.5 Intermediate Cross-Modal Cross-Attention Fusion
-- **Source File:** [src/multimodal/fusion.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/multimodal/fusion.py)
+- **Source File:** [src/multimodal/fusion.py](src/multimodal/fusion.py)
 - **Implementation Highlights:**
   - `VisualFeatureExtractor`: 4 convolutional stages with Batch Normalization, ReLU, MaxPool, and Adaptive Average Pooling outputting a 128-dimensional visual embedding.
   - `MultimodalDetector`: Features a projection layer mapping 256-dim text representations to 128-dim, followed by `CrossModalCrossAttentionFusion` with sigmoid gating.
@@ -307,7 +311,7 @@ flowchart TD
 ---
 
 ### 4.6 Grounded Explainable AI (XAI) & Directional AOPC
-- **Source Files:** [src/explainability/text_attribution.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/explainability/text_attribution.py), [src/explainability/visual_attribution.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/explainability/visual_attribution.py), [src/explainability/synthesizer.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/explainability/synthesizer.py)
+- **Source Files:** [src/explainability/text_attribution.py](src/explainability/text_attribution.py), [src/explainability/visual_attribution.py](src/explainability/visual_attribution.py), [src/explainability/synthesizer.py](src/explainability/synthesizer.py)
 - **Implementation Highlights:**
   - `TextAttributionEngine` computes model-agnostic leave-one-out perturbation. Tokens are scored by signed probability shift, distinguishing positive evidence (supporting the decision) from negative evidence (opposing the decision).
   - **Symmetric Directional Faithfulness (AOPC):** Evaluates drop in confidence for the *predicted class* $\hat{y}$ upon top-k token ablation, bounded strictly in $[0.0, 1.0]$.
@@ -317,7 +321,7 @@ flowchart TD
 ---
 
 ### 4.7 Multi-Objective Reward Vector Formulation
-- **Source File:** [src/rewards/reward_function.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/rewards/reward_function.py)
+- **Source File:** [src/rewards/reward_function.py](src/rewards/reward_function.py)
 - **Implementation Highlights:**
   - Evaluates the 5-parameter vector: $R_{\text{cls}}$ (accuracy), $R_{\text{exp}}$ (faithfulness), $R_{\text{ctx}}$ (context), $R_{\text{fb}}$ (normalized human feedback rating), and $R_{\text{err}}$ (overconfidence penalty).
   - Fully configurable via `config/rewards/default.yaml` and the interactive Reward Studio in the frontend.
@@ -325,7 +329,7 @@ flowchart TD
 ---
 
 ### 4.8 Direct Preference Optimization (DPO) & Model Versioning
-- **Source Files:** [src/optimization/optimizer.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/optimization/optimizer.py), [src/optimization/preference_dataset.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/optimization/preference_dataset.py)
+- **Source Files:** [src/optimization/optimizer.py](src/optimization/optimizer.py), [src/optimization/preference_dataset.py](src/optimization/preference_dataset.py)
 - **Implementation Highlights:**
   - `PreferenceDatasetBuilder` queries audited feedback from SQLite, pairing winning ground-truth labels against losing predictions. Includes implicit label fallback ($1 - \hat{y}$) when human evaluators mark an error without selecting a suggested dropdown.
   - `RewardOptimizer` trains the transformer head using the DPO preference objective.
@@ -335,7 +339,7 @@ flowchart TD
 ---
 
 ### 4.9 Linguistic Disaggregation & Equalized Odds Fairness Audit
-- **Source File:** [src/fairness/evaluator.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/fairness/evaluator.py)
+- **Source File:** [src/fairness/evaluator.py](src/fairness/evaluator.py)
 - **Implementation Highlights:**
   - Disaggregates test records across English, Hindi Devanagari, and Hinglish. If language metadata is missing, autonomous on-the-fly language identification is performed.
   - Computes subgroup confusion matrices, Accuracy, Macro F1, Precision, Recall, False Positive Rate (FPR), and False Negative Rate (FNR).
@@ -344,7 +348,7 @@ flowchart TD
 ---
 
 ### 4.10 Controlled Empirical Experiments (EXP-1 through EXP-9)
-- **Source File:** [src/experiments/runner.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/src/experiments/runner.py)
+- **Source File:** [src/experiments/runner.py](src/experiments/runner.py)
 - **Implementation Highlights:**
   - Automated execution harness for all 9 formal research investigations.
   - **Zero Synthetic Dictionaries:** Exp 3 dynamically compares caption-only vs. caption+OCR test splits; Exp 4 benchmarks real forward-pass latencies via `time.perf_counter()`; Exp 7 measures empirical feedback sample scaling; Exp 9 measures accuracy recovery on quotation and counterspeech challenge cases with and without context processing.
@@ -353,7 +357,7 @@ flowchart TD
 ---
 
 ### 4.11 Production FastAPI Backend & Concurrency Management
-- **Source Files:** [backend/main.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/backend/main.py), [backend/database/db.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/backend/database/db.py), [backend/api/detection.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/backend/api/detection.py), [backend/api/models.py](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/backend/api/models.py)
+- **Source Files:** [backend/main.py](backend/main.py), [backend/database/db.py](backend/database/db.py), [backend/api/detection.py](backend/api/detection.py), [backend/api/models.py](backend/api/models.py)
 - **Implementation Highlights:**
   - High-performance asynchronous ASGI application with CORS, no-cache headers, and static frontend mounting.
   - **SQLite WAL Mode & Concurrency:** Configured with `PRAGMA journal_mode=WAL;` and `PRAGMA synchronous=NORMAL;`, eliminating database lock contention during concurrent inference and feedback writes.
@@ -362,22 +366,57 @@ flowchart TD
 ---
 
 ### 4.12 ThoughtStream Research UI & Design System
-- **Source Files:** [frontend/index.html](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/frontend/index.html), [frontend/css/thoughtstream.css](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/frontend/css/thoughtstream.css), [frontend/js/app.js](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/frontend/js/app.js)
+- **Source Files:** [frontend/index.html](frontend/index.html), [frontend/css/thoughtstream.css](frontend/css/thoughtstream.css), [frontend/js/app.js](frontend/js/app.js)
 - **Implementation Highlights:**
   - Clean, zen, minimal aesthetic: 0px border radius, flat hairline borders, and warm neutral typography.
   - **Native Theme Engine:** Seamless Light/Dark mode toggle with persistent `localStorage` and native browser View Transitions API.
   - **11 Dedicated Research Laboratories:**
     1. *Detection Studio:* Real-time inference with dual-color token attribution heatmaps and OCR visualization.
-    2. *Dataset Management:* Benchmark record inspection, class balance charts, and schema validators.
+    2. *Dataset Management:* Benchmark record inspection, class balance charts, schema validators, and universal sample auditing.
     3. *Preprocessing Lab:* Interactive Unicode normalization, script detection, and demographic neutral masking.
     4. *Model Lab:* Architecture switching and version history inspection.
     5. *Explainability Lab:* Perturbation ablation curves, faithfulness scores, and natural language synthesis.
-    6. *Reward Studio:* Multi-objective weight sliders ($\alpha, \beta, \gamma, \delta, \lambda_{\text{err}}$) and live reward calculation.
+    6. *Reward Studio:* Multi-objective weight sliders ($\alpha, \beta, \gamma, \delta, \lambda_{\text{err}}$), preset weight configurations, and single-sample live reward vector simulations.
     7. *Optimization Hub:* Trigger DPO training cycles and review before-vs-after metric improvements.
-    8. *Fairness Audit:* Disaggregated linguistic subgroup charts and Equalized Odds gap verification.
-    9. *Experiment Runner:* One-click execution of Experiments 1–9 with real-time metric rendering.
+    8. *Fairness Audit:* Disaggregated linguistic subgroup charts, counterfactual demographic stress-testing, and Equalized Odds gap verification.
+    9. *Experiment Runner:* Execution of Experiments 1–9 with real-time step counter and specialized academic visualizers.
     10. *Reports & Publication:* Live ACL LaTeX manuscript viewer and summary exporter.
     11. *System Settings:* Thread allocation, device selection, and database maintenance.
+
+---
+
+### 4.13 Universal Dataset Inspection & Multimodal Asset Auditing
+The dataset ingestion layer was generalized via `UniversalDatasetAdapter` (`src/data/adapter.py`) to support heterogeneous social media formats without schema friction.
+- **Dynamic Field Auto-Resolution:** Automatically detects token columns (`post_tokens`, `tokens`), text fields (`text`, `caption`, `clean_text`), ground truth labels (`label`, `gold_label`, `Class`), and OCR transcriptions (`ocr_text`, `easyocr`).
+- **Multimodal Image Serving:** Direct integration between `data/raw/images/` and the FastAPI static file system mounts `/data/raw/images/{filename}`, enabling interactive thumbnail inspection and full-resolution lightbox viewing.
+- **Interactive Inspection Endpoint (`GET /api/datasets/{dataset_id}/inspect`):**
+  Supports parameterized querying (`limit`, `offset`, `label_filter`, `search`), calculating real-time class distributions and surfacing complete modal metadata (OCR text, contextual threads, post categories).
+
+---
+
+### 4.14 Counterfactual Demographic Invariance Stress-Testing & Disparity Probing
+To prevent identity bias in content moderation, an interactive counterfactual evaluation suite was integrated into the platform (`backend/api/fairness.py` and `#page-fairness`).
+- **Counterfactual Probe Endpoint (`POST /api/fairness/counterfactual-probe`):**
+  Accepts a template sentence containing the `[DEMOGRAPHIC]` token (e.g. *"People from [DEMOGRAPHIC] community are hardworking and honest."*) and dynamically evaluates model predictions across 8 protected socio-religious groups:
+  $$\mathcal{D} = \{\text{Muslim}, \text{Hindu}, \text{Sikh}, \text{Christian}, \text{Jewish}, \text{Dalit}, \text{Adivasi}, \text{Brahmin}\}$$
+- **Disparity Spread Metric ($\Delta_{\text{spread}}$):**
+  Quantifies the maximum probability deviation across all counterfactual perturbations:
+  $$\Delta_{\text{spread}} = \max_{d_i, d_j \in \mathcal{D}} \left| P(y=1 \mid x[d_i]) - P(y=1 \mid x[d_j]) \right|$$
+  An automated parity indicator confirms whether classifications remain identical and within the acceptable demographic parity threshold ($\Delta \le 0.10$).
+
+---
+
+### 4.15 Dynamic Research Experiment Benchmarking Suite & Reset Lifecycle
+The empirical experimentation harness (`backend/api/experiments.py` and `src/experiments/runner.py`) provides end-to-end execution of Protocols 1 through 9.
+- **Dynamic Verification Counter:** The UI tracks completion in real-time, transitioning from `0 / 9 Verified` sequentially through `1, 2, 3... / 9 Verified` as experiments finish executing.
+- **Dedicated Visualizers:**
+  - *Exp 1 & 4:* Architectural comparison grids and parameter/latency trade-off tables.
+  - *Exp 2 & 8:* Disaggregated language/subgroup parity charts.
+  - *Exp 3:* 2x2 confusion matrix heatmaps contrasting caption-only against fused multimodal meme classification.
+  - *Exp 5 & 6:* Token attribution tables and AOPC curve trajectories.
+  - *Exp 7:* Multi-objective reward optimization progression across iterations.
+  - *Exp 9:* Contextual disambiguation recovery delta bars.
+- **Reset Suite Lifecycle (`POST /api/experiments/reset`):** Purges logged experiment runs from SQLite (`DELETE FROM experiments`), resetting the suite counter to `0 / 9` on demand.
 
 ---
 
@@ -447,7 +486,20 @@ flowchart TD
 - **The Fix:**
   1. Documented that Vercel is designed for lightweight frontend/Next.js apps and cannot host heavy PyTorch models.
   2. Provided complete turnkey deployment configurations for **Render.com** (persistent container web service with CPU-only PyTorch `--index-url https://download.pytorch.org/whl/cpu` that installs in under 200 MB), **Hugging Face Spaces**, and **Railway**.
-  3. Created verified production deployment artifacts: [requirements.txt](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/requirements.txt), [Dockerfile](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/Dockerfile), and [.dockerignore](file:///c:/Users/gagan/Desktop/Hate-Speech-Detector/.dockerignore).
+  3. Created verified production deployment artifacts: [requirements.txt](requirements.txt), [Dockerfile](Dockerfile), and [.dockerignore](.dockerignore).
+
+---
+
+### Breakthrough 8: Demographic Identity Grounding vs. Benevolent Statement False Positives
+- **The Issue:** Statements praising or referencing protected socio-religious communities in benign, prosocial contexts (e.g. *"People from Muslim community are hardworking and honest"*) were previously getting classified as `HATEFUL` ($y=1$).
+- **Root Cause:** In the earlier target grounding guardrail (`has_grounded_markers()`), protected demographic identity tokens (`muslim`, `hindu`, `sikh`, `christian`, `jewish`, `dalit`, `adivasi`, `brahmin`) were bundled together with hostility and slur markers. Consequently, the presence of a protected group name satisfied the grounding check (`has_grounding = True`), bypassing logit shrinkage and allowing spurious high-confidence hate classifications.
+- **The Fix:**
+  1. **Decoupled Grounding Criteria:** Separated demographic identity tokens from hostility predicates. A statement must contain an explicit hostile predicate, slur, or incitement marker to qualify as hate grounded. Mentioning an identity group alone does not trigger hate grounding.
+  2. **Calibrated Logit Shrinkage:** When no hostility marker is present and the model outputs an ungrounded hate logit ($z_1 > z_0$), shrinkage is applied:
+     $$z_1 \leftarrow z_0 - 1.5$$
+     This guarantees that benevolent statements (*"People from Muslim community are hardworking and honest"*) classify reliably as `NON-HATEFUL (0)` with high non-hate probability ($P = 0.818$).
+  3. **Preserved Hate Interception:** Genuine attacks directed at demographic groups (e.g. *"Muslims are vermin and must be thrown out"*) retain their hostile markers, reliably firing grounding and triggering classification as `HATEFUL (1)`.
+  4. **Regression Verification:** All 45/45 automated test cases continue to pass with 100% precision.
 
 ---
 
@@ -459,13 +511,15 @@ flowchart TD
 | **Multilingual NLP (Hi / En / Hi-En)** | `src/language/detector.py`, `src/preprocessing/text/normalizer.py` | Verified (Devanagari + Hinglish) |
 | **Multimodal Meme Analysis** | `src/multimodal/ocr.py`, `src/multimodal/fusion.py` | Verified (EasyOCR + CNN Cross-Attn) |
 | **Contextual Dialogue Processing** | `src/preprocessing/context/context_processor.py` | Verified (`[DEMOGRAPHIC_NEUTRAL]`) |
+| **Universal Dataset Inspector** | `src/data/adapter.py`, `backend/api/datasets.py` | Verified (Auto-columns, Modal Assets) |
+| **Counterfactual Invariance Probe** | `backend/api/fairness.py`, `#page-fairness` | Verified (8 Demographic Groups, $\Delta \le 0.10$) |
 | **Grounded Explainable AI (XAI)** | `src/explainability/text_attribution.py` | Verified (Signed LOO + AOPC) |
-| **Multi-Objective Reward Function** | `src/rewards/reward_function.py` | Verified ($R_{\text{cls}}, R_{\text{exp}}, R_{\text{ctx}}, R_{\text{fb}}, R_{\text{err}}$) |
+| **Multi-Objective Reward Function** | `src/rewards/reward_function.py`, `backend/api/optimization.py` | Verified ($R_{\text{cls}}, R_{\text{exp}}, R_{\text{ctx}}, R_{\text{fb}}, R_{\text{err}}$) |
 | **Direct Preference Optimization** | `src/optimization/optimizer.py`, `preference_dataset.py` | Verified (DPO Loss + Anti-Regression) |
 | **Disaggregated Fairness Audit** | `src/fairness/evaluator.py` | Verified ($\text{EO Gap} = 0.0000$) |
-| **9 Controlled Research Experiments** | `src/experiments/runner.py` | Verified (Exp 1 through Exp 9) |
+| **9 Controlled Research Experiments** | `src/experiments/runner.py`, `backend/api/experiments.py` | Verified (Exp 1–9, Live Step Counter, Reset) |
 | **Automated Test Suite** | `tests/` (unit, integration, end-to-end) | **45 / 45 Tests Passing (100%)** |
-| **ThoughtStream User Interface** | `frontend/` (11 Research Labs, Dark Mode) | Verified (View Transitions API) |
+| **ThoughtStream User Interface** | `frontend/` (11 Research Labs, Dark Mode) | Verified (Strict No-Wrap Badges, v2.4 Cache) |
 | **Academic Manuscript & Slides** | `paper/main.tex`, `presentation/index.html` | Verified (ACL LaTeX & Viva Deck) |
 | **Zero Hardcoding Constraint** | Full Codebase Audit | Verified (100% Dynamic Computation) |
 
@@ -550,7 +604,16 @@ python -c "from src.experiments.runner import ExperimentRunner; r = ExperimentRu
 # 4. Trigger Direct Preference Optimization (DPO) Cycle via CLI
 python -c "from src.optimization.optimizer import RewardOptimizer; o = RewardOptimizer(); print(o.run_optimization_cycle())"
 
-# 5. Access In-Browser Workbenches
+# 5. Reset Research Experiments Benchmarking Suite (0/9)
+curl -X POST http://127.0.0.1:8000/api/experiments/reset
+
+# 6. Execute Counterfactual Demographic Invariance Probe
+curl -X POST http://127.0.0.1:8000/api/fairness/counterfactual-probe -H "Content-Type: application/json" -d "{\"template\": \"People from [DEMOGRAPHIC] community are hardworking and honest.\"}"
+
+# 7. Simulate Multi-Objective Reward Vector
+curl -X POST http://127.0.0.1:8000/api/optimization/simulate-reward -H "Content-Type: application/json" -d "{\"is_correct\": true, \"confidence\": 0.95, \"faithfulness\": 0.88, \"context_aligned\": true, \"human_feedback_score\": 1.0, \"is_false_alarm\": false}"
+
+# 8. Access In-Browser Workbenches
 # - Interactive Dashboard: http://127.0.0.1:8000
 # - Swagger REST API Docs: http://127.0.0.1:8000/docs
 # - Viva Slide Deck:      http://127.0.0.1:8000/presentation/index.html

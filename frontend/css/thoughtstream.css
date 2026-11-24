@@ -440,7 +440,20 @@ textarea.form-control {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border: 1px solid var(--color-border-subtle);
-  white-space: nowrap;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  box-sizing: border-box;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+td .badge,
+th .badge,
+.table-container .badge {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  display: inline-block !important;
 }
 
 .badge-hate {

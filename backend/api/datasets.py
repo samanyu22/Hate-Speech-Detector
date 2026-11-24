@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from typing import Dict, Any, List
 from fastapi import APIRouter, HTTPException
+from backend.core.config import settings
 from backend.schemas.dataset import DatasetRegisterRequest, DatasetValidationResponse
 from backend.database.db import get_connection
 from src.data.adapter import UniversalDatasetAdapter
@@ -55,7 +56,7 @@ def register_dataset(req: DatasetRegisterRequest):
             req.license,
             json.dumps(req.languages),
             json.dumps(req.modalities),
-            req.file_path,
+            settings.to_relative_path(req.file_path),
             val_report["sample_count"],
             json.dumps(val_report["class_distribution"]),
             json.dumps(val_report)
@@ -81,7 +82,7 @@ def inspect_dataset(
     if not row:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
-    file_path = row["file_path"]
+    file_path = str(settings.resolve_path(row["file_path"]))
     try:
         adapter = UniversalDatasetAdapter(file_path=file_path)
         records = adapter.load()
@@ -128,7 +129,7 @@ def inspect_dataset(
             "license": row["license"],
             "languages": languages,
             "modalities": modalities,
-            "file_path": file_path,
+            "file_path": settings.to_relative_path(file_path),
             "total_samples": len(records),
             "filtered_count": total_filtered,
             "class_distribution": class_dist,

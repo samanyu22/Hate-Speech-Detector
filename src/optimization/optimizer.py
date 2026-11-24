@@ -156,7 +156,7 @@ class RewardOptimizer:
             mean_reward_after,
             after_metrics["macro_f1"],
             after_metrics["accuracy"],
-            str(new_checkpoint_path),
+            settings.to_relative_path(new_checkpoint_path),
             json.dumps(after_metrics)
         ))
 
@@ -172,7 +172,7 @@ class RewardOptimizer:
                 f"Multilingual Code-Mixed Transformer (Reward-Optimized v{version_num})",
                 "transformer",
                 version_num,
-                str(new_checkpoint_path),
+                settings.to_relative_path(new_checkpoint_path),
                 "ready",
                 1,
                 json.dumps(after_metrics)

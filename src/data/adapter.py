@@ -3,6 +3,7 @@ import csv
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 import pandas as pd
+from backend.core.config import settings
 
 class DatasetRecord:
     def __init__(
@@ -18,7 +19,7 @@ class DatasetRecord:
         self.id = str(id)
         self.text = str(text) if text is not None else ""
         self.label = int(label)
-        self.image_path = str(image_path) if image_path else None
+        self.image_path = settings.to_relative_path(str(image_path)) if image_path else None
         self.context = str(context) if context else None
         self.language = str(language) if language else None
         self.metadata = metadata or {}
@@ -54,7 +55,7 @@ class UniversalDatasetAdapter:
         id_column: Optional[str] = "id",
         label_mapping: Optional[Dict[str, int]] = None
     ):
-        self.file_path = Path(file_path)
+        self.file_path = settings.resolve_path(file_path)
         self.text_column = text_column
         self.label_column = label_column
         self.image_column = image_column

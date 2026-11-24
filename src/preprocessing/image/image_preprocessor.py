@@ -20,9 +20,10 @@ class ImagePreprocessor:
 
         # 2. Existing File Path
         try:
-            path = Path(source)
-            if path.exists() and path.is_file():
-                return Image.open(path).convert("RGB")
+            from backend.core.config import settings
+            resolved = settings.resolve_path(source)
+            if resolved.exists() and resolved.is_file():
+                return Image.open(resolved).convert("RGB")
         except (OSError, ValueError):
             pass
 

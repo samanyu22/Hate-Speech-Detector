@@ -47,7 +47,7 @@ def get_active_model_registry_info() -> Dict[str, Any]:
         return dict(row)
     return {
         "id": settings.app_config.get("active_model", {}).get("id", "multilingual-transformer-v1"),
-        "checkpoint_path": str(settings.base_dir / "models" / "checkpoints" / "multilingual_transformer.pt"),
+        "checkpoint_path": "models/checkpoints/multilingual_transformer.pt",
         "version": "1.0"
     }
 
@@ -55,11 +55,12 @@ def get_models(force_reload: bool = False) -> Tuple[Optional[ClassicalBaselineCl
     global _classical_model, _transformer_model, _current_loaded_checkpoint
     
     active_info = get_active_model_registry_info()
-    target_ckpt = active_info.get("checkpoint_path") or str(settings.base_dir / "models" / "checkpoints" / "multilingual_transformer.pt")
+    raw_ckpt = active_info.get("checkpoint_path") or "models/checkpoints/multilingual_transformer.pt"
+    target_ckpt = str(settings.resolve_path(raw_ckpt))
 
     if _classical_model is None or force_reload:
         _classical_model = ClassicalBaselineClassifier()
-        if _classical_model.checkpoint_path.exists():
+        if settings.resolve_path(_classical_model.checkpoint_path).exists():
             _classical_model.load()
 
     need_reload = (
@@ -70,10 +71,11 @@ def get_models(force_reload: bool = False) -> Tuple[Optional[ClassicalBaselineCl
 
     if need_reload:
         _transformer_model = MultilingualTransformerEngine(checkpoint_path=target_ckpt)
-        if Path(target_ckpt).exists():
-            _transformer_model.load_checkpoint(Path(target_ckpt))
+        resolved_p = settings.resolve_path(target_ckpt)
+        if resolved_p.exists():
+            _transformer_model.load_checkpoint(resolved_p)
             _current_loaded_checkpoint = target_ckpt
-        elif _transformer_model.checkpoint_path.exists():
+        elif settings.resolve_path(_transformer_model.checkpoint_path).exists():
             _transformer_model.load_checkpoint()
             _current_loaded_checkpoint = str(_transformer_model.checkpoint_path)
 

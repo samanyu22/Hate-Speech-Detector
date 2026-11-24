@@ -93,7 +93,8 @@ class MultilingualTransformerEngine:
 
     def encode_text(self, text: str) -> torch.Tensor:
         """Extracts 256-dim pooled representation from the bidirectional attention transformer."""
-        if not self.is_trained and self.checkpoint_path.exists():
+        from backend.core.config import settings
+        if not self.is_trained and settings.resolve_path(self.checkpoint_path).exists():
             self.load_checkpoint()
         self.model.eval()
         x = self.tokenize_to_tensor(text)
@@ -352,7 +353,8 @@ class MultilingualTransformerEngine:
         }
 
     def evaluate(self, records: List[DatasetRecord]) -> Dict[str, Any]:
-        if not self.is_trained and self.checkpoint_path.exists():
+        from backend.core.config import settings
+        if not self.is_trained and settings.resolve_path(self.checkpoint_path).exists():
             self.load_checkpoint()
 
         self.model.eval()
@@ -388,7 +390,8 @@ class MultilingualTransformerEngine:
         }
 
     def save_checkpoint(self, path: Optional[Path] = None):
-        target = path or self.checkpoint_path
+        from backend.core.config import settings
+        target = settings.resolve_path(path or self.checkpoint_path)
         target.parent.mkdir(parents=True, exist_ok=True)
         torch.save({
             "model_state_dict": self.model.state_dict(),
@@ -397,7 +400,8 @@ class MultilingualTransformerEngine:
         }, target)
 
     def load_checkpoint(self, path: Optional[Path] = None):
-        target = path or self.checkpoint_path
+        from backend.core.config import settings
+        target = settings.resolve_path(path or self.checkpoint_path)
         if not target.exists():
             raise FileNotFoundError(f"Checkpoint not found at {target}")
         ckpt = torch.load(target, map_location=self.device)

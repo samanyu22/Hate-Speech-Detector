@@ -159,7 +159,52 @@ def init_db():
     """)
 
     conn.commit()
+    sanitize_db_paths(conn)
     conn.close()
+
+def sanitize_db_paths(conn: sqlite3.Connection):
+    """Normalize any machine-specific or absolute hardcoded paths in the DB to portable relative paths."""
+    cursor = conn.cursor()
+    try:
+        # 1. Datasets file_path
+        rows = cursor.execute("SELECT id, file_path FROM datasets").fetchall()
+        for r in rows:
+            orig = r["file_path"]
+            if orig:
+                rel = settings.to_relative_path(orig)
+                if rel != orig:
+                    cursor.execute("UPDATE datasets SET file_path = ? WHERE id = ?", (rel, r["id"]))
+
+        # 2. Model registry checkpoint_path
+        rows = cursor.execute("SELECT id, checkpoint_path FROM model_registry").fetchall()
+        for r in rows:
+            orig = r["checkpoint_path"]
+            if orig:
+                rel = settings.to_relative_path(orig)
+                if rel != orig:
+                    cursor.execute("UPDATE model_registry SET checkpoint_path = ? WHERE id = ?", (rel, r["id"]))
+
+        # 3. Model versions checkpoint_path
+        rows = cursor.execute("SELECT version_id, checkpoint_path FROM model_versions").fetchall()
+        for r in rows:
+            orig = r["checkpoint_path"]
+            if orig:
+                rel = settings.to_relative_path(orig)
+                if rel != orig:
+                    cursor.execute("UPDATE model_versions SET checkpoint_path = ? WHERE version_id = ?", (rel, r["version_id"]))
+
+        # 4. Predictions image_path
+        rows = cursor.execute("SELECT id, image_path FROM predictions WHERE image_path IS NOT NULL").fetchall()
+        for r in rows:
+            orig = r["image_path"]
+            if orig and (":\\" in orig or ":/" in orig or "Users" in orig):
+                rel = settings.to_relative_path(orig)
+                if rel != orig:
+                    cursor.execute("UPDATE predictions SET image_path = ? WHERE id = ?", (rel, r["id"]))
+
+        conn.commit()
+    except Exception as e:
+        print(f"Warning during sanitize_db_paths: {e}")
 
 if __name__ == "__main__":
     init_db()
