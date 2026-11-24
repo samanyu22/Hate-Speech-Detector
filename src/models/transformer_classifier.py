@@ -393,11 +393,29 @@ class MultilingualTransformerEngine:
         tokens = set(words_lower)
 
         has_target = any(t in tokens or t in t_lower for t in self.TARGETED_IDENTITIES)
-        subordination_phrases = [
+        base_subordination = [
             "know their place", "cannot be trusted", "deserved it", "deserve it", "stay beneath", "second-class", "born to serve",
-            "should be jailed", "be jailed", "jailed", "locked up", "should be locked up", "should be deported", "be deported", "deported", "kick them out"
+            "kick them out", "throw them out"
         ]
-        has_targeted_subordination = has_target and any(p in t_lower for p in subordination_phrases)
+        has_unneg_subordination = False
+        has_neg_subordination = False
+
+        if has_target:
+            for p in base_subordination:
+                if p in t_lower:
+                    idx = t_lower.find(p)
+                    prefix = t_lower[max(0, idx-15):idx]
+                    if any(nw in prefix.split() for nw in self.NEGATION_WORDS):
+                        has_neg_subordination = True
+                    else:
+                        has_unneg_subordination = True
+
+            for i, w in enumerate(words_lower):
+                if w in {"jailed", "jail", "deported", "deport"} or (w == "locked" and i+1 < len(words_lower) and words_lower[i+1] == "up"):
+                    if self.is_word_locally_negated(words_lower, i):
+                        has_neg_subordination = True
+                    else:
+                        has_unneg_subordination = True
 
         # Check targeted sensory tropes (e.g. "stinky indian", "filthy immigrants")
         sensory_tropes = {"stinky", "stink", "stinks", "filthy", "dirty", "unclean"}
@@ -436,9 +454,9 @@ class MultilingualTransformerEngine:
             has_grounding = False
 
         # Severe explicit slurs, direct unnegated hatred, targeted subordination, or targeted derogatory tropes are hate speech
-        if (has_slur or has_unneg_hostility or has_targeted_subordination or has_unneg_sensory) and not is_condemning_quote:
+        if (has_slur or has_unneg_hostility or has_unneg_subordination or has_unneg_sensory) and not is_condemning_quote:
             z1 = max(z1, z0 + 3.8)
-        elif is_neg_hostility or has_neg_slur or has_neg_sensory or (is_condemning_quote and z0 > z1):
+        elif is_neg_hostility or has_neg_slur or has_neg_sensory or has_neg_subordination or (is_condemning_quote and z0 > z1):
             # Explicit negation of hostility, negated slurs/tropes, or valid counter-speech
             z1 = min(z1, z0 - 2.5)
         elif len(known_content) == 0 and len(content_words) > 0:
