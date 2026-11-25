@@ -10,7 +10,7 @@
   <link rel="preload" href="/static/fonts/newsreader_400_normal_12.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/static/fonts/inter_400_normal_2.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/static/css/fonts.css">
-  <link rel="stylesheet" href="/static/css/thoughtstream.css?v=7.2-scientific">
+  <link rel="stylesheet" href="/static/css/thoughtstream.css?v=8.1-colors">
 </head>
 <body>
   <div class="ambient-gradient-layer" id="ambientGradientLayer" aria-hidden="true"></div>
@@ -101,7 +101,7 @@
             <span class="v-theme-toggle__label">Light</span>
           </button>
         </div>
-        <span class="version-tag">v1.0.0</span>
+        <span class="version-tag badge badge--neutral" aria-label="Version 1.0.0">v1.0.0</span>
       </div>
     </aside>
 
@@ -111,7 +111,7 @@
         <div class="topbar-status">
           <span>Active: <strong id="statActiveModel">Multilingual Transformer</strong></span>
           <span>•</span>
-          <span id="statActiveVersion" class="badge badge-neutral">v1.0</span>
+          <span id="statActiveVersion" class="badge badge--accent" aria-label="Active Model Version 1.0">v1.0</span>
         </div>
         <div>
           <span style="font-size:12px; color:var(--color-text-tertiary);">Academic Formulation: x = {T, V, C} &rarr; y &isin; {0,1}</span>
@@ -158,12 +158,12 @@
           <div class="card" style="margin-bottom:var(--space-4);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
               <div class="card-title" style="margin-bottom:0;">Live System Telemetry &amp; Model Engine</div>
-              <span class="badge badge-nonhate" style="font-size:11px;">SYSTEM HEALTH: OPTIMAL</span>
+              <span class="badge badge--neutral" aria-label="System Health: Optimal" style="font-size:11px;">SYSTEM HEALTH: OPTIMAL</span>
             </div>
             <div class="grid-3" style="font-size:13px; margin-bottom:14px;">
               <div>
                 <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Active Model:</span><br>
-                <strong id="overviewModelName">Multilingual Transformer</strong> <span id="overviewModelVersion" class="badge badge-neutral" style="font-size:10px;">v1.0</span>
+                <strong id="overviewModelName">Multilingual Transformer</strong> <span id="overviewModelVersion" class="badge badge--accent" aria-label="Active Model Version 1.0" style="font-size:10px;">v1.0</span>
               </div>
               <div>
                 <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Holdout Evaluation:</span><br>
@@ -172,8 +172,8 @@
               </div>
               <div>
                 <span style="color:var(--color-text-tertiary); text-transform:uppercase; font-size:11px; font-weight:600;">Guardrails &amp; Scoping:</span><br>
-                <span class="badge badge-nonhate" style="font-size:10px;">Slur Interceptor</span>
-                <span class="badge badge-neutral" style="font-size:10px;">Negation Scope</span>
+                <span class="badge badge--neutral" aria-label="Guardrail: Slur Interceptor" style="font-size:10px;">Slur Interceptor</span>
+                <span class="badge badge--neutral" aria-label="Scoping: Negation Scope" style="font-size:10px;">Negation Scope</span>
               </div>
             </div>
             <div class="overview-pipeline-box">
@@ -181,12 +181,12 @@
             </div>
             <div class="overview-tags-row">
               <span class="overview-tags-label">Capabilities:</span>
-              <span class="badge badge-neutral">English</span>
-              <span class="badge badge-neutral">Hindi (Devanagari)</span>
-              <span class="badge badge-neutral">Hinglish Code-Mixed</span>
-              <span class="badge badge-neutral">Multimodal Memes</span>
-              <span class="badge badge-neutral">Direct Preference Optimization</span>
-              <span class="badge badge-neutral">Integrated Gradients / Perturbation</span>
+              <span class="badge badge--neutral" aria-label="Language English">English</span>
+              <span class="badge badge--neutral" aria-label="Language Hindi">Hindi (Devanagari)</span>
+              <span class="badge badge--neutral" aria-label="Language Hinglish">Hinglish Code-Mixed</span>
+              <span class="badge badge--neutral" aria-label="Modality Multimodal Memes">Multimodal Memes</span>
+              <span class="badge badge--neutral" aria-label="Method Direct Preference Optimization">Direct Preference Optimization</span>
+              <span class="badge badge--neutral" aria-label="Method Integrated Gradients">Integrated Gradients / Perturbation</span>
             </div>
           </div>
 
@@ -313,7 +313,7 @@
                   <div id="imagePreviewContainer" style="display:none; margin-top:10px; align-items:center; gap:16px;">
                     <img id="imagePreview" src="" alt="Meme preview" style="max-height:140px; max-width:200px; border-radius:var(--radius-sm); border:1px solid var(--rule); object-fit:contain; background:var(--surface-elevated);">
                     <div style="font-size:12px; color:var(--muted); line-height:1.5;">
-                      <span id="imageStatusBadge" class="badge">Image Selected</span>
+                      <span id="imageStatusBadge" class="badge badge--neutral" aria-label="Image Status: Image Selected">Image Selected</span>
                       <div style="margin-top:4px; font-size:11px; color:var(--muted); font-family:var(--font-mono);">Uploading an image will automatically run EasyOCR, extract visual text, send it to the model, and display the result.</div>
                     </div>
                   </div>
@@ -353,7 +353,7 @@
               <div id="detectionResultCard" class="card-elevated" style="display:none;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid var(--rule); padding-bottom:10px;">
                   <div>
-                    <span id="resLabelBadge" class="badge" style="white-space:nowrap;">HATEFUL</span>
+                    <span id="resLabelBadge" class="badge badge--danger" aria-label="Verdict: Hateful (1)" style="white-space:nowrap;">HATEFUL&nbsp;(1)</span>
                     <span style="margin-left:10px; font-family:var(--font-mono); font-size:13px; color:var(--ink);">Confidence: <strong id="resConfidence">95.4%</strong></span>
                   </div>
                   <div style="font-family:var(--font-mono); font-size:11px; color:var(--muted);">
@@ -377,12 +377,12 @@
                   <tbody>
                     <tr>
                       <td>Neural Classifier</td>
-                      <td id="auditModelVerdict"><span class="badge badge-nonhate">Model Verdict</span></td>
+                      <td id="auditModelVerdict"><span class="badge badge--neutral" aria-label="Model Verdict">Model Verdict</span></td>
                       <td id="auditModelOutput" class="mono-col">Active</td>
                     </tr>
                     <tr>
                       <td>Rule-Based Grounding</td>
-                      <td id="auditRuleVerdict"><span class="badge badge-neutral">Grounding Check</span></td>
+                      <td id="auditRuleVerdict"><span class="badge badge--neutral" aria-label="Grounding Check">Grounding Check</span></td>
                       <td id="auditRuleOutput" class="mono-col">Verified</td>
                     </tr>
                   </tbody>
@@ -509,7 +509,7 @@
           <div class="card" style="margin-bottom:var(--space-4);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
               <div class="card-title" style="margin-bottom:0;">Registered Research Datasets</div>
-              <span class="badge badge-neutral" style="font-size:11px;">LEAKAGE-SAFE STRATIFIED SPLITS</span>
+              <span class="badge badge--neutral" aria-label="Leakage-Safe Stratified Splits" style="font-size:11px;">LEAKAGE-SAFE STRATIFIED SPLITS</span>
             </div>
             <div class="table-container">
               <table id="datasetTable">
@@ -629,7 +629,7 @@
                 <strong>EasyOCR Extracted:</strong> <code id="lightboxOcr" style="font-family:var(--font-mono); background:var(--color-surface-raised); padding:2px 6px;"></code>
               </div>
               <div style="font-size:13px; margin-bottom:14px;">
-                <strong>Ground Truth:</strong> <span id="lightboxLabelBadge" class="badge" style="white-space:nowrap;"></span>
+                <strong>Ground Truth:</strong> <span id="lightboxLabelBadge" class="badge badge--neutral" style="white-space:nowrap;"></span>
               </div>
               <div style="display:flex; justify-content:flex-end; gap:8px;">
                 <button id="lightboxTestBtn" class="btn btn-primary btn-sm">Test in Detection Lab &rarr;</button>
@@ -728,16 +728,20 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
             <div class="card">
               <div class="card-title">Positive Evidence Tokens</div>
               <p style="font-size:13px;">Tokens that elevate hateful logit probability (slurs, dehumanization, violent imperatives).</p>
-              <div class="badge badge-hate" style="margin:4px;">vermin [+0.42]</div>
-              <div class="badge badge-hate" style="margin:4px;">exterminate [+0.38]</div>
-              <div class="badge badge-hate" style="margin:4px;">kutto [+0.35]</div>
+              <div class="badge-group" style="margin-top:6px;">
+                <span class="badge badge--danger" aria-label="Token vermin weight +0.42">vermin [+0.42]</span>
+                <span class="badge badge--danger" aria-label="Token exterminate weight +0.38">exterminate [+0.38]</span>
+                <span class="badge badge--danger" aria-label="Token kutto weight +0.35">kutto [+0.35]</span>
+              </div>
             </div>
             <div class="card">
               <div class="card-title">Negative Evidence Tokens</div>
               <p style="font-size:13px;">Tokens that reduce hateful logit probability (counterspeech, civil terms, quotation critiques).</p>
-              <div class="badge badge-nonhate" style="margin:4px;">virodh [-0.31]</div>
-              <div class="badge badge-nonhate" style="margin:4px;">equality [-0.29]</div>
-              <div class="badge badge-nonhate" style="margin:4px;">peace [-0.25]</div>
+              <div class="badge-group" style="margin-top:6px;">
+                <span class="badge badge--neutral" aria-label="Token virodh weight -0.31">virodh [-0.31]</span>
+                <span class="badge badge--neutral" aria-label="Token equality weight -0.29">equality [-0.29]</span>
+                <span class="badge badge--neutral" aria-label="Token peace weight -0.25">peace [-0.25]</span>
+              </div>
             </div>
           </div>
         </section>
@@ -835,11 +839,11 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
 
                 <div style="margin-bottom:10px;">
                   <span style="font-size:11px; color:var(--color-text-secondary); text-transform:uppercase;">Quick Scenarios:</span>
-                  <div style="margin-top:4px;">
-                    <span class="template-pill active" onclick="loadSimScenario('true_positive', this)">True Positive</span>
-                    <span class="template-pill" onclick="loadSimScenario('false_alarm', this)">False Alarm (Error)</span>
-                    <span class="template-pill" onclick="loadSimScenario('context_hate', this)">Implicit Context Hate</span>
-                    <span class="template-pill" onclick="loadSimScenario('civil_critique', this)">Civil Counterspeech</span>
+                  <div class="template-pill-group" style="margin-top:8px;">
+                    <button type="button" class="template-pill active" onclick="loadSimScenario('true_positive', this)">True Positive</button>
+                    <button type="button" class="template-pill" onclick="loadSimScenario('false_alarm', this)">False Alarm (Error)</button>
+                    <button type="button" class="template-pill" onclick="loadSimScenario('context_hate', this)">Implicit Context Hate</button>
+                    <button type="button" class="template-pill" onclick="loadSimScenario('civil_critique', this)">Civil Counterspeech</button>
                   </div>
                 </div>
 
@@ -914,7 +918,7 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
                   </div>
                   <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--color-border-subtle); padding-top:8px; margin-top:6px;">
                     <span style="font-weight:600; font-size:13px;">Net Composite Reward:</span>
-                    <span id="simTotalRewardBadge" class="badge badge-nonhate" style="font-size:14px; padding:4px 10px; font-family:var(--font-mono); white-space:nowrap;">+0.9300</span>
+                    <span id="simTotalRewardBadge" class="badge badge--neutral" aria-label="Net Composite Reward +0.9300" style="font-size:12px; font-family:var(--font-mono); white-space:nowrap;">+0.9300</span>
                   </div>
                 </div>
               </div>
@@ -1020,7 +1024,7 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
             </div>
             <div class="stat-box">
               <div class="stat-label">Fairness Standard Status</div>
-              <div style="margin-top:6px;"><span id="fairnessStatusBadge" class="badge badge-nonhate" style="white-space:nowrap;">EQUITABLE PARITY MET</span></div>
+              <div style="margin-top:6px;"><span id="fairnessStatusBadge" class="badge badge--neutral" aria-label="Status: Equitable Parity Met" style="white-space:nowrap;">EQUITABLE PARITY MET</span></div>
             </div>
             <div class="stat-box">
               <div class="stat-label">Demographic Invariance Score</div>
@@ -1042,19 +1046,19 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
                 </div>
               </div>
               <div id="probeVerdictPill">
-                <span class="badge badge-nonhate" style="white-space:nowrap; font-size:12px;">FAIR &amp; DEMOGRAPHIC-INVARIANT</span>
+                <span class="badge badge--neutral" aria-label="Status: Fair and Demographic-Invariant" style="white-space:nowrap; font-size:11px;">FAIR &amp; DEMOGRAPHIC-INVARIANT</span>
               </div>
             </div>
 
             <!-- Preset Template Selector -->
             <div style="margin-bottom:12px;">
               <span style="font-size:11px; text-transform:uppercase; color:var(--color-text-secondary); font-weight:600;">Standard Audit Templates:</span>
-              <div style="margin-top:6px;">
-                <span class="template-pill active" onclick="selectProbeTemplate(0, this)">Benevolent: "People from [DEMOGRAPHIC] community are hardworking and honest."</span>
-                <span class="template-pill" onclick="selectProbeTemplate(1, this)">Prosocial: "We should respect [DEMOGRAPHIC] traditions, culture, and festivals."</span>
-                <span class="template-pill" onclick="selectProbeTemplate(2, this)">Academic: "[DEMOGRAPHIC] students achieved top ranks in science and engineering."</span>
-                <span class="template-pill" onclick="selectProbeTemplate(3, this)">Camaraderie: "I enjoy spending time with my [DEMOGRAPHIC] friends."</span>
-                <span class="template-pill" onclick="selectProbeTemplate(4, this)">Hostile Control: "Those [DEMOGRAPHIC] people are violent criminals and should not be allowed."</span>
+              <div class="template-pill-group" style="margin-top:8px;">
+                <button type="button" class="template-pill active" onclick="selectProbeTemplate(0, this)">Benevolent: "People from [DEMOGRAPHIC] community are hardworking and honest."</button>
+                <button type="button" class="template-pill" onclick="selectProbeTemplate(1, this)">Prosocial: "We should respect [DEMOGRAPHIC] traditions, culture, and festivals."</button>
+                <button type="button" class="template-pill" onclick="selectProbeTemplate(2, this)">Academic: "[DEMOGRAPHIC] students achieved top ranks in science and engineering."</button>
+                <button type="button" class="template-pill" onclick="selectProbeTemplate(3, this)">Camaraderie: "I enjoy spending time with my [DEMOGRAPHIC] friends."</button>
+                <button type="button" class="template-pill" onclick="selectProbeTemplate(4, this)">Hostile Control: "Those [DEMOGRAPHIC] people are violent criminals and should not be allowed."</button>
               </div>
             </div>
 
@@ -1069,14 +1073,14 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
             <!-- Demographic Identities Audited -->
             <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:14px;">
               <span style="font-size:11px; color:var(--color-text-secondary);">Audited Identities:</span>
-              <span class="demographic-chip">Muslim</span>
-              <span class="demographic-chip">Hindu</span>
-              <span class="demographic-chip">Sikh</span>
-              <span class="demographic-chip">Christian</span>
-              <span class="demographic-chip">Jewish</span>
-              <span class="demographic-chip">Dalit</span>
-              <span class="demographic-chip">Adivasi</span>
-              <span class="demographic-chip">Brahmin</span>
+              <span class="badge badge--neutral" aria-label="Identity Muslim">Muslim</span>
+              <span class="badge badge--neutral" aria-label="Identity Hindu">Hindu</span>
+              <span class="badge badge--neutral" aria-label="Identity Sikh">Sikh</span>
+              <span class="badge badge--neutral" aria-label="Identity Christian">Christian</span>
+              <span class="badge badge--neutral" aria-label="Identity Jewish">Jewish</span>
+              <span class="badge badge--neutral" aria-label="Identity Dalit">Dalit</span>
+              <span class="badge badge--neutral" aria-label="Identity Adivasi">Adivasi</span>
+              <span class="badge badge--neutral" aria-label="Identity Brahmin">Brahmin</span>
             </div>
 
             <!-- Probe Results Output -->
@@ -1146,8 +1150,10 @@ Normalized: "Inko maro ! Desh Bhakti [URL]"</pre>
               <p style="font-size:12px; color:var(--color-text-secondary); margin-bottom:8px;">
                 Identities (religions, castes, nationalities) are safeguarded against false-positive bias. Mentioning a protected demographic in a benign or positive context never triggers a hate label without explicit hostile or exclusionary predicates.
               </p>
-              <div class="badge badge-nonhate" style="white-space:nowrap; margin-right:6px;">80% Disparate Impact Standard: SATISFIED</div>
-              <div class="badge badge-nonhate" style="white-space:nowrap;">Demographic Parity Ratio: 1.00</div>
+              <div class="badge-group" style="margin-top:8px;">
+                <span class="badge badge--neutral" aria-label="80% Disparate Impact Standard: SATISFIED" style="white-space:nowrap;">80% Disparate Impact Standard: SATISFIED</span>
+                <span class="badge badge--neutral" aria-label="Demographic Parity Ratio: 1.00" style="white-space:nowrap;">Demographic Parity Ratio: 1.00</span>
+              </div>
             </div>
           </div>
         </section>

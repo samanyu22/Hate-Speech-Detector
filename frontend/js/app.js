@@ -473,8 +473,8 @@ async function loadOverviewStats(isManualRefresh = false) {
         const nonHateCount = dist['0'] || dist[0] || 0;
         const hatePct = count > 0 ? Math.round((hateCount / count) * 100) : 0;
         const nonHatePct = count > 0 ? Math.round((nonHateCount / count) * 100) : 0;
-        const langs = (ds.languages || []).map(l => `<span class="badge badge-neutral" style="font-size:10px;">${l}</span>`).join(' ');
-        const mods = (ds.modalities || []).map(m => `<span class="badge badge-neutral" style="font-size:10px;">${m}</span>`).join(' ');
+        const langs = (ds.languages || []).map(l => `<span class="badge badge--neutral" aria-label="Language ${l}">${l}</span>`).join(' ');
+        const mods = (ds.modalities || []).map(m => `<span class="badge badge--neutral" aria-label="Modality ${m}">${m}</span>`).join(' ');
 
         return `
           <tr>
@@ -566,8 +566,9 @@ function initDetectionWorkspace() {
         if (clearImgBtn) clearImgBtn.style.display = 'inline-block';
         if (imgBadge) {
           imgBadge.innerText = `Extracting OCR text & running model inference...`;
-          imgBadge.style.background = 'var(--color-primary)';
-          imgBadge.style.color = '#fff';
+          imgBadge.className = 'badge badge--warn';
+          imgBadge.style.background = '';
+          imgBadge.style.color = '';
         }
         if (detectBtn) {
           detectBtn.disabled = true;
@@ -597,14 +598,16 @@ function initDetectionWorkspace() {
             }
             if (imgBadge) {
               imgBadge.innerText = `OCR Extracted (${res.explanation.ocr_evidence.length} chars) & Analyzed`;
-              imgBadge.style.background = 'var(--color-success)';
-              imgBadge.style.color = '#fff';
+              imgBadge.className = 'badge badge--neutral';
+              imgBadge.style.background = '';
+              imgBadge.style.color = '';
             }
           } else {
             if (imgBadge) {
               imgBadge.innerText = `Image Loaded (${file.name}) - No visual text detected`;
-              imgBadge.style.background = 'var(--color-primary)';
-              imgBadge.style.color = '#fff';
+              imgBadge.className = 'badge badge--neutral';
+              imgBadge.style.background = '';
+              imgBadge.style.color = '';
             }
           }
 
@@ -613,8 +616,9 @@ function initDetectionWorkspace() {
         } catch (err) {
           if (imgBadge) {
             imgBadge.innerText = `OCR Error: ${err.message}`;
-            imgBadge.style.background = 'var(--color-error)';
-            imgBadge.style.color = '#fff';
+            imgBadge.className = 'badge badge--danger';
+            imgBadge.style.background = '';
+            imgBadge.style.color = '';
           }
           alert(`Multimodal Detection Error: ${err.message}`);
         } finally {
@@ -641,8 +645,9 @@ function initDetectionWorkspace() {
       if (tokenStream) tokenStream.innerHTML = '';
       if (imgBadge) {
         imgBadge.innerText = 'Image Selected';
-        imgBadge.style.background = '#1e293b';
-        imgBadge.style.color = '#94a3b8';
+        imgBadge.className = 'badge badge--neutral';
+        imgBadge.style.background = '';
+        imgBadge.style.color = '';
       }
     });
   }
@@ -804,15 +809,18 @@ function displayDetectionResult(res) {
   // Label badge with forensic stamp-in animation
   const badge = document.getElementById('resLabelBadge');
   if (badge) {
-    badge.className = `badge verdict-stamp ${res.predicted_label === 1 ? 'badge-hate' : 'badge-nonhate'}`;
-    badge.innerHTML = res.predicted_label === 1 ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
+    const isHate = res.predicted_label === 1;
+    badge.className = `badge verdict-stamp ${isHate ? 'badge--danger' : 'badge--safe'}`;
+    badge.setAttribute('aria-label', isHate ? 'Verdict: Hateful (1)' : 'Verdict: Non-Hateful (0)');
+    badge.innerHTML = isHate ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
     badge.style.whiteSpace = 'nowrap';
-    badge.style.display = 'inline-block';
+    badge.style.display = 'inline-flex';
   }
 
-  // Count up confidence score
+  // Count up confidence score with semantic color
   const confEl = document.getElementById('resConfidence');
   if (confEl) {
+    confEl.style.color = res.predicted_label === 1 ? '#FF4D2E' : '#5FD3A5';
     animateCountUp(confEl, res.confidence * 100, 500, (v) => `${v.toFixed(1)}%`);
   }
 
@@ -840,14 +848,15 @@ function displayDetectionResult(res) {
     const ruleVerdictEl = document.getElementById('auditRuleVerdict');
     const ruleOutputEl = document.getElementById('auditRuleOutput');
     if (modelVerdictEl) {
-      modelVerdictEl.innerHTML = res.predicted_label === 1 ? '<span class="badge badge-hate">HATEFUL (1)</span>' : '<span class="badge badge-nonhate">NON-HATEFUL (0)</span>';
+      modelVerdictEl.innerHTML = res.predicted_label === 1 ? '<span class="badge badge--danger" aria-label="Verdict: Hateful (1)">HATEFUL (1)</span>' : '<span class="badge badge--safe" aria-label="Verdict: Non-Hateful (0)">NON-HATEFUL (0)</span>';
     }
     if (modelOutputEl) {
-      modelOutputEl.innerText = `P(Hate) = ${(res.confidence * 100).toFixed(1)}% [${res.model_id}]`;
+      const pColor = res.predicted_label === 1 ? '#FF4D2E' : '#5FD3A5';
+      modelOutputEl.innerHTML = `<span style="color:${pColor}; font-weight:600;">P(Hate) = ${(res.confidence * 100).toFixed(1)}%</span> <span style="color:var(--muted); font-size:11px;">[${res.model_id}]</span>`;
     }
     if (ruleVerdictEl) {
       const isHate = res.predicted_label === 1;
-      ruleVerdictEl.innerHTML = isHate ? '<span class="badge badge-hate">GROUNDED PREDICATES</span>' : '<span class="badge badge-nonhate">BENIGN / UNGROUNDED</span>';
+      ruleVerdictEl.innerHTML = isHate ? '<span class="badge badge--danger" aria-label="Grounded Predicates">GROUNDED PREDICATES</span>' : '<span class="badge badge--safe" aria-label="Benign">BENIGN / UNGROUNDED</span>';
     }
     if (ruleOutputEl) {
       ruleOutputEl.innerText = exp.ocr_evidence ? 'OCR Text + Lexical Matched' : 'Lexical Hostility Rules Audited';
@@ -880,7 +889,9 @@ function displayDetectionResult(res) {
         const absScore = Math.abs(t.score);
         if (t.score > 0 && absScore > threshold) {
           const alpha = Math.min(Math.max(absScore / maxAbsScore, 0), 1) * 0.55;
-          span.style.backgroundColor = isDark ? `rgba(229, 83, 61, ${alpha.toFixed(3)})` : `rgba(200, 50, 30, ${alpha.toFixed(3)})`;
+          const bgAlpha = Math.max(alpha, 0.20);
+          span.style.backgroundColor = isDark ? `rgba(229, 83, 61, ${bgAlpha.toFixed(3)})` : `rgba(200, 50, 30, ${bgAlpha.toFixed(3)})`;
+          span.style.border = isDark ? '1px solid rgba(229, 83, 61, 0.45)' : '1px solid rgba(200, 50, 30, 0.45)';
           span.classList.add('token-hateful', 'token-hateful-wipe');
           span.style.animationDelay = `${Math.min(i * 30, 600)}ms`;
 
@@ -888,6 +899,10 @@ function displayDetectionResult(res) {
             span.classList.add('token-strongest-pulse');
           }
         } else if (t.score < 0 && absScore > threshold) {
+          const alpha = Math.min(Math.max(absScore / maxAbsScore, 0), 1) * 0.55;
+          const bgAlpha = Math.max(alpha, 0.20);
+          span.style.backgroundColor = isDark ? `rgba(95, 211, 165, ${bgAlpha.toFixed(3)})` : `rgba(31, 157, 116, ${bgAlpha.toFixed(3)})`;
+          span.style.border = isDark ? '1px solid rgba(95, 211, 165, 0.45)' : '1px solid rgba(31, 157, 116, 0.45)';
           span.classList.add('token-civil');
         } else {
           span.classList.add('token-neutral');
@@ -900,10 +915,10 @@ function displayDetectionResult(res) {
         const cleanToken = t.token.replace(/^##/, '');
         span.appendChild(document.createTextNode(prefix + cleanToken));
 
-        // Monospace Tooltip on hover/focus
+        // Monospace Tooltip on hover/focus showing percentage
         const tip = document.createElement('span');
         tip.className = 'inline-token-tooltip';
-        tip.innerText = `${t.token} (${t.score > 0 ? '+' : ''}${t.score.toFixed(4)})`;
+        tip.innerText = `${t.token} (${t.score > 0 ? '+' : ''}${(t.score * 100).toFixed(1)}%)`;
         span.appendChild(tip);
 
         inlineContainer.appendChild(span);
@@ -959,9 +974,9 @@ async function loadDatasets() {
       const nonHatePct = count > 0 ? Math.round((nonHateCount / count) * 100) : 0;
 
       const langs = (Array.isArray(ds.languages) ? ds.languages : [ds.languages || 'en'])
-        .map(l => `<span class="badge badge-neutral" style="font-size:10px;">${l}</span>`).join(' ');
+        .map(l => `<span class="badge badge--neutral" aria-label="Language ${l}">${l}</span>`).join(' ');
       const mods = (Array.isArray(ds.modalities) ? ds.modalities : [ds.modalities || 'text'])
-        .map(m => `<span class="badge badge-neutral" style="font-size:10px;">${m}</span>`).join(' ');
+        .map(m => `<span class="badge badge--neutral" aria-label="Modality ${m}">${m}</span>`).join(' ');
 
       const tr = document.createElement('tr');
       tr.innerHTML = `
@@ -1129,7 +1144,8 @@ async function renderDatasetInspector() {
 
     tbody.innerHTML = data.sample_slice.map((s, idx) => {
       const isHate = s.label === 1;
-      const badgeClass = isHate ? 'badge-hate' : 'badge-nonhate';
+      const rowClass = isHate ? 'class="hateful-row"' : '';
+      const badgeClass = isHate ? 'badge--danger' : 'badge--neutral';
       const labelText = isHate ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
       const lang = s.language ? s.language.toUpperCase() : 'EN';
       const cleanText = (s.text || '').replace(/"/g, '&quot;');
@@ -1160,7 +1176,7 @@ async function renderDatasetInspector() {
       const escapedImg = encodeURIComponent(s.image_path || '');
 
       return `
-        <tr>
+        <tr ${rowClass}>
           <td style="font-family:var(--font-mono); font-size:11px; color:var(--color-text-tertiary);">${idx + 1}</td>
           <td><code style="font-size:11px;">${s.id}</code></td>
           <td style="max-width:480px;">
@@ -1168,8 +1184,8 @@ async function renderDatasetInspector() {
             <div style="font-size:13px; line-height:1.5;">${cleanText || '<em style="color:var(--color-text-tertiary)">[Multimodal OCR Content]</em>'}</div>
             ${extraPills ? `<div style="margin-top:4px;">${extraPills}</div>` : ''}
           </td>
-          <td><span class="badge badge-neutral" style="font-size:10px;">${lang}</span></td>
-          <td style="white-space:nowrap; min-width:145px;"><span class="badge ${badgeClass}" style="white-space:nowrap !important; display:inline-block;">${labelText}</span></td>
+          <td><span class="badge badge--neutral" aria-label="Language ${lang}">${lang}</span></td>
+          <td style="white-space:nowrap; min-width:145px;"><span class="badge ${badgeClass}" aria-label="${isHate ? 'Hateful (1)' : 'Non-Hateful (0)'}">${labelText}</span></td>
           <td>
             <button class="btn btn-secondary btn-sm" onclick="sendSampleToDetectionLab('${escapedText}', '${escapedCtx}', '${escapedImg}')" style="padding:3px 8px; font-size:11px; white-space:nowrap;">
               Test in Lab &rarr;
@@ -1221,10 +1237,12 @@ window.openMemeLightbox = function(imgUrl, encodedCaption, encodedOcr, label) {
 
   const badge = document.getElementById('lightboxLabelBadge');
   if (badge) {
-    badge.className = `badge ${label === 1 ? 'badge-hate' : 'badge-nonhate'}`;
-    badge.innerHTML = label === 1 ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
+    const isHate = label === 1;
+    badge.className = `badge ${isHate ? 'badge--danger' : 'badge--neutral'}`;
+    badge.setAttribute('aria-label', isHate ? 'Verdict: Hateful (1)' : 'Verdict: Non-Hateful (0)');
+    badge.innerHTML = isHate ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
     badge.style.whiteSpace = 'nowrap';
-    badge.style.display = 'inline-block';
+    badge.style.display = 'inline-flex';
   }
 
   const testBtn = document.getElementById('lightboxTestBtn');
@@ -1263,7 +1281,7 @@ async function loadModels() {
         <td>v${m.version}</td>
         <td>${m.architecture}</td>
         <td>${acc} / ${f1}</td>
-        <td><span class="badge ${m.is_active ? 'badge-nonhate' : 'badge-neutral'}">${m.is_active ? 'ACTIVE' : 'READY'}</span></td>
+        <td><span class="badge ${m.is_active ? 'badge--accent' : 'badge--neutral'}" aria-label="Status: ${m.is_active ? 'ACTIVE' : 'READY'}">${m.is_active ? 'ACTIVE' : 'READY'}</span></td>
         <td>${!m.is_active ? `<button class="btn btn-secondary btn-sm" onclick="selectModel('${m.id}')">Activate</button>` : '—'}</td>
       `;
       tbody.appendChild(tr);
@@ -1349,10 +1367,10 @@ async function loadOptimizationData() {
 
           tr.innerHTML = `
             <td><code>${r.run_name || r.id.substring(0, 12)}</code></td>
-            <td><span class="badge" style="background:var(--color-surface-raised);">${r.method}</span></td>
+            <td><span class="badge badge--neutral" aria-label="Method ${r.method}">${r.method}</span></td>
             <td>${sampleCount} pairs</td>
             <td><strong>${beforeF1} &rarr; ${afterF1}</strong></td>
-            <td><span class="badge badge-nonhate" style="white-space:nowrap;">${r.status.toUpperCase()}</span></td>
+            <td><span class="badge badge--neutral" aria-label="Status: ${r.status.toUpperCase()}" style="white-space:nowrap;">${r.status.toUpperCase()}</span></td>
             <td style="font-size:12px; color:var(--color-text-secondary);">${r.created_at || 'Recent'}</td>
           `;
           tbody.appendChild(tr);
@@ -1371,7 +1389,7 @@ async function loadOptimizationData() {
           const rtr = document.createElement('tr');
           const isPos = Number(rew.total_reward) >= 0;
           const formattedReward = (isPos ? '+' : '') + Number(rew.total_reward).toFixed(4);
-          const badgeClass = isPos ? 'badge-nonhate' : 'badge-hate';
+          const badgeClass = isPos ? 'badge--neutral' : 'badge--danger';
           const errPenalty = Number(rew.r_error) > 0 ? `<span style="color:var(--color-error); font-weight:600;">-${rew.r_error}</span>` : `<span style="color:var(--color-text-tertiary);">0.00</span>`;
 
           rtr.innerHTML = `
@@ -1381,7 +1399,7 @@ async function loadOptimizationData() {
             <td>${Number(rew.r_context).toFixed(2)}</td>
             <td>${Number(rew.r_feedback).toFixed(2)}</td>
             <td>${errPenalty}</td>
-            <td><span class="badge ${badgeClass}" style="white-space:nowrap; font-family:var(--font-mono);">${formattedReward}</span></td>
+            <td><span class="badge ${badgeClass}" aria-label="Reward ${formattedReward}" style="white-space:nowrap; font-family:var(--font-mono);">${formattedReward}</span></td>
             <td style="font-size:11px; color:var(--color-text-secondary);">${rew.created_at ? rew.created_at.substring(11, 19) : '--'}</td>
           `;
           rewBody.appendChild(rtr);
@@ -1601,7 +1619,8 @@ window.runLiveRewardSimulation = async function() {
     if (totBadge) {
       const isPos = res.total_reward >= 0;
       totBadge.innerText = (isPos ? '+' : '') + res.total_reward.toFixed(4);
-      totBadge.className = `badge ${isPos ? 'badge-nonhate' : 'badge-hate'}`;
+      totBadge.className = `badge ${isPos ? 'badge--neutral' : 'badge--danger'}`;
+      totBadge.setAttribute('aria-label', `Total Composite Reward: ${(isPos ? '+' : '') + res.total_reward.toFixed(4)}`);
     }
   } catch (e) {
     console.warn('Live simulation update failed:', e);
@@ -1629,7 +1648,8 @@ async function loadFairnessAudit(isRefresh = false) {
     if (badgeEl) {
       const isFair = report.is_fair_under_threshold;
       badgeEl.innerText = isFair ? 'EQUITABLE PARITY MET' : 'DISPARITY WARNING';
-      badgeEl.className = `badge ${isFair ? 'badge-nonhate' : 'badge-hate'}`;
+      badgeEl.className = `badge ${isFair ? 'badge--neutral' : 'badge--danger'}`;
+      badgeEl.setAttribute('aria-label', isFair ? 'Status: Equitable Parity Met' : 'Status: Disparity Warning');
     }
 
     const countEl = document.getElementById('fairnessSubgroupsCount');
@@ -1658,12 +1678,12 @@ async function loadFairnessAudit(isRefresh = false) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong>${label}</strong></td>
-          <td><span class="badge" style="background:var(--color-surface-raised); font-family:var(--font-mono);">${m.sample_count} samples</span></td>
+          <td><span class="badge badge--neutral" aria-label="${m.sample_count} samples" style="font-family:var(--font-mono);">${m.sample_count} samples</span></td>
           <td><strong>${(m.accuracy * 100).toFixed(1)}%</strong></td>
           <td>${(m.macro_f1 * 100).toFixed(1)}%</td>
           <td>${(m.fpr * 100).toFixed(1)}%</td>
           <td>${(m.fnr * 100).toFixed(1)}%</td>
-          <td><span class="badge badge-nonhate" style="white-space:nowrap;">PARITY MET</span></td>
+          <td><span class="badge badge--neutral" aria-label="Parity Met" style="white-space:nowrap;">PARITY MET</span></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1726,7 +1746,8 @@ window.runCounterfactualStressTest = async function() {
     if (container) container.style.display = 'block';
 
     if (verdictPill) {
-      verdictPill.innerHTML = `<span class="badge ${data.verdict_badge}" style="white-space:nowrap; font-size:12px;">${data.verdict}</span>`;
+      const isFair = data.is_fair || data.verdict === 'FAIR';
+      verdictPill.innerHTML = `<span class="badge ${isFair ? 'badge--neutral' : 'badge--danger'}" aria-label="Status: ${data.verdict}" style="white-space:nowrap; font-size:11px;">${data.verdict}</span>`;
     }
 
     if (banner) {
@@ -1743,13 +1764,20 @@ window.runCounterfactualStressTest = async function() {
       tbody.innerHTML = '';
       data.results.forEach(r => {
         const tr = document.createElement('tr');
-        const badgeClass = r.label === 1 ? 'badge-hate' : 'badge-nonhate';
+        const isHate = r.label === 1;
+        if (isHate) tr.className = 'hateful-row';
+        const badgeClass = isHate ? 'badge--danger' : 'badge--neutral';
         tr.innerHTML = `
           <td><strong>${r.demographic}</strong></td>
           <td><code style="font-size:12px;">${r.text}</code></td>
-          <td style="white-space:nowrap; min-width:145px;"><span class="badge ${badgeClass}" style="white-space:nowrap !important; display:inline-block;">${r.label_str}&nbsp;(${r.label})</span></td>
-          <td>${(r.confidence * 100).toFixed(1)}%</td>
-          <td><span class="badge badge-nonhate" style="white-space:nowrap;">Parity Met</span></td>
+          <td style="white-space:nowrap; min-width:145px;"><span class="badge ${badgeClass}" aria-label="${r.label_str} (${r.label})">${r.label_str}&nbsp;(${r.label})</span></td>
+          <td class="col-confidence">
+            <div class="confidence-val">${(r.confidence * 100).toFixed(1)}%</div>
+            <div class="confidence-bar-track">
+              <div class="confidence-bar-fill ${isHate ? 'confidence-bar-fill--danger' : ''}" style="--val:${r.confidence};"></div>
+            </div>
+          </td>
+          <td><span class="badge badge--neutral" aria-label="Parity Met">Parity Met</span></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1783,8 +1811,8 @@ const EXP_METADATA = {
 let cachedExperimentsList = [];
 
 function updateVerifiedCounter() {
-  const verifiedCards = document.querySelectorAll('.exp-card .badge-nonhate');
-  const count = verifiedCards.length;
+  const verifiedBadges = Array.from(document.querySelectorAll('.exp-card [id^="statusBadge_"]')).filter(b => b.innerText.includes('VERIFIED'));
+  const count = verifiedBadges.length;
   const verifiedEl = document.getElementById('expVerifiedCount');
   if (verifiedEl) {
     verifiedEl.innerText = `${count} / 9 Verified`;
@@ -1819,7 +1847,7 @@ async function loadExperiments() {
             <div class="exp-badge-group">
               <span class="exp-code-pill">${meta.num}</span>
               <span class="exp-tag-pill" style="color:${meta.tagColor}; background:${meta.tagColor}1a;">${meta.category}</span>
-              <span class="badge ${isCompleted ? 'badge-nonhate' : 'badge-neutral'}" id="statusBadge_${exp.code}" style="white-space:nowrap; font-size:11px;">
+              <span class="badge ${isCompleted ? 'badge--neutral' : 'badge--warn'}" id="statusBadge_${exp.code}" aria-label="Status: ${isCompleted ? 'VERIFIED' : 'READY TO RUN'}" style="white-space:nowrap; font-size:11px;">
                 ${isCompleted ? 'VERIFIED' : 'READY TO RUN'}
               </span>
             </div>
@@ -2187,7 +2215,7 @@ function renderExp4Body(m, summary) {
         <div class="card" style="margin-bottom:0; background:var(--color-surface); border:2px solid var(--color-primary); padding:12px;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <div style="font-weight:700; font-size:13px; color:var(--color-primary);">Cross-Modal Attention</div>
-            <span class="badge badge-nonhate" style="font-size:10px;">TOP ACCURACY</span>
+            <span class="badge badge--neutral" aria-label="Top Accuracy" style="font-size:10px;">TOP ACCURACY</span>
           </div>
           <div style="font-size:11px; color:var(--color-text-secondary); margin-bottom:8px;">Multi-head bidirectional co-attention</div>
           <div style="font-size:12px;">Macro F1: <strong style="color:var(--color-success);">${(ca.macro_f1 * 100).toFixed(1)}%</strong></div>
@@ -2235,22 +2263,22 @@ function renderExp5Body(m, summary) {
       
       <div style="margin-bottom:12px;">
         <span style="font-size:11px; text-transform:uppercase; color:var(--color-text-secondary); font-weight:600;">Top Discriminative Hate Speech Tokens Attributed:</span>
-        <div style="margin-top:6px;">
-          <span class="badge badge-hate" style="margin:2px;">vermin [+0.42]</span>
-          <span class="badge badge-hate" style="margin:2px;">exterminate [+0.38]</span>
-          <span class="badge badge-hate" style="margin:2px;">kutto [+0.35]</span>
-          <span class="badge badge-hate" style="margin:2px;">goli maaro [+0.33]</span>
-          <span class="badge badge-hate" style="margin:2px;">parasites [+0.30]</span>
+        <div class="badge-group" style="margin-top:6px;">
+          <span class="badge badge--danger" aria-label="Token vermin weight +0.42" style="margin:2px;">vermin [+0.42]</span>
+          <span class="badge badge--danger" aria-label="Token exterminate weight +0.38" style="margin:2px;">exterminate [+0.38]</span>
+          <span class="badge badge--danger" aria-label="Token kutto weight +0.35" style="margin:2px;">kutto [+0.35]</span>
+          <span class="badge badge--danger" aria-label="Token goli maaro weight +0.33" style="margin:2px;">goli maaro [+0.33]</span>
+          <span class="badge badge--danger" aria-label="Token parasites weight +0.30" style="margin:2px;">parasites [+0.30]</span>
         </div>
       </div>
 
       <div>
         <span style="font-size:11px; text-transform:uppercase; color:var(--color-text-secondary); font-weight:600;">Top Prosocial Counterspeech Tokens Attributed:</span>
-        <div style="margin-top:6px;">
-          <span class="badge badge-nonhate" style="margin:2px;">virodh [-0.31]</span>
-          <span class="badge badge-nonhate" style="margin:2px;">equality [-0.29]</span>
-          <span class="badge badge-nonhate" style="margin:2px;">peace [-0.25]</span>
-          <span class="badge badge-nonhate" style="margin:2px;">respect [-0.24]</span>
+        <div class="badge-group" style="margin-top:6px;">
+          <span class="badge badge--neutral" aria-label="Token virodh weight -0.31" style="margin:2px;">virodh [-0.31]</span>
+          <span class="badge badge--neutral" aria-label="Token equality weight -0.29" style="margin:2px;">equality [-0.29]</span>
+          <span class="badge badge--neutral" aria-label="Token peace weight -0.25" style="margin:2px;">peace [-0.25]</span>
+          <span class="badge badge--neutral" aria-label="Token respect weight -0.24" style="margin:2px;">respect [-0.24]</span>
         </div>
       </div>
     </div>
@@ -2428,21 +2456,21 @@ function renderExp8Body(m, summary) {
           <div style="font-weight:700; font-size:12px;">English (EN)</div>
           <div style="font-size:11px; color:var(--color-text-secondary); margin-top:4px;">FPR: <strong>${((fpr.english || 0) * 100).toFixed(1)}%</strong></div>
           <div style="font-size:11px; color:var(--color-text-secondary);">FNR: <strong>${((fnr.english || 0) * 100).toFixed(1)}%</strong></div>
-          <span class="badge badge-nonhate" style="margin-top:6px; font-size:10px;">PARITY MET</span>
+          <span class="badge badge--neutral" aria-label="Parity Met" style="margin-top:6px; font-size:10px;">PARITY MET</span>
         </div>
 
         <div class="card" style="margin-bottom:0; background:var(--color-surface); padding:10px;">
           <div style="font-weight:700; font-size:12px;">Hindi Devanagari (HI)</div>
           <div style="font-size:11px; color:var(--color-text-secondary); margin-top:4px;">FPR: <strong>${((fpr.hindi_native || 0) * 100).toFixed(1)}%</strong></div>
           <div style="font-size:11px; color:var(--color-text-secondary);">FNR: <strong>${((fnr.hindi_native || 0) * 100).toFixed(1)}%</strong></div>
-          <span class="badge badge-nonhate" style="margin-top:6px; font-size:10px;">PARITY MET</span>
+          <span class="badge badge--neutral" aria-label="Parity Met" style="margin-top:6px; font-size:10px;">PARITY MET</span>
         </div>
 
         <div class="card" style="margin-bottom:0; background:var(--color-surface); padding:10px;">
           <div style="font-weight:700; font-size:12px;">Hinglish Code-Mixed (HI-EN)</div>
           <div style="font-size:11px; color:var(--color-text-secondary); margin-top:4px;">FPR: <strong>${((fpr.hinglish_code_mixed || 0) * 100).toFixed(1)}%</strong></div>
           <div style="font-size:11px; color:var(--color-text-secondary);">FNR: <strong>${((fnr.hinglish_code_mixed || 0) * 100).toFixed(1)}%</strong></div>
-          <span class="badge badge-nonhate" style="margin-top:6px; font-size:10px;">PARITY MET</span>
+          <span class="badge badge--neutral" aria-label="Parity Met" style="margin-top:6px; font-size:10px;">PARITY MET</span>
         </div>
       </div>
     </div>
@@ -2555,7 +2583,8 @@ window.runExperiment = async function(expCode) {
       contentEl.innerHTML = renderExperimentBody(expCode, res);
     }
     if (statusBadge) {
-      statusBadge.className = 'badge badge-nonhate';
+      statusBadge.className = 'badge badge--neutral';
+      statusBadge.setAttribute('aria-label', 'Status: VERIFIED');
       statusBadge.innerText = 'VERIFIED';
     }
     updateVerifiedCounter();
