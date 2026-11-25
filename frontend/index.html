@@ -10,7 +10,7 @@
   <link rel="preload" href="/static/fonts/newsreader_400_normal_12.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/static/fonts/inter_400_normal_2.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/static/css/fonts.css">
-  <link rel="stylesheet" href="/static/css/thoughtstream.css?v=5.0">
+  <link rel="stylesheet" href="/static/css/thoughtstream.css?v=7.2-scientific">
 </head>
 <body>
   <div class="ambient-gradient-layer" id="ambientGradientLayer" aria-hidden="true"></div>
@@ -176,10 +176,11 @@
                 <span class="badge badge-neutral" style="font-size:10px;">Negation Scope</span>
               </div>
             </div>
-            <p style="font-size:12px; color:var(--color-text-secondary); margin-bottom:10px;">
+            <div class="overview-pipeline-box">
               <strong>Academic Architecture Pipeline:</strong> Social Media Input <em>x = {T, V, C}</em> &rarr; Language &amp; Modality Detection &rarr; Modality Preprocessing (Text Normalization, EasyOCR, Context Sanitization) &rarr; Feature Extraction &amp; Cross-Attention Fusion &rarr; Hate Speech Classification &rarr; Grounded XAI Attribution &rarr; Multi-Objective Reward Calculation &rarr; Direct Preference Optimization (DPO).
-            </p>
-            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            </div>
+            <div class="overview-tags-row">
+              <span class="overview-tags-label">Capabilities:</span>
               <span class="badge badge-neutral">English</span>
               <span class="badge badge-neutral">Hindi (Devanagari)</span>
               <span class="badge badge-neutral">Hinglish Code-Mixed</span>
@@ -220,7 +221,7 @@
           <div class="grid-2">
             <div class="card">
               <div class="card-title">Core Research Mandates</div>
-              <ul style="padding-left:18px; font-size:13px; color:var(--color-text-secondary); line-height:1.8;">
+              <ul class="overview-mandates-list">
                 <li><strong>Strict Binary Objective:</strong> 0 = Non-Hateful, 1 = Hateful.</li>
                 <li><strong>No Hardcoding Rule:</strong> All metrics, predictions, explanations, and rewards are dynamically computed from SQLite and models.</li>
                 <li><strong>Multilingual Robustness:</strong> Devanagari script and Latin Romanized Hindi slang support without blind machine translation.</li>
@@ -229,11 +230,23 @@
             </div>
             <div class="card">
               <div class="card-title">Quick Action Links</div>
-              <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
-                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-detection\']').click()">Launch Detection Workspace &rarr;</button>
-                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-datasets\']').click()">Inspect Registered Datasets &rarr;</button>
-                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-optimization\']').click()">Review Reward Optimization Lab &rarr;</button>
-                <button class="btn btn-secondary" onclick="document.querySelector('[data-target=\'page-experiments\']').click()">Run Research Experiments (1-9) &rarr;</button>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+                <button class="quick-action-btn" onclick="document.querySelector('[data-target=\'page-detection\']').click()">
+                  <span>Launch Detection Workspace</span>
+                  <span>&rarr;</span>
+                </button>
+                <button class="quick-action-btn" onclick="document.querySelector('[data-target=\'page-datasets\']').click()">
+                  <span>Inspect Registered Datasets</span>
+                  <span>&rarr;</span>
+                </button>
+                <button class="quick-action-btn" onclick="document.querySelector('[data-target=\'page-optimization\']').click()">
+                  <span>Review Reward Optimization Lab</span>
+                  <span>&rarr;</span>
+                </button>
+                <button class="quick-action-btn" onclick="document.querySelector('[data-target=\'page-experiments\']').click()">
+                  <span>Run Research Experiments (1-9)</span>
+                  <span>&rarr;</span>
+                </button>
               </div>
             </div>
           </div>

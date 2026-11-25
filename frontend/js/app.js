@@ -74,7 +74,7 @@ function initMotionSystem() {
   document.addEventListener('pointermove', (e) => {
     if (mouseRaf) return;
     mouseRaf = requestAnimationFrame(() => {
-      const target = e.target.closest('.card, .card-elevated, .verdict-audit-table tr, .table-row-hover, .scanner-bench-panel');
+      const target = e.target.closest('.card, .card-elevated, .stat-box, .metric-card, .verdict-audit-table tr, .table-row-hover, .scanner-bench-panel');
       if (target) {
         const rect = target.getBoundingClientRect();
         target.style.setProperty('--mx', `${(e.clientX - rect.left).toFixed(1)}px`);
