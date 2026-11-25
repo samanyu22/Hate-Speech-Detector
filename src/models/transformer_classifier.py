@@ -314,7 +314,7 @@ class MultilingualTransformerEngine:
 
         return False
 
-    def train(self, records: List[DatasetRecord], epochs: int = 15, lr: float = 1.5e-3) -> Dict[str, Any]:
+    def train(self, records: List[DatasetRecord], epochs: int = 15, lr: float = 1.5e-3, batch_size: int = 32) -> Dict[str, Any]:
         texts = [r.text for r in records]
         self.build_vocab(texts)
         self.model.train()
@@ -328,24 +328,31 @@ class MultilingualTransformerEngine:
         class_weights = torch.tensor([1.0, float(weight_pos)], device=self.device)
         criterion = nn.CrossEntropyLoss(weight=class_weights)
 
-        batch_size = 16
+        # Pre-tokenize all records once for high throughput training
+        pretokenized = [
+            [self.vocab.get(w.lower(), self.vocab["<UNK>"]) for w in self.normalizer.tokenize_words(self.normalizer.normalize(r.text))]
+            for r in records
+        ]
+        all_labels = [r.label for r in records]
+
         losses = []
 
         for epoch in range(epochs):
             total_loss = 0.0
             indices = torch.randperm(len(records)).tolist()
             for i in range(0, len(records), batch_size):
-                batch_records = [records[idx] for idx in indices[i:i+batch_size]]
-                raw_token_lists = [
-                    [self.vocab.get(w.lower(), self.vocab["<UNK>"]) for w in self.normalizer.tokenize_words(self.normalizer.normalize(r.text))]
-                    for r in batch_records
-                ]
+                batch_indices = indices[i:i+batch_size]
                 # Word dropout: randomly replace 15% of tokens with <UNK> during training
                 # This explicitly trains the model that unknown words are neutral, preventing OOV collapse
-                for t in raw_token_lists:
+                raw_token_lists = []
+                for idx in batch_indices:
+                    t = list(pretokenized[idx])
+                    if len(t) == 0:
+                        t = [self.vocab["<UNK>"]]
                     for pos in range(len(t)):
                         if torch.rand(1).item() < 0.15:
                             t[pos] = self.vocab["<UNK>"]
+                    raw_token_lists.append(t)
 
                 batch_max = max(max(len(t) for t in raw_token_lists), 1)
                 padded_batches = [
@@ -353,7 +360,7 @@ class MultilingualTransformerEngine:
                     for t in raw_token_lists
                 ]
                 x_batch = torch.tensor(padded_batches, dtype=torch.long, device=self.device)
-                y_batch = torch.tensor([r.label for r in batch_records], dtype=torch.long, device=self.device)
+                y_batch = torch.tensor([all_labels[idx] for idx in batch_indices], dtype=torch.long, device=self.device)
 
                 optimizer.zero_grad()
                 logits = self.model(x_batch)
@@ -492,8 +499,8 @@ class MultilingualTransformerEngine:
             z1 = min(z1, z0 - 2.5)
         elif len(known_content) == 0 and len(content_words) > 0:
             z1 = min(z1, z0 - 1.0)
-        elif not has_grounding and z1 > z0:
-            # Discourse without any grounded hostility marker, slur, or structural exclusion predicate
+        elif not has_grounding and (z1 - z0) <= 1.2:
+            # Ambiguous or weak activation without explicit grounding: calibrate toward non-hateful
             z1 = z0 - 1.5
         elif coverage < 0.5 and z1 > z0:
             z1 = z0 + (z1 - z0) * coverage

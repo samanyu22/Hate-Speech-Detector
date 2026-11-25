@@ -1,39 +1,72 @@
 {
   "total_samples": 200,
-  "accuracy": 0.98,
-  "macro_f1": 0.98,
-  "macro_precision": 0.9808,
-  "macro_recall": 0.98,
+  "accuracy": 0.91,
+  "macro_f1": 0.9097,
+  "macro_precision": 0.916,
+  "macro_recall": 0.91,
   "confusion_matrix": {
-    "TN": 100,
-    "FP": 0,
-    "FN": 4,
-    "TP": 96
+    "TN": 85,
+    "FP": 15,
+    "FN": 3,
+    "TP": 97
   },
   "per_class": {
     "unhateful": {
-      "precision": 0.9615,
-      "recall": 1.0,
-      "f1": 0.9804,
+      "precision": 0.9659,
+      "recall": 0.85,
+      "f1": 0.9043,
       "support": 100
     },
     "hateful": {
-      "precision": 1.0,
-      "recall": 0.96,
-      "f1": 0.9796,
+      "precision": 0.8661,
+      "recall": 0.97,
+      "f1": 0.9151,
       "support": 100
     }
   },
   "mismatches": [
     {
-      "id": "id535",
-      "text": "People of that caste should not be permitted to participate in village decision-making.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.6005,
-      "prob_hateful": 0.3995,
+      "id": "id538",
+      "text": "The university has announced a new research grant application process.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9849,
+      "prob_hateful": 0.9849,
+      "match": false
+    },
+    {
+      "id": "id544",
+      "text": "The sports authority has introduced a revised athlete registration procedure.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8564,
+      "prob_hateful": 0.8564,
+      "match": false
+    },
+    {
+      "id": "id574",
+      "text": "The cooperative society is accepting applications for new memberships.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8896,
+      "prob_hateful": 0.8896,
+      "match": false
+    },
+    {
+      "id": "id580",
+      "text": "The nursing council has published its professional registration guidelines.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8778,
+      "prob_hateful": 0.8778,
       "match": false
     },
     {
@@ -43,30 +76,151 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9993,
-      "prob_hateful": 0.0007,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": false
     },
     {
-      "id": "id647",
-      "text": "Men should not be allowed to receive parental leave benefits.",
+      "id": "id596",
+      "text": "The organisers have announced the judging criteria for the public speaking competition.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8347,
+      "prob_hateful": 0.8347,
+      "match": false
+    },
+    {
+      "id": "id604",
+      "text": "The childcare department has announced new registration dates.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9994,
+      "prob_hateful": 0.9994,
+      "match": false
+    },
+    {
+      "id": "id614",
+      "text": "The theatre group is holding auditions for its next production.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9976,
+      "prob_hateful": 0.9976,
+      "match": false
+    },
+    {
+      "id": "id621",
+      "text": "People who speak a minority language should not be allowed to participate in public broadcasting.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.802,
-      "prob_hateful": 0.198,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
-      "id": "id675",
-      "text": "People from a particular nationality should not be permitted to work in public research laboratories.",
+      "id": "id657",
+      "text": "People with disabilities should not be allowed to access online government forms.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8884,
-      "prob_hateful": 0.1116,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id670",
+      "text": "The examination library has added new reference materials.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8431,
+      "prob_hateful": 0.8431,
+      "match": false
+    },
+    {
+      "id": "id674",
+      "text": "The heritage department is documenting historic buildings in the region.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8274,
+      "prob_hateful": 0.8274,
+      "match": false
+    },
+    {
+      "id": "id678",
+      "text": "The agriculture department is organising a workshop about crop management.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.7394,
+      "prob_hateful": 0.7394,
+      "match": false
+    },
+    {
+      "id": "id694",
+      "text": "The council is introducing live captions for its online meetings.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9481,
+      "prob_hateful": 0.9481,
+      "match": false
+    },
+    {
+      "id": "id702",
+      "text": "The library committee is reviewing its book acquisition budget.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8318,
+      "prob_hateful": 0.8318,
+      "match": false
+    },
+    {
+      "id": "id710",
+      "text": "The cultural department has announced a new grant application window.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.98,
+      "prob_hateful": 0.98,
+      "match": false
+    },
+    {
+      "id": "id720",
+      "text": "The environmental institute is recruiting volunteers for a biodiversity study.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9479,
+      "prob_hateful": 0.9479,
+      "match": false
+    },
+    {
+      "id": "id728",
+      "text": "The heritage organisation is recruiting volunteers to document historic monuments.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8881,
+      "prob_hateful": 0.8881,
       "match": false
     }
   ],
@@ -89,8 +243,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9944,
-      "prob_hateful": 0.0056,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -100,8 +254,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9975,
+      "prob_hateful": 0.9975,
       "match": true
     },
     {
@@ -111,57 +265,13 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.997,
-      "prob_hateful": 0.003,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
       "id": "id535",
       "text": "People of that caste should not be permitted to participate in village decision-making.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.6005,
-      "prob_hateful": 0.3995,
-      "match": false
-    },
-    {
-      "id": "id536",
-      "text": "The village council is collecting suggestions about its development projects.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9714,
-      "prob_hateful": 0.0286,
-      "match": true
-    },
-    {
-      "id": "id537",
-      "text": "Students from that nationality should not be allowed to receive university research grants.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9174,
-      "prob_hateful": 0.9174,
-      "match": true
-    },
-    {
-      "id": "id538",
-      "text": "The university has announced a new research grant application process.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
-      "match": true
-    },
-    {
-      "id": "id539",
-      "text": "People with that disability should not be allowed to participate in professional examinations.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "hateful",
@@ -171,14 +281,58 @@
       "match": true
     },
     {
+      "id": "id536",
+      "text": "The village council is collecting suggestions about its development projects.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": true
+    },
+    {
+      "id": "id537",
+      "text": "Students from that nationality should not be allowed to receive university research grants.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
+      "match": true
+    },
+    {
+      "id": "id538",
+      "text": "The university has announced a new research grant application process.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9849,
+      "prob_hateful": 0.9849,
+      "match": false
+    },
+    {
+      "id": "id539",
+      "text": "People with that disability should not be allowed to participate in professional examinations.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9998,
+      "prob_hateful": 0.9998,
+      "match": true
+    },
+    {
       "id": "id540",
       "text": "The examination board has published guidelines for candidates requiring additional arrangements.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9943,
-      "prob_hateful": 0.0057,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -199,8 +353,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8265,
-      "prob_hateful": 0.1735,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -219,11 +373,11 @@
       "text": "The sports authority has introduced a revised athlete registration procedure.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9849,
-      "prob_hateful": 0.0151,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8564,
+      "prob_hateful": 0.8564,
+      "match": false
     },
     {
       "id": "id545",
@@ -243,8 +397,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6664,
-      "prob_hateful": 0.3336,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -254,8 +408,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9989,
-      "prob_hateful": 0.9989,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -265,8 +419,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7765,
-      "prob_hateful": 0.2235,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -276,8 +430,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9994,
-      "prob_hateful": 0.9994,
+      "confidence": 0.9998,
+      "prob_hateful": 0.9998,
       "match": true
     },
     {
@@ -287,8 +441,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9281,
-      "prob_hateful": 0.0719,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -298,8 +452,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.9998,
       "match": true
     },
     {
@@ -309,8 +463,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9991,
-      "prob_hateful": 0.0009,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -320,8 +474,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -331,8 +485,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9954,
-      "prob_hateful": 0.0046,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -342,8 +496,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9676,
+      "prob_hateful": 0.9676,
       "match": true
     },
     {
@@ -375,8 +529,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9936,
-      "prob_hateful": 0.0064,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -397,8 +551,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9972,
-      "prob_hateful": 0.0028,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -419,8 +573,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9995,
-      "prob_hateful": 0.0005,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -441,8 +595,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9761,
-      "prob_hateful": 0.0239,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -463,8 +617,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9973,
-      "prob_hateful": 0.0027,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -474,8 +628,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9716,
+      "prob_hateful": 0.9716,
       "match": true
     },
     {
@@ -485,8 +639,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9523,
-      "prob_hateful": 0.0477,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -507,8 +661,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8058,
-      "prob_hateful": 0.1942,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -529,8 +683,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9923,
-      "prob_hateful": 0.0077,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -549,11 +703,11 @@
       "text": "The cooperative society is accepting applications for new memberships.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9831,
-      "prob_hateful": 0.0169,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8896,
+      "prob_hateful": 0.8896,
+      "match": false
     },
     {
       "id": "id575",
@@ -562,8 +716,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9984,
-      "prob_hateful": 0.9984,
+      "confidence": 0.9989,
+      "prob_hateful": 0.9989,
       "match": true
     },
     {
@@ -573,8 +727,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -595,8 +749,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9694,
-      "prob_hateful": 0.0306,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -606,8 +760,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -615,11 +769,11 @@
       "text": "The nursing council has published its professional registration guidelines.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9952,
-      "prob_hateful": 0.0048,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8778,
+      "prob_hateful": 0.8778,
+      "match": false
     },
     {
       "id": "id581",
@@ -628,8 +782,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9966,
-      "prob_hateful": 0.9966,
+      "confidence": 0.6599,
+      "prob_hateful": 0.6599,
       "match": true
     },
     {
@@ -639,8 +793,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9886,
-      "prob_hateful": 0.0114,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -650,8 +804,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9993,
-      "prob_hateful": 0.0007,
+      "confidence": 0.9998,
+      "prob_hateful": 0.0002,
       "match": false
     },
     {
@@ -661,8 +815,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9624,
-      "prob_hateful": 0.0376,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -672,8 +826,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -683,8 +837,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -694,8 +848,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9951,
+      "prob_hateful": 0.9951,
       "match": true
     },
     {
@@ -705,8 +859,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8296,
-      "prob_hateful": 0.1704,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -716,8 +870,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9906,
-      "prob_hateful": 0.9906,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -727,8 +881,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8617,
-      "prob_hateful": 0.1383,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -738,8 +892,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9992,
-      "prob_hateful": 0.9992,
+      "confidence": 0.9261,
+      "prob_hateful": 0.9261,
       "match": true
     },
     {
@@ -749,8 +903,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.998,
-      "prob_hateful": 0.002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -760,8 +914,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9997,
-      "prob_hateful": 0.9997,
+      "confidence": 0.9277,
+      "prob_hateful": 0.9277,
       "match": true
     },
     {
@@ -771,8 +925,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9653,
-      "prob_hateful": 0.0347,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -782,8 +936,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -791,11 +945,11 @@
       "text": "The organisers have announced the judging criteria for the public speaking competition.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7152,
-      "prob_hateful": 0.2848,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8347,
+      "prob_hateful": 0.8347,
+      "match": false
     },
     {
       "id": "id597",
@@ -804,8 +958,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.8283,
+      "prob_hateful": 0.8283,
       "match": true
     },
     {
@@ -815,8 +969,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9087,
-      "prob_hateful": 0.0913,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -826,8 +980,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9946,
+      "prob_hateful": 0.9946,
       "match": true
     },
     {
@@ -859,8 +1013,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9959,
-      "prob_hateful": 0.0041,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -879,11 +1033,11 @@
       "text": "The childcare department has announced new registration dates.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.974,
-      "prob_hateful": 0.026,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9994,
+      "prob_hateful": 0.9994,
+      "match": false
     },
     {
       "id": "id605",
@@ -903,8 +1057,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9955,
-      "prob_hateful": 0.0045,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -925,8 +1079,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9987,
-      "prob_hateful": 0.0013,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -947,8 +1101,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.999,
-      "prob_hateful": 0.001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -958,8 +1112,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.8399,
+      "prob_hateful": 0.8399,
       "match": true
     },
     {
@@ -969,8 +1123,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9976,
-      "prob_hateful": 0.0024,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -989,11 +1143,11 @@
       "text": "The theatre group is holding auditions for its next production.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.6908,
-      "prob_hateful": 0.3092,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9976,
+      "prob_hateful": 0.9976,
+      "match": false
     },
     {
       "id": "id615",
@@ -1002,8 +1156,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.7276,
-      "prob_hateful": 0.7276,
+      "confidence": 0.7989,
+      "prob_hateful": 0.7989,
       "match": true
     },
     {
@@ -1013,8 +1167,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9904,
-      "prob_hateful": 0.0096,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1024,8 +1178,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9996,
-      "prob_hateful": 0.9996,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1035,8 +1189,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1046,8 +1200,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.8372,
-      "prob_hateful": 0.8372,
+      "confidence": 0.9935,
+      "prob_hateful": 0.9935,
       "match": true
     },
     {
@@ -1057,8 +1211,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1066,11 +1220,11 @@
       "text": "People who speak a minority language should not be allowed to participate in public broadcasting.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id622",
@@ -1079,8 +1233,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8221,
-      "prob_hateful": 0.1779,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1090,8 +1244,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -1101,8 +1255,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5752,
-      "prob_hateful": 0.4248,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1123,8 +1277,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8265,
-      "prob_hateful": 0.1735,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1134,8 +1288,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9996,
+      "prob_hateful": 0.9996,
       "match": true
     },
     {
@@ -1145,8 +1299,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9936,
-      "prob_hateful": 0.0064,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1156,8 +1310,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -1167,8 +1321,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9809,
-      "prob_hateful": 0.0191,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1189,8 +1343,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1200,8 +1354,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9413,
-      "prob_hateful": 0.9413,
+      "confidence": 0.9119,
+      "prob_hateful": 0.9119,
       "match": true
     },
     {
@@ -1211,8 +1365,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9983,
-      "prob_hateful": 0.0017,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1222,8 +1376,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9985,
+      "prob_hateful": 0.9985,
       "match": true
     },
     {
@@ -1233,8 +1387,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9784,
-      "prob_hateful": 0.0216,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1266,8 +1420,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9998,
+      "prob_hateful": 0.9998,
       "match": true
     },
     {
@@ -1277,8 +1431,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9498,
-      "prob_hateful": 0.0502,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1299,8 +1453,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9882,
-      "prob_hateful": 0.0118,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1310,8 +1464,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9997,
-      "prob_hateful": 0.9997,
+      "confidence": 0.9995,
+      "prob_hateful": 0.9995,
       "match": true
     },
     {
@@ -1321,8 +1475,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9969,
-      "prob_hateful": 0.0031,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1332,8 +1486,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.6315,
-      "prob_hateful": 0.6315,
+      "confidence": 0.5498,
+      "prob_hateful": 0.5498,
       "match": true
     },
     {
@@ -1343,8 +1497,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9935,
-      "prob_hateful": 0.0065,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1352,11 +1506,11 @@
       "text": "Men should not be allowed to receive parental leave benefits.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.802,
-      "prob_hateful": 0.198,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.639,
+      "prob_hateful": 0.639,
+      "match": true
     },
     {
       "id": "id648",
@@ -1365,8 +1519,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1387,8 +1541,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9984,
-      "prob_hateful": 0.0016,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1398,8 +1552,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 0.8808,
+      "prob_hateful": 0.8808,
       "match": true
     },
     {
@@ -1409,8 +1563,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7604,
-      "prob_hateful": 0.2396,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1431,8 +1585,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9979,
-      "prob_hateful": 0.0021,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1442,8 +1596,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9996,
+      "prob_hateful": 0.9996,
       "match": true
     },
     {
@@ -1453,8 +1607,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9993,
-      "prob_hateful": 0.0007,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1462,11 +1616,11 @@
       "text": "People with disabilities should not be allowed to access online government forms.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id658",
@@ -1475,8 +1629,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8755,
-      "prob_hateful": 0.1245,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1497,8 +1651,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1519,8 +1673,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1530,8 +1684,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.8924,
-      "prob_hateful": 0.8924,
+      "confidence": 0.9983,
+      "prob_hateful": 0.9983,
       "match": true
     },
     {
@@ -1541,8 +1695,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9601,
-      "prob_hateful": 0.0399,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1552,8 +1706,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9996,
-      "prob_hateful": 0.9996,
+      "confidence": 0.9991,
+      "prob_hateful": 0.9991,
       "match": true
     },
     {
@@ -1585,8 +1739,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9948,
-      "prob_hateful": 0.0052,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1596,8 +1750,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.998,
+      "prob_hateful": 0.998,
       "match": true
     },
     {
@@ -1605,11 +1759,11 @@
       "text": "The examination library has added new reference materials.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.974,
-      "prob_hateful": 0.026,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8431,
+      "prob_hateful": 0.8431,
+      "match": false
     },
     {
       "id": "id671",
@@ -1618,8 +1772,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9762,
-      "prob_hateful": 0.9762,
+      "confidence": 0.8724,
+      "prob_hateful": 0.8724,
       "match": true
     },
     {
@@ -1629,8 +1783,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9905,
-      "prob_hateful": 0.0095,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1640,8 +1794,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1649,22 +1803,22 @@
       "text": "The heritage department is documenting historic buildings in the region.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8176,
-      "prob_hateful": 0.1824,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8274,
+      "prob_hateful": 0.8274,
+      "match": false
     },
     {
       "id": "id675",
       "text": "People from a particular nationality should not be permitted to work in public research laboratories.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8884,
-      "prob_hateful": 0.1116,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9996,
+      "prob_hateful": 0.9996,
+      "match": true
     },
     {
       "id": "id676",
@@ -1673,8 +1827,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1693,11 +1847,11 @@
       "text": "The agriculture department is organising a workshop about crop management.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9547,
-      "prob_hateful": 0.0453,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.7394,
+      "prob_hateful": 0.7394,
+      "match": false
     },
     {
       "id": "id679",
@@ -1717,8 +1871,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9866,
-      "prob_hateful": 0.0134,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1728,8 +1882,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.999,
+      "prob_hateful": 0.999,
       "match": true
     },
     {
@@ -1739,8 +1893,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9782,
-      "prob_hateful": 0.0218,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1761,8 +1915,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9988,
-      "prob_hateful": 0.0012,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1783,8 +1937,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1794,8 +1948,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -1805,8 +1959,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9962,
-      "prob_hateful": 0.0038,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1816,8 +1970,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9939,
+      "prob_hateful": 0.9939,
       "match": true
     },
     {
@@ -1827,8 +1981,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9899,
-      "prob_hateful": 0.0101,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1838,8 +1992,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.996,
-      "prob_hateful": 0.996,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1849,8 +2003,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9987,
-      "prob_hateful": 0.0013,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1860,8 +2014,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9994,
+      "prob_hateful": 0.9994,
       "match": true
     },
     {
@@ -1869,11 +2023,11 @@
       "text": "The council is introducing live captions for its online meetings.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9963,
-      "prob_hateful": 0.0037,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9481,
+      "prob_hateful": 0.9481,
+      "match": false
     },
     {
       "id": "id695",
@@ -1893,8 +2047,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9961,
-      "prob_hateful": 0.0039,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1915,8 +2069,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1926,8 +2080,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1937,8 +2091,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9982,
-      "prob_hateful": 0.0018,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1957,11 +2111,11 @@
       "text": "The library committee is reviewing its book acquisition budget.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9722,
-      "prob_hateful": 0.0278,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8318,
+      "prob_hateful": 0.8318,
+      "match": false
     },
     {
       "id": "id703",
@@ -1981,8 +2135,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7086,
-      "prob_hateful": 0.2914,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1992,8 +2146,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -2003,8 +2157,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9823,
-      "prob_hateful": 0.0177,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2025,8 +2179,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9867,
-      "prob_hateful": 0.0133,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2045,11 +2199,11 @@
       "text": "The cultural department has announced a new grant application window.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9974,
-      "prob_hateful": 0.0026,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.98,
+      "prob_hateful": 0.98,
+      "match": false
     },
     {
       "id": "id711",
@@ -2058,8 +2212,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9989,
-      "prob_hateful": 0.9989,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -2069,8 +2223,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2080,8 +2234,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9975,
+      "prob_hateful": 0.9975,
       "match": true
     },
     {
@@ -2091,8 +2245,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9918,
-      "prob_hateful": 0.0082,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2102,8 +2256,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9982,
+      "prob_hateful": 0.9982,
       "match": true
     },
     {
@@ -2113,8 +2267,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9875,
-      "prob_hateful": 0.0125,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2135,8 +2289,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2146,8 +2300,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -2155,11 +2309,11 @@
       "text": "The environmental institute is recruiting volunteers for a biodiversity study.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9303,
-      "prob_hateful": 0.0697,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9479,
+      "prob_hateful": 0.9479,
+      "match": false
     },
     {
       "id": "id721",
@@ -2179,8 +2333,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9539,
-      "prob_hateful": 0.0461,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2201,8 +2355,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8862,
-      "prob_hateful": 0.1138,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2223,8 +2377,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9632,
-      "prob_hateful": 0.0368,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2243,11 +2397,11 @@
       "text": "The heritage organisation is recruiting volunteers to document historic monuments.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.6729,
-      "prob_hateful": 0.3271,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8881,
+      "prob_hateful": 0.8881,
+      "match": false
     },
     {
       "id": "id729",
@@ -2267,8 +2421,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9952,
-      "prob_hateful": 0.0048,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     }
   ]

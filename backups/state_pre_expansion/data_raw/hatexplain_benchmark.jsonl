@@ -1,0 +1,210 @@
+{"id": "hx_bench_000", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_001", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_002", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_003", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_004", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_005", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_006", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_007", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_008", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_009", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_010", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_011", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_012", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_013", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_014", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_015", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_016", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_017", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_018", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_019", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_020", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_021", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_022", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_023", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_024", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_025", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_026", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_027", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_028", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_029", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_030", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_031", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_032", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_033", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_034", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_035", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_036", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_037", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_038", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_039", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_040", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_041", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_042", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_043", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_044", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_045", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_046", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_047", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_048", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_049", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_050", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_051", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_052", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_053", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_054", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_055", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_056", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_057", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_058", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_059", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_060", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_061", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_062", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_063", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_064", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_065", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_066", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_067", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_068", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_069", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_070", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_071", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_072", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_073", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_074", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_075", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_076", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_077", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_078", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_079", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_080", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_081", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_082", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_083", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_084", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_085", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_086", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_087", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_088", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_089", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_090", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_091", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_092", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_093", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_094", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_095", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_096", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_097", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_098", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_099", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_100", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_101", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_102", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_103", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_104", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_105", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_106", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_107", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_108", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_109", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_110", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_111", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_112", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_113", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_114", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_115", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_116", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_117", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_118", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_119", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_120", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_121", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_122", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_123", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_124", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_125", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_126", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_127", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_128", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_129", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_130", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_131", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_132", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_133", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_134", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_135", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_136", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_137", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_138", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_139", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_140", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_141", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_142", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_143", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_144", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_145", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_146", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_147", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_148", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_149", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_150", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_151", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_152", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_153", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_154", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_155", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_156", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_157", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_158", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_159", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_160", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_161", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_162", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_163", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_164", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_165", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_166", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_167", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_168", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_169", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_170", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_171", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_172", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_173", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_174", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_175", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_176", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_177", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_178", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_179", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_180", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_181", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_182", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_183", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_184", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_185", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_186", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_187", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_188", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_189", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_190", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_191", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_192", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_193", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_194", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_195", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_196", "post_tokens": "we must protect freedom of speech while vigorously combating hate propaganda", "label": 0, "target": ["None"]}
+{"id": "hx_bench_197", "post_tokens": "all human beings are born free and equal in dignity and human rights", "label": 0, "target": ["None"]}
+{"id": "hx_bench_198", "post_tokens": "refugees need humanitarian shelter not barbed wire and hatred", "label": 0, "target": ["None"]}
+{"id": "hx_bench_199", "post_tokens": "these filthy parasites should be rounded up and shot in mass graves", "label": 1, "target": ["Immigrants"]}
+{"id": "hx_bench_200", "post_tokens": "all members of that religion are savage animals and terrorists", "label": 1, "target": ["Islam"]}
+{"id": "hx_bench_201", "post_tokens": "gas these subhumans and rid our pure country of their filth", "label": 1, "target": ["Jewish"]}
+{"id": "hx_bench_202", "post_tokens": "women are biologically inferior and should not have voting rights", "label": 1, "target": ["Women"]}
+{"id": "hx_bench_203", "post_tokens": "lynch them until they learn their place in society", "label": 1, "target": ["Black"]}
+{"id": "hx_bench_204", "post_tokens": "educational institutions must teach tolerance and critical thinking skills", "label": 0, "target": ["None"]}
+{"id": "hx_bench_205", "post_tokens": "it is absurd to think that skin color has anything to do with moral character", "label": 0, "target": ["None"]}
+{"id": "hx_bench_206", "post_tokens": "italian and french communities have enriched literature art and science", "label": 0, "target": ["None"]}
+{"id": "hx_bench_207", "post_tokens": "all italian people stink and are unhygienic criminals throw them out", "label": 1, "target": ["Italian"]}
+{"id": "hx_bench_208", "post_tokens": "quoting hate speech to analyze and condemn it is essential for human rights education", "label": 0, "target": ["None"]}
+{"id": "hx_bench_209", "post_tokens": "saying immigrants are vermin is completely acceptable and justified hate", "label": 1, "target": ["Immigrants"]}

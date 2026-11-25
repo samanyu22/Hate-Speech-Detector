@@ -1,41 +1,30 @@
 {
   "total_samples": 320,
-  "accuracy": 0.8625,
-  "macro_f1": 0.8599,
-  "macro_precision": 0.8922,
-  "macro_recall": 0.8625,
+  "accuracy": 0.7469,
+  "macro_f1": 0.7427,
+  "macro_precision": 0.7642,
+  "macro_recall": 0.7469,
   "confusion_matrix": {
-    "TN": 160,
-    "FP": 0,
-    "FN": 44,
-    "TP": 116
+    "TN": 140,
+    "FP": 20,
+    "FN": 61,
+    "TP": 99
   },
   "per_class": {
     "unhateful": {
-      "precision": 0.7843,
-      "recall": 1.0,
-      "f1": 0.8791,
+      "precision": 0.6965,
+      "recall": 0.875,
+      "f1": 0.7756,
       "support": 160
     },
     "hateful": {
-      "precision": 1.0,
-      "recall": 0.725,
-      "f1": 0.8406,
+      "precision": 0.8319,
+      "recall": 0.6188,
+      "f1": 0.7097,
       "support": 160
     }
   },
   "mismatches": [
-    {
-      "id": "id215",
-      "text": "Muslims should never be allowed to hold senior positions in this company.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.5703,
-      "prob_hateful": 0.4297,
-      "match": false
-    },
     {
       "id": "id217",
       "text": "Jewish families should not be permitted to purchase homes in this neighbourhood.",
@@ -43,8 +32,19 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.774,
-      "prob_hateful": 0.226,
+      "confidence": 0.8544,
+      "prob_hateful": 0.1456,
+      "match": false
+    },
+    {
+      "id": "id219",
+      "text": "Hindus from that region should be refused admission to our university.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8561,
+      "prob_hateful": 0.1439,
       "match": false
     },
     {
@@ -54,8 +54,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8688,
-      "prob_hateful": 0.1312,
+      "confidence": 0.9896,
+      "prob_hateful": 0.0104,
       "match": false
     },
     {
@@ -65,8 +65,63 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9835,
-      "prob_hateful": 0.0165,
+      "confidence": 0.9866,
+      "prob_hateful": 0.0134,
+      "match": false
+    },
+    {
+      "id": "id237",
+      "text": "Dalit employees should never be promoted to management positions.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.7214,
+      "prob_hateful": 0.2786,
+      "match": false
+    },
+    {
+      "id": "id241",
+      "text": "Interfaith couples should be prohibited from renting apartments here.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id245",
+      "text": "Tamil-speaking residents should be denied government assistance.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id247",
+      "text": "Bengali families should not be allowed to settle in this neighbourhood.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id249",
+      "text": "People from Northeast India should be barred from university hostels.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -76,8 +131,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5999,
-      "prob_hateful": 0.4001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -92,8 +147,8 @@
       "match": false
     },
     {
-      "id": "id261",
-      "text": "Deaf applicants should never be considered for customer-facing jobs.",
+      "id": "id263",
+      "text": "People who stutter should be prohibited from participating in debates.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
@@ -103,14 +158,25 @@
       "match": false
     },
     {
-      "id": "id267",
-      "text": "Blind employees should not be permitted to work in this office.",
+      "id": "id265",
+      "text": "People with epilepsy should be excluded from university activities.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7236,
-      "prob_hateful": 0.2764,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id278",
+      "text": "The emergency department now provides visual alerts and written instructions.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9371,
+      "prob_hateful": 0.9371,
       "match": false
     },
     {
@@ -120,8 +186,30 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8099,
-      "prob_hateful": 0.1901,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id283",
+      "text": "Mothers should be permanently excluded from professional promotions.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id286",
+      "text": "The parenting workshop welcomes mothers, fathers, and guardians.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9922,
+      "prob_hateful": 0.9922,
       "match": false
     },
     {
@@ -136,17 +224,6 @@
       "match": false
     },
     {
-      "id": "id293",
-      "text": "Intersex people should be excluded from ordinary community events.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7959,
-      "prob_hateful": 0.2041,
-      "match": false
-    },
-    {
       "id": "id295",
       "text": "Transgender employees should be dismissed regardless of their performance.",
       "gold_label": "hateful",
@@ -155,6 +232,39 @@
       "pred_numeric": 0,
       "confidence": 0.8176,
       "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id297",
+      "text": "Gay couples should be refused accommodation at every hotel.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.972,
+      "prob_hateful": 0.028,
+      "match": false
+    },
+    {
+      "id": "id299",
+      "text": "Lesbian students should be prohibited from joining the student council.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8203,
+      "prob_hateful": 0.1797,
+      "match": false
+    },
+    {
+      "id": "id300",
+      "text": "The student council is discussing ways to make campus activities more inclusive.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9995,
+      "prob_hateful": 0.9995,
       "match": false
     },
     {
@@ -169,14 +279,36 @@
       "match": false
     },
     {
+      "id": "id306",
+      "text": "The hospital has recruited nurses from a wide range of backgrounds.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9363,
+      "prob_hateful": 0.9363,
+      "match": false
+    },
+    {
+      "id": "id307",
+      "text": "Women should be barred from participating in local elections.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.9994,
+      "prob_hateful": 0.0006,
+      "match": false
+    },
+    {
       "id": "id311",
       "text": "Older workers should be rejected regardless of their experience.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9899,
-      "prob_hateful": 0.0101,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -186,8 +318,19 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9073,
-      "prob_hateful": 0.0927,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id316",
+      "text": "The public library has launched a reading programme for teenagers.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8895,
+      "prob_hateful": 0.8895,
       "match": false
     },
     {
@@ -197,19 +340,41 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9003,
-      "prob_hateful": 0.0997,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
-      "id": "id321",
-      "text": "People from rural communities should not be permitted to work in urban offices.",
+      "id": "id319",
+      "text": "People from wealthy families should be denied basic legal protection.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6328,
-      "prob_hateful": 0.3672,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id323",
+      "text": "Residents from villages should be refused admission to city colleges.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id324",
+      "text": "The college has started an orientation programme for students from rural areas.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9714,
+      "prob_hateful": 0.9714,
       "match": false
     },
     {
@@ -221,6 +386,17 @@
       "pred_numeric": 0,
       "confidence": 0.8176,
       "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id328",
+      "text": "The department is translating important notices into several regional languages.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9936,
+      "prob_hateful": 0.9936,
       "match": false
     },
     {
@@ -241,8 +417,19 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.798,
-      "prob_hateful": 0.202,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id343",
+      "text": "People who wear religious clothing should be refused entry to public libraries.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -252,8 +439,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7712,
-      "prob_hateful": 0.2288,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -268,8 +455,8 @@
       "match": false
     },
     {
-      "id": "id351",
-      "text": "People who change their religion should lose their citizenship.",
+      "id": "id357",
+      "text": "People who do not believe in any religion should be banned from public universities.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
@@ -279,14 +466,47 @@
       "match": false
     },
     {
+      "id": "id358",
+      "text": "The philosophy course compares religious and non-religious viewpoints.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8154,
+      "prob_hateful": 0.8154,
+      "match": false
+    },
+    {
+      "id": "id360",
+      "text": "The village committee is repairing the shared water supply.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8316,
+      "prob_hateful": 0.8316,
+      "match": false
+    },
+    {
       "id": "id361",
       "text": "Students from a scheduled caste should be prevented from using the school laboratory.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9084,
-      "prob_hateful": 0.0916,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id364",
+      "text": "The government has announced repairs to several student hostels.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8934,
+      "prob_hateful": 0.8934,
       "match": false
     },
     {
@@ -296,8 +516,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9474,
-      "prob_hateful": 0.0526,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -307,8 +527,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9556,
-      "prob_hateful": 0.0444,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -329,8 +549,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6635,
-      "prob_hateful": 0.3365,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -345,8 +565,63 @@
       "match": false
     },
     {
-      "id": "id429",
-      "text": "People with disabilities should be paid less for equivalent work.",
+      "id": "id413",
+      "text": "People with mobility impairments should be prohibited from attending concerts.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id417",
+      "text": "People with facial differences should be refused customer service.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id419",
+      "text": "People with a history of mental illness should be denied educational opportunities.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id421",
+      "text": "People with neurological conditions should be barred from public libraries.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id423",
+      "text": "People with learning disabilities should be refused access to vocational training.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id427",
+      "text": "People who use assistive technology should be excluded from computer laboratories.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
@@ -362,8 +637,30 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.94,
-      "prob_hateful": 0.06,
+      "confidence": 0.9943,
+      "prob_hateful": 0.0057,
+      "match": false
+    },
+    {
+      "id": "id432",
+      "text": "The research institute has announced vacancies across several departments.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9327,
+      "prob_hateful": 0.9327,
+      "match": false
+    },
+    {
+      "id": "id435",
+      "text": "Girls should be prohibited from participating in mathematics competitions.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.9452,
+      "prob_hateful": 0.0548,
       "match": false
     },
     {
@@ -373,8 +670,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.981,
-      "prob_hateful": 0.019,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -384,19 +681,19 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9251,
-      "prob_hateful": 0.0749,
+      "confidence": 0.9982,
+      "prob_hateful": 0.0018,
       "match": false
     },
     {
-      "id": "id443",
-      "text": "Boys should be denied access to art and music classes.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8482,
-      "prob_hateful": 0.1518,
+      "id": "id442",
+      "text": "The childcare centre is recruiting qualified educators.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8286,
+      "prob_hateful": 0.8286,
       "match": false
     },
     {
@@ -406,19 +703,52 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8014,
-      "prob_hateful": 0.1986,
+      "confidence": 0.9222,
+      "prob_hateful": 0.0778,
       "match": false
     },
     {
-      "id": "id461",
-      "text": "People from a particular age group should be denied the right to participate in community decisions.",
+      "id": "id449",
+      "text": "Gay people should be prohibited from applying for teaching licences.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8845,
-      "prob_hateful": 0.1155,
+      "confidence": 0.877,
+      "prob_hateful": 0.123,
+      "match": false
+    },
+    {
+      "id": "id451",
+      "text": "Lesbian people should not be allowed to rent office space.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.6898,
+      "prob_hateful": 0.3102,
+      "match": false
+    },
+    {
+      "id": "id456",
+      "text": "The health department has published a directory of public clinics.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9245,
+      "prob_hateful": 0.9245,
+      "match": false
+    },
+    {
+      "id": "id460",
+      "text": "The university has announced a new research ethics seminar.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9972,
+      "prob_hateful": 0.9972,
       "match": false
     },
     {
@@ -428,8 +758,19 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9996,
-      "prob_hateful": 0.0004,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id464",
+      "text": "The library is offering beginner computer classes for older adults.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9742,
+      "prob_hateful": 0.9742,
       "match": false
     },
     {
@@ -439,8 +780,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9973,
-      "prob_hateful": 0.0027,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -450,63 +791,129 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.937,
-      "prob_hateful": 0.063,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
-      "id": "id475",
-      "text": "People from rural backgrounds should not be permitted to apply for civil service jobs.",
+      "id": "id468",
+      "text": "The charity is distributing notebooks and stationery to students.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9592,
+      "prob_hateful": 0.9592,
+      "match": false
+    },
+    {
+      "id": "id469",
+      "text": "People experiencing homelessness should be prohibited from entering public parks.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9783,
-      "prob_hateful": 0.0217,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
-      "id": "id485",
-      "text": "Foreign students should be excluded from university research facilities solely because of their nationality.",
+      "id": "id477",
+      "text": "People from urban communities should be excluded from agricultural training programmes.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9567,
-      "prob_hateful": 0.0433,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
-      "id": "id495",
-      "text": "Members of a religious minority should be prevented from participating in school elections.",
+      "id": "id482",
+      "text": "The publisher has announced a competition for new authors.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9115,
+      "prob_hateful": 0.9115,
+      "match": false
+    },
+    {
+      "id": "id489",
+      "text": "People who speak a minority language should be denied the right to register businesses.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8379,
-      "prob_hateful": 0.1621,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
-      "id": "id499",
-      "text": "People from a particular caste should be refused access to public drinking water.",
+      "id": "id494",
+      "text": "The hospital is recruiting staff for its new outpatient department.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8594,
+      "prob_hateful": 0.8594,
+      "match": false
+    },
+    {
+      "id": "id496",
+      "text": "The school has announced the dates for its student council elections.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9947,
+      "prob_hateful": 0.9947,
+      "match": false
+    },
+    {
+      "id": "id497",
+      "text": "People who wear traditional cultural clothing should be denied entry to government offices.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5629,
-      "prob_hateful": 0.4371,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
-      "id": "id505",
-      "text": "People from a particular ancestry should be prohibited from serving on community committees.",
+      "id": "id502",
+      "text": "The sports department has announced open trials for its district teams.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8707,
+      "prob_hateful": 0.8707,
+      "match": false
+    },
+    {
+      "id": "id523",
+      "text": "People of a particular religion should be denied access to government education programmes.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9167,
-      "prob_hateful": 0.0833,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id529",
+      "text": "People from a particular ethnic community should be prevented from participating in local cultural decisions.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     }
   ],
@@ -518,8 +925,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9372,
+      "prob_hateful": 0.9372,
       "match": true
     },
     {
@@ -529,8 +936,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9961,
-      "prob_hateful": 0.0039,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -540,8 +947,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -551,8 +958,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -560,11 +967,11 @@
       "text": "Muslims should never be allowed to hold senior positions in this company.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.5703,
-      "prob_hateful": 0.4297,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9811,
+      "prob_hateful": 0.9811,
+      "match": true
     },
     {
       "id": "id216",
@@ -573,8 +980,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -584,8 +991,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.774,
-      "prob_hateful": 0.226,
+      "confidence": 0.8544,
+      "prob_hateful": 0.1456,
       "match": false
     },
     {
@@ -595,8 +1002,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9535,
-      "prob_hateful": 0.0465,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -604,11 +1011,11 @@
       "text": "Hindus from that region should be refused admission to our university.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8561,
+      "prob_hateful": 0.1439,
+      "match": false
     },
     {
       "id": "id220",
@@ -617,8 +1024,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9838,
-      "prob_hateful": 0.0162,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -628,8 +1035,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9612,
-      "prob_hateful": 0.9612,
+      "confidence": 0.9671,
+      "prob_hateful": 0.9671,
       "match": true
     },
     {
@@ -650,8 +1057,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9901,
-      "prob_hateful": 0.9901,
+      "confidence": 0.9991,
+      "prob_hateful": 0.9991,
       "match": true
     },
     {
@@ -661,8 +1068,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5434,
-      "prob_hateful": 0.4566,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -672,8 +1079,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.8558,
-      "prob_hateful": 0.8558,
+      "confidence": 0.7397,
+      "prob_hateful": 0.7397,
       "match": true
     },
     {
@@ -683,8 +1090,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7311,
-      "prob_hateful": 0.2689,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -694,8 +1101,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -705,8 +1112,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -716,8 +1123,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9972,
+      "prob_hateful": 0.9972,
       "match": true
     },
     {
@@ -738,8 +1145,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8688,
-      "prob_hateful": 0.1312,
+      "confidence": 0.9896,
+      "prob_hateful": 0.0104,
       "match": false
     },
     {
@@ -749,8 +1156,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9997,
-      "prob_hateful": 0.0003,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -760,8 +1167,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.999,
-      "prob_hateful": 0.999,
+      "confidence": 0.891,
+      "prob_hateful": 0.891,
       "match": true
     },
     {
@@ -782,8 +1189,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9835,
-      "prob_hateful": 0.0165,
+      "confidence": 0.9866,
+      "prob_hateful": 0.0134,
       "match": false
     },
     {
@@ -793,8 +1200,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9991,
-      "prob_hateful": 0.0009,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -802,11 +1209,11 @@
       "text": "Dalit employees should never be promoted to management positions.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9306,
-      "prob_hateful": 0.9306,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.7214,
+      "prob_hateful": 0.2786,
+      "match": false
     },
     {
       "id": "id238",
@@ -826,8 +1233,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 0.9989,
+      "prob_hateful": 0.9989,
       "match": true
     },
     {
@@ -837,8 +1244,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9558,
-      "prob_hateful": 0.0442,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -846,11 +1253,11 @@
       "text": "Interfaith couples should be prohibited from renting apartments here.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id242",
@@ -859,8 +1266,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9997,
-      "prob_hateful": 0.0003,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -870,8 +1277,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9569,
-      "prob_hateful": 0.9569,
+      "confidence": 0.9019,
+      "prob_hateful": 0.9019,
       "match": true
     },
     {
@@ -881,8 +1288,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9971,
-      "prob_hateful": 0.0029,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -890,11 +1297,11 @@
       "text": "Tamil-speaking residents should be denied government assistance.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9993,
-      "prob_hateful": 0.9993,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id246",
@@ -903,8 +1310,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9937,
-      "prob_hateful": 0.0063,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -912,11 +1319,11 @@
       "text": "Bengali families should not be allowed to settle in this neighbourhood.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9487,
-      "prob_hateful": 0.9487,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id248",
@@ -925,8 +1332,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9371,
-      "prob_hateful": 0.0629,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -934,11 +1341,11 @@
       "text": "People from Northeast India should be barred from university hostels.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9787,
-      "prob_hateful": 0.9787,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id250",
@@ -947,8 +1354,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9938,
-      "prob_hateful": 0.0062,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -958,8 +1365,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5999,
-      "prob_hateful": 0.4001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -969,8 +1376,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9113,
-      "prob_hateful": 0.0887,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -991,8 +1398,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9972,
-      "prob_hateful": 0.0028,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1002,8 +1409,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.9686,
+      "prob_hateful": 0.9686,
       "match": true
     },
     {
@@ -1013,8 +1420,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7867,
-      "prob_hateful": 0.2133,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1024,8 +1431,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9976,
-      "prob_hateful": 0.9976,
+      "confidence": 0.8587,
+      "prob_hateful": 0.8587,
       "match": true
     },
     {
@@ -1035,8 +1442,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9929,
-      "prob_hateful": 0.0071,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1046,8 +1453,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9755,
+      "prob_hateful": 0.9755,
       "match": true
     },
     {
@@ -1057,13 +1464,35 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
       "id": "id261",
       "text": "Deaf applicants should never be considered for customer-facing jobs.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8447,
+      "prob_hateful": 0.8447,
+      "match": true
+    },
+    {
+      "id": "id262",
+      "text": "The company has introduced sign-language interpretation during interviews.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": true
+    },
+    {
+      "id": "id263",
+      "text": "People who stutter should be prohibited from participating in debates.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
@@ -1073,36 +1502,14 @@
       "match": false
     },
     {
-      "id": "id262",
-      "text": "The company has introduced sign-language interpretation during interviews.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8816,
-      "prob_hateful": 0.1184,
-      "match": true
-    },
-    {
-      "id": "id263",
-      "text": "People who stutter should be prohibited from participating in debates.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9795,
-      "prob_hateful": 0.9795,
-      "match": true
-    },
-    {
       "id": "id264",
       "text": "The debate club offers additional preparation time to every participant who needs it.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9883,
-      "prob_hateful": 0.0117,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1110,11 +1517,11 @@
       "text": "People with epilepsy should be excluded from university activities.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.5249,
-      "prob_hateful": 0.5249,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id266",
@@ -1123,8 +1530,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9821,
-      "prob_hateful": 0.0179,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1132,11 +1539,11 @@
       "text": "Blind employees should not be permitted to work in this office.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7236,
-      "prob_hateful": 0.2764,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.5694,
+      "prob_hateful": 0.5694,
+      "match": true
     },
     {
       "id": "id268",
@@ -1145,8 +1552,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9979,
-      "prob_hateful": 0.0021,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1156,8 +1563,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -1167,8 +1574,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8726,
-      "prob_hateful": 0.1274,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1178,8 +1585,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9906,
+      "prob_hateful": 0.9906,
       "match": true
     },
     {
@@ -1189,8 +1596,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1200,8 +1607,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9941,
-      "prob_hateful": 0.9941,
+      "confidence": 0.9314,
+      "prob_hateful": 0.9314,
       "match": true
     },
     {
@@ -1211,8 +1618,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9956,
-      "prob_hateful": 0.0044,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1222,8 +1629,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9962,
+      "prob_hateful": 0.9962,
       "match": true
     },
     {
@@ -1233,8 +1640,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7972,
-      "prob_hateful": 0.2028,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1244,8 +1651,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9976,
+      "prob_hateful": 0.9976,
       "match": true
     },
     {
@@ -1253,11 +1660,11 @@
       "text": "The emergency department now provides visual alerts and written instructions.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8713,
-      "prob_hateful": 0.1287,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9371,
+      "prob_hateful": 0.9371,
+      "match": false
     },
     {
       "id": "id279",
@@ -1266,8 +1673,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9997,
-      "prob_hateful": 0.9997,
+      "confidence": 0.9687,
+      "prob_hateful": 0.9687,
       "match": true
     },
     {
@@ -1277,8 +1684,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5377,
-      "prob_hateful": 0.4623,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1288,8 +1695,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8099,
-      "prob_hateful": 0.1901,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -1299,8 +1706,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8666,
-      "prob_hateful": 0.1334,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1308,11 +1715,11 @@
       "text": "Mothers should be permanently excluded from professional promotions.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.8591,
-      "prob_hateful": 0.8591,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id284",
@@ -1321,8 +1728,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9852,
-      "prob_hateful": 0.0148,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1332,8 +1739,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.5573,
-      "prob_hateful": 0.5573,
+      "confidence": 0.9995,
+      "prob_hateful": 0.9995,
       "match": true
     },
     {
@@ -1341,11 +1748,11 @@
       "text": "The parenting workshop welcomes mothers, fathers, and guardians.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.999,
-      "prob_hateful": 0.001,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9922,
+      "prob_hateful": 0.9922,
+      "match": false
     },
     {
       "id": "id287",
@@ -1365,8 +1772,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1387,8 +1794,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.968,
-      "prob_hateful": 0.032,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1398,8 +1805,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9776,
+      "prob_hateful": 0.9776,
       "match": true
     },
     {
@@ -1418,11 +1825,11 @@
       "text": "Intersex people should be excluded from ordinary community events.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7959,
-      "prob_hateful": 0.2041,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9677,
+      "prob_hateful": 0.9677,
+      "match": true
     },
     {
       "id": "id294",
@@ -1431,8 +1838,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9997,
-      "prob_hateful": 0.0003,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1453,8 +1860,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9993,
-      "prob_hateful": 0.0007,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1462,11 +1869,11 @@
       "text": "Gay couples should be refused accommodation at every hotel.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.6126,
-      "prob_hateful": 0.6126,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.972,
+      "prob_hateful": 0.028,
+      "match": false
     },
     {
       "id": "id298",
@@ -1475,8 +1882,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9998,
-      "prob_hateful": 0.0002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1484,22 +1891,22 @@
       "text": "Lesbian students should be prohibited from joining the student council.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.6562,
-      "prob_hateful": 0.6562,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8203,
+      "prob_hateful": 0.1797,
+      "match": false
     },
     {
       "id": "id300",
       "text": "The student council is discussing ways to make campus activities more inclusive.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9995,
+      "prob_hateful": 0.9995,
+      "match": false
     },
     {
       "id": "id301",
@@ -1519,8 +1926,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8675,
-      "prob_hateful": 0.1325,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1530,8 +1937,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9827,
-      "prob_hateful": 0.9827,
+      "confidence": 0.8574,
+      "prob_hateful": 0.8574,
       "match": true
     },
     {
@@ -1541,8 +1948,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.951,
-      "prob_hateful": 0.049,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1552,8 +1959,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9852,
+      "prob_hateful": 0.9852,
       "match": true
     },
     {
@@ -1561,22 +1968,22 @@
       "text": "The hospital has recruited nurses from a wide range of backgrounds.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9566,
-      "prob_hateful": 0.0434,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9363,
+      "prob_hateful": 0.9363,
+      "match": false
     },
     {
       "id": "id307",
       "text": "Women should be barred from participating in local elections.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.6334,
-      "prob_hateful": 0.6334,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.9994,
+      "prob_hateful": 0.0006,
+      "match": false
     },
     {
       "id": "id308",
@@ -1585,8 +1992,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9761,
-      "prob_hateful": 0.0239,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1596,8 +2003,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9995,
+      "prob_hateful": 0.9995,
       "match": true
     },
     {
@@ -1607,8 +2014,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8728,
-      "prob_hateful": 0.1272,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1618,8 +2025,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9899,
-      "prob_hateful": 0.0101,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -1629,8 +2036,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5202,
-      "prob_hateful": 0.4798,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1640,8 +2047,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9073,
-      "prob_hateful": 0.0927,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -1651,8 +2058,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8892,
-      "prob_hateful": 0.1108,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1671,11 +2078,11 @@
       "text": "The public library has launched a reading programme for teenagers.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8895,
+      "prob_hateful": 0.8895,
+      "match": false
     },
     {
       "id": "id317",
@@ -1684,8 +2091,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9003,
-      "prob_hateful": 0.0997,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -1695,8 +2102,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9975,
-      "prob_hateful": 0.0025,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1704,11 +2111,11 @@
       "text": "People from wealthy families should be denied basic legal protection.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id320",
@@ -1717,8 +2124,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9997,
-      "prob_hateful": 0.0003,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1726,11 +2133,11 @@
       "text": "People from rural communities should not be permitted to work in urban offices.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.6328,
-      "prob_hateful": 0.3672,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9927,
+      "prob_hateful": 0.9927,
+      "match": true
     },
     {
       "id": "id322",
@@ -1739,8 +2146,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1748,22 +2155,22 @@
       "text": "Residents from villages should be refused admission to city colleges.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.573,
-      "prob_hateful": 0.573,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id324",
       "text": "The college has started an orientation programme for students from rural areas.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9991,
-      "prob_hateful": 0.0009,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9714,
+      "prob_hateful": 0.9714,
+      "match": false
     },
     {
       "id": "id325",
@@ -1772,8 +2179,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9984,
-      "prob_hateful": 0.9984,
+      "confidence": 0.9966,
+      "prob_hateful": 0.9966,
       "match": true
     },
     {
@@ -1783,8 +2190,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9719,
-      "prob_hateful": 0.0281,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1803,11 +2210,11 @@
       "text": "The department is translating important notices into several regional languages.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7057,
-      "prob_hateful": 0.2943,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9936,
+      "prob_hateful": 0.9936,
+      "match": false
     },
     {
       "id": "id329",
@@ -1816,8 +2223,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.8788,
+      "prob_hateful": 0.8788,
       "match": true
     },
     {
@@ -1827,8 +2234,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9858,
-      "prob_hateful": 0.0142,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1849,8 +2256,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9244,
-      "prob_hateful": 0.0756,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1860,8 +2267,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9439,
-      "prob_hateful": 0.9439,
+      "confidence": 0.9977,
+      "prob_hateful": 0.9977,
       "match": true
     },
     {
@@ -1871,8 +2278,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7952,
-      "prob_hateful": 0.2048,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1882,8 +2289,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.798,
-      "prob_hateful": 0.202,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -1893,8 +2300,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9684,
-      "prob_hateful": 0.0316,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1904,8 +2311,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 1.0,
+      "prob_hateful": 1.0,
       "match": true
     },
     {
@@ -1915,8 +2322,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.974,
-      "prob_hateful": 0.026,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1926,8 +2333,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9963,
-      "prob_hateful": 0.9963,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -1937,8 +2344,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9772,
-      "prob_hateful": 0.0228,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1948,8 +2355,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -1959,8 +2366,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9913,
-      "prob_hateful": 0.0087,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1968,11 +2375,11 @@
       "text": "People who wear religious clothing should be refused entry to public libraries.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id344",
@@ -1981,8 +2388,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9621,
-      "prob_hateful": 0.0379,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -1992,8 +2399,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.7712,
-      "prob_hateful": 0.2288,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -2003,8 +2410,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.964,
-      "prob_hateful": 0.036,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2014,8 +2421,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.668,
-      "prob_hateful": 0.668,
+      "confidence": 0.8235,
+      "prob_hateful": 0.8235,
       "match": true
     },
     {
@@ -2025,8 +2432,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.97,
-      "prob_hateful": 0.03,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2047,8 +2454,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9303,
-      "prob_hateful": 0.0697,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2056,11 +2463,11 @@
       "text": "People who change their religion should lose their citizenship.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8176,
-      "prob_hateful": 0.1824,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9553,
+      "prob_hateful": 0.9553,
+      "match": true
     },
     {
       "id": "id352",
@@ -2069,8 +2476,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.996,
-      "prob_hateful": 0.004,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2080,8 +2487,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -2091,8 +2498,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9745,
-      "prob_hateful": 0.0255,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2102,8 +2509,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9998,
-      "prob_hateful": 0.9998,
+      "confidence": 0.9855,
+      "prob_hateful": 0.9855,
       "match": true
     },
     {
@@ -2113,8 +2520,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9232,
-      "prob_hateful": 0.0768,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2122,22 +2529,22 @@
       "text": "People who do not believe in any religion should be banned from public universities.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id358",
       "text": "The philosophy course compares religious and non-religious viewpoints.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7188,
-      "prob_hateful": 0.2812,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8154,
+      "prob_hateful": 0.8154,
+      "match": false
     },
     {
       "id": "id359",
@@ -2146,8 +2553,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.974,
-      "prob_hateful": 0.974,
+      "confidence": 0.9989,
+      "prob_hateful": 0.9989,
       "match": true
     },
     {
@@ -2155,11 +2562,11 @@
       "text": "The village committee is repairing the shared water supply.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7311,
-      "prob_hateful": 0.2689,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8316,
+      "prob_hateful": 0.8316,
+      "match": false
     },
     {
       "id": "id361",
@@ -2168,8 +2575,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9084,
-      "prob_hateful": 0.0916,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -2179,8 +2586,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2190,8 +2597,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.8706,
+      "prob_hateful": 0.8706,
       "match": true
     },
     {
@@ -2199,11 +2606,11 @@
       "text": "The government has announced repairs to several student hostels.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.994,
-      "prob_hateful": 0.006,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8934,
+      "prob_hateful": 0.8934,
+      "match": false
     },
     {
       "id": "id365",
@@ -2212,8 +2619,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9474,
-      "prob_hateful": 0.0526,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -2223,8 +2630,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2234,8 +2641,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9965,
-      "prob_hateful": 0.9965,
+      "confidence": 0.9955,
+      "prob_hateful": 0.9955,
       "match": true
     },
     {
@@ -2245,8 +2652,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2256,8 +2663,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9997,
-      "prob_hateful": 0.9997,
+      "confidence": 0.9189,
+      "prob_hateful": 0.9189,
       "match": true
     },
     {
@@ -2267,8 +2674,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9958,
-      "prob_hateful": 0.0042,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2278,8 +2685,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9556,
-      "prob_hateful": 0.0444,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -2289,8 +2696,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2300,8 +2707,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.9054,
+      "prob_hateful": 0.9054,
       "match": true
     },
     {
@@ -2333,8 +2740,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2344,8 +2751,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6635,
-      "prob_hateful": 0.3365,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -2355,8 +2762,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9943,
-      "prob_hateful": 0.0057,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2366,8 +2773,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9815,
-      "prob_hateful": 0.9815,
+      "confidence": 0.9964,
+      "prob_hateful": 0.9964,
       "match": true
     },
     {
@@ -2377,8 +2784,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9726,
-      "prob_hateful": 0.0274,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2388,8 +2795,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9991,
+      "prob_hateful": 0.9991,
       "match": true
     },
     {
@@ -2399,8 +2806,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8048,
-      "prob_hateful": 0.1952,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2410,8 +2817,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.7739,
+      "prob_hateful": 0.7739,
       "match": true
     },
     {
@@ -2421,8 +2828,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9989,
-      "prob_hateful": 0.0011,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2432,8 +2839,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9944,
-      "prob_hateful": 0.9944,
+      "confidence": 0.9406,
+      "prob_hateful": 0.9406,
       "match": true
     },
     {
@@ -2443,8 +2850,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9961,
-      "prob_hateful": 0.0039,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2454,8 +2861,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -2465,8 +2872,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2487,8 +2894,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9952,
-      "prob_hateful": 0.0048,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2498,8 +2905,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.986,
+      "prob_hateful": 0.986,
       "match": true
     },
     {
@@ -2531,8 +2938,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8915,
-      "prob_hateful": 0.1085,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2542,8 +2949,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9938,
+      "prob_hateful": 0.9938,
       "match": true
     },
     {
@@ -2553,8 +2960,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9208,
-      "prob_hateful": 0.0792,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2564,8 +2971,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -2575,8 +2982,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9995,
-      "prob_hateful": 0.0005,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2586,8 +2993,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9877,
-      "prob_hateful": 0.9877,
+      "confidence": 0.8439,
+      "prob_hateful": 0.8439,
       "match": true
     },
     {
@@ -2597,8 +3004,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9994,
-      "prob_hateful": 0.0006,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2630,8 +3037,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.998,
+      "prob_hateful": 0.998,
       "match": true
     },
     {
@@ -2641,8 +3048,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5829,
-      "prob_hateful": 0.4171,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2652,8 +3059,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9985,
+      "prob_hateful": 0.9985,
       "match": true
     },
     {
@@ -2663,8 +3070,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6375,
-      "prob_hateful": 0.3625,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2685,8 +3092,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2707,8 +3114,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9968,
-      "prob_hateful": 0.0032,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2718,8 +3125,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.992,
+      "prob_hateful": 0.992,
       "match": true
     },
     {
@@ -2729,8 +3136,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2738,11 +3145,11 @@
       "text": "People with mobility impairments should be prohibited from attending concerts.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id414",
@@ -2751,8 +3158,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9973,
-      "prob_hateful": 0.0027,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2762,8 +3169,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9726,
+      "prob_hateful": 0.9726,
       "match": true
     },
     {
@@ -2782,11 +3189,11 @@
       "text": "People with facial differences should be refused customer service.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9874,
-      "prob_hateful": 0.9874,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id418",
@@ -2804,11 +3211,11 @@
       "text": "People with a history of mental illness should be denied educational opportunities.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9932,
-      "prob_hateful": 0.9932,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id420",
@@ -2817,101 +3224,13 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9875,
-      "prob_hateful": 0.0125,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
       "id": "id421",
       "text": "People with neurological conditions should be barred from public libraries.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9967,
-      "prob_hateful": 0.9967,
-      "match": true
-    },
-    {
-      "id": "id422",
-      "text": "The library is adding quiet study spaces for visitors.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8737,
-      "prob_hateful": 0.1263,
-      "match": true
-    },
-    {
-      "id": "id423",
-      "text": "People with learning disabilities should be refused access to vocational training.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
-    },
-    {
-      "id": "id424",
-      "text": "The training centre offers courses with different levels of learning support.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9645,
-      "prob_hateful": 0.0355,
-      "match": true
-    },
-    {
-      "id": "id425",
-      "text": "People with disabilities should not be allowed to participate in public consultations.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
-    },
-    {
-      "id": "id426",
-      "text": "The council accepts feedback through online and in-person meetings.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7901,
-      "prob_hateful": 0.2099,
-      "match": true
-    },
-    {
-      "id": "id427",
-      "text": "People who use assistive technology should be excluded from computer laboratories.",
-      "gold_label": "hateful",
-      "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9995,
-      "prob_hateful": 0.9995,
-      "match": true
-    },
-    {
-      "id": "id428",
-      "text": "The computer laboratory is installing adaptive keyboards and other accessibility tools.",
-      "gold_label": "unhateful",
-      "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9498,
-      "prob_hateful": 0.0502,
-      "match": true
-    },
-    {
-      "id": "id429",
-      "text": "People with disabilities should be paid less for equivalent work.",
       "gold_label": "hateful",
       "gold_numeric": 1,
       "pred_label": "unhateful",
@@ -2921,14 +3240,102 @@
       "match": false
     },
     {
+      "id": "id422",
+      "text": "The library is adding quiet study spaces for visitors.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": true
+    },
+    {
+      "id": "id423",
+      "text": "People with learning disabilities should be refused access to vocational training.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id424",
+      "text": "The training centre offers courses with different levels of learning support.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": true
+    },
+    {
+      "id": "id425",
+      "text": "People with disabilities should not be allowed to participate in public consultations.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
+      "match": true
+    },
+    {
+      "id": "id426",
+      "text": "The council accepts feedback through online and in-person meetings.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": true
+    },
+    {
+      "id": "id427",
+      "text": "People who use assistive technology should be excluded from computer laboratories.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
+    },
+    {
+      "id": "id428",
+      "text": "The computer laboratory is installing adaptive keyboards and other accessibility tools.",
+      "gold_label": "unhateful",
+      "gold_numeric": 0,
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": true
+    },
+    {
+      "id": "id429",
+      "text": "People with disabilities should be paid less for equivalent work.",
+      "gold_label": "hateful",
+      "gold_numeric": 1,
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9945,
+      "prob_hateful": 0.9945,
+      "match": true
+    },
+    {
       "id": "id430",
       "text": "The organisation is reviewing its equal-pay policy.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2938,8 +3345,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.94,
-      "prob_hateful": 0.06,
+      "confidence": 0.9943,
+      "prob_hateful": 0.0057,
       "match": false
     },
     {
@@ -2947,11 +3354,11 @@
       "text": "The research institute has announced vacancies across several departments.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9997,
-      "prob_hateful": 0.0003,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9327,
+      "prob_hateful": 0.9327,
+      "match": false
     },
     {
       "id": "id433",
@@ -2960,8 +3367,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.8912,
-      "prob_hateful": 0.8912,
+      "confidence": 0.8987,
+      "prob_hateful": 0.8987,
       "match": true
     },
     {
@@ -2971,8 +3378,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9036,
-      "prob_hateful": 0.0964,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -2980,11 +3387,11 @@
       "text": "Girls should be prohibited from participating in mathematics competitions.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.7667,
-      "prob_hateful": 0.7667,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.9452,
+      "prob_hateful": 0.0548,
+      "match": false
     },
     {
       "id": "id436",
@@ -2993,8 +3400,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.999,
-      "prob_hateful": 0.001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3004,8 +3411,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.981,
-      "prob_hateful": 0.019,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -3015,8 +3422,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9996,
-      "prob_hateful": 0.0004,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3026,8 +3433,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9935,
+      "prob_hateful": 0.9935,
       "match": true
     },
     {
@@ -3037,8 +3444,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9993,
-      "prob_hateful": 0.0007,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3048,8 +3455,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9251,
-      "prob_hateful": 0.0749,
+      "confidence": 0.9982,
+      "prob_hateful": 0.0018,
       "match": false
     },
     {
@@ -3057,22 +3464,22 @@
       "text": "The childcare centre is recruiting qualified educators.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.7311,
-      "prob_hateful": 0.2689,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8286,
+      "prob_hateful": 0.8286,
+      "match": false
     },
     {
       "id": "id443",
       "text": "Boys should be denied access to art and music classes.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8482,
-      "prob_hateful": 0.1518,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9709,
+      "prob_hateful": 0.9709,
+      "match": true
     },
     {
       "id": "id444",
@@ -3081,8 +3488,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3092,8 +3499,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -3103,8 +3510,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.995,
-      "prob_hateful": 0.005,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3114,8 +3521,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8014,
-      "prob_hateful": 0.1986,
+      "confidence": 0.9222,
+      "prob_hateful": 0.0778,
       "match": false
     },
     {
@@ -3125,8 +3532,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9917,
-      "prob_hateful": 0.0083,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3134,11 +3541,11 @@
       "text": "Gay people should be prohibited from applying for teaching licences.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.5912,
-      "prob_hateful": 0.5912,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.877,
+      "prob_hateful": 0.123,
+      "match": false
     },
     {
       "id": "id450",
@@ -3147,8 +3554,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9164,
-      "prob_hateful": 0.0836,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3156,11 +3563,11 @@
       "text": "Lesbian people should not be allowed to rent office space.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9992,
-      "prob_hateful": 0.9992,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.6898,
+      "prob_hateful": 0.3102,
+      "match": false
     },
     {
       "id": "id452",
@@ -3169,8 +3576,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9994,
-      "prob_hateful": 0.0006,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3180,8 +3587,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.8339,
+      "prob_hateful": 0.8339,
       "match": true
     },
     {
@@ -3191,8 +3598,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9912,
-      "prob_hateful": 0.0088,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3202,8 +3609,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9999,
-      "prob_hateful": 0.9999,
+      "confidence": 0.9969,
+      "prob_hateful": 0.9969,
       "match": true
     },
     {
@@ -3211,11 +3618,11 @@
       "text": "The health department has published a directory of public clinics.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9245,
+      "prob_hateful": 0.9245,
+      "match": false
     },
     {
       "id": "id457",
@@ -3224,8 +3631,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9979,
+      "prob_hateful": 0.9979,
       "match": true
     },
     {
@@ -3235,8 +3642,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.8668,
-      "prob_hateful": 0.1332,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3246,8 +3653,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.8972,
-      "prob_hateful": 0.8972,
+      "confidence": 0.9452,
+      "prob_hateful": 0.9452,
       "match": true
     },
     {
@@ -3255,22 +3662,22 @@
       "text": "The university has announced a new research ethics seminar.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9972,
+      "prob_hateful": 0.9972,
+      "match": false
     },
     {
       "id": "id461",
       "text": "People from a particular age group should be denied the right to participate in community decisions.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8845,
-      "prob_hateful": 0.1155,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
+      "match": true
     },
     {
       "id": "id462",
@@ -3290,8 +3697,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9996,
-      "prob_hateful": 0.0004,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -3299,11 +3706,11 @@
       "text": "The library is offering beginner computer classes for older adults.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9557,
-      "prob_hateful": 0.0443,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9742,
+      "prob_hateful": 0.9742,
+      "match": false
     },
     {
       "id": "id465",
@@ -3312,8 +3719,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9973,
-      "prob_hateful": 0.0027,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -3323,8 +3730,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9921,
-      "prob_hateful": 0.0079,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3334,8 +3741,8 @@
       "gold_numeric": 1,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.937,
-      "prob_hateful": 0.063,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": false
     },
     {
@@ -3343,22 +3750,22 @@
       "text": "The charity is distributing notebooks and stationery to students.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8342,
-      "prob_hateful": 0.1658,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9592,
+      "prob_hateful": 0.9592,
+      "match": false
     },
     {
       "id": "id469",
       "text": "People experiencing homelessness should be prohibited from entering public parks.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id470",
@@ -3367,8 +3774,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3378,8 +3785,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9705,
-      "prob_hateful": 0.9705,
+      "confidence": 0.9338,
+      "prob_hateful": 0.9338,
       "match": true
     },
     {
@@ -3389,8 +3796,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3400,8 +3807,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -3411,8 +3818,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9827,
-      "prob_hateful": 0.0173,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3420,11 +3827,11 @@
       "text": "People from rural backgrounds should not be permitted to apply for civil service jobs.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9783,
-      "prob_hateful": 0.0217,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.999,
+      "prob_hateful": 0.999,
+      "match": true
     },
     {
       "id": "id476",
@@ -3433,8 +3840,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9947,
-      "prob_hateful": 0.0053,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3442,11 +3849,11 @@
       "text": "People from urban communities should be excluded from agricultural training programmes.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9958,
-      "prob_hateful": 0.9958,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id478",
@@ -3455,8 +3862,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.5585,
-      "prob_hateful": 0.4415,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3466,8 +3873,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9984,
-      "prob_hateful": 0.9984,
+      "confidence": 0.9785,
+      "prob_hateful": 0.9785,
       "match": true
     },
     {
@@ -3477,8 +3884,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6075,
-      "prob_hateful": 0.3925,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3488,8 +3895,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9445,
+      "prob_hateful": 0.9445,
       "match": true
     },
     {
@@ -3497,11 +3904,11 @@
       "text": "The publisher has announced a competition for new authors.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9996,
-      "prob_hateful": 0.0004,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9115,
+      "prob_hateful": 0.9115,
+      "match": false
     },
     {
       "id": "id483",
@@ -3510,8 +3917,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9988,
+      "prob_hateful": 0.9988,
       "match": true
     },
     {
@@ -3521,8 +3928,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6664,
-      "prob_hateful": 0.3336,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3530,11 +3937,11 @@
       "text": "Foreign students should be excluded from university research facilities solely because of their nationality.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9567,
-      "prob_hateful": 0.0433,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9974,
+      "prob_hateful": 0.9974,
+      "match": true
     },
     {
       "id": "id486",
@@ -3543,8 +3950,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9651,
-      "prob_hateful": 0.0349,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3554,8 +3961,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9972,
-      "prob_hateful": 0.9972,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -3565,8 +3972,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.999,
-      "prob_hateful": 0.001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3574,11 +3981,11 @@
       "text": "People who speak a minority language should be denied the right to register businesses.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id490",
@@ -3587,8 +3994,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9937,
-      "prob_hateful": 0.0063,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3598,8 +4005,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9939,
-      "prob_hateful": 0.9939,
+      "confidence": 0.9998,
+      "prob_hateful": 0.9998,
       "match": true
     },
     {
@@ -3609,8 +4016,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9392,
-      "prob_hateful": 0.0608,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3620,8 +4027,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9868,
+      "prob_hateful": 0.9868,
       "match": true
     },
     {
@@ -3629,44 +4036,44 @@
       "text": "The hospital is recruiting staff for its new outpatient department.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9978,
-      "prob_hateful": 0.0022,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8594,
+      "prob_hateful": 0.8594,
+      "match": false
     },
     {
       "id": "id495",
       "text": "Members of a religious minority should be prevented from participating in school elections.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.8379,
-      "prob_hateful": 0.1621,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9118,
+      "prob_hateful": 0.9118,
+      "match": true
     },
     {
       "id": "id496",
       "text": "The school has announced the dates for its student council elections.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9996,
-      "prob_hateful": 0.0004,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9947,
+      "prob_hateful": 0.9947,
+      "match": false
     },
     {
       "id": "id497",
       "text": "People who wear traditional cultural clothing should be denied entry to government offices.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id498",
@@ -3675,8 +4082,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9999,
-      "prob_hateful": 0.0001,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3684,11 +4091,11 @@
       "text": "People from a particular caste should be refused access to public drinking water.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.5629,
-      "prob_hateful": 0.4371,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9118,
+      "prob_hateful": 0.9118,
+      "match": true
     },
     {
       "id": "id500",
@@ -3708,8 +4115,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9952,
+      "prob_hateful": 0.9952,
       "match": true
     },
     {
@@ -3717,11 +4124,11 @@
       "text": "The sports department has announced open trials for its district teams.",
       "gold_label": "unhateful",
       "gold_numeric": 0,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.997,
-      "prob_hateful": 0.003,
-      "match": true
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.8707,
+      "prob_hateful": 0.8707,
+      "match": false
     },
     {
       "id": "id503",
@@ -3730,8 +4137,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9633,
-      "prob_hateful": 0.9633,
+      "confidence": 0.9994,
+      "prob_hateful": 0.9994,
       "match": true
     },
     {
@@ -3741,8 +4148,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.998,
-      "prob_hateful": 0.002,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3750,11 +4157,11 @@
       "text": "People from a particular ancestry should be prohibited from serving on community committees.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "unhateful",
-      "pred_numeric": 0,
-      "confidence": 0.9167,
-      "prob_hateful": 0.0833,
-      "match": false
+      "pred_label": "hateful",
+      "pred_numeric": 1,
+      "confidence": 0.9532,
+      "prob_hateful": 0.9532,
+      "match": true
     },
     {
       "id": "id506",
@@ -3763,8 +4170,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9979,
-      "prob_hateful": 0.0021,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3774,8 +4181,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9993,
+      "prob_hateful": 0.9993,
       "match": true
     },
     {
@@ -3785,8 +4192,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.6294,
-      "prob_hateful": 0.3706,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3796,8 +4203,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9995,
-      "prob_hateful": 0.9995,
+      "confidence": 0.9997,
+      "prob_hateful": 0.9997,
       "match": true
     },
     {
@@ -3807,8 +4214,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9831,
-      "prob_hateful": 0.0169,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3818,8 +4225,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9852,
+      "prob_hateful": 0.9852,
       "match": true
     },
     {
@@ -3829,8 +4236,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9904,
-      "prob_hateful": 0.0096,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3840,8 +4247,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9976,
-      "prob_hateful": 0.9976,
+      "confidence": 0.9991,
+      "prob_hateful": 0.9991,
       "match": true
     },
     {
@@ -3851,8 +4258,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9334,
-      "prob_hateful": 0.0666,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3862,8 +4269,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9324,
-      "prob_hateful": 0.9324,
+      "confidence": 0.9882,
+      "prob_hateful": 0.9882,
       "match": true
     },
     {
@@ -3873,8 +4280,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9773,
-      "prob_hateful": 0.0227,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3884,8 +4291,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9785,
-      "prob_hateful": 0.9785,
+      "confidence": 0.9996,
+      "prob_hateful": 0.9996,
       "match": true
     },
     {
@@ -3895,8 +4302,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3906,8 +4313,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9932,
-      "prob_hateful": 0.9932,
+      "confidence": 0.8167,
+      "prob_hateful": 0.8167,
       "match": true
     },
     {
@@ -3917,8 +4324,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9996,
-      "prob_hateful": 0.0004,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3928,8 +4335,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9976,
+      "prob_hateful": 0.9976,
       "match": true
     },
     {
@@ -3939,8 +4346,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9405,
-      "prob_hateful": 0.0595,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3948,11 +4355,11 @@
       "text": "People of a particular religion should be denied access to government education programmes.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id524",
@@ -3961,8 +4368,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9904,
-      "prob_hateful": 0.0096,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3972,8 +4379,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 0.9789,
-      "prob_hateful": 0.9789,
+      "confidence": 0.9932,
+      "prob_hateful": 0.9932,
       "match": true
     },
     {
@@ -3983,8 +4390,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9932,
-      "prob_hateful": 0.0068,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -3994,8 +4401,8 @@
       "gold_numeric": 1,
       "pred_label": "hateful",
       "pred_numeric": 1,
-      "confidence": 1.0,
-      "prob_hateful": 1.0,
+      "confidence": 0.9999,
+      "prob_hateful": 0.9999,
       "match": true
     },
     {
@@ -4005,8 +4412,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 0.9997,
-      "prob_hateful": 0.0003,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     },
     {
@@ -4014,11 +4421,11 @@
       "text": "People from a particular ethnic community should be prevented from participating in local cultural decisions.",
       "gold_label": "hateful",
       "gold_numeric": 1,
-      "pred_label": "hateful",
-      "pred_numeric": 1,
-      "confidence": 0.9867,
-      "prob_hateful": 0.9867,
-      "match": true
+      "pred_label": "unhateful",
+      "pred_numeric": 0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
+      "match": false
     },
     {
       "id": "id530",
@@ -4027,8 +4434,8 @@
       "gold_numeric": 0,
       "pred_label": "unhateful",
       "pred_numeric": 0,
-      "confidence": 1.0,
-      "prob_hateful": 0.0,
+      "confidence": 0.8176,
+      "prob_hateful": 0.1824,
       "match": true
     }
   ]
