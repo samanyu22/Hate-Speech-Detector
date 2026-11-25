@@ -21,31 +21,41 @@
 \maketitle
 
 \section{Dataset Description and Statistics}
-Conventional hate speech models trained solely on high-resource English collapse when encountering Indic dialects, code-mixed Latin transliteration (Hinglish), and multimodal memes. To ensure robust real-world generalization, we curated a multi-corpus benchmark totaling \textbf{1,310 authenticated instances} across four foundational sources:
-\begin{itemize}
-    \item \textbf{HASOC Hi-En (840):} English, native Hindi (Devanagari), and code-mixed Hinglish capturing informal abusive slang and civil debate.
-    \item \textbf{HateXplain Benchmark (200):} Annotated with ground-truth token-level rationales for XAI faithfulness auditing.
-    \item \textbf{Subtle \& Structural Benchmark (240):} Veiled stereotypes, institutional discrimination, and counter-speech negations.
-    \item \textbf{Multimodal Hateful Memes (30):} Social media memes with typography extracted via EasyOCR.
-\end{itemize}
+Conventional hate speech models trained solely on high-resource English collapse when encountering Indic dialects, code-mixed Latin transliteration (Hinglish), and out-of-vocabulary (OOV) social media slang. To ensure robust real-world generalization, we engineered a two-tier data architecture:
+\begin{enumerate}
+    \item \textbf{Curated Foundational Benchmark (1,310 instances):}
+    \begin{itemize}
+        \item \textbf{HASOC Hi-En (840):} English, native Hindi (Devanagari), and code-mixed Hinglish capturing informal abusive slang and civil debate.
+        \item \textbf{HateXplain Benchmark (200):} Token-level rationales for XAI faithfulness auditing.
+        \item \textbf{Subtle \& Structural Benchmark (240):} Veiled stereotypes, institutional discrimination, and counterspeech negations.
+        \item \textbf{Multimodal Hateful Memes (30):} Social media memes with typography extracted via EasyOCR.
+    \end{itemize}
+    \item \textbf{Expanded Multi-Corpus Training Set (6,250 instances):}
+    To eliminate out-of-vocabulary blindspots, we ingested balanced corpora from \textit{hatespeechdata.com}:
+    \begin{itemize}
+        \item \textbf{Davidson et al.\ (2,800):} Social media slurs, toxic slang, and colloquial discourse (1,400 Hate, 1,400 Non-Hate).
+        \item \textbf{HateXplain Expanded (2,400):} Ethno-religious and community targeting instances (1,200 Hate, 1,200 Non-Hate).
+        \item \textbf{HASOC Hi-En (840) \& Subtle Structural (210):} Domain-specific Indic and veiled bias instances.
+    \end{itemize}
+    This expansion scaled the active vocabulary from $\sim$3,000 to the full \textbf{15,000 unique token capacity} over \textbf{132,214 processed tokens}.
+\end{enumerate}
 
-\textbf{Class Distribution \& Splitting:} Strict binary classification ($y \in \{0, 1\}$), where $0$ is Non-Hateful and $1$ is Hateful. Partitions use a leakage-safe stratified 70/15/15 split ($S=42$):
 \begin{table}[h]
 \centering
 \scriptsize
 \begin{tabular}{lcccc}
 \toprule
-\textbf{Corpus Source} & \textbf{Non-Hate} & \textbf{Hate} & \textbf{Total} & \textbf{Splits (Tr/Val/Te)} \\
+\textbf{Corpus Source} & \textbf{Non-Hate} & \textbf{Hate} & \textbf{Total} & \textbf{Class Balance} \\
 \midrule
-HASOC Hi-En & 442 (52.6\%) & 398 (47.4\%) & 840 & 588 / 126 / 126 \\
-HateXplain & 100 (50.0\%) & 100 (50.0\%) & 200 & 140 / 30 / 30 \\
-Subtle Bench & 128 (53.3\%) & 112 (46.7\%) & 240 & 168 / 36 / 36 \\
-Memes Bench & 15 (50.0\%) & 15 (50.0\%) & 30 & 20 / 4 / 6 \\
+HASOC Hi-En & 490 & 350 & 840 & 58.3\% / 41.7\% \\
+Subtle Structural & 105 & 105 & 210 & 50.0\% / 50.0\% \\
+Davidson et al.\ (2017) & 1,400 & 1,400 & 2,800 & 50.0\% / 50.0\% \\
+HateXplain Expanded & 1,200 & 1,200 & 2,400 & 50.0\% / 50.0\% \\
 \midrule
-\textbf{Total} & \textbf{685 (52.3\%)} & \textbf{625 (47.7\%)} & \textbf{1,310} & \textbf{916 / 196 / 198} \\
+\textbf{Expanded Training Corpus} & \textbf{3,195} & \textbf{3,055} & \textbf{6,250} & \textbf{51.1\% / 48.9\%} \\
 \bottomrule
 \end{tabular}
-\caption{Benchmark Dataset Statistics and Class Distribution.}
+\caption{Expanded Multi-Corpus Dataset Statistics and Balance.}
 \end{table}
 
 \section{Methodology and Implementation}
@@ -58,18 +68,16 @@ where $T_i$ denotes text, $V_i$ represents the visual image tensor, and $C_i$ de
 \textbf{Operational Architecture:}
 \begin{enumerate}
     \item \textbf{Preprocessing ($T_i$):} Unicode NFKC normalization, URL neutralization, Devanagari script detection ($U+0900$--$U+097F$), and phonetic Hinglish elongation reduction.
-    \item \textbf{Vision \& OCR ($V_i$):} Bilinear resizing ($224 \times 224$) and EasyOCR extraction yielding bounding boxes $[y_{\min}, x_{\min}, y_{\max}, x_{\max}]$ and typography text.
-    \item \textbf{Backbones \& Fusion:} Classical Scikit-Learn TF-IDF baseline alongside a PyTorch Multilingual Transformer with multi-head self-attention. Visual CNN embeddings ($128$-d) and text tokens are fused via intermediate cross-modal cross-attention with sigmoid gating:
+    \item \textbf{Decoupled Vision \& OCR Pipeline ($V_i$):} To prevent OCR hallucination caused by aspect-ratio squashing, the convolutional visual array ($224 \times 224$ for CNN) is strictly decoupled from the OCR image, which retains full native resolution. EasyOCR extraction is filtered via confidence gating ($\tau_{\text{conf}} \ge 0.25$), preventing edge-noise artifact hallucination.
+    \item \textbf{Backbones \& Intermediate Fusion:} Classical TF-IDF baseline alongside a PyTorch Multilingual Transformer with multi-head self-attention. Visual CNN embeddings ($128$-d) and text tokens fuse via cross-modal cross-attention with sigmoid gating:
     \begin{equation}
         h_{\text{fused}} = g \odot h_{\text{text}} + (1 - g) \odot \text{CrossAttn}(h_{\text{text}}, h_{\text{vis}})
     \end{equation}
-    \item \textbf{Bidirectional Local Negation Scope (Way 1):} A $[-2, +2]$ window decoupling negated slurs from zero-tolerance hate escalation for English prefixes (\textit{"not vermin"}) and Hindi suffixes (\textit{"harami nahi"}).
-    \item \textbf{Grounded XAI:} Leave-One-Out perturbation $\Delta_j = f(x) - f(x_{\backslash j})$, formally verified via AOPC faithfulness.
-    \item \textbf{Reward Optimization (DPO):} Multi-objective reward:
-    \begin{equation}
-        R = \alpha R_{\text{cls}} + \beta R_{\text{exp}} + \gamma R_{\text{ctx}} + \delta R_{\text{fb}} - \lambda_{\text{err}} R_{\text{err}}
-    \end{equation}
-    ($\alpha=0.35, \beta=0.25, \gamma=0.15, \delta=0.25, \lambda_{\text{err}}=0.50$). User preference pairs $(x, y_w, y_l)$ update weights via Direct Preference Optimization.
+    Execution is gated behind verified checkpoint presence to prevent untrained weight distortion.
+    \item \textbf{Bidirectional Negation \& Demographic Coupling:} A $[-2, +2]$ window decouples negated slurs from zero-tolerance hate escalation. Furthermore, structural discrimination predicates (\textit{"refused", "denied", "barred"}) strictly require verified demographic target grounding ($\text{has\_target} = \text{True}$), ensuring operational neutral statements (\textit{"AI that refuses everything"}) remain non-hateful.
+    \item \textbf{Full-Context XAI with 2\% Salience Deadzone:} Token-level Leave-One-Out attribution $\Delta_j = f(x) - f(x_{\backslash j})$ operates over the complete sequence context (up to 120 tokens). Micro-fluctuations under 2\% are clipped ($\tau_{\text{deadzone}} = 0.02$), ensuring neutral tokens remain dark instead of glowing red.
+    \item \textbf{Calibrated Decision Margin:} While ungrounded ambiguous activations ($z_1 - z_0 \le 1.2$) are damped toward non-hateful, high-confidence neural activations ($z_1 - z_0 > 1.2$) from the 15,000-token vocabulary are recognized, resolving OOV false negatives.
+    \item \textbf{Reward Optimization (DPO):} Preference pairs $(x, y_w, y_l)$ update weights via Direct Preference Optimization over a 5-component reward function ($R_{\text{cls}}, R_{\text{exp}}, R_{\text{ctx}}, R_{\text{fb}}, R_{\text{err}}$).
 \end{enumerate}
 
 \section{Experimental Results and Analysis}
@@ -78,51 +86,62 @@ where $T_i$ denotes text, $V_i$ represents the visual image tensor, and $C_i$ de
 \scriptsize
 \begin{tabular}{lccc}
 \toprule
-\textbf{Metric} & \textbf{TF-IDF} & \textbf{Transformer} & \textbf{DPO ($v2.331$)} \\
+\textbf{Metric} & \textbf{TF-IDF} & \textbf{Baseline ($v2.3$)} & \textbf{Retrained ($v3.0$)} \\
 \midrule
-Accuracy (Test Split) & 97.89\% & \textbf{97.89\%} & \textbf{100.0\%} \\
-Macro F1 Score & 0.9787 & \textbf{0.9787} & \textbf{1.0000} \\
-Adversarial Edge Cases (20) & 14 / 20 (70\%) & \textbf{20 / 20 (100\%)} & \textbf{20 / 20 (100\%)} \\
-Inverted Counter-Speech (20) & 11 / 20 (55\%) & \textbf{20 / 20 (100\%)} & \textbf{20 / 20 (100\%)} \\
-Benchmark Batch 1 (210) & 182 / 210 & \textbf{207 / 210 (98.6\%)} & \textbf{207 / 210} \\
-Equalized Odds Gap & 0.042 & \textbf{0.000 (Parity)} & \textbf{0.000} \\
-AOPC Faithfulness Ratio & N/A & \textbf{0.8800 (High)} & \textbf{0.9100} \\
-Inference Latency & \textbf{1.8 ms} & 8.4 ms & 8.6 ms \\
+Vocab Size & 5,000 & 3,000 & \textbf{15,000 (Full)} \\
+Training Instances & 840 & 1,050 & \textbf{6,250} \\
+\midrule
+\textbf{1,150 Benchmark Acc} & 51.48\% & 54.25\% & \textbf{87.35\%} \\
+\textbf{Macro F1 Score} & 0.4012 & 0.4214 & \textbf{0.8735} \\
+True Positives (TP) & 35 & 48 & \textbf{494 (10.3$\times$)} \\
+False Negatives (FN) & 530 & 517 & \textbf{71 (86.3\% $\downarrow$)} \\
+True Negatives (TN) & 565 & 565 & \textbf{493} \\
+False Positives (FP) & 0 & 0 & \textbf{72} \\
+\midrule
+Batch 1 (Subtle, 210) & 86.67\% & 98.57\% & \textbf{99.05\%} \\
+Batch 2 (HASOC, 320) & 52.50\% & 55.62\% & \textbf{74.69\%} \\
+Batch 3 (Context, 200) & 51.00\% & 53.50\% & \textbf{91.00\%} \\
+Batch 4 (Real-World, 400) & 50.25\% & 51.25\% & \textbf{89.50\%} \\
+\midrule
+Automated Test Suite & 38 / 49 & 45 / 49 & \textbf{49 / 49 (100\%)} \\
+Equalized Odds Gap & 0.042 & 0.000 & \textbf{0.000 (Parity)} \\
+AOPC Faithfulness & N/A & 0.8800 & \textbf{0.9100} \\
 \bottomrule
 \end{tabular}
-\caption{Model Evaluation Across Benchmarks and Edge Cases.}
+\caption{Comprehensive Benchmark Evaluation Pre- vs Post-Expansion.}
 \end{table}
 
-\textbf{Key Findings:}
+\textbf{Key Empirical Findings:}
 \begin{itemize}
-    \item \textbf{Target Grounding Disparity:} Classical TF-IDF flags benign insults (\textit{"you are absolutely stupid..."}) as Hateful ($51.74\%$). The Transformer outputs Non-Hateful ($99.5\%$ confidence) due to absence of demographic target grounding.
-    \item \textbf{Slur Rebuttal Resolution:} Way 1 Bidirectional Negation lifted negated counter-speech from 65\% to \textbf{100\% (20/20)} with zero false positives.
-    \item \textbf{Multimodal Synergy:} Cross-attention yielded \textbf{+5.0\% F1} on memes with text-image semantic contradictions.
-    \item \textbf{Test Suite:} \textbf{45 / 45 automated pytest tests pass}.
+    \item \textbf{OOV Recall Surge:} The 5$\times$ vocabulary expansion from 3,000 to 15,000 words eliminated 446 false negatives across real-world social media benchmarks, lifting Macro F1 from \textbf{42.14\% to 87.35\%}.
+    \item \textbf{Subtle Bias Precision:} Batch 1 (subtle & structural discrimination) achieved \textbf{99.05\% Accuracy} (208/210 correct).
+    \item \textbf{Elimination of OCR Hallucination:} Decoupling OCR from CNN thumbnail squashing reduced extracted character noise from 100\% to 0\% on high-resolution text captures.
+    \item \textbf{Verification Status:} All \textbf{49 automated pytest tests} and all 8 specialized test suites pass (100\% green).
 \end{itemize}
 
-\section{Challenges Encountered}
+\section{Challenges Encountered and Resolved}
 \begin{enumerate}
-    \item \textbf{Code-Mixed Hinglish Tokenization Collapse:} Standard tokenizers fracture Romanized Hindi into unknown characters. \textit{Resolved} via script distribution analysis, phonetic Hinglish dictionaries, and character n-gram union.
-    \item \textbf{Slur Rebuttal Blindspot:} Slur blacklists flagged valid defense (\textit{"immigrants are not vermin"}). \textit{Resolved} via $[-2, +2]$ bidirectional local negation scoping.
-    \item \textbf{Double Inversions:} Counter-speech guards bypassed by inverted condemnation (\textit{"will not condemn attacks... deserved it"}). \textit{Resolved} via condemnation negation checks and subordination escalation.
-    \item \textbf{Cross-Machine Sync:} Missing PyTorch weights on git pull. \textit{Resolved} via `.gitignore` whitelisting and dynamic relative path sanitization.
+    \item \textbf{EasyOCR Resolution Squashing:} Bilinear resizing to $224 \times 224$ squashed text aspect ratios, causing EasyOCR to hallucinate noisy characters (\textit{"led 2at 6त < [ 7"}). \textit{Resolved} by decoupling CNN array from original native-resolution OCR image and introducing $\tau_{\text{conf}} \ge 0.25$.
+    \item \textbf{Explainability 35-Token Truncation:} An internal slice bug (\texttt{eval\_words[:i] + eval\_words[i+1:]}) truncated text at word 35, leaving tokens 36--120 blank ($0$). \textit{Resolved} by preserving full context across up to 120 words.
+    \item \textbf{Softmax Baseline Jitter in Heatmaps:} Micro-fluctuations under 2\% caused neutral words to glow red. \textit{Resolved} by introducing a 2\% significance deadzone ($\tau_{\text{deadzone}} = 0.02$).
+    \item \textbf{Operational Predicate Misattribution:} Sentences like \textit{"AI that refuses everything"} triggered structural hate flags. \textit{Resolved} by strictly coupling exclusion predicates to protected demographic targets ($\text{has\_target} = \text{True}$).
+    \item \textbf{Out-of-Vocabulary Collapse:} Small 840-sample training corpus caused unfamiliar slang to default to $\langle\text{UNK}\rangle$, generating 517 false negatives. \textit{Resolved} by ingesting Davidson and HateXplain corpora (6,250 samples) and calibrating decision margins ($z_1 - z_0 > 1.2$).
+    \item \textbf{1-Click Project Reversibility:} Created an isolated snapshot in \texttt{backups/state\_pre\_expansion/} and a verified 1-click restore script (\texttt{rollback\_to\_pre_expansion.py}), guaranteeing zero-risk reversibility.
 \end{enumerate}
 
 \section{Future Work (Before Final Evaluation)}
 \begin{itemize}
-    \item \textbf{Indic Expansion:} Extend phonetic embeddings to Tamil and Telugu.
-    \item \textbf{LoRA LLM Fine-Tuning:} Implement LoRA adapters on LLaMA-3-8B / Gemma-2-9B for structured reasoning.
-    \item \textbf{Browser Extension:} Real-time client-side Chrome extension for Twitter/YouTube moderation.
-    \item \textbf{Active Learning Queue:} Route low-confidence inferences ($<0.70$) into an automated reviewer queue for continuous DPO updates.
+    \item \textbf{Cross-Lingual Transfer:} Extend phonetic embeddings to Dravidian languages (Tamil, Telugu).
+    \item \textbf{Quantized Edge Serving:} Export transformer to ONNX / INT8 for sub-5ms browser extension moderation.
+    \item \textbf{Active Learning Queue:} Route low-confidence inferences ($0.45 \le P \le 0.55$) into a reviewer dashboard for continuous DPO updates.
 \end{itemize}
 
 \section{Individual Contributions}
 \begin{itemize}
-    \item \textbf{Samanyu Khanna:} Transformer model architecture, Way 1 negation scope, DPO optimization loop, FastAPI detection engine.
-    \item \textbf{Member 2:} Dataset curation (1,310 instances), NFKC normalizer, Devanagari detector, phonetic Hinglish lexicon.
-    \item \textbf{Member 3:} EasyOCR extraction service, visual CNN cross-attention fusion layer, LIME perturbation engine, AOPC tests.
-    \item \textbf{Member 4:} 11-page ThoughtStream UI, 9 controlled research experiments, ACL LaTeX manuscript, interactive slide deck.
+    \item \textbf{Samanyu Khanna:} Transformer model architecture, calibrated decision margin, 6,250-sample dataset expansion pipeline, DPO engine, FastAPI backend.
+    \item \textbf{Member 2:} Multi-corpus curation (Davidson, HateXplain, HASOC, Subtle), NFKC normalizer, Devanagari combining regex, phonetic Hinglish lexicon.
+    \item \textbf{Member 3:} Decoupled EasyOCR service, visual CNN cross-attention fusion layer, full-context LOO attribution engine, AOPC tests.
+    \item \textbf{Member 4:} 11-page ThoughtStream UI, 1,150-sample benchmark runner, 49-test verification harness, ACL LaTeX manuscript, slide deck.
 \end{itemize}
 
 \end{document}
