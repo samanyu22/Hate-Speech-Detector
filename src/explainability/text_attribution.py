@@ -48,7 +48,7 @@ class TextAttributionEngine:
 
         # Statistical significance deadzone: probability shifts < 2.0% (0.02) are baseline
         # softmax re-normalization noise and should remain neutral, preventing benign words from glowing red/green.
-        significance_threshold = 0.02
+        significance_threshold = 0.015
 
         if use_logit_attribution:
             max_dl = max((abs(r[2]) for r in raw_pert), default=1.0)
