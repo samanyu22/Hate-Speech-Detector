@@ -1,6 +1,7 @@
 // Main Application Controller for ThoughtStream Research Platform
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
+  initMotionSystem();
   initNavigation();
   loadOverviewStats();
   initDetectionWorkspace();
@@ -12,6 +13,87 @@ document.addEventListener('DOMContentLoaded', () => {
   loadPaperDraft();
   loadSettings();
 });
+
+// Motion System Helpers: Count-Up, Typewriter, Spotlight & View Transitions
+function animateCountUp(el, endVal, duration = 450, formatter = (v) => Math.round(v).toLocaleString()) {
+  if (!el || endVal == null || isNaN(endVal)) return;
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    el.innerText = formatter(endVal);
+    return;
+  }
+  const start = performance.now();
+  const startVal = 0;
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 2); // easeOutQuad
+    const current = startVal + (endVal - startVal) * eased;
+    el.innerText = formatter(current);
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.innerText = formatter(endVal);
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+function typewriterText(el, text, speedMs = 12, charsPerTick = 3) {
+  if (!el) return;
+  el.innerText = '';
+  if (!text) return;
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    el.innerText = text;
+    return;
+  }
+  let index = 0;
+  const len = text.length;
+  function tick() {
+    index = Math.min(index + charsPerTick, len);
+    el.innerText = text.slice(0, index);
+    if (index < len) {
+      setTimeout(tick, speedMs);
+    }
+  }
+  tick();
+}
+
+function updateSidebarActivePill() {
+  const activeItem = document.querySelector('.nav-item.active');
+  const pill = document.getElementById('sidebarActivePill');
+  if (activeItem && pill) {
+    pill.style.transform = `translateY(${activeItem.offsetTop}px)`;
+  }
+}
+
+function initMotionSystem() {
+  // 1. Throttled Pointermove Spotlight on Cards & Rows
+  let mouseRaf = null;
+  document.addEventListener('pointermove', (e) => {
+    if (mouseRaf) return;
+    mouseRaf = requestAnimationFrame(() => {
+      const target = e.target.closest('.card, .card-elevated, .verdict-audit-table tr, .table-row-hover, .scanner-bench-panel');
+      if (target) {
+        const rect = target.getBoundingClientRect();
+        target.style.setProperty('--mx', `${(e.clientX - rect.left).toFixed(1)}px`);
+        target.style.setProperty('--my', `${(e.clientY - rect.top).toFixed(1)}px`);
+      }
+      mouseRaf = null;
+    });
+  }, { passive: true });
+
+  // 2. Pause Drifting Background Animation when tab is hidden
+  document.addEventListener('visibilitychange', () => {
+    document.body.classList.toggle('tab-hidden', document.hidden);
+  });
+
+  // 3. Update active pill on resize
+  window.addEventListener('resize', () => {
+    updateSidebarActivePill();
+  });
+}
 
 // 1. Dark Mode Management (Cojeev Theme Toggle)
 const SUN_PATH = "M12 5C15.866 5 19 8.134 19 12C19 15.866 15.866 19 12 19C8.134 19 5 15.866 5 12C5 8.134 8.134 5 12 5Z";
@@ -257,25 +339,38 @@ function initNavigation() {
   const navItems = document.querySelectorAll('.nav-item');
   const pages = document.querySelectorAll('.page-view');
 
+  const switchPage = (targetPage, item) => {
+    navItems.forEach(n => n.classList.remove('active'));
+    pages.forEach(p => p.classList.remove('active'));
+
+    if (item) item.classList.add('active');
+    const activePage = document.getElementById(targetPage);
+    if (activePage) activePage.classList.add('active');
+    updateSidebarActivePill();
+
+    // Refresh specific page data on view
+    if (targetPage === 'page-overview') loadOverviewStats();
+    if (targetPage === 'page-datasets') loadDatasets();
+    if (targetPage === 'page-models') loadModels();
+    if (targetPage === 'page-optimization') loadOptimizationData();
+    if (targetPage === 'page-fairness') loadFairnessAudit();
+    if (targetPage === 'page-experiments') loadExperiments();
+  };
+
   navItems.forEach(item => {
     item.addEventListener('click', () => {
       const targetPage = item.getAttribute('data-target');
-      navItems.forEach(n => n.classList.remove('active'));
-      pages.forEach(p => p.classList.remove('active'));
-
-      item.classList.add('active');
-      const activePage = document.getElementById(targetPage);
-      if (activePage) activePage.classList.add('active');
-
-      // Refresh specific page data on view
-      if (targetPage === 'page-overview') loadOverviewStats();
-      if (targetPage === 'page-datasets') loadDatasets();
-      if (targetPage === 'page-models') loadModels();
-      if (targetPage === 'page-optimization') loadOptimizationData();
-      if (targetPage === 'page-fairness') loadFairnessAudit();
-      if (targetPage === 'page-experiments') loadExperiments();
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (document.startViewTransition && !prefersReduced) {
+        document.startViewTransition(() => switchPage(targetPage, item));
+      } else {
+        switchPage(targetPage, item);
+      }
     });
   });
+
+  // Position sliding indicator on initial boot
+  setTimeout(updateSidebarActivePill, 40);
 }
 
 // 3. Overview Dashboard (Dynamic Real-Time Telemetry)
@@ -310,7 +405,8 @@ async function loadOverviewStats(isManualRefresh = false) {
     // 2. Top Metric Cards
     const elSamples = document.getElementById('statTotalSamples');
     if (elSamples) {
-      elSamples.innerText = summary.total_samples != null ? Number(summary.total_samples).toLocaleString() : '1,310';
+      const val = summary.total_samples != null ? Number(summary.total_samples) : 1310;
+      animateCountUp(elSamples, val, 450, (v) => Math.round(v).toLocaleString());
     }
     const elSamplesSub = document.getElementById('statSamplesSub');
     if (elSamplesSub) {
@@ -319,7 +415,8 @@ async function loadOverviewStats(isManualRefresh = false) {
 
     const elOptRuns = document.getElementById('statOptimizationRuns');
     if (elOptRuns) {
-      elOptRuns.innerText = summary.optimization_cycles != null ? summary.optimization_cycles : 1;
+      const val = summary.optimization_cycles != null ? Number(summary.optimization_cycles) : 1;
+      animateCountUp(elOptRuns, val, 350, (v) => Math.round(v).toString());
     }
     const elOptSub = document.getElementById('statOptSub');
     if (elOptSub) {
@@ -328,7 +425,8 @@ async function loadOverviewStats(isManualRefresh = false) {
 
     const elFeedback = document.getElementById('statTotalFeedback');
     if (elFeedback) {
-      elFeedback.innerText = summary.total_feedbacks != null ? Number(summary.total_feedbacks).toLocaleString() : '0';
+      const val = summary.total_feedbacks != null ? Number(summary.total_feedbacks) : 0;
+      animateCountUp(elFeedback, val, 400, (v) => Math.round(v).toLocaleString());
     }
     const elFeedbackSub = document.getElementById('statFeedbackSub');
     if (elFeedbackSub && summary.feedback_summary) {
@@ -423,6 +521,21 @@ function initDetectionWorkspace() {
   const textInput = document.getElementById('detectTextInput');
   const contextInput = document.getElementById('detectContextInput');
   const resultCard = document.getElementById('detectionResultCard');
+  const skeleton = document.getElementById('detectionSkeleton');
+  const errorMsg = document.getElementById('detectionErrorMsg');
+  const scannerBench = document.getElementById('detectionScannerBench');
+  const scannerPreview = document.getElementById('scannerTextPreview');
+
+  // Live character counter on manuscript textarea
+  const charCountEl = document.getElementById('detectCharCount');
+  if (textInput && charCountEl) {
+    const updateCount = () => {
+      const len = textInput.value.length;
+      charCountEl.innerText = `${len.toLocaleString()} character${len === 1 ? '' : 's'}`;
+    };
+    textInput.addEventListener('input', updateCount);
+    updateCount();
+  }
 
   let currentUploadedImageBase64 = null;
   const imageInput = document.getElementById('detectImageInput');
@@ -551,9 +664,42 @@ function initDetectionWorkspace() {
       if (presets[key]) {
         textInput.value = presets[key].text;
         contextInput.value = presets[key].ctx;
+        if (charCountEl) {
+          const len = textInput.value.length;
+          charCountEl.innerText = `${len.toLocaleString()} character${len === 1 ? '' : 's'}`;
+        }
       }
     });
   });
+
+  // Ctrl+Enter shortcut on textarea to trigger analysis
+  if (textInput && detectBtn) {
+    textInput.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        if (!detectBtn.disabled) detectBtn.click();
+      }
+    });
+  }
+
+  // Toggle raw tokens button
+  const toggleRawBtn = document.getElementById('btnToggleRawTokens');
+  if (toggleRawBtn) {
+    toggleRawBtn.addEventListener('click', () => {
+      const rawStream = document.getElementById('resTokenStream');
+      const inlineAttr = document.getElementById('resInlineAttribution');
+      if (!rawStream || !inlineAttr) return;
+      if (rawStream.style.display === 'none') {
+        rawStream.style.display = 'flex';
+        inlineAttr.style.display = 'none';
+        toggleRawBtn.innerText = 'View Inline Text';
+      } else {
+        rawStream.style.display = 'none';
+        inlineAttr.style.display = 'block';
+        toggleRawBtn.innerText = 'View Raw Tokens';
+      }
+    });
+  }
 
   if (detectBtn) {
     detectBtn.addEventListener('click', async () => {
@@ -562,12 +708,31 @@ function initDetectionWorkspace() {
       const modelId = document.getElementById('detectModelSelect').value;
 
       if (!text && !currentUploadedImageBase64) {
-        alert('Please enter social media post text or upload an image.');
+        if (errorMsg) {
+          errorMsg.style.display = 'block';
+          errorMsg.innerText = 'Please enter social media post text or upload an image.';
+          errorMsg.classList.remove('detection-error');
+          void errorMsg.offsetWidth; // trigger reflow for error shake
+          errorMsg.classList.add('detection-error');
+        } else {
+          alert('Please enter social media post text or upload an image.');
+        }
         return;
       }
 
+      // Prevent double submits & show forensic scanner bench
       detectBtn.disabled = true;
-      detectBtn.innerText = currentUploadedImageBase64 ? 'Extracting OCR & Analyzing...' : 'Analyzing Multimodal Features...';
+      detectBtn.innerHTML = currentUploadedImageBase64 
+        ? '<span class="scanner-pulse" style="display:inline-block; margin-right:6px;"></span> Extracting OCR &amp; Analyzing...' 
+        : '<span class="scanner-pulse" style="display:inline-block; margin-right:6px;"></span> Scanning Multimodal Embeddings...';
+      if (errorMsg) { errorMsg.style.display = 'none'; errorMsg.innerText = ''; }
+      if (resultCard) resultCard.style.display = 'none';
+      if (scannerBench) {
+        scannerBench.style.display = 'block';
+        if (scannerPreview) scannerPreview.innerText = text || (currentUploadedImageBase64 ? '[Visual Image Uploaded — Running EasyOCR]' : 'Scanning multimodal features...');
+      } else if (skeleton) {
+        skeleton.style.display = 'block';
+      }
 
       try {
         const payload = {
@@ -586,10 +751,17 @@ function initDetectionWorkspace() {
         displayDetectionResult(res);
         loadOverviewStats(); // update counters
       } catch (err) {
-        alert(`Detection Error: ${err.message}`);
+        if (errorMsg) {
+          errorMsg.style.display = 'block';
+          errorMsg.innerText = `Inference Failed: ${err.message || err}`;
+        } else {
+          alert(`Detection Error: ${err.message}`);
+        }
       } finally {
         detectBtn.disabled = false;
         detectBtn.innerText = 'Execute Detection Pipeline';
+        if (scannerBench) scannerBench.style.display = 'none';
+        if (skeleton) skeleton.style.display = 'none';
       }
     });
   }
@@ -626,16 +798,24 @@ function initDetectionWorkspace() {
 
 function displayDetectionResult(res) {
   const card = document.getElementById('detectionResultCard');
+  if (!card) return;
   card.style.display = 'block';
 
-  // Label badge
+  // Label badge with forensic stamp-in animation
   const badge = document.getElementById('resLabelBadge');
-  badge.className = `badge ${res.predicted_label === 1 ? 'badge-hate' : 'badge-nonhate'}`;
-  badge.innerHTML = res.predicted_label === 1 ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
-  badge.style.whiteSpace = 'nowrap';
-  badge.style.display = 'inline-block';
+  if (badge) {
+    badge.className = `badge verdict-stamp ${res.predicted_label === 1 ? 'badge-hate' : 'badge-nonhate'}`;
+    badge.innerHTML = res.predicted_label === 1 ? 'HATEFUL&nbsp;(1)' : 'NON-HATEFUL&nbsp;(0)';
+    badge.style.whiteSpace = 'nowrap';
+    badge.style.display = 'inline-block';
+  }
 
-  document.getElementById('resConfidence').innerText = `${(res.confidence * 100).toFixed(1)}%`;
+  // Count up confidence score
+  const confEl = document.getElementById('resConfidence');
+  if (confEl) {
+    animateCountUp(confEl, res.confidence * 100, 500, (v) => `${v.toFixed(1)}%`);
+  }
+
   document.getElementById('resLanguage').innerText = res.language_detected.toUpperCase();
   document.getElementById('resModalities').innerText = res.modalities_used.join(', ').toUpperCase();
   document.getElementById('resModelVersion').innerText = `${res.model_id} (v${res.model_version})`;
@@ -644,18 +824,104 @@ function displayDetectionResult(res) {
   if (res.explanation) {
     const exp = res.explanation;
     document.getElementById('resFaithfulness').innerText = `${(exp.faithfulness_score * 100).toFixed(1)}%`;
-    document.getElementById('resNaturalExplanation').innerText = exp.natural_language_explanation;
+    
+    // Typewriter reveal on natural language explanation
+    typewriterText(document.getElementById('resNaturalExplanation'), exp.natural_language_explanation || '');
 
-    // Tokens
+    // Attribution method tag
+    const methodTag = document.getElementById('resAttributionMethod');
+    if (methodTag) {
+      methodTag.innerText = `Attribution Method: ${exp.attribution_method || 'Integrated Gradients (Raw Embedding Gradients)'}`;
+    }
+
+    // Ruled Audit Table: Model classification vs rule grounding
+    const modelVerdictEl = document.getElementById('auditModelVerdict');
+    const modelOutputEl = document.getElementById('auditModelOutput');
+    const ruleVerdictEl = document.getElementById('auditRuleVerdict');
+    const ruleOutputEl = document.getElementById('auditRuleOutput');
+    if (modelVerdictEl) {
+      modelVerdictEl.innerHTML = res.predicted_label === 1 ? '<span class="badge badge-hate">HATEFUL (1)</span>' : '<span class="badge badge-nonhate">NON-HATEFUL (0)</span>';
+    }
+    if (modelOutputEl) {
+      modelOutputEl.innerText = `P(Hate) = ${(res.confidence * 100).toFixed(1)}% [${res.model_id}]`;
+    }
+    if (ruleVerdictEl) {
+      const isHate = res.predicted_label === 1;
+      ruleVerdictEl.innerHTML = isHate ? '<span class="badge badge-hate">GROUNDED PREDICATES</span>' : '<span class="badge badge-nonhate">BENIGN / UNGROUNDED</span>';
+    }
+    if (ruleOutputEl) {
+      ruleOutputEl.innerText = exp.ocr_evidence ? 'OCR Text + Lexical Matched' : 'Lexical Hostility Rules Audited';
+    }
+
+    // INLINE RUNNING SERIF HIGHLIGHTING with staggered wipe-in and strongest token pulse
+    const inlineContainer = document.getElementById('resInlineAttribution');
+    if (inlineContainer && exp.token_attributions && exp.token_attributions.length > 0) {
+      inlineContainer.innerHTML = '';
+      const isDark = document.body.classList.contains('dark-mode') || document.documentElement.getAttribute('data-theme') === 'dark';
+      
+      const maxAbsScore = Math.max(...exp.token_attributions.map(t => Math.abs(t.score)), 0.0001);
+      const threshold = 0.05 * maxAbsScore;
+
+      // Identify single highest-attribution hateful token to pulse
+      let highestHateIdx = -1;
+      let maxHateScore = -1;
+      exp.token_attributions.forEach((t, idx) => {
+        if (t.score > maxHateScore) {
+          maxHateScore = t.score;
+          highestHateIdx = idx;
+        }
+      });
+
+      exp.token_attributions.forEach((t, i) => {
+        const span = document.createElement('span');
+        span.tabIndex = 0;
+        span.className = 'inline-token';
+
+        const absScore = Math.abs(t.score);
+        if (t.score > 0 && absScore > threshold) {
+          const alpha = Math.min(Math.max(absScore / maxAbsScore, 0), 1) * 0.55;
+          span.style.backgroundColor = isDark ? `rgba(229, 83, 61, ${alpha.toFixed(3)})` : `rgba(200, 50, 30, ${alpha.toFixed(3)})`;
+          span.classList.add('token-hateful', 'token-hateful-wipe');
+          span.style.animationDelay = `${Math.min(i * 30, 600)}ms`;
+
+          if (i === highestHateIdx && maxHateScore > 0) {
+            span.classList.add('token-strongest-pulse');
+          }
+        } else if (t.score < 0 && absScore > threshold) {
+          span.classList.add('token-civil');
+        } else {
+          span.classList.add('token-neutral');
+        }
+
+        // Display token text with spacing & subword merging (##)
+        const isSubword = t.token.startsWith('##');
+        const isPunct = /^[,.;:!?%']/.test(t.token);
+        const prefix = (i > 0 && !isSubword && !isPunct) ? ' ' : '';
+        const cleanToken = t.token.replace(/^##/, '');
+        span.appendChild(document.createTextNode(prefix + cleanToken));
+
+        // Monospace Tooltip on hover/focus
+        const tip = document.createElement('span');
+        tip.className = 'inline-token-tooltip';
+        tip.innerText = `${t.token} (${t.score > 0 ? '+' : ''}${t.score.toFixed(4)})`;
+        span.appendChild(tip);
+
+        inlineContainer.appendChild(span);
+      });
+    }
+
+    // Legacy Raw Tokens (Preserved for inspection)
     const tokenStream = document.getElementById('resTokenStream');
-    tokenStream.innerHTML = '';
-    exp.token_attributions.forEach(t => {
-      const span = document.createElement('span');
-      span.className = `attr-token ${t.polarity === 'positive_evidence' ? 'token-positive' : (t.polarity === 'negative_evidence' ? 'token-negative' : '')}`;
-      span.title = `Attribution Score: ${t.score} (${t.polarity})`;
-      span.innerText = `${t.token} [${t.score > 0 ? '+' : ''}${t.score}]`;
-      tokenStream.appendChild(span);
-    });
+    if (tokenStream) {
+      tokenStream.innerHTML = '';
+      exp.token_attributions.forEach(t => {
+        const span = document.createElement('span');
+        span.className = `attr-token ${t.polarity === 'positive_evidence' ? 'token-positive' : (t.polarity === 'negative_evidence' ? 'token-negative' : '')}`;
+        span.title = `Attribution Score: ${t.score} (${t.polarity})`;
+        span.innerText = `${t.token} [${t.score > 0 ? '+' : ''}${t.score}]`;
+        tokenStream.appendChild(span);
+      });
+    }
 
     // OCR & Context
     document.getElementById('resOcrEvidence').innerText = exp.ocr_evidence || 'No visual text detected.';
@@ -663,7 +929,7 @@ function displayDetectionResult(res) {
   }
 
   // Scroll smoothly to results
-  card.scrollIntoView({ behavior: 'smooth' });
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // 5. Datasets Laboratory & Inspector State
@@ -781,7 +1047,7 @@ window.onInspectSearchInput = function() {
       currentInspectSearch = searchInput.value.trim();
       renderDatasetInspector();
     }
-  }, 250);
+  }, 650);
 };
 
 window.onInspectLimitChange = function() {
